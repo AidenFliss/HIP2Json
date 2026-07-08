@@ -23,6 +23,11 @@ A tool that allows you to extract .HIP and .HOP files to a set of json files, ed
 
 > Support for Scooby, Incredibles, and ROTU are not planned at this time.
 
+# Supported Platforms:
+- ✅ Gamecube
+- ❌ PS2
+- ❌ Xbox
+
 # Usage
 
 To use the program you will need [a copy of the game you will be modding extracted into a folder.](https://heavyironmodding.org/wiki/Setting_up_Dolphin_for_modding)
@@ -35,3 +40,6 @@ You should see folders such as ```parsed``` and ```unpacked``` be created. If th
 ### Packing:
 
 Run ```HIP2Json``` with the project directory and you should see the folder ```packed``` appear. This contains the modified HIP and HOP files to reimport into a copy of the game.
+
+> [!NOTE]
+Note: Some asset types do not have an implemented parser so they will be ignored when editing json.
