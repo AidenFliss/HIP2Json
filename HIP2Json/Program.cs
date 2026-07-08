@@ -51,10 +51,8 @@ public struct xLinkAsset
     public string dstEvent;
     [JsonConverter(typeof(AssetIDConverter))]
     public uint dstAssetID;
-    [JsonNumberHandling(JsonNumberHandling.Strict)]
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] paramU32;
-    [JsonNumberHandling(JsonNumberHandling.Strict)]
     public float[] paramF32;
     [JsonConverter(typeof(AssetIDConverter))]
     public uint paramWidgetAssetID;
@@ -859,9 +857,12 @@ class Program
                                                 {
                                                     if (i >= 4) break;
                                                     float fv = item.ValueKind==JsonValueKind.Number ? item.GetSingle() : 0f;
-                                                    int iv = BitConverter.SingleToInt32Bits(fv);
-                                                    pU32[i] = unchecked((uint)iv);
-                                                    i++;
+                                                    if (float.IsFinite(fv)) //can have coincidental NaN as a float interpretation... thx for no metadata :heavyironmoment:
+                                                    {
+                                                        int iv = BitConverter.SingleToInt32Bits(fv);
+                                                        pU32[i] = unchecked((uint)iv);
+                                                        i++;
+                                                    }
                                                 }
                                             }
 
