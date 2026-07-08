@@ -1,0 +1,72 @@
+name: Build & Release
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Read Version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(grep -oPm1 '(?<=<Version>)[^<]+' HIP2Json/HIP2Json.csproj)
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::No <Version> found in HIP2Json.csproj"
+            exit 1
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+          echo "zip=${{ github.event.repository.name }}-v$VERSION.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Restore
+        run: dotnet restore HIP2Json.sln
+
+      - name: Build
+        run: dotnet build HIP2Json.sln -c Release --no-restore
+
+      - name: Publish
+        run: |
+          dotnet publish HIP2Json/HIP2Json.csproj \
+            -c Release \
+            -o publish
+
+      - name: Create ZIP
+        run: |
+          cd publish
+          zip -r "../${{ steps.version.outputs.zip }}" .
+
+      - name: Delete existing release (if any)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete "${{ steps.version.outputs.tag }}" --cleanup-tag -y || true
+
+      - name: Create Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag }}" \
+            "${{ steps.version.outputs.zip }}" \
+            --title "${{ github.event.repository.name }} ${{ steps.version.outputs.tag }}" \
+            --generate-notes
