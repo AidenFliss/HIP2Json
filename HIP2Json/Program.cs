@@ -120,9 +120,17 @@ public enum GameType
     TSSM
 }
 
+public enum GamePlatform
+{
+    GC,
+    PS2,
+    XBOX
+}
+
 class Program
 {
     public static GameType CurrentGame;
+    public static GamePlatform CurrentPlatform;
     public static bool BigEndian = true;
 
     static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "RWTX", "TEXS", "ANIM", "SNDS", "SND", "SHRP", "ATBL", "ALST" };
@@ -183,8 +191,41 @@ class Program
                 Environment.Exit(1);
             }
 
+            string platformArg = null;
+            for (int i = 0; i < args.Length; i++)
+            {
+                if (string.Equals(args[i], "--platform", StringComparison.OrdinalIgnoreCase) ||
+                    string.Equals(args[i], "-P", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (i + 1 < args.Length)
+                    {
+                        platformArg = args[i + 1];
+                        break;
+                    }
+                    Logger.LogError("Error: --platform requires a value (GC, PS2, or XBOX).");
+                    ShowUsage();
+                    Environment.Exit(1);
+                }
+            }
+
+            if (string.IsNullOrEmpty(platformArg) || !Enum.TryParse<GamePlatform>(platformArg, true, out CurrentPlatform))
+            {
+                Logger.LogError($"Error: missing or invalid platform configuration. Valid options: GC, PS2, or XBOX.");
+                ShowUsage();
+                Environment.Exit(1);
+            }
+
+            if (CurrentPlatform == GamePlatform.GC)
+            {
+                BigEndian = true; // gamecube is big endian, override the BE suffix globally to little endian
+            }
+            else
+            {
+                BigEndian = false;
+            }
+
             var standardFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--extract", "--pack", "-p", "--progress" };
-            var valueFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--game", "-g" };
+            var valueFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--game", "-g", "--platform", "-P" };
             
             string[] paths = GetPathArguments(args, standardFlags, valueFlags);
 
@@ -226,8 +267,8 @@ class Program
         string ns = typeof(Program).Namespace;
 
         Logger.LogInfo("Usage:");
-        Logger.LogInfo($"  {ns} --extract <game_directory> <project_directory> [--game <BFBB|TSSM>] [--progress]");
-        Logger.LogInfo($"  {ns} --pack <project_directory> [--game <BFBB|TSSM>]");
+        Logger.LogInfo($"  {ns} --extract <game_directory> <project_directory> [--game <BFBB|TSSM>] [--platform <GC|PS2|XBOX>] [--progress]");
+        Logger.LogInfo($"  {ns} --pack <project_directory> [--game <BFBB|TSSM>] [--platform <GC|PS2|XBOX>]");
         Logger.LogInfo("");
         Logger.LogInfo("Modes:");
         Logger.LogInfo("  --extract   Extract game files into a project.");
@@ -235,11 +276,12 @@ class Program
         Logger.LogInfo("");
         Logger.LogInfo("Options:");
         Logger.LogInfo("  --game, -g      Specify the game. (BFBB or TSSM)");
+        Logger.LogInfo("  --platform, -P      Specify the platform. (GC, PS2, or XBOX)");
         Logger.LogInfo("  --progress, -p  Show parsing converage.");
         Logger.LogInfo("  --help, -h      Show this help message.");
     }
 
-   static string[] GetPathArguments(string[] args, HashSet<string> excludedFlags, HashSet<string> flagsWithValues)
+    static string[] GetPathArguments(string[] args, HashSet<string> excludedFlags, HashSet<string> flagsWithValues)
     {
         var positionalArgs = new List<string>();
 
@@ -300,9 +342,7 @@ class Program
 
             Logger.LogInfo($"Processing {file}...");
             
-            (HipFile hipfile, Game game, Platform platform) = HipHopFile.HipFile.FromPath(file);
-
-            BigEndian = IsPlatformBigEndian(platform);
+            (HipFile hipfile, Game game, Platform _) = HipHopFile.HipFile.FromPath(file);
             
             hipfile.ToIni(game, Path.Combine(unpackedDir, Path.GetFileNameWithoutExtension(file)) + "_" + type, true, true);
 
@@ -693,10 +733,10 @@ class Program
                                         if (baseProp.TryGetProperty("baseFlags", out var bf) && bf.ValueKind == JsonValueKind.Number)
                                             baseFlags = bf.GetUInt16();
 
-                                        Util.WriteUInt32(bw, idVal, BigEndian);
+                                        Util.WriteUInt32(bw, idVal);
                                         bw.Write(baseTypeByte);
                                         bw.Write(linkCountByte);
-                                        Util.WriteUInt16(bw, baseFlags, BigEndian);
+                                        Util.WriteUInt16(bw, baseFlags);
                                     }
 
                                     if (modElem.ValueKind == JsonValueKind.Object && modElem.TryGetProperty("Entity", out var entProp) && entProp.ValueKind == JsonValueKind.Object)
@@ -721,7 +761,7 @@ class Program
                                         }
 
                                         uint surfaceID = entProp.TryGetProperty("surfaceID", out var sid) && sid.ValueKind==JsonValueKind.Number ? sid.GetUInt32() : 0u;
-                                        Util.WriteUInt32(bw, surfaceID, BigEndian);
+                                        Util.WriteUInt32(bw, surfaceID);
 
                                         double Deg2Rad = 1.0 / 57.29577951308232;
                                         if (entProp.TryGetProperty("ang", out var ang) && ang.ValueKind==JsonValueKind.Object)
@@ -729,29 +769,29 @@ class Program
                                             float ax = ang.TryGetProperty("x", out var axp) && axp.ValueKind==JsonValueKind.Number ? axp.GetSingle() : 0f;
                                             float ay = ang.TryGetProperty("y", out var ayp) && ayp.ValueKind==JsonValueKind.Number ? ayp.GetSingle() : 0f;
                                             float az = ang.TryGetProperty("z", out var azp) && azp.ValueKind==JsonValueKind.Number ? azp.GetSingle() : 0f;
-                                            Util.WriteFloat(bw, (float)(ax * Deg2Rad), BigEndian);
-                                            Util.WriteFloat(bw, (float)(ay * Deg2Rad), BigEndian);
-                                            Util.WriteFloat(bw, (float)(az * Deg2Rad), BigEndian);
+                                            Util.WriteFloat(bw, (float)(ax * Deg2Rad));
+                                            Util.WriteFloat(bw, (float)(ay * Deg2Rad));
+                                            Util.WriteFloat(bw, (float)(az * Deg2Rad));
                                         }
-                                        else { Util.WriteFloat(bw, 0f, BigEndian); Util.WriteFloat(bw, 0f, BigEndian); Util.WriteFloat(bw, 0f, BigEndian); }
+                                        else { Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); }
 
                                         if (entProp.TryGetProperty("pos", out var pos) && pos.ValueKind==JsonValueKind.Object)
                                         {
                                             float px = pos.TryGetProperty("x", out var pxp) && pxp.ValueKind==JsonValueKind.Number ? pxp.GetSingle() : 0f;
                                             float py = pos.TryGetProperty("y", out var pyp) && pyp.ValueKind==JsonValueKind.Number ? pyp.GetSingle() : 0f;
                                             float pz = pos.TryGetProperty("z", out var pzp) && pzp.ValueKind==JsonValueKind.Number ? pzp.GetSingle() : 0f;
-                                            Util.WriteFloat(bw, px, BigEndian); Util.WriteFloat(bw, py, BigEndian); Util.WriteFloat(bw, pz, BigEndian);
+                                            Util.WriteFloat(bw, px); Util.WriteFloat(bw, py); Util.WriteFloat(bw, pz);
                                         }
-                                        else { Util.WriteFloat(bw, 0f, BigEndian); Util.WriteFloat(bw, 0f, BigEndian); Util.WriteFloat(bw, 0f, BigEndian); }
+                                        else { Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); }
 
                                         if (entProp.TryGetProperty("scale", out var scale) && scale.ValueKind==JsonValueKind.Object)
                                         {
                                             float sx = scale.TryGetProperty("x", out var sxp) && sxp.ValueKind==JsonValueKind.Number ? sxp.GetSingle() : 1f;
                                             float sy = scale.TryGetProperty("y", out var syp) && syp.ValueKind==JsonValueKind.Number ? syp.GetSingle() : 1f;
                                             float sz = scale.TryGetProperty("z", out var szp) && szp.ValueKind==JsonValueKind.Number ? szp.GetSingle() : 1f;
-                                            Util.WriteFloat(bw, sx, BigEndian); Util.WriteFloat(bw, sy, BigEndian); Util.WriteFloat(bw, sz, BigEndian);
+                                            Util.WriteFloat(bw, sx); Util.WriteFloat(bw, sy); Util.WriteFloat(bw, sz);
                                         }
-                                        else { Util.WriteFloat(bw, 1f, BigEndian); Util.WriteFloat(bw, 1f, BigEndian); Util.WriteFloat(bw, 1f, BigEndian); }
+                                        else { Util.WriteFloat(bw, 1f); Util.WriteFloat(bw, 1f); Util.WriteFloat(bw, 1f); }
 
                                         float redMult = entProp.TryGetProperty("redMult", out var rm) && rm.ValueKind==JsonValueKind.Number ? rm.GetSingle() : 1f;
                                         float greenMult = entProp.TryGetProperty("greenMult", out var gm) && gm.ValueKind==JsonValueKind.Number ? gm.GetSingle() : 1f;
@@ -759,11 +799,11 @@ class Program
                                         float seeThru = entProp.TryGetProperty("seeThru", out var stt) && stt.ValueKind==JsonValueKind.Number ? stt.GetSingle() : 0f;
                                         float seeThruSpeed = entProp.TryGetProperty("seeThruSpeed", out var sts) && sts.ValueKind==JsonValueKind.Number ? sts.GetSingle() : 0f;
 
-                                        Util.WriteFloat(bw, redMult, BigEndian);
-                                        Util.WriteFloat(bw, greenMult, BigEndian);
-                                        Util.WriteFloat(bw, blueMult, BigEndian);
-                                        Util.WriteFloat(bw, seeThru, BigEndian);
-                                        Util.WriteFloat(bw, seeThruSpeed, BigEndian);
+                                        Util.WriteFloat(bw, redMult);
+                                        Util.WriteFloat(bw, greenMult);
+                                        Util.WriteFloat(bw, blueMult);
+                                        Util.WriteFloat(bw, seeThru);
+                                        Util.WriteFloat(bw, seeThruSpeed);
 
                                         uint modelInfoID = 0;
                                         if (entProp.TryGetProperty("modelInfoID", out var mid) && mid.ValueKind==JsonValueKind.String && mid.GetString().StartsWith("0x")) modelInfoID = Convert.ToUInt32(mid.GetString().Substring(2), 16);
@@ -772,8 +812,8 @@ class Program
                                         if (entProp.TryGetProperty("animListID", out var aid) && aid.ValueKind==JsonValueKind.String && aid.GetString().StartsWith("0x")) animListID = Convert.ToUInt32(aid.GetString().Substring(2), 16);
                                         else if (entProp.TryGetProperty("animListID", out var aid2) && aid2.ValueKind==JsonValueKind.Number) animListID = aid2.GetUInt32();
 
-                                        Util.WriteUInt32(bw, modelInfoID, BigEndian);
-                                        Util.WriteUInt32(bw, animListID, BigEndian);
+                                        Util.WriteUInt32(bw, modelInfoID);
+                                        Util.WriteUInt32(bw, animListID);
                                     }
 
                                     bw.Write(coreBytes);
@@ -830,13 +870,13 @@ class Program
                                                 }
                                             }
 
-                                            Util.WriteUInt16(bw, srcEvent, BigEndian);
-                                            Util.WriteUInt16(bw, dstEvent, BigEndian);
+                                            Util.WriteUInt16(bw, srcEvent);
+                                            Util.WriteUInt16(bw, dstEvent);
 
                                             uint dstAssetID = 0;
                                             if (link.TryGetProperty("dstAssetID", out var da) && da.ValueKind==JsonValueKind.String && da.GetString().StartsWith("0x")) dstAssetID = Convert.ToUInt32(da.GetString().Substring(2), 16);
                                             else if (link.TryGetProperty("dstAssetID", out var da2) && da2.ValueKind==JsonValueKind.Number) dstAssetID = da2.GetUInt32();
-                                            Util.WriteUInt32(bw, dstAssetID, BigEndian);
+                                            Util.WriteUInt32(bw, dstAssetID);
 
                                             uint[] pU32 = new uint[4];
                                             if (link.TryGetProperty("paramU32", out var pu) && pu.ValueKind==JsonValueKind.Array)
@@ -866,7 +906,7 @@ class Program
                                                 }
                                             }
 
-                                            for (int i = 0; i < 4; i++) Util.WriteUInt32(bw, pU32[i], BigEndian);
+                                            for (int i = 0; i < 4; i++) Util.WriteUInt32(bw, pU32[i]);
 
                                             linkIndex++;
 
@@ -877,8 +917,8 @@ class Program
                                             if (link.TryGetProperty("chkAssetID", out var ck) && ck.ValueKind==JsonValueKind.String && ck.GetString().StartsWith("0x")) chkAssetID = Convert.ToUInt32(ck.GetString().Substring(2), 16);
                                             else if (link.TryGetProperty("chkAssetID", out var ck2) && ck2.ValueKind==JsonValueKind.Number) chkAssetID = ck2.GetUInt32();
 
-                                            Util.WriteUInt32(bw, paramWidgetAssetID, BigEndian);
-                                            Util.WriteUInt32(bw, chkAssetID, BigEndian);
+                                            Util.WriteUInt32(bw, paramWidgetAssetID);
+                                            Util.WriteUInt32(bw, chkAssetID);
                                         }
                                     }
 
@@ -1164,10 +1204,10 @@ class Program
             if (header.Length < 8)
                 return null;
 
-            uint id = Util.ReadUInt32(header, 0, BigEndian);
+            uint id = Util.ReadUInt32(header, 0);
             byte baseTypeByte = header[4];
             linkCount = header[5];
-            ushort baseFlags = Util.ReadUInt16(header, 6, BigEndian);
+            ushort baseFlags = Util.ReadUInt16(header, 6);
 
             string baseTypeStr = $"0x{baseTypeByte:X2}";
 
@@ -1310,34 +1350,34 @@ class Program
             _ = br.ReadBytes(3);
         }
 
-        uint surfaceID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
+        uint surfaceID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
         xVec3 ang = ToDegrees(new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian)
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0)
         ));
 
         xVec3 pos = new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian)
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0)
         );
 
         xVec3 scale = new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian),
-            Util.ReadFloat(br.ReadBytes(4), 0, BigEndian)
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0),
+            Util.ReadFloat(br.ReadBytes(4), 0)
         );
 
-        float redMult = Util.ReadFloat(br.ReadBytes(4), 0, BigEndian);
-        float greenMult = Util.ReadFloat(br.ReadBytes(4), 0, BigEndian);
-        float blueMult = Util.ReadFloat(br.ReadBytes(4), 0, BigEndian);
-        float seeThru = Util.ReadFloat(br.ReadBytes(4), 0, BigEndian);
-        float seeThruSpeed = Util.ReadFloat(br.ReadBytes(4), 0, BigEndian);
+        float redMult = Util.ReadFloat(br.ReadBytes(4), 0);
+        float greenMult = Util.ReadFloat(br.ReadBytes(4), 0);
+        float blueMult = Util.ReadFloat(br.ReadBytes(4), 0);
+        float seeThru = Util.ReadFloat(br.ReadBytes(4), 0);
+        float seeThruSpeed = Util.ReadFloat(br.ReadBytes(4), 0);
 
-        uint modelInfoID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
-        uint animListID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
+        uint modelInfoID = Util.ReadUInt32(br.ReadBytes(4), 0);
+        uint animListID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
         return new xEntAsset
         {
@@ -1364,9 +1404,9 @@ class Program
     {
         Align4(br);
 
-        ushort srcEvent = Util.ReadUInt16(br.ReadBytes(2), 0, BigEndian);
-        ushort dstEvent = Util.ReadUInt16(br.ReadBytes(2), 0, BigEndian);
-        uint dstAssetID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
+        ushort srcEvent = Util.ReadUInt16(br.ReadBytes(2), 0);
+        ushort dstEvent = Util.ReadUInt16(br.ReadBytes(2), 0);
+        uint dstAssetID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
         string srcEventStr = "Unknown";
         string dstEventStr = "Unknown";
@@ -1385,12 +1425,12 @@ class Program
         float[] pF32 = new float[4];
         for (int i = 0; i < 4; i++)
         {
-            pU32[i] = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
+            pU32[i] = Util.ReadUInt32(br.ReadBytes(4), 0);
             pF32[i] = BitConverter.Int32BitsToSingle(unchecked((int)pU32[i]));
         }
         
-        uint paramWidgetAssetID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
-        uint chkAssetID = Util.ReadUInt32(br.ReadBytes(4), 0, BigEndian);
+        uint paramWidgetAssetID = Util.ReadUInt32(br.ReadBytes(4), 0);
+        uint chkAssetID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
         return new xLinkAsset
         {
@@ -1412,9 +1452,9 @@ class Program
             br.BaseStream.Position = aligned;
     }
 
-    static bool IsPlatformBigEndian(Platform p)
+    static bool IsPlatformBigEndian(GamePlatform p)
     {
-        return p == Platform.GameCube;
+        return p == GamePlatform.GC;
     }
 
     static string GetFriendlyName(string fileName)

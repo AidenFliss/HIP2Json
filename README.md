@@ -25,8 +25,8 @@ A tool that allows you to extract .HIP and .HOP files to a set of json files, ed
 
 # Supported Platforms:
 - ✅ Gamecube
-- ❌ PS2
-- ❌ Xbox
+- ✅ PS2
+- ✅ Xbox
 
 # Usage
 

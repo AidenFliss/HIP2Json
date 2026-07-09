@@ -5,36 +5,39 @@ namespace PortHeavyIronGameRewrite;
 
 public static class Util
 {
-    public static short ReadInt16(byte[] bytes, int start, bool s_BigEndian)
+    public static short ReadInt16(byte[] bytes, int start)
     {
         if (bytes.Length - start < 2) throw new EndOfStreamException();
-        if (s_BigEndian)
-            return (short)(bytes[start] << 8 | bytes[start + 1]);
-        else
-            return (short)(bytes[start] | (bytes[start + 1] << 8));
+
+        byte[] b = bytes[start..(start + 2)];
+        if (Program.BigEndian) Array.Reverse(b);
+
+        return BitConverter.ToInt16(b);
     }
 
-    public static ushort ReadUInt16(byte[] bytes, int start, bool s_BigEndian)
+    public static ushort ReadUInt16(byte[] bytes, int start)
     {
         if (bytes.Length - start < 2) throw new EndOfStreamException();
-        if (s_BigEndian)
-            return (ushort)(bytes[start] << 8 | bytes[start + 1]);
-        else
-            return (ushort)(bytes[start] | (bytes[start + 1] << 8));
+
+        byte[] b = bytes[start..(start + 2)];
+        if (Program.BigEndian) Array.Reverse(b);
+
+        return BitConverter.ToUInt16(b);
     }
 
-    public static uint ReadUInt32(byte[] bytes, int start, bool s_BigEndian)
+    public static uint ReadUInt32(byte[] bytes, int start)
     {
         if (bytes.Length - start < 4) throw new EndOfStreamException();
-        if (s_BigEndian)
-            return (uint)(bytes[start] << 24 | bytes[start + 1] << 16 | bytes[start + 2] << 8 | bytes[start + 3]);
-        else
-            return (uint)(bytes[start] | (bytes[start + 1] << 8) | (bytes[start + 2] << 16) | (bytes[start + 3] << 24));
+
+        byte[] b = bytes[start..(start + 4)];
+        if (Program.BigEndian) Array.Reverse(b);
+
+        return BitConverter.ToUInt32(b);
     }
 
-    public static float ReadFloat(byte[] bytes, int start, bool s_BigEndian)
+    public static float ReadFloat(byte[] bytes, int start)
     {
-        uint u = ReadUInt32(bytes, start, s_BigEndian);
+        uint u = ReadUInt32(bytes, start);
         return UIntToFloat(u);
     }
 
@@ -52,21 +55,21 @@ public static class Util
     public static xColor ReadColor(BinaryReader br) =>
         new xColor(br.ReadSingle(), br.ReadSingle(), br.ReadSingle(), br.ReadSingle());
 
-    public static void WriteUInt32(BinaryWriter bw, uint v, bool bigEndian)
+    public static void WriteUInt32(BinaryWriter bw, uint v)
     {
         var b = BitConverter.GetBytes(v);
         if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
-    public static void WriteUInt16(BinaryWriter bw, ushort v, bool bigEndian)
+    public static void WriteUInt16(BinaryWriter bw, ushort v)
     {
         var b = BitConverter.GetBytes(v);
         if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
-    public static void WriteFloat(BinaryWriter bw, float v, bool bigEndian)
+    public static void WriteFloat(BinaryWriter bw, float v)
     {
         var b = BitConverter.GetBytes(v);
         if (Program.BigEndian == true) Array.Reverse(b);

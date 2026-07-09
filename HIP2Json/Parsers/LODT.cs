@@ -61,6 +61,8 @@ public sealed class LODTParser : AssetParser
         {
             WriteUInt32BE(bw, table.baseBucket);
             WriteFloatBE(bw, table.noRenderDist);
+            if (Program.CurrentGame != GameType.BFBB)
+                WriteUInt32BE(bw, table.flags);
             WriteUInt32BE(bw, table.lodModel1);
             WriteUInt32BE(bw, table.lodModel2);
             WriteUInt32BE(bw, table.lodModel3);

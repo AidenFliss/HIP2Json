@@ -19,7 +19,7 @@ public abstract class AssetParser
     protected static float ReadFloatBE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         return BitConverter.ToSingle(b, 0);
     }
 
@@ -32,7 +32,7 @@ public abstract class AssetParser
     protected static int ReadInt32BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         return BitConverter.ToInt32(b, 0);
     }
 
@@ -45,21 +45,21 @@ public abstract class AssetParser
     protected static short ReadInt16BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(2);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         return BitConverter.ToInt16(b, 0);
     }
 
     protected static ushort ReadUInt16BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(2);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         return BitConverter.ToUInt16(b, 0);
     }
 
     protected static uint ReadUInt32BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         return BitConverter.ToUInt32(b, 0);
     }
 
@@ -71,7 +71,7 @@ public abstract class AssetParser
     protected static void WriteFloatBE(BinaryWriter bw, float value)
     {
         byte[] b = BitConverter.GetBytes(value);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
@@ -90,28 +90,28 @@ public abstract class AssetParser
     protected static void WriteUInt32BE(BinaryWriter bw, uint value)
     {
         byte[] b = BitConverter.GetBytes(value);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
     protected static void WriteUInt16BE(BinaryWriter bw, ushort value)
     {
         byte[] b = BitConverter.GetBytes(value);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
     protected static void WriteInt32BE(BinaryWriter bw, int value)
     {
         byte[] b = BitConverter.GetBytes(value);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
     protected static void WriteInt16BE(BinaryWriter bw, short value)
     {
         byte[] b = BitConverter.GetBytes(value);
-        Array.Reverse(b);
+        if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
 
