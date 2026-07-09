@@ -911,7 +911,38 @@ class Program
                                 }
 
                                 string safeKey = string.Join("_", key.Split(Path.GetInvalidFileNameChars()));
-                                string outFile = Path.Combine(hipHopFolder, Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", "")), folder, safeKey);
+                                string hipHopContainer = Path.Combine(hipHopFolder, Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", "")));
+                                string outFile = Path.Combine(hipHopContainer, folder, safeKey);
+
+                                if (!Directory.Exists(Path.Combine(hipHopContainer, folder)))
+                                {
+                                    Directory.CreateDirectory(Path.Combine(hipHopContainer, folder)); //new assets never present wont have folders yet
+                                }
+
+                                if (added.Contains(key))
+                                {
+                                    string iniLine = "";
+                                    if (detectedAssetType == "DYNA")
+                                        iniLine = "Asset=" + GetAssetId(safeKey).Substring(2) + ";" + folder + ";" + "2" + ";" + "0" + ";" + safeKey.Substring(11) + ";;" + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
+                                    else
+                                        iniLine = "Asset=" + GetAssetId(safeKey).Substring(2) + ";" + folder + ";" + "2" + ";" + "-1" + ";" + safeKey.Substring(11) + ";;" + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
+                                    
+                                    Logger.LogInfo(iniLine);
+
+                                    string settingsIni = Path.Combine(hipHopContainer, "Settings.ini");
+                                    
+                                    var lines = File.ReadAllLines(settingsIni);
+
+                                    int start = Array.FindIndex(lines, l => l == "LayerType=0 DEFAULT");
+                                    int end = Array.FindIndex(lines, start + 1, l => l == "EndLayer");
+
+                                    var newLines = lines
+                                        .Take(end)
+                                        .Append(iniLine)
+                                        .Concat(lines.Skip(end));
+                                    
+                                    File.WriteAllLines(settingsIni, newLines);
+                                }
 
                                 File.WriteAllBytes(outFile, fullBytes);
 
@@ -930,7 +961,86 @@ class Program
 
                     foreach (var key in removed)
                     {
-                        //todo, remove correct assets...
+                        var modElem = ogKeys[key];
+
+                        string detectedAssetType = null;
+                        foreach (var prop in modElem.EnumerateObject())
+                        {
+                            if (ParserMaps.AssetToParser.ContainsKey(prop.Name))
+                            {
+                                detectedAssetType = prop.Name;
+                                break;
+                            }
+                        }
+
+                        if (string.IsNullOrEmpty(detectedAssetType))
+                        {
+                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "error", "asset_type_not_detected" } });
+                            continue;
+                        }
+
+                        if (!ParserMaps.AssetToParser.TryGetValue(detectedAssetType, out AssetParser assetParser))
+                        {
+                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "no_parser" } });
+                            continue;
+                        }
+
+                        var asm = typeof(Program).Assembly;
+                        string ns = typeof(Program).Namespace;
+
+                        Type targetType = asm.GetType($"{ns}." + detectedAssetType, false, true);
+
+                        if (targetType == null)
+                        {
+                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "type_not_found" } });
+                            continue;
+                        }
+
+                        JsonSerializerOptions serOpts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, IncludeFields = true };
+                        var propElem = modElem.GetProperty(detectedAssetType);
+                        object obj = JsonSerializer.Deserialize(propElem.GetRawText(), targetType, serOpts);
+
+                        string folder = "";
+                        if (detectedAssetType == "DYNA")
+                        {
+                            DYNA dyna = (DYNA)obj;
+                            if (ParserMaps.DYNAToParser.TryGetValue(dyna.typeNameInternal, out AbstractDYNAParser parser))
+                            {
+                                folder = parser.GetFolderName();
+                            }
+                            else
+                            {
+                                throw new Exception("Something has gone horrible wrong....");
+                            }
+                        }
+                        else
+                        {
+                            folder = Dictionaries.ID_TO_FOLDER_NAME[detectedAssetType];
+                        }
+
+                        string safeKey = string.Join("_", key.Split(Path.GetInvalidFileNameChars()));
+                        string assetID = GetAssetId(safeKey).Substring(2);
+
+                        string hipHopContainer = Path.Combine(hipHopFolder, Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", "")));
+                        string outFile = Path.Combine(hipHopContainer, folder, safeKey);
+
+                        string settingsIni = Path.Combine(hipHopContainer, "Settings.ini");
+
+                        IEnumerable<string> iniLines = File.ReadLines(settingsIni);
+
+                        var newLines = File.ReadLines(settingsIni) //remove ghost asset entries
+                            .Where(line => !line.StartsWith("Asset=" + assetID + ";"))
+                            .ToArray();
+
+                        File.Delete(outFile);
+                        File.WriteAllLines(settingsIni, newLines);
+
+                        string dir = Path.Combine(hipHopContainer, folder);
+
+                        if (!Directory.EnumerateFileSystemEntries(dir).Any())
+                        {
+                            Directory.Delete(dir); //delete if the asset type is never used, to clean up
+                        }
                     }
 
                     if (serializedOutputs.Count > 0)
