@@ -13,7 +13,7 @@ public sealed class game_object_RingParser : AbstractDYNAParser
             direction = ReadVector3BE(br),
             offset = ReadVector3BE(br),
             scale = ReadVector3BE(br),
-            triggerBoundsType = ReadUInt32BE(br),
+            triggerBoundsType = (TriggerBoundsType)ReadUInt32BE(br),
             radius = ReadFloatBE(br),
             width = ReadFloatBE(br),
             height = ReadFloatBE(br),
@@ -34,7 +34,7 @@ public sealed class game_object_RingParser : AbstractDYNAParser
         WriteVector3BE(bw, ring.direction);
         WriteVector3BE(bw, ring.offset);
         WriteVector3BE(bw, ring.scale);
-        WriteUInt32BE(bw, ring.triggerBoundsType);
+        WriteUInt32BE(bw, (uint)ring.triggerBoundsType);
         WriteFloatBE(bw, ring.radius);
         WriteFloatBE(bw, ring.width);
         WriteFloatBE(bw, ring.height);
@@ -54,7 +54,7 @@ public class game_object_Ring
     public xVec3 direction { get; set; }
     public xVec3 offset { get; set; }
     public xVec3 scale { get; set; }
-    public uint triggerBoundsType { get; set; }
+    public TriggerBoundsType triggerBoundsType { get; set; }
     public float radius { get; set; }
     public float width { get; set; }
     public float height { get; set; }
@@ -62,4 +62,11 @@ public class game_object_Ring
     public float warningTime { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint drivenById { get; set; }
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TriggerBoundsType : uint
+{
+    HalfSizeShadow = 0,
+    FullSizeShadow = 1
 }

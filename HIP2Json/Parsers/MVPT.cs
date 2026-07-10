@@ -23,7 +23,7 @@ public sealed class MVPTParser : AssetParser
         {
             pos = pos,
             wt = wt,
-            on = on,
+            on = (OnType)on,
             bezIndex = bezIndex,
             flg_props = flg_props,
             pad = pad,
@@ -46,7 +46,7 @@ public sealed class MVPTParser : AssetParser
 
         WriteVector3BE(bw, mvpt.pos);
         WriteUInt16BE(bw, mvpt.wt);
-        WriteByte(bw, mvpt.on);
+        WriteByte(bw, (byte)mvpt.on);
         WriteByte(bw, mvpt.bezIndex);
         WriteByte(bw, mvpt.flg_props);
         WriteByte(bw, mvpt.pad);
@@ -67,7 +67,7 @@ public class MVPT
 {
     public xVec3 pos { get; set; }
     public ushort wt { get; set; }
-    public byte on { get; set; }
+    public OnType on { get; set; }
     public byte bezIndex { get; set; }
     public byte flg_props { get; set; }
     public byte pad { get; set; }
@@ -77,4 +77,11 @@ public class MVPT
     public float arenaRadius { get; set; }
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] points { get; set; }
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum OnType : byte
+{
+    Arena = 0,
+    Zone = 1
 }

@@ -12,11 +12,6 @@ internal sealed class TRIGParser : AssetParser
 
         byte t = br.ReadByte();
 
-        TriggerType type =
-            Enum.IsDefined(typeof(TriggerType), t)
-                ? (TriggerType)t
-                : TriggerType.Unknown;
-
         br.BaseStream.Seek(dataStart, SeekOrigin.Begin);
 
         xVec3[] positions = new xVec3[4];
@@ -30,7 +25,7 @@ internal sealed class TRIGParser : AssetParser
 
         return new TRIG
         {
-            Type = type,
+            Type = (TriggerType)t,
             Positions = positions,
             Direction = direction,
             Flags = flags

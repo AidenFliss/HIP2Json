@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace PortHeavyIronGameRewrite;
 
@@ -8,7 +9,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
     {
         return new game_object_NPCSettings
         {
-            basisType = ReadUInt32BE(br),
+            basisType = (BasisType)ReadUInt32BE(br),
             allowDetect = ReadByte(br),
             allowPatrol = ReadByte(br),
             allowWander = ReadByte(br),
@@ -21,7 +22,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
             allowAttack = ReadByte(br),
             assumeLOS = ReadByte(br),
             assumeFOV = ReadByte(br),
-            duploWaveMode = ReadUInt32BE(br),
+            duploWaveMode = (DuploWaveMode)ReadUInt32BE(br),
             duploSpawnDelay = ReadFloatBE(br),
             duploSpawnLifeMax = ReadInt32BE(br)
         };
@@ -34,7 +35,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
-        WriteUInt32BE(bw, npcSettings.basisType);
+        WriteUInt32BE(bw, (uint)npcSettings.basisType);
         WriteByte(bw, npcSettings.allowDetect);
         WriteByte(bw, npcSettings.allowPatrol);
         WriteByte(bw, npcSettings.allowWander);
@@ -46,7 +47,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
         WriteByte(bw, npcSettings.allowChase);
         WriteByte(bw, npcSettings.assumeLOS);
         WriteByte(bw, npcSettings.assumeFOV);
-        WriteUInt32BE(bw, npcSettings.duploWaveMode);
+        WriteUInt32BE(bw, (uint)npcSettings.duploWaveMode);
         WriteFloatBE(bw, npcSettings.duploSpawnDelay);
         WriteInt32BE(bw, npcSettings.duploSpawnLifeMax);
 
@@ -58,7 +59,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
 
 public class game_object_NPCSettings
 {
-    public uint basisType { get; set; }
+    public BasisType basisType { get; set; }
     public byte allowDetect { get; set; }
     public byte allowPatrol { get; set; }
     public byte allowWander { get; set; }
@@ -71,7 +72,24 @@ public class game_object_NPCSettings
     public byte allowAttack { get; set; }
     public byte assumeLOS { get; set; }
     public byte assumeFOV { get; set; }
-    public uint duploWaveMode { get; set; }
+    public DuploWaveMode duploWaveMode { get; set; }
     public float duploSpawnDelay { get; set; }
     public int duploSpawnLifeMax { get; set; }
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BasisType : uint
+{
+    None = 0,
+    EvilRobot = 1,
+    FriendlyRobot = 2,
+    LovingCitizen = 3,
+    GrumpyCitizen = 4
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DuploWaveMode : uint
+{
+    Continuous = 0,
+    Discreet = 1
 }

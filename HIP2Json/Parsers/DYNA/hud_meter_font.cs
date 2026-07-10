@@ -20,7 +20,7 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
             sound_increment = ReadUInt32BE(br),
             sound_start_decrement = ReadUInt32BE(br),
             sound_decrement = ReadUInt32BE(br),
-            font_id = ReadUInt32BE(br),
+            font_id = (TextFont)ReadUInt32BE(br),
             font_justify = ReadInt32BE(br),
             font_w = ReadInt32BE(br),
             font_h = ReadInt32BE(br),
@@ -54,7 +54,7 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
         WriteUInt32BE(bw, hudMeterFont.sound_increment);
         WriteUInt32BE(bw, hudMeterFont.sound_start_decrement);
         WriteUInt32BE(bw, hudMeterFont.sound_decrement);
-        WriteUInt32BE(bw, hudMeterFont.font_id);
+        WriteUInt32BE(bw, (uint)hudMeterFont.font_id);
         WriteInt32BE(bw, hudMeterFont.font_justify);
         WriteInt32BE(bw, hudMeterFont.font_w);
         WriteInt32BE(bw, hudMeterFont.font_h);
@@ -91,7 +91,7 @@ public class hud_meter_font
     public uint sound_start_decrement { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_decrement { get; set; }
-    public uint font_id { get; set; }
+    public TextFont font_id { get; set; }
     public int font_justify { get; set; }
     public int font_w { get; set; }
     public int font_h { get; set; }

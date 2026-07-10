@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -10,7 +11,7 @@ public sealed class DSCOParser : AssetParser
     {
         z_disco_floor_asset discoFloorAsset = new z_disco_floor_asset
         {
-            flags = ReadUInt32BE(br),
+            flags = (DiscoFloorFlags)ReadUInt32BE(br),
             interval_transition = ReadFloatBE(br),
             interval_state = ReadFloatBE(br),
             prefix_offset_off = ReadUInt32BE(br),
@@ -109,7 +110,7 @@ public sealed class DSCOParser : AssetParser
             nextStateOffset += (uint)stateMaskBytes;
         }
 
-        WriteUInt32BE(bw, asset.flags);
+        WriteUInt32BE(bw, (uint)asset.flags);
         WriteFloatBE(bw, asset.interval_transition);
         WriteFloatBE(bw, asset.interval_state);
         WriteUInt32BE(bw, asset.prefix_offset_off);
@@ -143,9 +144,18 @@ public class DSCO
     public byte[][] state_masks { get; set; }
 }
 
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum DiscoFloorFlags : uint
+{
+    None = 0,
+    Loop = 0x1,
+    Enabled = 0x2
+}
+
 public class z_disco_floor_asset
 {
-    public uint flags { get; set; }
+    public DiscoFloorFlags flags { get; set; }
     public float interval_transition { get; set; }
     public float interval_state { get; set; }
     public uint prefix_offset_off { get; set; }

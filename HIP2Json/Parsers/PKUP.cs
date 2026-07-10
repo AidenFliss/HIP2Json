@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text.Json.Serialization;
 
 namespace PortHeavyIronGameRewrite;
@@ -10,7 +11,7 @@ public sealed class PKUPParser : AssetParser
         return new PKUP
         {
             pickupHash = ReadUInt32BE(br),
-            pickupFlags = ReadInt16BE(br),
+            pickupFlags = (PickupFlags)ReadInt16BE(br),
             pickupValue = ReadInt16BE(br),
         };
     }
@@ -23,7 +24,7 @@ public sealed class PKUPParser : AssetParser
         using var bw = new BinaryWriter(ms);
 
         WriteUInt32BE(bw, pkup.pickupHash);
-        WriteInt16BE(bw, pkup.pickupFlags);
+        WriteInt16BE(bw, (short)pkup.pickupFlags);
         WriteInt16BE(bw, pkup.pickupValue);
 
         return ms.ToArray();
@@ -34,6 +35,15 @@ public class PKUP
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint pickupHash { get; set; }
-    public short pickupFlags { get; set; }
+    public PickupFlags pickupFlags { get; set; }
     public short pickupValue { get; set; }
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PickupFlags : short //funky math stuff yay
+{
+    None = 0,
+    ReappearAfterCollecting = 1 << 0,
+    EnabledOnStart = 1 << 1,
 }

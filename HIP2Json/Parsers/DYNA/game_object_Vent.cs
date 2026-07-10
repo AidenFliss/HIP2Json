@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -15,7 +16,7 @@ public sealed class game_object_VentParser : AbstractDYNAParser
             damageCorner1 = ReadVector3BE(br),
             damageCorner2 = ReadVector3BE(br),
             boulderInfluence = ReadFloatBE(br),
-            flags = ReadUInt32BE(br),
+            flags = (VentFlags)ReadUInt32BE(br),
             idle_time = ReadFloatBE(br),
             warn_time = ReadFloatBE(br),
             damage_time = ReadFloatBE(br),
@@ -35,7 +36,7 @@ public sealed class game_object_VentParser : AbstractDYNAParser
         WriteVector3BE(bw, vent.damageCorner1);
         WriteVector3BE(bw, vent.damageCorner2);
         WriteFloatBE(bw, vent.boulderInfluence);
-        WriteUInt32BE(bw, vent.flags);
+        WriteUInt32BE(bw, (uint)vent.flags);
         WriteFloatBE(bw, vent.idle_time);
         WriteFloatBE(bw, vent.warn_time);
         WriteFloatBE(bw, vent.damage_time);
@@ -55,8 +56,18 @@ public class game_object_Vent
     public xVec3 damageCorner1 { get; set; }
     public xVec3 damageCorner2 { get; set; }
     public float boulderInfluence { get; set; }
-    public uint flags { get; set; }
+    public VentFlags flags { get; set; }
     public float idle_time { get; set; }
     public float warn_time { get; set; }
     public float damage_time { get; set; }
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum VentFlags : uint
+{
+    None = 0,
+    BreakBoulders = 0x1,
+    Automatic = 0x2,
+    DamageSpongeBall = 0x4
 }

@@ -20,7 +20,7 @@ public sealed class CAMParser : AssetParser
 
             fov = ReadFloatBE(br),
             transitionTime = ReadFloatBE(br),
-            transitionType = ReadInt32BE(br),
+            transitionType = (TransitionType)ReadInt32BE(br),
 
             flags = ReadUInt32BE(br),
 
@@ -108,7 +108,7 @@ public sealed class CAMParser : AssetParser
 
         WriteFloatBE(bw, cam.fov);
         WriteFloatBE(bw, cam.transitionTime);
-        WriteInt32BE(bw, cam.transitionType);
+        WriteInt32BE(bw, (int)cam.transitionType);
 
         WriteUInt32BE(bw, cam.flags);
 
@@ -176,7 +176,7 @@ public class CAM
 
     public float fov { get; set; }
     public float transitionTime { get; set; }
-    public int transitionType { get; set; }
+    public TransitionType transitionType { get; set; }
 
     public uint flags { get; set; }
 
@@ -204,6 +204,21 @@ public enum CamType : byte
     Static = 2,
     Path = 3,
     StaticFollow = 4
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum TransitionType
+{
+    None = 0,
+    Interp1 = 1,
+    Interp2 = 2,
+    Interp3 = 3,
+    Interp4 = 4,
+    Linear = 5,
+    Interp1Rev = 6,
+    Interp2Rev = 7,
+    Interp3Rev = 8,
+    Interp4Rev = 9
 }
 
 public class FollowCam

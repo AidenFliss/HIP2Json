@@ -550,9 +550,7 @@ class Program
                         }
                     }
 
-                    string ogJson = ogElem.GetRawText();
-                    string modJson = modElem.GetRawText();
-                    if (!string.Equals(ogJson, modJson, StringComparison.Ordinal))
+                    if (!JsonElement.DeepEquals(ogElem, modElem))
                     {
                         modified.Add(k);
                     }
@@ -659,6 +657,7 @@ class Program
                                             PlatformType.Breakaway => typeof(BreakawayPlatformBFBB),
                                             PlatformType.Teeter => typeof(TeeterPlatform),
                                             PlatformType.Paddle => typeof(PaddlePlatform),
+                                            PlatformType.Mechanism => typeof(MechanismMotion),
                                             _ => null
                                         };
                                     }
@@ -680,6 +679,22 @@ class Program
                                     {
                                         plat.specific = platElem.Deserialize(payloadType, serOpts)!;
                                     }
+                                }
+                                else if (obj is BUTN butn && butn.motion.specific is JsonElement butnElem)
+                                {
+                                    Type payloadType = null;
+                                    payloadType = butn.motion.type switch
+                                    {
+                                        MotionType.ExtendRetract => typeof(ExtendRetractMotion),
+                                        MotionType.Orbit => typeof(OrbitMotion),
+                                        MotionType.Spline => typeof(SplineMotion),
+                                        MotionType.MovePoint => typeof(MovePointMotion),
+                                        MotionType.Mechanism => typeof(MechanismMotion),
+                                        MotionType.Pendulum => typeof(PendulumMotion),
+                                        _ => null
+                                    };
+
+                                    butn.motion.specific = butnElem.Deserialize(payloadType, serOpts);
                                 }
                                 
                                 serialized = assetParser.Serialize(obj);
@@ -973,15 +988,19 @@ class Program
                                     
                                     var lines = File.ReadAllLines(settingsIni);
 
-                                    int start = Array.FindIndex(lines, l => l == "LayerType=0 DEFAULT");
-                                    int end = Array.FindIndex(lines, start + 1, l => l == "EndLayer");
-
-                                    var newLines = lines
+                                    var newLines = File.ReadLines(settingsIni) //remove duplicates to prevent crash on packing
+                                        .Where(line => !line.StartsWith("Asset=" + GetAssetId(safeKey).Substring(2) + ";"))
+                                        .ToArray();
+                                    
+                                    int start = Array.FindIndex(newLines, l => l == "LayerType=0 DEFAULT");
+                                    int end = Array.FindIndex(newLines, start + 1, l => l == "EndLayer");
+                                    
+                                    var newerLines = newLines
                                         .Take(end)
                                         .Append(iniLine)
-                                        .Concat(lines.Skip(end));
-                                    
-                                    File.WriteAllLines(settingsIni, newLines);
+                                        .Concat(newLines.Skip(end));
+
+                                    File.WriteAllLines(settingsIni, newerLines);
                                 }
 
                                 File.WriteAllBytes(outFile, fullBytes);

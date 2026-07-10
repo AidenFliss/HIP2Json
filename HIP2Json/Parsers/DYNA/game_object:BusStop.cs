@@ -10,7 +10,7 @@ public sealed class game_object_BusStopParser : AbstractDYNAParser
         return new game_object_BusStop
         {
             marker = ReadUInt32BE(br),
-            character = ReadInt32BE(br),
+            character = (PlayableCharacter)ReadInt32BE(br),
             cameraID = ReadUInt32BE(br),
             busID = ReadUInt32BE(br),
             delay = ReadFloatBE(br)
@@ -25,7 +25,7 @@ public sealed class game_object_BusStopParser : AbstractDYNAParser
         using var bw = new BinaryWriter(ms);
 
         WriteUInt32BE(bw, busStop.marker);
-        WriteInt32BE(bw, busStop.character);
+        WriteInt32BE(bw, (int)busStop.character);
         WriteUInt32BE(bw, busStop.cameraID);
         WriteUInt32BE(bw, busStop.busID);
         WriteFloatBE(bw, busStop.delay);
@@ -40,10 +40,17 @@ public class game_object_BusStop
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint marker { get; set; }
-    public int character { get; set; }
+    public PlayableCharacter character { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint cameraID { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint busID { get; set; }
     public float delay { get; set; }
+}
+
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PlayableCharacter
+{
+    Patrick = 0,
+    Sandy = 1
 }

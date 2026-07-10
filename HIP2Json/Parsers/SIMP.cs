@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace PortHeavyIronGameRewrite;
 
@@ -10,7 +12,7 @@ public sealed class SIMPParser : AssetParser
         {
             animSpeed = ReadFloatBE(br),
             initAnimState = ReadInt32BE(br),
-            collType = ReadByte(br),
+            collType = (CollisionType)ReadByte(br),
             flags = ReadByte(br),
             pad1 = ReadByte(br),
             pad2 = ReadByte(br)
@@ -26,7 +28,7 @@ public sealed class SIMPParser : AssetParser
 
         WriteFloatBE(bw, simp.animSpeed);
         WriteInt32BE(bw, simp.initAnimState);
-        WriteByte(bw, simp.collType);
+        WriteByte(bw, (byte)simp.collType);
         WriteByte(bw, simp.flags);
         WriteByte(bw, simp.pad1);
         WriteByte(bw, simp.pad2);
@@ -39,8 +41,20 @@ public class SIMP
 {
     public float animSpeed { get; set; }
     public int initAnimState { get; set; }
-    public byte collType { get; set; }
+    public CollisionType collType { get; set; }
     public byte flags { get; set; }
     public byte pad1 { get; set; }
     public byte pad2 { get; set; }
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum CollisionType : byte //weird bit stuff again, yay
+{
+    None    = 0,
+    Trigger = 1 << 0,
+    Static  = 1 << 1,
+    Dynamic = 1 << 2,
+    NPC     = 1 << 3,
+    Player  = 1 << 4
 }

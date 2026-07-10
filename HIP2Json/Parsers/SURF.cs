@@ -1,4 +1,6 @@
+using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace PortHeavyIronGameRewrite;
 
@@ -25,7 +27,7 @@ public sealed class SURFParser : AssetParser
             phys_pad = phys_pad,
             sld_start = sld_start,
             sld_stop = sld_stop,
-            phys_flags = phys_flags,
+            phys_flags = (PhysFlags)phys_flags,
             friction = friction,
 
             matfx = new zSurfMatFX
@@ -122,7 +124,7 @@ public sealed class SURFParser : AssetParser
         WriteByte(bw, surf.phys_pad);
         WriteByte(bw, surf.sld_start);
         WriteByte(bw, surf.sld_stop);
-        WriteByte(bw, surf.phys_flags);
+        WriteByte(bw, (byte)surf.phys_flags);
         WriteFloatBE(bw, surf.friction);
 
         WriteUInt32BE(bw, surf.matfx.flags);
@@ -192,7 +194,7 @@ public class SURF
     public byte phys_pad { get; set; }
     public byte sld_start { get; set; }
     public byte sld_stop { get; set; }
-    public byte phys_flags { get; set; }
+    public PhysFlags phys_flags { get; set; }
     public float friction { get; set; }
     public zSurfMatFX matfx { get; set; }
     public zSurfColorFX colorfx { get; set; }
@@ -211,6 +213,19 @@ public class SURF
     public float walljump_scale_y { get; set; }
     public float damage_timer { get; set; }
     public float damage_bounce { get; set; }
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum PhysFlags : byte
+{
+    SlideOffPlayer = 0,
+    AnglePlayer = 0x02,
+    NoStand = 0x04,
+    OutOfBounds = 0x08,
+    WallJump = 0x10,
+    LedgeGrab = 0x20,
+    Unknown40 = 0x40
 }
 
 public class zSurfMatFX
