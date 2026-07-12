@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class game_object_TeleportParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         uint marker = ReadUInt32BE(br);
         uint opened = ReadUInt32BE(br);
@@ -27,7 +27,7 @@ public sealed class game_object_TeleportParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Teleport teleport = (game_object_Teleport)obj;
         

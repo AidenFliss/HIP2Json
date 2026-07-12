@@ -4,7 +4,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class pointerParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new pointer
         {
@@ -13,7 +13,7 @@ public sealed class pointerParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         pointer pointer = (pointer)obj;
         

@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class effect_LightningParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new effect_Lightning
         {
@@ -27,7 +27,7 @@ public sealed class effect_LightningParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_Lightning lightning = (effect_Lightning)obj;
         

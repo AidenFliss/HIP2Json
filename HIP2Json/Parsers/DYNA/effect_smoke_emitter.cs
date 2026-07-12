@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class effect_smoke_emitterParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new effect_smoke_emitter
         {
@@ -33,7 +33,7 @@ public sealed class effect_smoke_emitterParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_smoke_emitter smokeEmitter = (effect_smoke_emitter)obj;
         

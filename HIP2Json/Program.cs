@@ -60,13 +60,25 @@ public struct xLinkAsset
     public uint chkAssetID;
 }
 
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BaseFlags : ushort
+{
+    None = 0,
+    Enabled = 0x01,
+    Persistent = 0x02,
+    Valid = 0x04,
+    VisibleDuringCutscenes = 0x08,
+    ReceiveShadows = 0x10,
+}
+
 public struct xBaseAsset
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint id;
     public string baseType;
     public byte linkCount;
-    public ushort baseFlags;
+    public BaseFlags baseFlags;
     public override string ToString()
         => $"id: {id}, baseType: {baseType}, linkCount: {linkCount}, baseFlags: {baseFlags}";
 }
@@ -144,8 +156,8 @@ class Program
     static int _parsedEntity;
     static int _parsedDyna;
     static int _parsedBinary;
-    static int _unimplemented;
-    static Dictionary<string, int> _unimplByType = new();
+    public static int _unimplemented;
+    public static Dictionary<string, int> _unimplByType = new();
 
     static void Main(string[] args)
     {
@@ -696,6 +708,36 @@ class Program
 
                                     butn.motion.specific = butnElem.Deserialize(payloadType, serOpts);
                                 }
+                                else if (obj is UIM uim)
+                                {
+                                    for (int i = 0; i < uim.commands.Length; i++)
+                                    {
+                                        if (uim.commands[i] is JsonElement uimElem)
+                                        {
+                                            UIMCommandType type = (UIMCommandType)uimElem
+                                                .GetProperty("type")
+                                                .GetInt32();
+
+                                            Type commandType = type switch
+                                            {
+                                                UIMCommandType.Move => typeof(UIMMoveCommand),
+                                                UIMCommandType.Scale => typeof(UIMScaleCommand),
+                                                UIMCommandType.Rotate => typeof(UIMRotateCommand),
+                                                UIMCommandType.Opacity => typeof(UIMOpacityCommand),
+                                                UIMCommandType.AbsoluteScale => typeof(UIMAbsoluteScaleCommand),
+                                                UIMCommandType.Brightness => typeof(UIMBrightnessCommand),
+                                                UIMCommandType.Color => typeof(UIMColorCommand),
+                                                UIMCommandType.UVScroll => typeof(UIMUVScrollCommand),
+                                                _ => null
+                                            };
+
+                                            if (commandType != null)
+                                            {
+                                                uim.commands[i] = uimElem.Deserialize(commandType, serOpts)!;
+                                            }
+                                        }
+                                    }
+                                }
                                 
                                 serialized = assetParser.Serialize(obj);
                             }
@@ -745,8 +787,8 @@ class Program
                                             linkCountByte = (byte)linksProp.GetArrayLength();
 
                                         ushort baseFlags = 0;
-                                        if (baseProp.TryGetProperty("baseFlags", out var bf) && bf.ValueKind == JsonValueKind.Number)
-                                            baseFlags = bf.GetUInt16();
+                                        if (baseProp.TryGetProperty("baseFlags", out var bf) && bf.ValueKind == JsonValueKind.String)
+                                            baseFlags = (ushort)Enum.Parse<BaseFlags>(bf.GetString()!);
 
                                         Util.WriteUInt32(bw, idVal);
                                         bw.Write(baseTypeByte);
@@ -951,13 +993,51 @@ class Program
                                 if (detectedAssetType == "DYNA") //dyna is very very epic, thx heavy iron..
                                 {
                                     DYNA dyna = (DYNA)obj;
-                                    if (ParserMaps.DYNAToParser.TryGetValue(dyna.typeNameInternal, out AbstractDYNAParser parser))
+
+                                    if (ParserMaps.TryGetDYNAParser(dyna.typeNameInternal, out AbstractDYNAParser parser))
                                     {
                                         folder = parser.GetFolderName();
+
+                                        if (dyna.typeNameInternal.StartsWith("Enemy:SB:"))
+                                        {
+                                            switch (dyna.typeNameInternal)
+                                            {
+                                                case "Enemy:SB:BucketOTron":
+                                                    folder = "Spawner";
+                                                    break;
+                                                case "Enemy:SB:CastNCrew":
+                                                    folder = "CastNCrew";
+                                                    break;
+                                                case "Enemy:SB:Critter":
+                                                    folder = "Critter";
+                                                    break;
+                                                case "Enemy:SB:Dennis":
+                                                    folder = "Dennis";
+                                                    break;
+                                                case "Enemy:SB:FrogFish":
+                                                    folder = "FrogFish";
+                                                    break;
+                                                case "Enemy:SB:Mindy":
+                                                    folder = "Mindy";
+                                                    break;
+                                                case "Enemy:SB:Neptune":
+                                                    folder = "Neptune";
+                                                    break;
+                                                case "Enemy:SB:Standard":
+                                                    folder = "Enemy";
+                                                    break;
+                                                case "Enemy:SB:SupplyCrate":
+                                                    folder = "Crate";
+                                                    break;
+                                                case "Enemy:SB:Turret":
+                                                    folder = "Turret";
+                                                    break;
+                                            }
+                                        }
                                     }
                                     else
                                     {
-                                        throw new Exception("Something has gone horrible wrong....");
+                                        throw new Exception($"No parser registered for DYNA type '{dyna.typeNameInternal}'.");
                                     }
                                 }
                                 else
@@ -1063,7 +1143,7 @@ class Program
                         if (detectedAssetType == "DYNA")
                         {
                             DYNA dyna = (DYNA)obj;
-                            if (ParserMaps.DYNAToParser.TryGetValue(dyna.typeNameInternal, out AbstractDYNAParser parser))
+                            if (ParserMaps.TryGetDYNAParser(dyna.typeNameInternal, out AbstractDYNAParser parser))
                             {
                                 folder = parser.GetFolderName();
                             }
@@ -1188,7 +1268,7 @@ class Program
                 Logger.LogWarning($"Skipping unknown folder '{folderName}' for file {Path.GetFileName(filePath)}");
                 return null;
             }
-            
+
             assetDescriptor = new AssetDescriptor()
             {
                 AssetType = "DYNA",
@@ -1235,7 +1315,7 @@ class Program
                 id = id,
                 baseType = baseTypeStr,
                 linkCount = linkCount,
-                baseFlags = baseFlags
+                baseFlags = (BaseFlags)baseFlags
             };
         }
 

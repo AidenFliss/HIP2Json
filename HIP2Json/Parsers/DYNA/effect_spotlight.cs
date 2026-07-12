@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class effect_spotlightParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new effect_spotlight
         {
@@ -31,7 +31,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_spotlight spotlight = (effect_spotlight)obj;
 

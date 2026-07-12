@@ -6,16 +6,16 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class ScenePropertiesParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         int idle03ExtraCount = ReadInt32BE(br);
         uint idle03Extras = ReadUInt32BE(br);
         int idle04ExtraCount = ReadInt32BE(br);
         uint idle04Extras = ReadUInt32BE(br);
-        ushort bombCount = ReadUInt16BE(br);
-        ushort extraIdleDelay = ReadUInt16BE(br);
-        ushort hdrGlow = ReadUInt16BE(br);
-        ushort hdrDarken = ReadUInt16BE(br);
+        byte bombCount = ReadByte(br);
+        byte extraIdleDelay = ReadByte(br);
+        byte hdrGlow = ReadByte(br);
+        byte hdrDarken = ReadByte(br);
         uint musicID = ReadUInt32BE(br);
         uint flags = ReadUInt32BE(br);
         float waterTileWidth = ReadFloatBE(br);
@@ -43,7 +43,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         SceneProperties sceneProperties = (SceneProperties)obj;
         
@@ -54,10 +54,10 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         WriteUInt32BE(bw, sceneProperties.idle03Extras);
         WriteInt32BE(bw, sceneProperties.idle04ExtraCount);
         WriteUInt32BE(bw, sceneProperties.idle04Extras);
-        WriteUInt16BE(bw, sceneProperties.bombCount);
-        WriteUInt16BE(bw, sceneProperties.extraIdleDelay);
-        WriteUInt16BE(bw, sceneProperties.hdrGlow);
-        WriteUInt16BE(bw, sceneProperties.hdrDarken);
+        WriteByte(bw, sceneProperties.bombCount);
+        WriteByte(bw, sceneProperties.extraIdleDelay);
+        WriteByte(bw, sceneProperties.hdrGlow);
+        WriteByte(bw, sceneProperties.hdrDarken);
         WriteUInt32BE(bw, sceneProperties.musicID);
         WriteUInt32BE(bw, sceneProperties.flags);
         WriteFloatBE(bw, sceneProperties.waterTileWidth);
@@ -80,10 +80,10 @@ public class SceneProperties
     public int idle04ExtraCount { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint idle04Extras { get; set; }
-    public ushort bombCount { get; set; }
-    public ushort extraIdleDelay { get; set; }
-    public ushort hdrGlow { get; set; }
-    public ushort hdrDarken { get; set; }
+    public byte bombCount { get; set; }
+    public byte extraIdleDelay { get; set; }
+    public byte hdrGlow { get; set; }
+    public byte hdrDarken { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint musicID { get; set; }
     public uint flags { get; set; }

@@ -6,16 +6,16 @@ namespace PortHeavyIronGameRewrite;
 
 public abstract class AbstractDYNAParser
 {
-    public object ParseSafe(BinaryReader br, long assetStart, long dataStart, short version)
+    public object ParseSafe(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         br.BaseStream.Position = dataStart;
 
-        return Parse(br, assetStart, dataStart, version);
+        return Parse(br, assetStart, dataStart, version, dynaType);
     }
 
-    public abstract object Parse(BinaryReader br, long assetStart, long dataStart, short version);
+    public abstract object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType);
 
-    public abstract byte[] Serialize(object obj, short version);
+    public abstract byte[] Serialize(object obj, short version, string dynaType);
 
     public abstract string GetFolderName();
 
@@ -186,6 +186,25 @@ public abstract class AbstractDYNAParser
         };
     }
 
+    protected static xBaseAsset ReadBaseAsset(BinaryReader br)
+    {
+        return new xBaseAsset
+        {
+            id = ReadUInt32BE(br),
+            baseType = ReadByte(br).ToString("X8"),
+            linkCount = ReadByte(br),
+            baseFlags = (BaseFlags)ReadUInt16BE(br)
+        };
+    }
+
+    protected static void WriteBaseAsset(BinaryWriter bw, xBaseAsset value)
+    {
+        WriteUInt32BE(bw, value.id);
+        WriteByte(bw, Convert.ToByte(value.baseType.Substring(2), 16));
+        WriteByte(bw, value.linkCount);
+        WriteUInt16BE(bw, (ushort)value.baseFlags);
+    }
+
     protected static xEntAsset ReadEntAsset(BinaryReader br)
     {
         xEntAsset value = new xEntAsset
@@ -194,11 +213,13 @@ public abstract class AbstractDYNAParser
             subtype = ReadByte(br),
             pflags = ReadByte(br),
             moreFlags = ReadByte(br),
-            pad = ReadByte(br),
         };
 
-        if (Program.CurrentGame != GameType.BFBB)
+        if (Program.CurrentGame == GameType.BFBB)
+        {
+            value.pad = br.ReadByte();
             br.ReadBytes(3);
+        }
 
         value.surfaceID = ReadUInt32BE(br);
         value.ang = ReadVector3BE(br);
@@ -221,10 +242,12 @@ public abstract class AbstractDYNAParser
         WriteByte(bw, value.subtype);
         WriteByte(bw, value.pflags);
         WriteByte(bw, value.moreFlags);
-        WriteByte(bw, value.pad);
 
-        if (Program.CurrentGame != GameType.BFBB)
+        if (Program.CurrentGame == GameType.BFBB)
+        {
+            WriteByte(bw, value.pad);
             bw.Write(new byte[3]);
+        }
 
         WriteUInt32BE(bw, value.surfaceID);
         WriteVector3BE(bw, value.ang);

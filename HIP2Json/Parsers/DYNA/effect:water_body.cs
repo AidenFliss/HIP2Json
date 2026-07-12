@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class effect_water_bodyParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new effect_water_body
         {
@@ -18,7 +18,7 @@ public sealed class effect_water_bodyParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_water_body waterBody = (effect_water_body)obj;
 

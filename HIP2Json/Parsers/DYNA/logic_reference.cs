@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class logic_referenceParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new logic_reference
         {
@@ -13,7 +13,7 @@ public sealed class logic_referenceParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         logic_reference logicReference = (logic_reference)obj;
         

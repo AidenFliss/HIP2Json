@@ -64,7 +64,7 @@ public static class Dictionaries
         ["ReactiveAnimation"] = new() { AssetType = "RANM", AssetStorage = AssetType.Base },
         ["Script"] = new() { AssetType = "SCRP", AssetStorage = AssetType.Base },
         ["SceneSettings"] = new() { AssetType = "SSET", AssetStorage = AssetType.Base },
-        ["SDFX"] = new() { AssetType = "SDFX", AssetStorage = AssetType.Binary },
+        ["SDFX"] = new() { AssetType = "SDFX", AssetStorage = AssetType.Base },
         ["SFX"] = new() { AssetType = "SFX", AssetStorage = AssetType.Base },
         ["SGRP"] = new() { AssetType = "SGRP", AssetStorage = AssetType.Binary },
         ["ShadowTable"] = new() { AssetType = "SHDW", AssetStorage = AssetType.Binary },

@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class game_object_talk_boxParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new game_object_talk_box
         {
@@ -35,7 +35,7 @@ public sealed class game_object_talk_boxParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_talk_box talkBox = (game_object_talk_box)obj;
         

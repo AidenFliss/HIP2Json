@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class hud_meter_unitParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new hud_meter_unit
         {
@@ -30,7 +30,7 @@ public sealed class hud_meter_unitParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         hud_meter_unit hudMeterUnit = (hud_meter_unit)obj;
 

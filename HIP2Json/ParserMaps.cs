@@ -12,7 +12,10 @@ public static class ParserMaps
         { "CNTR", new CNTRParser() },
         { "COLL", new COLLParser() },
         { "COND", new CONDParser() },
+        { "CRDT", new CRDTParser() },
         { "CSNM", new CSNMParser() },
+        { "CTOC", new CTOCParser() },
+        { "DEST", new DESTParser() },
         { "DPAT", new DPATParser() },
         { "DSCO", new DSCOParser() },
         { "DSTR", new DSTRParser() },
@@ -39,7 +42,9 @@ public static class ParserMaps
         { "PLAT", new PLATParser() },
         { "PLYR", new PLYRParser() },
         { "PORT", new PORTParser() },
+        { "RANM", new RANMParser() },
         { "SCRP", new SCRPParser() },
+        { "SDFX", new SDFXParser() },
         { "SFX", new SFXParser() },
         { "SHDW", new SHDWParser() },
         { "SIMP", new SIMPParser() },
@@ -49,6 +54,7 @@ public static class ParserMaps
         { "TRIG", new TRIGParser() },
         { "UI", new UIParser() },
         { "UIFT", new UIFTParser() },
+        { "UIM", new UIMParser() },
         { "VIL", new VILParser() }
     };
 
@@ -61,6 +67,7 @@ public static class ParserMaps
         { "effect:smoke_emitter", new effect_smoke_emitterParser() },
         { "effect:spotlight", new effect_spotlightParser() },
         { "effect:water_body", new effect_water_bodyParser() },
+        { "Enemy:SB", new Enemy_SBParser() },
         { "game_object:BoulderGenerator", new game_object_BoulderGeneratorParser() },
         { "game_object:bungee_drop", new game_object_bungee_dropParser() },
         { "game_object:bungee_hook", new game_object_bungee_hookParser() },
@@ -78,14 +85,14 @@ public static class ParserMaps
         { "game_object:Vent", new game_object_VentParser() },
         { "game_object:VentType", new game_object_VentTypeParser() },
         { "game_object:BusStop", new game_object_BusStopParser() },
-        { "hud_meter_font", new hud_meter_fontParser() },
-        { "hud_meter_unit", new hud_meter_unitParser() },
-        { "hud_model", new hud_modelParser() },
-        { "hud_text", new hud_textParser() },
-        { "JSPExtraData", new JSPExtraDataParser() },
+        { "hud:meter:font", new hud_meter_fontParser() },
+        { "hud:meter:unit", new hud_meter_unitParser() },
+        { "hud:model", new hud_modelParser() },
+        { "hud:text", new hud_textParser() },
+        { "JSP Extra Data", new JSPExtraDataParser() },
         { "logic:reference", new logic_referenceParser() },
         { "pointer", new pointerParser() },
-        { "SceneProperties", new ScenePropertiesParser() },
+        { "Scene Properties", new ScenePropertiesParser() },
     };
 
     public static Dictionary<string, string> DYNAFolderToInternalName = new()
@@ -97,12 +104,23 @@ public static class ParserMaps
         { "SmokeEmitter", "effect:smoke_emitter" },
         { "Spotlight", "effect:spotlight" },
         { "WaterBody", "effect:water_body" },
+        { "Enemy", "Enemy:SB" },
         { "BoulderGenerator", "game_object:BoulderGenerator" },
         { "BungeeDrop", "game_object:bungee_drop" },
         { "BungeeHook", "game_object:bungee_hook" },
         { "BusStop", "game_object:BusStop" },
         { "CameraTweak", "game_object:Camera_Tweak" },
         { "FlythroughObject", "game_object:Flythrough" },
+        { "Mindy", "Enemy:SB" },
+        { "EnemySB", "Enemy:SB" },
+        { "Critter", "Enemy:SB" },
+        { "Dennis", "Enemy:SB" },
+        { "Spawner", "Enemy:SB" },
+        { "CastNCrew", "Enemy:SB" },
+        { "FrogFish", "Enemy:SB" },
+        { "Crate", "Enemy:SB" },
+        { "Turret", "Enemy:SB" },
+        { "Neptune", "Enemy:SB" },
         { "NPCSettingsObject", "game_object:NPCSettings" },
         { "RaceTimer", "game_object:RaceTimer" },
         { "Ring", "game_object:Ring" },
@@ -114,13 +132,25 @@ public static class ParserMaps
         { "TextBox", "game_object:text_box" },
         { "Vent", "game_object:Vent" },
         { "VentType", "game_object:VentType" },
-        { "HUDMeterFont", "hud_meter_font" },
-        { "HUDMeterUnit", "hud_meter_unit" },
-        { "HUDModel", "hud_model" },
-        { "HUDText", "hud_text" },
-        { "JSPExtraData", "JSPExtraData" },
+        { "HUDMeterFont", "hud:meter:font" },
+        { "HUDMeterUnit", "hud:meter:unit" },
+        { "HUDModel", "hud:model" },
+        { "HUDText", "hud:text" },
+        { "JSPExtraData", "JSP Extra Data" },
         { "LogicReference", "logic:reference" },
         { "Pointer", "pointer" },
-        { "SceneProperties", "SceneProperties" },
+        { "SceneProperties", "Scene Properties" },
     };
+
+    public static bool TryGetDYNAParser(string typeName, out AbstractDYNAParser parser)
+    {
+        if (DYNAToParser.TryGetValue(typeName, out parser))
+            return true;
+
+        if (typeName.StartsWith("Enemy:SB:"))
+            return DYNAToParser.TryGetValue("Enemy:SB", out parser);
+
+        parser = null!;
+        return false;
+    }
 }

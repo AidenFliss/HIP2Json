@@ -4,7 +4,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class game_object_Camera_TweakParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new game_object_Camera_Tweak
         {
@@ -15,7 +15,7 @@ public sealed class game_object_Camera_TweakParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Camera_Tweak cameraTweak = (game_object_Camera_Tweak)obj;
         

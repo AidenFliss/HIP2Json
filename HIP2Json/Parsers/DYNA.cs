@@ -21,12 +21,21 @@ public sealed class DYNAParser : AssetParser //god save me..
         string typeHex = dyna.type.ToString("X8");
         string typeName = Dictionaries.DYNA_TO_NAME_MAPPING[typeHex];
 
-        if (ParserMaps.DYNAToParser.TryGetValue(typeName, out AbstractDYNAParser parser))
+        if (ParserMaps.TryGetDYNAParser(typeName, out AbstractDYNAParser parser))
         {
-            object parsed = parser.ParseSafe(br, assetStart, dataStart + 8, version);
+            object parsed = parser.ParseSafe(br, assetStart, dataStart + 8, version, typeName);
 
             dyna.typeNameInternal = typeName;
             dyna.dynaSpecificData = parsed;
+        }
+        else
+        {
+            if (!Program._unimplByType.TryGetValue(typeName, out int count))
+                Program._unimplByType[typeName] = 1;
+            else
+                Program._unimplByType[typeName] = count + 1;
+
+            Program._unimplemented++;
         }
 
         return dyna;
@@ -47,7 +56,7 @@ public sealed class DYNAParser : AssetParser //god save me..
 
         if (ParserMaps.DYNAToParser.TryGetValue(dyna.typeNameInternal, out AbstractDYNAParser parser))
         {
-            byte[] serializedBytes = parser.Serialize(dyna.dynaSpecificData, dyna.version);
+            byte[] serializedBytes = parser.Serialize(dyna.dynaSpecificData, dyna.version, dyna.typeNameInternal);
             bw.Write(serializedBytes);
         }
 

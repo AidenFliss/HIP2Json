@@ -75,4 +75,16 @@ public static class Util
         if (Program.BigEndian == true) Array.Reverse(b);
         bw.Write(b);
     }
+
+    public static void DecryptCRDT(ref byte[] data)
+    {
+        byte last = 0;
+        const string key = "xCMChunkHand";
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            last = (byte)(data[i] ^ last ^ key[(i + 0x18) % key.Length]);
+            data[i] = last;
+        }
+    }
 }

@@ -5,7 +5,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class JSPExtraDataParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         return new JSPExtraData
         {
@@ -14,7 +14,7 @@ public sealed class JSPExtraDataParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         JSPExtraData jspExtraData = (JSPExtraData)obj;
         

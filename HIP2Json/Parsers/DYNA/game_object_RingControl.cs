@@ -6,7 +6,7 @@ namespace PortHeavyIronGameRewrite;
 
 public sealed class game_object_RingControlParser : AbstractDYNAParser
 {
-    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version)
+    public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
         int player = ReadInt32BE(br);
         uint modelForRings = ReadUInt32BE(br);
@@ -37,7 +37,7 @@ public sealed class game_object_RingControlParser : AbstractDYNAParser
         };
     }
 
-    public override byte[] Serialize(object obj, short version)
+    public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_RingControl ringControl = (game_object_RingControl)obj;
         
