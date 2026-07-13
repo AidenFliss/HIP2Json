@@ -46,19 +46,12 @@ jobs:
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
-      - name: Restore
-        run: dotnet restore HIP2Json.sln
-
-      - name: Build
-        run: dotnet build HIP2Json.sln -c Release --no-restore
-
       - name: Publish
         run: |
           dotnet publish HIP2Json/HIP2Json.csproj \
             -c Release \
             -r ${{ matrix.runtime }} \
             --self-contained false \
-            --no-build \
             -o publish/${{ matrix.runtime }}
 
       - name: Create ZIP
@@ -87,9 +80,13 @@ jobs:
 
       - name: Read Version
         id: version
-        shell: bash
         run: |
-          VERSION=$(grep -oPm1 '(?<=<Version>)[^<]+' HIP2Json/HIP2Json.csproj)
+          VERSION=$(dotnet msbuild HIP2Json/HIP2Json.csproj -getProperty:FileVersion)
+
+          if [ -z "$VERSION" ]; then
+            echo "::error::No FileVersion found"
+            exit 1
+          fi
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
