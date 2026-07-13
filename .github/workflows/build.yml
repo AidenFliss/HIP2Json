@@ -3,7 +3,7 @@ name: Build & Release
 on:
   push:
     branches:
-      - main
+      - master
   workflow_dispatch:
 
 permissions:
@@ -11,6 +11,14 @@ permissions:
 
 jobs:
   build:
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime:
+          - win-x64
+          - win-x86
+          - linux-x64
+
     runs-on: ubuntu-latest
 
     steps:
@@ -37,7 +45,6 @@ jobs:
 
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
-          echo "zip=${{ github.event.repository.name }}-v$VERSION.zip" >> "$GITHUB_OUTPUT"
 
       - name: Restore
         run: dotnet restore HIP2Json.sln
@@ -49,12 +56,53 @@ jobs:
         run: |
           dotnet publish HIP2Json/HIP2Json.csproj \
             -c Release \
-            -o publish
+            -r ${{ matrix.runtime }} \
+            --self-contained false \
+            --no-build \
+            -o publish/${{ matrix.runtime }}
 
       - name: Create ZIP
         run: |
-          cd publish
-          zip -r "../${{ steps.version.outputs.zip }}" .
+          cd publish/${{ matrix.runtime }}
+          zip -r "../../HIP2Json-${{ steps.version.outputs.tag }}-${{ matrix.runtime }}.zip" .
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HIP2Json-${{ matrix.runtime }}
+          path: HIP2Json-${{ steps.version.outputs.tag }}-${{ matrix.runtime }}.zip
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Read Version
+        id: version
+        shell: bash
+        run: |
+          VERSION=$(grep -oPm1 '(?<=<Version>)[^<]+' HIP2Json/HIP2Json.csproj)
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Collect ZIPs
+        run: |
+          mkdir release
+          find artifacts -name "*.zip" -exec cp {} release/ \;
 
       - name: Delete existing release (if any)
         env:
@@ -67,6 +115,6 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create "${{ steps.version.outputs.tag }}" \
-            "${{ steps.version.outputs.zip }}" \
-            --title "${{ github.event.repository.name }} ${{ steps.version.outputs.tag }}" \
+            release/*.zip \
+            --title "HIP2Json ${{ steps.version.outputs.tag }}" \
             --generate-notes
