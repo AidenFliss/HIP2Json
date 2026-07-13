@@ -36,10 +36,10 @@ jobs:
         id: version
         shell: bash
         run: |
-          VERSION=$(grep -oPm1 '(?<=<Version>)[^<]+' HIP2Json/HIP2Json.csproj)
+          VERSION=$(dotnet msbuild HIP2Json/HIP2Json.csproj -getProperty:FileVersion)
 
           if [ -z "$VERSION" ]; then
-            echo "::error::No <Version> found in HIP2Json.csproj"
+            echo "::error::No FileVersion found"
             exit 1
           fi
 
