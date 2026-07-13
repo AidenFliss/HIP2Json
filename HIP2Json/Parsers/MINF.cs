@@ -46,40 +46,25 @@ public sealed class MINFParser : AssetParser
 
         while (br.BaseStream.Position < br.BaseStream.Length)
         {
-            long start = br.BaseStream.Position;
-
             uint type = ReadUInt32BE(br);
-            byte wordLen = br.ReadByte();
+            byte length = br.ReadByte();
 
-            byte s0 = br.ReadByte();
-            byte s1 = br.ReadByte();
-            byte s2 = br.ReadByte();
+            int dataLength = ((length + 1) * 4) - 1;
 
-            int byteLen = wordLen * 4;
-            byte[] payload = br.ReadBytes(byteLen);
+            byte[] data = br.ReadBytes(dataLength);
 
-            byte[] full = new byte[3 + payload.Length];
-            full[0] = s0;
-            full[1] = s1;
-            full[2] = s2;
-            Array.Copy(payload, 0, full, 3, payload.Length);
+            int end = Array.IndexOf(data, (byte)0);
+            if (end < 0)
+                end = data.Length;
 
-            int end = full.Length;
-            while (end > 0 && full[end - 1] == 0)
-                end--;
-
-            string value = Encoding.ASCII.GetString(full, 0, end);
+            string value = Encoding.ASCII.GetString(data, 0, end);
 
             parameters = parameters.Append(new MinfParam
             {
                 type = type,
-                length = wordLen,
+                length = dataLength,
                 value = value
             }).ToArray();
-
-            long pos = br.BaseStream.Position;
-            int pad = (int)((4 - (pos % 4)) % 4);
-            br.BaseStream.Position += pad;
         }
 
         return new MINF
@@ -120,20 +105,21 @@ public sealed class MINFParser : AssetParser
         foreach (var param in minf.parameters)
         {
             WriteUInt32BE(bw, param.type);
-            WriteByte(bw, (byte)param.length);
 
             byte[] valueBytes = Encoding.ASCII.GetBytes(param.value);
-            uint payloadLength = param.length * 4;
-            byte[] payload = new byte[payloadLength];
 
-            Array.Copy(valueBytes, 0, payload, 0, Math.Min(valueBytes.Length, payloadLength));
+            int totalLength = valueBytes.Length + 1;
+            int paddedLength = (totalLength + 3) & ~3;
 
-            bw.Write(payload);
+            byte length = (byte)((paddedLength / 4) - 1);
+            WriteByte(bw, length);
 
-            long pos = bw.BaseStream.Position;
-            int pad = (int)((4 - (pos % 4)) % 4);
-            for (int i = 0; i < pad; i++)
+            bw.Write(valueBytes);
+
+            for (int i = valueBytes.Length; i < paddedLength - 1; i++)
                 WriteByte(bw, 0);
+
+            WriteByte(bw, 0);
         }
         
         return ms.ToArray();
@@ -172,7 +158,7 @@ public class MinfParam
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint type { get; set; }
-    public uint length { get; set; }
+    public int length { get; set; }
     public string value { get; set; }
     public ushort pad { get; set; }
 }

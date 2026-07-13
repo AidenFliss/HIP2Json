@@ -1,4 +1,4 @@
-﻿using System.Data;
+﻿using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -75,7 +75,7 @@ public sealed class BOULParser : AssetParser
             maxAngVel = maxAngVel,
             stickiness = stickiness,
             bounceDamp = bounceDamp,
-            flags = flags,
+            flags = (BoulderFlags)flags,
             killtimer = killtimer,
             hitpoints = hitpoints,
             soundID = soundID,
@@ -112,7 +112,7 @@ public sealed class BOULParser : AssetParser
         WriteFloatBE(bw, boul.maxAngVel);
         WriteFloatBE(bw, boul.stickiness);
         WriteFloatBE(bw, boul.bounceDamp);
-        WriteUInt32BE(bw, boul.flags);
+        WriteUInt32BE(bw, (uint)boul.flags);
         WriteFloatBE(bw, boul.killtimer);
         WriteUInt32BE(bw, boul.hitpoints);
 
@@ -158,7 +158,7 @@ public class BOUL
     public float maxAngVel { get; set; }
     public float stickiness { get; set; }
     public float bounceDamp { get; set; }
-    public uint flags { get; set; }
+    public BoulderFlags flags { get; set; }
     public float killtimer { get; set; }
     public uint hitpoints { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
@@ -175,4 +175,21 @@ public class BOUL
     public byte uPad1 { get; set; } //movie only
     public byte uPad2 { get; set; } //movie only
     public byte uBoneIndex { get; set; } //movie only
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum BoulderFlags : uint
+{
+    None = 0,
+    HitWalls = 0x001,
+    DamagePlayer = 0x002,
+    Unknown004 = 0x004,
+    DamageNpcs = 0x008,
+    Unknown010 = 0x010,
+    DieOnOobSurfaces = 0x020,
+    Unknown040 = 0x040,
+    Unknown080 = 0x080,
+    DieOnPlayerAttack = 0x100,
+    DieAfterKillTimer = 0x200,
 }

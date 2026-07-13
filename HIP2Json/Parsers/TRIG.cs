@@ -10,7 +10,7 @@ internal sealed class TRIGParser : AssetParser
     {
         br.BaseStream.Seek(assetStart + 0x09, SeekOrigin.Begin);
 
-        byte t = br.ReadByte();
+        byte t = ReadByte(br);
 
         br.BaseStream.Seek(dataStart, SeekOrigin.Begin);
 

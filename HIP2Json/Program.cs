@@ -83,9 +83,43 @@ public struct xBaseAsset
         => $"id: {id}, baseType: {baseType}, linkCount: {linkCount}, baseFlags: {baseFlags}";
 }
 
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum EntFlags : byte
+{
+    None = 0,
+    Visible = 0x01,
+    Stackable = 0x02,
+    Unused04 = 0x04,
+    Unknown08 = 0x08,
+    Unused10 = 0x10,
+    Unused20 = 0x20,
+    NoShadow = 0x40,
+    Unused80 = 0x80,
+}
+
+[Flags]
+[JsonConverter(typeof(JsonStringEnumConverter))]
+public enum EntFlagsMore : byte
+{
+    None = 0,
+    Unused01 = 0x01,
+    PreciseCollision = 0x02,
+    Unknown04 = 0x04,
+    Grabbable = 0x08,
+    Hittable = 0x10,
+    AnimateCollision = 0x20,
+    Unused40 = 0x40,
+    LedgeGrab = 0x80,
+}
+
 public struct xEntAsset
 {
-    public byte flags, subtype, pflags, moreFlags, pad;
+    public EntFlags flags;
+    public byte subtype;
+    public byte pflags;
+    public EntFlagsMore moreFlags;
+    public byte pad;
     public uint surfaceID;
     public xVec3 ang, pos, scale;
     public float redMult, greenMult, blueMult, seeThru, seeThruSpeed;
@@ -654,6 +688,30 @@ class Program
                                     if (payloadType != null)
                                     {
                                         dyna.dynaSpecificData = dynaElem.Deserialize(payloadType, serOpts)!;
+
+                                        if (dyna.typeNameInternal.StartsWith("Enemy:SB:") && dyna.dynaSpecificData is Enemy_SB enemy)
+                                        {
+                                            Type enemyType = dyna.typeNameInternal switch
+                                            {
+                                                "Enemy:SB:BucketOTron" => typeof(Enemy_SB_BucketOTron),
+                                                "Enemy:SB:CastNCrew"   => typeof(Enemy_SB_CastNCrew),
+                                                "Enemy:SB:Critter"     => typeof(Enemy_SB_Critter),
+                                                "Enemy:SB:Dennis"      => typeof(Enemy_SB_Dennis),
+                                                "Enemy:SB:FrogFish"    => typeof(Enemy_SB_FrogFish),
+                                                "Enemy:SB:Mindy"       => typeof(Enemy_SB_Mindy),
+                                                "Enemy:SB:Neptune"     => typeof(Enemy_SB_Neptune),
+                                                "Enemy:SB:Standard"    => typeof(Enemy_SB_Standard),
+                                                "Enemy:SB:SupplyCrate" => typeof(Enemy_SB_SupplyCrate),
+                                                "Enemy:SB:Turret"      => typeof(Enemy_SB_Turret),
+                                                _ => null
+                                            };
+
+                                            if (enemyType != null &&
+                                                enemy.enemyData is JsonElement enemyElem)
+                                            {
+                                                enemy.enemyData = enemyElem.Deserialize(enemyType, serOpts)!;
+                                            }
+                                        }
                                     }
                                 }
                                 else if (obj is PLAT plat && plat.specific is JsonElement platElem)
@@ -798,15 +856,15 @@ class Program
 
                                     if (modElem.ValueKind == JsonValueKind.Object && modElem.TryGetProperty("Entity", out var entProp) && entProp.ValueKind == JsonValueKind.Object)
                                     {
-                                        byte flags = entProp.TryGetProperty("flags", out var f) && f.ValueKind==JsonValueKind.Number ? (byte)f.GetUInt32() : (byte)0;
+                                        EntFlags flags = entProp.TryGetProperty("flags", out var f) ? f.Deserialize<EntFlags>() : EntFlags.None;
                                         byte subtype = entProp.TryGetProperty("subtype", out var st) && st.ValueKind==JsonValueKind.Number ? (byte)st.GetUInt32() : (byte)0;
                                         byte pflags = entProp.TryGetProperty("pflags", out var pf) && pf.ValueKind==JsonValueKind.Number ? (byte)pf.GetUInt32() : (byte)0;
-                                        byte moreFlags = entProp.TryGetProperty("moreFlags", out var mf) && mf.ValueKind==JsonValueKind.Number ? (byte)mf.GetUInt32() : (byte)0;
+                                        EntFlagsMore moreFlags = entProp.TryGetProperty("moreFlags", out var mf) ? mf.Deserialize<EntFlagsMore>() : EntFlagsMore.None;
 
-                                        bw.Write(flags);
+                                        bw.Write((byte)flags);
                                         bw.Write(subtype);
                                         bw.Write(pflags);
-                                        bw.Write(moreFlags);
+                                        bw.Write((byte)moreFlags);
 
                                         if (CurrentGame == GameType.BFBB)
                                         {
@@ -986,6 +1044,12 @@ class Program
                                         bw.Seek(0x09, SeekOrigin.Begin);
                                         TRIG objectAsTrig = (TRIG)obj;
                                         bw.Write((byte)objectAsTrig.Type);
+                                    }
+                                    else if (detectedAssetType == "PKUP")
+                                    {
+                                        bw.Seek(0x09, SeekOrigin.Begin);
+                                        PKUP objectAsPkup = (PKUP)obj;
+                                        bw.Write((byte)objectAsPkup.pickupType);
                                     }
                                 }
 
@@ -1480,10 +1544,10 @@ class Program
 
         return new xEntAsset
         {
-            flags = flags,
+            flags = (EntFlags)flags,
             subtype = subtype,
             pflags = pflags,
-            moreFlags = moreFlags,
+            moreFlags = (EntFlagsMore)moreFlags,
             pad = pad,
             surfaceID = surfaceID,
             ang = ang,

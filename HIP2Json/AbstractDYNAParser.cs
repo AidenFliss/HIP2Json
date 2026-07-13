@@ -209,10 +209,10 @@ public abstract class AbstractDYNAParser
     {
         xEntAsset value = new xEntAsset
         {
-            flags = ReadByte(br),
+            flags = (EntFlags)ReadByte(br),
             subtype = ReadByte(br),
             pflags = ReadByte(br),
-            moreFlags = ReadByte(br),
+            moreFlags = (EntFlagsMore)ReadByte(br),
         };
 
         if (Program.CurrentGame == GameType.BFBB)
@@ -238,10 +238,10 @@ public abstract class AbstractDYNAParser
 
     protected static void WriteEntAsset(BinaryWriter bw, xEntAsset value)
     {
-        WriteByte(bw, value.flags);
+        WriteByte(bw, (byte)value.flags);
         WriteByte(bw, value.subtype);
         WriteByte(bw, value.pflags);
-        WriteByte(bw, value.moreFlags);
+        WriteByte(bw, (byte)value.moreFlags);
 
         if (Program.CurrentGame == GameType.BFBB)
         {
