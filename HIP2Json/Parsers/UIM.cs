@@ -52,7 +52,7 @@ public sealed class UIMParser : AssetParser
         return ms.ToArray();
     }
 
-    private object ReadCommand(BinaryReader br)
+    private UIMCommand ReadCommand(BinaryReader br)
     {
         UIMCommandType type = (UIMCommandType)ReadUInt32BE(br);
 
@@ -431,7 +431,7 @@ public class UIM
     public uint cmdSize { get; set; }
     public float totalTime { get; set; }
     public float loopTime { get; set; }
-    public object[] commands { get; set; }
+    public UIMCommand[] commands { get; set; }
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
@@ -447,6 +447,15 @@ public enum UIMCommandType : uint
     UVScroll = 7
 }
 
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(UIMMoveCommand), "Move")] 
+[JsonDerivedType(typeof(UIMScaleCommand), "Scale")]
+[JsonDerivedType(typeof(UIMRotateCommand), "Rotate")]
+[JsonDerivedType(typeof(UIMOpacityCommand), "Opacity")]
+[JsonDerivedType(typeof(UIMAbsoluteScaleCommand), "AbsoluteScale")]
+[JsonDerivedType(typeof(UIMBrightnessCommand), "Brightness")]
+[JsonDerivedType(typeof(UIMColorCommand), "Color")]
+[JsonDerivedType(typeof(UIMUVScrollCommand), "UVScroll")]
 public abstract class UIMCommand
 {
     public UIMCommandType type { get; set; }
@@ -460,33 +469,14 @@ public abstract class UIMCommand
     public byte pad2 { get; set; }
 }
 
-public class UIMMoveCommand
+public class UIMMoveCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float distX { get; set; }
     public float distY { get; set; }
 }
 
-
-public class UIMScaleCommand
+public class UIMScaleCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float amountX { get; set; }
     public float amountY { get; set; }
     public byte centerPivot { get; set; }
@@ -497,53 +487,23 @@ public class UIMScaleCommand
     public float centerOffsetY { get; set; }
 }
 
-
-public class UIMRotateCommand
+public class UIMRotateCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float rotation { get; set; }
     public float centerOffsetX { get; set; }
     public float centerOffsetY { get; set; }
 }
 
-
-public class UIMOpacityCommand
+public class UIMOpacityCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public byte startOpacity { get; set; }
     public byte endOpacity { get; set; }
     public byte colorPad0 { get; set; }
     public byte colorPad1 { get; set; }
 }
 
-
-public class UIMAbsoluteScaleCommand
+public class UIMAbsoluteScaleCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float startX { get; set; }
     public float startY { get; set; }
     public float endX { get; set; }
@@ -554,36 +514,16 @@ public class UIMAbsoluteScaleCommand
     public byte scalePad1 { get; set; }
 }
 
-
-public class UIMBrightnessCommand
+public class UIMBrightnessCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public byte startBrightness { get; set; }
     public byte endBrightness { get; set; }
     public byte brightnessPad0 { get; set; }
     public byte brightnessPad1 { get; set; }
 }
 
-
-public class UIMColorCommand
+public class UIMColorCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public byte startRed { get; set; }
     public byte startGreen { get; set; }
     public byte startBlue { get; set; }
@@ -594,20 +534,8 @@ public class UIMColorCommand
     public byte colorPad1 { get; set; }
 }
 
-
-public class UIMUVScrollCommand
+public class UIMUVScrollCommand : UIMCommand
 {
-    public UIMCommandType type { get; set; }
-
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float amountU { get; set; }
     public float amountV { get; set; }
 }

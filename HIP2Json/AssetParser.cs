@@ -259,7 +259,7 @@ public abstract class AssetParser
                 {
                     motion.specific = new MechanismMotion
                     {
-                        type = (MechanismType)ReadByte(br),
+                        mechanismType = (MechanismType)ReadByte(br),
                         flags = ReadByte(br),
                         slideAxis = (Axis)ReadByte(br),
                         rotateAxis = (Axis)ReadByte(br),
@@ -282,7 +282,7 @@ public abstract class AssetParser
                 {
                     motion.specific = new MechanismMotion
                     {
-                        type = (MechanismType)ReadByte(br),
+                        mechanismType = (MechanismType)ReadByte(br),
                         flags = ReadByte(br),
                         slideAxis = (Axis)ReadByte(br),
                         rotateAxis = (Axis)ReadByte(br),
@@ -334,6 +334,8 @@ public abstract class AssetParser
 
     protected static void WriteMotion(BinaryWriter bw, xMotion motion)
     {
+        long motionStart = bw.BaseStream.Position;
+
         WriteByte(bw, (byte)motion.type);
         WriteByte(bw, motion.useBanking);
         WriteUInt16BE(bw, motion.flags);
@@ -365,7 +367,6 @@ public abstract class AssetParser
             case MotionType.Spline:
             {
                 var m = (SplineMotion)motion.specific;
-
                 if (Program.CurrentGame == GameType.BFBB)
                 {
                     WriteInt32BE(bw, m.unknown);
@@ -376,7 +377,6 @@ public abstract class AssetParser
                     WriteFloatBE(bw, m.speed);
                     WriteFloatBE(bw, m.leanModifier);
                 }
-
                 break;
             }
 
@@ -392,8 +392,7 @@ public abstract class AssetParser
             case MotionType.Mechanism:
             {
                 var m = (MechanismMotion)motion.specific;
-
-                WriteByte(bw, (byte)m.type);
+                WriteByte(bw, (byte)m.mechanismType);
                 WriteByte(bw, m.flags);
                 WriteByte(bw, (byte)m.slideAxis);
                 WriteByte(bw, (byte)m.rotateAxis);
@@ -401,7 +400,7 @@ public abstract class AssetParser
                 if (Program.CurrentGame == GameType.TSSM)
                 {
                     WriteByte(bw, m.scaleAxis);
-                    bw.Write(new byte[3]);
+                    bw.Write(new byte[2]);
                 }
 
                 WriteFloatBE(bw, m.slideDistance);
@@ -422,14 +421,12 @@ public abstract class AssetParser
                     WriteFloatBE(bw, m.scaleAmount);
                     WriteFloatBE(bw, m.scaleDuration);
                 }
-
                 break;
             }
 
             case MotionType.Pendulum:
             {
                 var m = (PendulumMotion)motion.specific;
-
                 WriteByte(bw, m.flags);
                 WriteByte(bw, m.plane);
                 WriteUInt16BE(bw, m.pad);
@@ -440,6 +437,16 @@ public abstract class AssetParser
                 WriteFloatBE(bw, m.phase);
                 break;
             }
+        }
+
+        //fix: ensure correct padding for a fixed length
+        long expectedSize = (Program.CurrentGame == GameType.BFBB) ? 0x30 : 0x3C;
+        long bytesWritten = bw.BaseStream.Position - motionStart;
+        
+        if (bytesWritten < expectedSize)
+        {
+            int padNeeded = (int)(expectedSize - bytesWritten);
+            bw.Write(new byte[padNeeded]);
         }
     }
 }
@@ -474,7 +481,7 @@ public enum Axis : byte
     Z = 2
 }
 
-public class ExtendRetractMotion
+public class ExtendRetractMotion : MotionSpecificData
 {
     public xVec3 retPos { get; set; }
     public xVec3 extDPos { get; set; }
@@ -484,7 +491,7 @@ public class ExtendRetractMotion
     public float retWaitTm { get; set; }
 }
 
-public class OrbitMotion
+public class OrbitMotion : MotionSpecificData
 {
     public xVec3 center { get; set; }
     public float w { get; set; }
@@ -492,7 +499,7 @@ public class OrbitMotion
     public float period { get; set; }
 }
 
-public class SplineMotion
+public class SplineMotion : MotionSpecificData
 {
     public int unknown { get; set; } //bfbb only
     [JsonConverter(typeof(AssetIDConverter))] //movie momento
@@ -501,7 +508,7 @@ public class SplineMotion
     public float leanModifier { get; set; }
 }
 
-public class MovePointMotion
+public class MovePointMotion : MotionSpecificData
 {
     public uint flags { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
@@ -509,9 +516,9 @@ public class MovePointMotion
     public float speed { get; set; }
 }
 
-public class MechanismMotion
+public class MechanismMotion : MotionSpecificData
 {
-    public MechanismType type { get; set; }
+    public MechanismType mechanismType { get; set; }
     public byte flags { get; set; }
     public Axis slideAxis { get; set; }
     public Axis rotateAxis { get; set; }
@@ -532,7 +539,7 @@ public class MechanismMotion
     public float scaleDuration { get; set; }
 }
 
-public class PendulumMotion
+public class PendulumMotion : MotionSpecificData
 {
     public byte flags { get; set; }
     public byte plane { get; set; }

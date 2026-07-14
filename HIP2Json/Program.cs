@@ -37,12 +37,15 @@ public struct xColor
     public override string ToString() => $"({r}, {g}, {b}, {a})";
 }
 
+public abstract class MotionSpecificData { }
+
+[JsonConverter(typeof(xMotionConverter))]
 public class xMotion
 {
     public MotionType type { get; set; }
     public byte useBanking { get; set; }
     public ushort flags { get; set; }
-    public object specific { get; set; }
+    public MotionSpecificData specific { get; set; }
 }
 
 public struct xLinkAsset
@@ -710,88 +713,6 @@ class Program
                                                 enemy.enemyData is JsonElement enemyElem)
                                             {
                                                 enemy.enemyData = enemyElem.Deserialize(enemyType, serOpts)!;
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (obj is PLAT plat && plat.specific is JsonElement platElem)
-                                {
-                                    Type payloadType = null;
-                                    if (CurrentGame == GameType.BFBB)
-                                    {
-                                        payloadType = plat.type switch
-                                        {
-                                            PlatformType.Conveyor => typeof(ConveyorPlatform),
-                                            PlatformType.Falling => typeof(FallingPlatform),
-                                            PlatformType.FR => typeof(FRPlatform),
-                                            PlatformType.Breakaway => typeof(BreakawayPlatformBFBB),
-                                            PlatformType.Teeter => typeof(TeeterPlatform),
-                                            PlatformType.Paddle => typeof(PaddlePlatform),
-                                            PlatformType.Mechanism => typeof(MechanismMotion),
-                                            _ => null
-                                        };
-                                    }
-                                    else if (CurrentGame == GameType.TSSM)
-                                    {
-                                        payloadType = plat.type switch
-                                        {
-                                            PlatformType.Conveyor => typeof(ConveyorPlatform),
-                                            PlatformType.Falling => typeof(FallingPlatform),
-                                            PlatformType.FR => typeof(FRPlatform),
-                                            PlatformType.Breakaway => typeof(BreakawayPlatformTSSM),
-                                            PlatformType.Teeter => typeof(TeeterPlatform),
-                                            PlatformType.Paddle => typeof(PaddlePlatform),
-                                            _ => null
-                                        };
-                                    }
-
-                                    if (payloadType != null)
-                                    {
-                                        plat.specific = platElem.Deserialize(payloadType, serOpts)!;
-                                    }
-                                }
-                                else if (obj is BUTN butn && butn.motion.specific is JsonElement butnElem)
-                                {
-                                    Type payloadType = null;
-                                    payloadType = butn.motion.type switch
-                                    {
-                                        MotionType.ExtendRetract => typeof(ExtendRetractMotion),
-                                        MotionType.Orbit => typeof(OrbitMotion),
-                                        MotionType.Spline => typeof(SplineMotion),
-                                        MotionType.MovePoint => typeof(MovePointMotion),
-                                        MotionType.Mechanism => typeof(MechanismMotion),
-                                        MotionType.Pendulum => typeof(PendulumMotion),
-                                        _ => null
-                                    };
-
-                                    butn.motion.specific = butnElem.Deserialize(payloadType, serOpts);
-                                }
-                                else if (obj is UIM uim)
-                                {
-                                    for (int i = 0; i < uim.commands.Length; i++)
-                                    {
-                                        if (uim.commands[i] is JsonElement uimElem)
-                                        {
-                                            UIMCommandType type = (UIMCommandType)uimElem
-                                                .GetProperty("type")
-                                                .GetInt32();
-
-                                            Type commandType = type switch
-                                            {
-                                                UIMCommandType.Move => typeof(UIMMoveCommand),
-                                                UIMCommandType.Scale => typeof(UIMScaleCommand),
-                                                UIMCommandType.Rotate => typeof(UIMRotateCommand),
-                                                UIMCommandType.Opacity => typeof(UIMOpacityCommand),
-                                                UIMCommandType.AbsoluteScale => typeof(UIMAbsoluteScaleCommand),
-                                                UIMCommandType.Brightness => typeof(UIMBrightnessCommand),
-                                                UIMCommandType.Color => typeof(UIMColorCommand),
-                                                UIMCommandType.UVScroll => typeof(UIMUVScrollCommand),
-                                                _ => null
-                                            };
-
-                                            if (commandType != null)
-                                            {
-                                                uim.commands[i] = uimElem.Deserialize(commandType, serOpts)!;
                                             }
                                         }
                                     }

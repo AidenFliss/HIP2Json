@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -62,7 +63,17 @@ public sealed class PLATParser : AssetParser
                         collisionOffTime = ReadFloatBE(br),
                     };
                 }
-                
+                break;
+
+            case PlatformType.Springboard:
+                plat.specific = new SpringboardPlatform
+                {
+                    jmph = [ReadFloatBE(br), ReadFloatBE(br), ReadFloatBE(br)],
+                    jmpbounce = ReadFloatBE(br),
+                    animID = [ReadUInt32BE(br), ReadUInt32BE(br), ReadUInt32BE(br)],
+                    jmpdir = [ReadFloatBE(br), ReadFloatBE(br), ReadFloatBE(br)],
+                    springflags = ReadUInt32BE(br)
+                };
                 break;
 
             case PlatformType.Teeter:
@@ -98,7 +109,8 @@ public sealed class PLATParser : AssetParser
                 break;
         }
 
-        br.BaseStream.Position = assetStart + 0x90;
+        long motionOffset = (Program.CurrentGame == GameType.BFBB) ? 0x90 : 0x8C;
+        br.BaseStream.Position = assetStart + motionOffset;
         plat.motion = ReadMotion(br);
 
         return plat;
@@ -152,7 +164,15 @@ public sealed class PLATParser : AssetParser
                     WriteUInt32BE(bw, breakaway.breakFlags);
                     WriteFloatBE(bw, breakaway.collisionOffTime);
                 }
-                
+                break;
+
+            case PlatformType.Springboard:
+                var sb = (SpringboardPlatform)plat.specific;
+                foreach (float h in sb.jmph) WriteFloatBE(bw, h);
+                WriteFloatBE(bw, sb.jmpbounce);
+                foreach (uint id in sb.animID) WriteUInt32BE(bw, id);
+                foreach (float d in sb.jmpdir) WriteFloatBE(bw, d);
+                WriteUInt32BE(bw, sb.springflags);
                 break;
 
             case PlatformType.Teeter:
@@ -177,16 +197,9 @@ public sealed class PLATParser : AssetParser
                 break;
         }
 
-        if (Program.CurrentGame == GameType.BFBB)
-        {
-            while (ms.Length < 0x36) //due to asset start is 8 bytes and entity is up to 54 bytes
-                WriteByte(bw, 0);
-        }
-        else if (Program.CurrentGame == GameType.TSSM)
-        {
-            while (ms.Length < 0x3C) //movie
-                WriteByte(bw, 0);
-        }
+        int padNeeded = 0x3C - (int)ms.Length;
+        if (padNeeded > 0) 
+            bw.Write(new byte[padNeeded]);
 
         WriteMotion(bw, plat.motion);
 
@@ -200,10 +213,21 @@ public class PLAT
     public byte pad { get; set; }
     public ushort flags { get; set; }
 
-    public object specific { get; set; }
+    public PlatformSpecificData specific { get; set; }
 
     public xMotion motion { get; set; }
 }
+
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(ConveyorPlatform), "Conveyor")]
+[JsonDerivedType(typeof(FallingPlatform), "Falling")]
+[JsonDerivedType(typeof(FRPlatform), "FR")]
+[JsonDerivedType(typeof(BreakawayPlatformBFBB), "BreakawayBFBB")]
+[JsonDerivedType(typeof(BreakawayPlatformTSSM), "BreakawayTSSM")]
+[JsonDerivedType(typeof(SpringboardPlatform), "Springboard")]
+[JsonDerivedType(typeof(TeeterPlatform), "Teeter")]
+[JsonDerivedType(typeof(PaddlePlatform), "Paddle")]
+public abstract class PlatformSpecificData { }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum PlatformType : byte
@@ -224,19 +248,19 @@ public enum PlatformType : byte
     FullyManipulable = 13
 }
 
-public class ConveyorPlatform
+public class ConveyorPlatform : PlatformSpecificData
 {
     public float speed { get; set; }
 }
 
-public class FallingPlatform
+public class FallingPlatform : PlatformSpecificData
 {
     public float speed { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bustModelID { get; set; }
 }
 
-public class FRPlatform
+public class FRPlatform : PlatformSpecificData
 {
     public float fspeed { get; set; }
     public float rspeed { get; set; }
@@ -244,7 +268,7 @@ public class FRPlatform
     public float postRetDelay { get; set; }
 }
 
-public class BreakawayPlatformBFBB
+public class BreakawayPlatformBFBB : PlatformSpecificData
 {
     public float delay { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
@@ -253,7 +277,7 @@ public class BreakawayPlatformBFBB
     public uint breakFlags { get; set; }
 }
 
-public class BreakawayPlatformTSSM
+public class BreakawayPlatformTSSM : PlatformSpecificData
 {
     public float warningTime { get; set; }
     public float collapsedIdleTime { get; set; }
@@ -262,14 +286,24 @@ public class BreakawayPlatformTSSM
     public float collisionOffTime { get; set; }
 }
 
-public class TeeterPlatform
+public class SpringboardPlatform : PlatformSpecificData
+{
+    public float[] jmph { get; set; } = new float[3];
+    public float jmpbounce { get; set; }
+    [JsonConverter(typeof(AssetIDArrayConverter))]
+    public uint[] animID { get; set; } = new uint[3];
+    public float[] jmpdir { get; set; } = new float[3];
+    public uint springflags { get; set; }
+}
+
+public class TeeterPlatform : PlatformSpecificData
 {
     public float initialTilt { get; set; }
     public float maxTilt { get; set; }
     public float invMass { get; set; }
 }
 
-public class PaddlePlatform
+public class PaddlePlatform : PlatformSpecificData
 {
     public int startOrient { get; set; }
     public int countOrient { get; set; }
