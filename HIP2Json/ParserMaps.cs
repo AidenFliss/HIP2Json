@@ -48,6 +48,7 @@ public static class ParserMaps
         { "SFX", new SFXParser() },
         { "SHDW", new SHDWParser() },
         { "SIMP", new SIMPParser() },
+        { "SPLN", new SPLNParser() },
         { "SURF", new SURFParser() },
         { "TEXT", new TEXTParser() },
         { "TIMR", new TIMRParser() },
