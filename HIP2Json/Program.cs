@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using HipHopFile;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public struct xVec2
 {

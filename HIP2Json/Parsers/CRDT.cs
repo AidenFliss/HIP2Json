@@ -3,7 +3,7 @@ using System.Text;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class CRDTParser : AssetParser
 {

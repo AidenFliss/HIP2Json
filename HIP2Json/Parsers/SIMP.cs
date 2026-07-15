@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class SIMPParser : AssetParser
 {

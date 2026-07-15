@@ -3,7 +3,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Collections.Generic;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public static class AssetIDUtil
 {

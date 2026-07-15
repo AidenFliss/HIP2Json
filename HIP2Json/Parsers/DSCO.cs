@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class DSCOParser : AssetParser
 {

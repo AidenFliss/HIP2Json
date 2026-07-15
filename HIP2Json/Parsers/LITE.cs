@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class LITEParser : AssetParser
 {

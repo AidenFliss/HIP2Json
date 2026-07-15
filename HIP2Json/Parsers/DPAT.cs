@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class DPATParser : AssetParser
 {

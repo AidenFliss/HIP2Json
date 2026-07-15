@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public static class ParserMaps
 {

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 internal sealed class TRIGParser : AssetParser
 {

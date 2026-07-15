@@ -1,6 +1,6 @@
 using System.IO;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class game_object_Camera_TweakParser : AbstractDYNAParser
 {

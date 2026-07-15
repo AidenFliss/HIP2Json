@@ -1,4 +1,4 @@
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public enum EventTSSM : ushort
 {

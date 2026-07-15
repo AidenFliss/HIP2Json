@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public static class Util
 {

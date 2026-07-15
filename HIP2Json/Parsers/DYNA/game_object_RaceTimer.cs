@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class game_object_RaceTimerParser : AbstractDYNAParser
 {

@@ -1,7 +1,7 @@
 using System.IO;
 using System.Text.Json.Serialization;
 
-namespace PortHeavyIronGameRewrite;
+namespace HIP2Json;
 
 public sealed class effect_smoke_emitterParser : AbstractDYNAParser
 {
