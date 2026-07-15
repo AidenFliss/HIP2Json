@@ -45,6 +45,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
         WriteByte(bw, npcSettings.pad1);
         WriteByte(bw, npcSettings.pad2);
         WriteByte(bw, npcSettings.allowChase);
+        WriteByte(bw, npcSettings.allowAttack);
         WriteByte(bw, npcSettings.assumeLOS);
         WriteByte(bw, npcSettings.assumeFOV);
         WriteUInt32BE(bw, (uint)npcSettings.duploWaveMode);

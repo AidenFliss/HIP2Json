@@ -6,8 +6,8 @@
     <AssemblyTitle>HIP2Json</AssemblyTitle>
     <Product>HIP2Json</Product>
     <Copyright>Copyright © Aiden 2025</Copyright>
-    <AssemblyVersion>2026.07.13</AssemblyVersion>
-    <FileVersion>2026.07.13</FileVersion>
+    <AssemblyVersion>2026.07.15</AssemblyVersion>
+    <FileVersion>2026.07.15</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\HipHopTool\HipHopFile\HipHopFile.csproj" />
