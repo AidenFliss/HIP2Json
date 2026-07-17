@@ -123,6 +123,7 @@ public abstract class AssetParser
     protected static void WriteString(BinaryWriter bw, string value)
     {
         byte[] bytes = Encoding.ASCII.GetBytes(value);
+        if (Program.BigEndian == true) Array.Reverse(bytes);
         bw.Write(bytes);
         bw.Write((byte)0);
     }

@@ -27,7 +27,7 @@ public sealed class PORTParser : AssetParser
         WriteUInt32BE(bw, port.assetCameraID);
         WriteUInt32BE(bw, port.assetMarkerID);
         WriteFloatBE(bw, port.ang);
-        WriteUInt32BE(bw, Convert.ToUInt32(port.sceneID));
+        WriteString(bw, port.sceneID);
 
         return ms.ToArray();
     }
