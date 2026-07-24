@@ -1,5 +1,6 @@
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -12,13 +13,10 @@ public sealed class SCRPParser : AssetParser
         int eventCount = ReadInt32BE(br);
 
         byte loop;
-        byte pad0, pad1, pad2;
         if (Program.CurrentGame == GameType.TSSM)
         {
             loop = ReadByte(br);
-            pad0 = ReadByte(br);
-            pad1 = ReadByte(br);
-            pad2 = ReadByte(br);
+            br.ReadBytes(3);
         }
 
         br.BaseStream.Seek(0x14, SeekOrigin.Begin);
@@ -64,9 +62,7 @@ public sealed class SCRPParser : AssetParser
         if (Program.CurrentGame == GameType.TSSM)
         {
             WriteByte(bw, scrp.loop);
-            WriteByte(bw, scrp.pad0);
-            WriteByte(bw, scrp.pad1);
-            WriteByte(bw, scrp.pad2);
+            bw.Write(new byte[3]);
         }
 
         foreach (var evnt in scrp.events)
@@ -93,9 +89,6 @@ public class SCRP
     public float scriptStartTime { get; set; }
     public int eventCount { get; set; }
     public byte loop { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public xScriptEventAsset[] events { get; set; }
 }
 

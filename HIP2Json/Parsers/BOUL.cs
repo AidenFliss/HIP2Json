@@ -46,9 +46,6 @@ public sealed class BOULParser : AssetParser
         float outerRadius = 0;
 
         float fSphereRadius = 0;
-        byte uPad0 = 0;
-        byte uPad1 = 0;
-        byte uPad2 = 0;
         byte uBoneIndex = 0;
         if (Program.CurrentGame == GameType.BFBB)
         {
@@ -58,9 +55,7 @@ public sealed class BOULParser : AssetParser
         else
         {
             fSphereRadius = ReadFloatBE(br);
-            uPad0 = ReadByte(br);
-            uPad1 = ReadByte(br);
-            uPad2 = ReadByte(br);
+            br.ReadBytes(3);
             uBoneIndex = ReadByte(br);
         }
 
@@ -86,9 +81,6 @@ public sealed class BOULParser : AssetParser
             innerRadius = innerRadius,
             outerRadius = outerRadius,
             fSphereRadius = fSphereRadius,
-            uPad0 = uPad0,
-            uPad1 = uPad1,
-            uPad2 = uPad2,
             uBoneIndex = uBoneIndex
         };
     }
@@ -137,9 +129,7 @@ public sealed class BOULParser : AssetParser
         else
         {
             WriteFloatBE(bw, boul.fSphereRadius);
-            WriteByte(bw, boul.uPad0);
-            WriteByte(bw, boul.uPad1);
-            WriteByte(bw, boul.uPad2);
+            bw.Write(new byte[3]);
             WriteByte(bw, boul.uBoneIndex);
         }
 
@@ -171,9 +161,6 @@ public class BOUL
     public float innerRadius { get; set; } //bfbb only
     public float outerRadius { get; set; } //bfbb only
     public float fSphereRadius { get; set; } //movie only
-    public byte uPad0 { get; set; } //movie only
-    public byte uPad1 { get; set; } //movie only
-    public byte uPad2 { get; set; } //movie only
     public byte uBoneIndex { get; set; } //movie only
 }
 

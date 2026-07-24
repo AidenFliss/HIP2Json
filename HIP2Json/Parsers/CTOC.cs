@@ -33,7 +33,7 @@ public sealed class CTOCParser : AssetParser
             uint visCount = ReadUInt32BE(br);
             uint visSize = ReadUInt32BE(br);
             uint breakCount = ReadUInt32BE(br);
-            uint pad = ReadUInt32BE(br);
+            br.ReadBytes(4);
 
             if (Program.CurrentGame == GameType.BFBB)
             {
@@ -50,7 +50,6 @@ public sealed class CTOCParser : AssetParser
                     visCount = visCount,
                     visSize = visSize,
                     breakCount = breakCount,
-                    pad = pad,
                     soundLeft = Enumerable.Range(0, 16)
                         .Select(_ => ReadByte(br))
                         .ToArray(),
@@ -74,7 +73,6 @@ public sealed class CTOCParser : AssetParser
                     visCount = visCount,
                     visSize = visSize,
                     breakCount = breakCount,
-                    pad = pad,
                     uLeftSoundID = ReadUInt32BE(br),
                     uRightSoundID = ReadUInt32BE(br),
                     szLeftSound = Enumerable.Range(0, 28)
@@ -114,7 +112,7 @@ public sealed class CTOCParser : AssetParser
                 WriteUInt32BE(bw, entry.visCount);
                 WriteUInt32BE(bw, entry.visSize);
                 WriteUInt32BE(bw, entry.breakCount);
-                WriteUInt32BE(bw, entry.pad);
+                bw.Write(new byte[4]);
 
                 foreach (char c in entry.soundLeft)
                     WriteByte(bw, (byte)c);
@@ -138,7 +136,7 @@ public sealed class CTOCParser : AssetParser
                 WriteUInt32BE(bw, entry.visCount);
                 WriteUInt32BE(bw, entry.visSize);
                 WriteUInt32BE(bw, entry.breakCount);
-                WriteUInt32BE(bw, entry.pad);
+                bw.Write(new byte[4]);
                 WriteUInt32BE(bw, entry.uLeftSoundID);
                 WriteUInt32BE(bw, entry.uRightSoundID);
 
@@ -176,7 +174,6 @@ public class xCutsceneInfoBFBB
     public uint visCount { get; set; }
     public uint visSize { get; set; }
     public uint breakCount { get; set; }
-    public uint pad { get; set; }
     public byte[] soundLeft { get; set; }
     public byte[] soundRight { get; set; }
 }
@@ -196,7 +193,6 @@ public class xCutsceneInfoTSSM
     public uint visCount { get; set; }
     public uint visSize { get; set; }
     public uint breakCount { get; set; }
-    public uint pad { get; set; }
     public uint uLeftSoundID { get; set; }
     public uint uRightSoundID { get; set; }
     public byte[] szLeftSound { get; set; }

@@ -9,20 +9,30 @@ public sealed class LITEParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        LightType lightType = (LightType)ReadByte(br);
+        LightEffect lightEffect = (LightEffect)ReadByte(br);
+
+        br.ReadBytes(2);
+
+        LightFlags lightFlags = (LightFlags)ReadUInt32BE(br);
+        float[] lightColor = Enumerable.Range(0, 3)
+            .Select(_ => ReadFloatBE(br))
+            .ToArray();
+        xVec3 lightDir = ReadVector3BE(br);
+        float lightConeAngle = ReadFloatBE(br);
+        xVec3 lightSphere_center = ReadVector3BE(br);
+        float lightSphere_r = ReadFloatBE(br);
+
         return new LITE
         {
-            lightType = (LightType)ReadByte(br),
-            lightEffect = (LightEffect)ReadByte(br),
-            pad_0 = ReadByte(br),
-            pad_1 = ReadByte(br),
-            lightFlags = (LightFlags)ReadUInt32BE(br),
-            lightColor = Enumerable.Range(0, 3)
-                .Select(_ => ReadFloatBE(br))
-                .ToArray(),
-            lightDir = ReadVector3BE(br),
-            lightConeAngle = ReadFloatBE(br),
-            lightSphere_center = ReadVector3BE(br),
-            lightSphere_r = ReadFloatBE(br)
+            lightType = lightType,
+            lightEffect = lightEffect,
+            lightFlags = lightFlags,
+            lightColor = lightColor,
+            lightDir = lightDir,
+            lightConeAngle = lightConeAngle,
+            lightSphere_center = lightSphere_center,
+            lightSphere_r = lightSphere_r
         };
     }
 
@@ -35,8 +45,7 @@ public sealed class LITEParser : AssetParser
 
         WriteByte(bw, (byte)lite.lightType);
         WriteByte(bw, (byte)lite.lightEffect);
-        WriteByte(bw, lite.pad_0);
-        WriteByte(bw, lite.pad_1);
+        bw.Write(new byte[2]);
         WriteUInt32BE(bw, (uint)lite.lightFlags);
         foreach (var color in lite.lightColor)
             WriteFloatBE(bw, color);
@@ -53,8 +62,6 @@ public class LITE
 {
     public LightType lightType { get; set; }
     public LightEffect lightEffect { get; set; }
-    public byte pad_0 { get; set; }
-    public byte pad_1 { get; set; }
     public LightFlags lightFlags { get; set; }
     public float[] lightColor { get; set; }
     public xVec3 lightDir { get; set; }

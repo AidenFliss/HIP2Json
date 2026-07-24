@@ -7,27 +7,41 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
+        uint flags = ReadUInt32BE(br);
+        uint attach_to = ReadUInt32BE(br);
+        uint target = ReadUInt32BE(br);
+        byte attach_bone = ReadByte(br);
+        byte target_bone = ReadByte(br);
+        br.ReadBytes(2);
+        float radius = ReadFloatBE(br);
+        float view_angle = ReadFloatBE(br);
+        float max_dist = ReadFloatBE(br);
+        xColor lightColor = ReadColor(br);
+        xColor auraColor = ReadColor(br);
+        uint flareTexture = ReadUInt32BE(br);
+        float size_min = ReadFloatBE(br);
+        float size_max = ReadFloatBE(br);
+        byte glow_min = ReadByte(br);
+        byte glow_max = ReadByte(br);
+        br.ReadBytes(2);
+
         return new effect_spotlight
         {
-            flags = ReadUInt32BE(br),
-            attach_to = ReadUInt32BE(br),
-            target = ReadUInt32BE(br),
-            attach_bone = ReadByte(br),
-            target_bone = ReadByte(br),
-            pad1 = ReadByte(br),
-            pad2 = ReadByte(br),
-            radius = ReadFloatBE(br),
-            view_angle = ReadFloatBE(br),
-            max_dist = ReadFloatBE(br),
-            lightColor = ReadColor(br),
-            auraColor = ReadColor(br),
-            flareTexture = ReadUInt32BE(br),
-            size_min = ReadFloatBE(br),
-            size_max = ReadFloatBE(br),
-            glow_min = ReadByte(br),
-            glow_max = ReadByte(br),
-            pad3 = ReadByte(br),
-            pad4 = ReadByte(br),
+            flags = flags,
+            attach_to = attach_to,
+            target = target,
+            attach_bone = attach_bone,
+            target_bone = target_bone,
+            radius = radius,
+            view_angle = view_angle,
+            max_dist = max_dist,
+            lightColor = lightColor,
+            auraColor = auraColor,
+            flareTexture = flareTexture,
+            size_min = size_min,
+            size_max = size_max,
+            glow_min = glow_min,
+            glow_max = glow_max
         };
     }
 
@@ -43,8 +57,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         WriteUInt32BE(bw, spotlight.target);
         WriteByte(bw, spotlight.attach_bone);
         WriteByte(bw, spotlight.target_bone);
-        WriteByte(bw, spotlight.pad1);
-        WriteByte(bw, spotlight.pad2);
+        bw.Write(new byte[2]);
         WriteFloatBE(bw, spotlight.radius);
         WriteFloatBE(bw, spotlight.view_angle);
         WriteFloatBE(bw, spotlight.max_dist);
@@ -55,8 +68,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         WriteFloatBE(bw, spotlight.size_max);
         WriteByte(bw, spotlight.glow_min);
         WriteByte(bw, spotlight.glow_max);
-        WriteByte(bw, spotlight.pad3);
-        WriteByte(bw, spotlight.pad4);
+        bw.Write(new byte[2]);
 
         return ms.ToArray();
     }
@@ -73,8 +85,6 @@ public class effect_spotlight
     public uint target { get; set; }
     public byte attach_bone { get; set; }
     public byte target_bone { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public float radius { get; set; }
     public float view_angle { get; set; }
     public float max_dist { get; set; }
@@ -86,6 +96,4 @@ public class effect_spotlight
     public float size_max { get; set; }
     public byte glow_min { get; set; }
     public byte glow_max { get; set; }
-    public byte pad3 { get; set; }
-    public byte pad4 { get; set; }
 }

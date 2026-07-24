@@ -8,11 +8,13 @@ public sealed class PLATParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        PlatformType type = (PlatformType)ReadByte(br);
+        br.ReadBytes(1);
+        ushort flags = ReadUInt16BE(br);
         var plat = new PLAT
         {
-            type = (PlatformType)ReadByte(br),
-            pad = ReadByte(br),
-            flags = ReadUInt16BE(br)
+            type = type,
+            flags = flags
         };
 
         switch (plat.type)
@@ -124,7 +126,7 @@ public sealed class PLATParser : AssetParser
         using var bw = new BinaryWriter(ms);
 
         WriteByte(bw, (byte)plat.type);
-        WriteByte(bw, plat.pad);
+        bw.Write(new byte[1]);
         WriteUInt16BE(bw, plat.flags);
 
         switch (plat.type)
@@ -210,7 +212,6 @@ public sealed class PLATParser : AssetParser
 public class PLAT
 {
     public PlatformType type { get; set; }
-    public byte pad { get; set; }
     public ushort flags { get; set; }
 
     public PlatformSpecificData specific { get; set; }

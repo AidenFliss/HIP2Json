@@ -8,14 +8,18 @@ public sealed class SIMPParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        float animSpeed = ReadFloatBE(br);
+        int initAnimState = ReadInt32BE(br);
+        CollisionType collType = (CollisionType)ReadByte(br);
+        byte flags = ReadByte(br);
+        br.ReadBytes(2);
+
         return new SIMP
         {
-            animSpeed = ReadFloatBE(br),
-            initAnimState = ReadInt32BE(br),
-            collType = (CollisionType)ReadByte(br),
-            flags = ReadByte(br),
-            pad1 = ReadByte(br),
-            pad2 = ReadByte(br)
+            animSpeed = animSpeed,
+            initAnimState = initAnimState,
+            collType = collType,
+            flags = flags
         };
     }
 
@@ -30,8 +34,7 @@ public sealed class SIMPParser : AssetParser
         WriteInt32BE(bw, simp.initAnimState);
         WriteByte(bw, (byte)simp.collType);
         WriteByte(bw, simp.flags);
-        WriteByte(bw, simp.pad1);
-        WriteByte(bw, simp.pad2);
+        bw.Write(new byte[2]);
 
         return ms.ToArray();
     }
@@ -43,8 +46,6 @@ public class SIMP
     public int initAnimState { get; set; }
     public CollisionType collType { get; set; }
     public byte flags { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
 }
 
 [Flags]

@@ -160,5 +160,4 @@ public class MinfParam
     public uint type { get; set; }
     public int length { get; set; }
     public string value { get; set; }
-    public ushort pad { get; set; }
 }

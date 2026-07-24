@@ -12,11 +12,110 @@ public sealed class SURFParser : AssetParser
         byte game_sticky = ReadByte(br);
         byte game_damage_flags = ReadByte(br);
         byte surf_type = ReadByte(br);
-        byte phys_pad = ReadByte(br);
+        br.ReadBytes(1);
         byte sld_start = ReadByte(br);
         byte sld_stop = ReadByte(br);
         byte phys_flags = ReadByte(br);
         float friction = ReadFloatBE(br);
+
+        uint matfx_flags = ReadUInt32BE(br);
+        uint bumpmapID = ReadUInt32BE(br);
+        uint envmapID = ReadUInt32BE(br);
+        float shininess = ReadFloatBE(br);
+        float bumpiness = ReadFloatBE(br);
+        uint dualmapID = ReadUInt32BE(br);
+
+        ushort colorfx_flags = ReadUInt16BE(br);
+        ushort mode = ReadUInt16BE(br);
+        float speed = ReadFloatBE(br);
+
+        uint texture_anim_flags = ReadUInt32BE(br);
+
+        br.ReadBytes(2);
+        ushort texture_anm_0_mode = ReadUInt16BE(br);
+        uint texture_anm_0_group = ReadUInt32BE(br);
+        float texture_anm_0_speed = ReadFloatBE(br);
+
+        zSurfTextureAnim texture_anm_0 = new zSurfTextureAnim
+        {
+            mode = texture_anm_0_mode,
+            group = texture_anm_0_group,
+            speed = texture_anm_0_speed
+        };
+
+        br.ReadBytes(2);
+        ushort texture_anm_1_mode = ReadUInt16BE(br);
+        uint texture_anm_1_group = ReadUInt32BE(br);
+        float texture_anm_1_speed = ReadFloatBE(br);
+
+        zSurfTextureAnim texture_anm_1 = new zSurfTextureAnim
+        {
+            mode = texture_anm_1_mode,
+            group = texture_anm_1_group,
+            speed = texture_anm_1_speed
+        };
+
+        uint uvfx_flags = ReadUInt32BE(br);
+
+        int uvfx_0_mode = ReadInt32BE(br);
+        float uvfx_0_rot = ReadFloatBE(br);
+        float uvfx_0_rot_spd = ReadFloatBE(br);
+        xVec3 uvfx_0_trans = ReadVector3BE(br);
+        xVec3 uvfx_0_trans_spd = ReadVector3BE(br);
+        xVec3 uvfx_0_scale = ReadVector3BE(br);
+        xVec3 uvfx_0_scale_spd = ReadVector3BE(br);
+        xVec3 uvfx_0_min = ReadVector3BE(br);
+        xVec3 uvfx_0_max = ReadVector3BE(br);
+        xVec3 uvfx_0_minmax_spd = ReadVector3BE(br);
+
+        zSurfUVFX uvfx_0 = new zSurfUVFX
+        {
+            mode = uvfx_0_mode,
+            rot = uvfx_0_rot,
+            rot_spd = uvfx_0_rot_spd,
+            trans = uvfx_0_trans,
+            trans_spd = uvfx_0_trans_spd,
+            scale = uvfx_0_scale,
+            scale_spd = uvfx_0_scale_spd,
+            min = uvfx_0_min,
+            max = uvfx_0_max,
+            minmax_spd = uvfx_0_minmax_spd
+        };
+
+        int uvfx_1_mode = ReadInt32BE(br);
+        float uvfx_1_rot = ReadFloatBE(br);
+        float uvfx_1_rot_spd = ReadFloatBE(br);
+        xVec3 uvfx_1_trans = ReadVector3BE(br);
+        xVec3 uvfx_1_trans_spd = ReadVector3BE(br);
+        xVec3 uvfx_1_scale = ReadVector3BE(br);
+        xVec3 uvfx_1_scale_spd = ReadVector3BE(br);
+        xVec3 uvfx_1_min = ReadVector3BE(br);
+        xVec3 uvfx_1_max = ReadVector3BE(br);
+        xVec3 uvfx_1_minmax_spd = ReadVector3BE(br);
+
+        zSurfUVFX uvfx_1 = new zSurfUVFX
+        {
+            mode = uvfx_1_mode,
+            rot = uvfx_1_rot,
+            rot_spd = uvfx_1_rot_spd,
+            trans = uvfx_1_trans,
+            trans_spd = uvfx_1_trans_spd,
+            scale = uvfx_1_scale,
+            scale_spd = uvfx_1_scale_spd,
+            min = uvfx_1_min,
+            max = uvfx_1_max,
+            minmax_spd = uvfx_1_minmax_spd
+        };
+
+        byte on = ReadByte(br);
+
+        br.ReadBytes(3);
+
+        float oob_delay = ReadFloatBE(br);
+        float walljump_scale_xz = ReadFloatBE(br);
+        float walljump_scale_y = ReadFloatBE(br);
+        float damage_timer = ReadFloatLE(br);
+        float damage_bounce = ReadFloatLE(br);
 
         return new SURF
         {
@@ -24,7 +123,6 @@ public sealed class SURFParser : AssetParser
             game_sticky = game_sticky,
             game_damage_flags = game_damage_flags,
             surf_type = surf_type,
-            phys_pad = phys_pad,
             sld_start = sld_start,
             sld_stop = sld_stop,
             phys_flags = (PhysFlags)phys_flags,
@@ -32,81 +130,36 @@ public sealed class SURFParser : AssetParser
 
             matfx = new zSurfMatFX
             {
-                flags = ReadUInt32BE(br),
-                bumpmapID = ReadUInt32BE(br),
-                envmapID = ReadUInt32BE(br),
-                shininess = ReadFloatBE(br),
-                bumpiness = ReadFloatBE(br),
-                dualmapID = ReadUInt32BE(br)
+                flags = matfx_flags,
+                bumpmapID = bumpmapID,
+                envmapID = envmapID,
+                shininess = shininess,
+                bumpiness = bumpiness,
+                dualmapID = dualmapID
             },
 
             colorfx = new zSurfColorFX
             {
-                flags = ReadUInt16BE(br),
-                mode = ReadUInt16BE(br),
-                speed = ReadFloatBE(br)
+                flags = colorfx_flags,
+                mode = mode,
+                speed = speed
             },
 
-            texture_anim_flags = ReadUInt32BE(br),
+            texture_anim_flags = texture_anim_flags,
+            texture_anm_0 = texture_anm_0,
+            texture_anm_1 = texture_anm_1,
 
-            texture_anm_0 = new zSurfTextureAnim
-            {
-                pad = ReadUInt16BE(br),
-                mode = ReadUInt16BE(br),
-                group = ReadUInt32BE(br),
-                speed = ReadFloatBE(br)
-            },
+            uvfx_flags = uvfx_flags,
+            uvfx_0 = uvfx_0,
+            uvfx_1 = uvfx_1,
 
-            texture_anm_1 = new zSurfTextureAnim
-            {
-                pad = ReadUInt16BE(br),
-                mode = ReadUInt16BE(br),
-                group = ReadUInt32BE(br),
-                speed = ReadFloatBE(br)
-            },
+            on = on,
 
-            uvfx_flags = ReadUInt32BE(br),
-
-            uvfx_0 = new zSurfUVFX
-            {
-                mode = ReadInt32BE(br),
-                rot = ReadFloatBE(br),
-                rot_spd = ReadFloatBE(br),
-
-                trans = ReadVector3BE(br),
-                trans_spd = ReadVector3BE(br),
-                scale = ReadVector3BE(br),
-                scale_spd = ReadVector3BE(br),
-                min = ReadVector3BE(br),
-                max = ReadVector3BE(br),
-                minmax_spd = ReadVector3BE(br)
-            },
-
-            uvfx_1 = new zSurfUVFX
-            {
-                mode = ReadInt32BE(br),
-                rot = ReadFloatBE(br),
-                rot_spd = ReadFloatBE(br),
-
-                trans = ReadVector3BE(br),
-                trans_spd = ReadVector3BE(br),
-                scale = ReadVector3BE(br),
-                scale_spd = ReadVector3BE(br),
-                min = ReadVector3BE(br),
-                max = ReadVector3BE(br),
-                minmax_spd = ReadVector3BE(br)
-            },
-
-            on = ReadByte(br),
-            pad_0 = ReadByte(br),
-            pad_1 = ReadByte(br),
-            pad_2 = ReadByte(br),
-
-            oob_delay = ReadFloatBE(br),
-            walljump_scale_xz = ReadFloatBE(br),
-            walljump_scale_y = ReadFloatBE(br),
-            damage_timer = ReadFloatLE(br),
-            damage_bounce = ReadFloatLE(br)
+            oob_delay = oob_delay,
+            walljump_scale_xz = walljump_scale_xz,
+            walljump_scale_y = walljump_scale_y,
+            damage_timer = damage_timer,
+            damage_bounce = damage_bounce
         };
     }
 
@@ -121,7 +174,7 @@ public sealed class SURFParser : AssetParser
         WriteByte(bw, surf.game_sticky);
         WriteByte(bw, surf.game_damage_flags);
         WriteByte(bw, surf.surf_type);
-        WriteByte(bw, surf.phys_pad);
+        bw.Write(new byte[1]);
         WriteByte(bw, surf.sld_start);
         WriteByte(bw, surf.sld_stop);
         WriteByte(bw, (byte)surf.phys_flags);
@@ -138,12 +191,12 @@ public sealed class SURFParser : AssetParser
         WriteUInt16BE(bw, surf.colorfx.mode);
         WriteFloatBE(bw, surf.colorfx.speed);
 
-        WriteUInt16BE(bw, surf.texture_anm_0.pad);
+        bw.Write(new byte[1]);
         WriteUInt16BE(bw, surf.texture_anm_0.mode);
         WriteUInt32BE(bw, surf.texture_anm_0.group);
         WriteFloatBE(bw, surf.texture_anm_0.speed);
 
-        WriteUInt16BE(bw, surf.texture_anm_1.pad);
+        bw.Write(new byte[1]);
         WriteUInt16BE(bw, surf.texture_anm_1.mode);
         WriteUInt32BE(bw, surf.texture_anm_1.group);
         WriteFloatBE(bw, surf.texture_anm_1.speed);
@@ -171,9 +224,7 @@ public sealed class SURFParser : AssetParser
         WriteVector3BE(bw, surf.uvfx_1.minmax_spd);
 
         WriteByte(bw, surf.on);
-        WriteByte(bw, surf.pad_0);
-        WriteByte(bw, surf.pad_1);
-        WriteByte(bw, surf.pad_2);
+        bw.Write(new byte[3]);
 
         WriteFloatBE(bw, surf.oob_delay);
         WriteFloatBE(bw, surf.walljump_scale_xz);
@@ -191,7 +242,6 @@ public class SURF
     public byte game_sticky { get; set; }
     public byte game_damage_flags { get; set; }
     public byte surf_type { get; set; }
-    public byte phys_pad { get; set; }
     public byte sld_start { get; set; }
     public byte sld_stop { get; set; }
     public PhysFlags phys_flags { get; set; }
@@ -205,9 +255,6 @@ public class SURF
     public zSurfUVFX uvfx_0 { get; set; }
     public zSurfUVFX uvfx_1 { get; set; }
     public byte on { get; set; }
-    public byte pad_0 { get; set; }
-    public byte pad_1 { get; set; }
-    public byte pad_2 { get; set; }
     public float oob_delay { get; set; }
     public float walljump_scale_xz { get; set; }
     public float walljump_scale_y { get; set; }
@@ -247,7 +294,6 @@ public class zSurfColorFX
 
 public class zSurfTextureAnim
 {
-    public ushort pad { get; set; }
     public ushort mode { get; set; }
     public uint group { get; set; }
     public float speed { get; set; }

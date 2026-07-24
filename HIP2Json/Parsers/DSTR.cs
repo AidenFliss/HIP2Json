@@ -7,25 +7,42 @@ public sealed class DSTRParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        float animSpeed = ReadFloatBE(br);
+        uint initAnimState = ReadUInt32BE(br);
+        uint health = ReadUInt32BE(br);
+        uint spawnItemID = ReadUInt32BE(br);
+        uint dflags = ReadUInt32BE(br);
+        byte collType = ReadByte(br);
+        byte fxType = ReadByte(br);
+
+        br.ReadBytes(2);
+
+        float blast_radius = ReadFloatBE(br);
+        float blast_strength = ReadFloatBE(br);
+        uint shrapnelID_destroy = ReadUInt32BE(br);
+        uint shrapnelID_hit = ReadUInt32BE(br);
+        uint sfx_destroy = ReadUInt32BE(br);
+        uint sfx_hit = ReadUInt32BE(br);
+        uint hitModel = ReadUInt32BE(br);
+        uint destroyModel = ReadUInt32BE(br);
+
         return new DSTR
         {
-            animSpeed = ReadFloatBE(br),
-            initAnimState = ReadUInt32BE(br),
-            health = ReadUInt32BE(br),
-            spawnItemID = ReadUInt32BE(br),
-            dflags = ReadUInt32BE(br),
-            collType = ReadByte(br),
-            fxType = ReadByte(br),
-            pad0 = ReadByte(br),
-            pad1 = ReadByte(br),
-            blast_radius = ReadFloatBE(br),
-            blast_strength = ReadFloatBE(br),
-            shrapnelID_destroy = ReadUInt32BE(br),
-            shrapnelID_hit = ReadUInt32BE(br),
-            sfx_destroy = ReadUInt32BE(br),
-            sfx_hit = ReadUInt32BE(br),
-            hitModel = ReadUInt32BE(br),
-            destroyModel = ReadUInt32BE(br),
+            animSpeed = animSpeed,
+            initAnimState = initAnimState,
+            health = health,
+            spawnItemID = spawnItemID,
+            dflags = dflags,
+            collType = collType,
+            fxType = fxType,
+            blast_radius = blast_radius,
+            blast_strength = blast_strength,
+            shrapnelID_destroy = shrapnelID_destroy,
+            shrapnelID_hit = shrapnelID_hit,
+            sfx_destroy = sfx_destroy,
+            sfx_hit = sfx_hit,
+            hitModel = hitModel,
+            destroyModel = destroyModel
         };
     }
 
@@ -43,8 +60,7 @@ public sealed class DSTRParser : AssetParser
         WriteUInt32BE(bw, dstr.dflags);
         WriteByte(bw, dstr.collType);
         WriteByte(bw, dstr.fxType);
-        WriteByte(bw, dstr.pad0);
-        WriteByte(bw, dstr.pad1);
+        bw.Write(new byte[2]);
         WriteFloatBE(bw, dstr.blast_radius);
         WriteFloatBE(bw, dstr.blast_strength);
         WriteUInt32BE(bw, dstr.shrapnelID_destroy);
@@ -68,8 +84,6 @@ public class DSTR
     public uint dflags { get; set; }
     public byte collType { get; set; }
     public byte fxType { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
     public float blast_radius { get; set; }
     public float blast_strength { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]

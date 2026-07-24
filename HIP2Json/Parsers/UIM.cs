@@ -8,22 +8,26 @@ public sealed class UIMParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
-        UIM uim = new()
-        {
-            cmdCount = ReadByte(br),
-            inn = ReadByte(br),
-            pad0 = ReadByte(br),
-            pad1 = ReadByte(br),
-            cmdSize = ReadUInt32BE(br),
-            totalTime = ReadFloatBE(br),
-            loopTime = ReadFloatBE(br),
-        };
+        byte cmdCount = ReadByte(br);
+        byte inn = ReadByte(br);
+        br.ReadBytes(2);
+        uint cmdSize = ReadUInt32BE(br);
+        float totalTime = ReadFloatBE(br);
+        float loopTime = ReadFloatBE(br);
 
-        uim.commands = Enumerable.Range(0, uim.cmdCount)
+        UIMCommand[] commands = Enumerable.Range(0, cmdCount)
             .Select(_ => ReadCommand(br))
             .ToArray();
 
-        return uim;
+        return new UIM
+        {
+            cmdCount = cmdCount,
+            inn = inn,
+            cmdSize = cmdSize,
+            totalTime = totalTime,
+            loopTime = loopTime,
+            commands = commands
+        };
     }
 
     public override object Serialize(object obj)
@@ -37,8 +41,7 @@ public sealed class UIMParser : AssetParser
 
         WriteByte(bw, uim.cmdCount);
         WriteByte(bw, uim.inn);
-        WriteByte(bw, uim.pad0);
-        WriteByte(bw, uim.pad1);
+        bw.Write(new byte[2]);
         WriteUInt32BE(bw, uim.cmdSize);
         WriteFloatBE(bw, uim.totalTime);
         WriteFloatBE(bw, uim.loopTime);
@@ -63,13 +66,14 @@ public sealed class UIMParser : AssetParser
 
         byte enabled = ReadByte(br);
 
-        byte pad0 = ReadByte(br);
-        byte pad1 = ReadByte(br);
-        byte pad2 = ReadByte(br);
+        br.ReadBytes(3);
 
         switch (type)
         {
             case UIMCommandType.Move:
+                float distX = ReadFloatBE(br);
+                float distY = ReadFloatBE(br);
+
                 return new UIMMoveCommand
                 {
                     type = type,
@@ -78,16 +82,21 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    distX = ReadFloatBE(br),
-                    distY = ReadFloatBE(br),
+                    distX = distX,
+                    distY = distY
                 };
 
-
             case UIMCommandType.Scale:
+                float amountX = ReadFloatBE(br);
+                float amountY = ReadFloatBE(br);
+
+                byte centerPivot = ReadByte(br);
+
+                br.ReadBytes(3);
+
+                float centerOffsetX = ReadFloatBE(br);
+                float centerOffsetY = ReadFloatBE(br);
+
                 return new UIMScaleCommand
                 {
                     type = type,
@@ -96,24 +105,18 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    amountX = ReadFloatBE(br),
-                    amountY = ReadFloatBE(br),
-
-                    centerPivot = ReadByte(br),
-                    centerPad0 = ReadByte(br),
-                    centerPad1 = ReadByte(br),
-                    centerPad2 = ReadByte(br),
-
-                    centerOffsetX = ReadFloatBE(br),
-                    centerOffsetY = ReadFloatBE(br),
+                    amountX = amountX,
+                    amountY = amountY,
+                    centerPivot = centerPivot,
+                    centerOffsetX = centerOffsetX,
+                    centerOffsetY = centerOffsetY
                 };
 
-
             case UIMCommandType.Rotate:
+                float rotation = ReadFloatBE(br);
+                float rotCenterOffsetX = ReadFloatBE(br);
+                float rotCenterOffsetY = ReadFloatBE(br);
+
                 return new UIMRotateCommand
                 {
                     type = type,
@@ -122,17 +125,17 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    rotation = ReadFloatBE(br),
-                    centerOffsetX = ReadFloatBE(br),
-                    centerOffsetY = ReadFloatBE(br),
+                    rotation = rotation,
+                    centerOffsetX = rotCenterOffsetX,
+                    centerOffsetY = rotCenterOffsetY
                 };
 
-
             case UIMCommandType.Opacity:
+                byte startOpacity = ReadByte(br);
+                byte endOpacity = ReadByte(br);
+
+                br.ReadBytes(2);
+
                 return new UIMOpacityCommand
                 {
                     type = type,
@@ -141,17 +144,21 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    startOpacity = ReadByte(br),
-                    endOpacity = ReadByte(br),
-                    colorPad0 = ReadByte(br),
-                    colorPad1 = ReadByte(br),
+                    startOpacity = startOpacity,
+                    endOpacity = endOpacity
                 };
-            
+
             case UIMCommandType.AbsoluteScale:
+                float startX = ReadFloatBE(br);
+                float startY = ReadFloatBE(br);
+                float endX = ReadFloatBE(br);
+                float endY = ReadFloatBE(br);
+
+                byte absCenterPivot = ReadByte(br);
+                byte textScale = ReadByte(br);
+
+                br.ReadBytes(2);
+
                 return new UIMAbsoluteScaleCommand
                 {
                     type = type,
@@ -160,23 +167,20 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    startX = ReadFloatBE(br),
-                    startY = ReadFloatBE(br),
-                    endX = ReadFloatBE(br),
-                    endY = ReadFloatBE(br),
-
-                    centerPivot = ReadByte(br),
-                    textScale = ReadByte(br),
-                    scalePad0 = ReadByte(br),
-                    scalePad1 = ReadByte(br),
+                    startX = startX,
+                    startY = startY,
+                    endX = endX,
+                    endY = endY,
+                    centerPivot = absCenterPivot,
+                    textScale = textScale
                 };
 
-
             case UIMCommandType.Brightness:
+                byte startBrightness = ReadByte(br);
+                byte endBrightness = ReadByte(br);
+
+                br.ReadBytes(2);
+
                 return new UIMBrightnessCommand
                 {
                     type = type,
@@ -185,18 +189,21 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    startBrightness = ReadByte(br),
-                    endBrightness = ReadByte(br),
-                    brightnessPad0 = ReadByte(br),
-                    brightnessPad1 = ReadByte(br),
+                    startBrightness = startBrightness,
+                    endBrightness = endBrightness
                 };
 
-
             case UIMCommandType.Color:
+                byte startRed = ReadByte(br);
+                byte startGreen = ReadByte(br);
+                byte startBlue = ReadByte(br);
+
+                byte endRed = ReadByte(br);
+                byte endGreen = ReadByte(br);
+                byte endBlue = ReadByte(br);
+
+                br.ReadBytes(2);
+
                 return new UIMColorCommand
                 {
                     type = type,
@@ -205,24 +212,18 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    startRed = ReadByte(br),
-                    startGreen = ReadByte(br),
-                    startBlue = ReadByte(br),
-
-                    endRed = ReadByte(br),
-                    endGreen = ReadByte(br),
-                    endBlue = ReadByte(br),
-
-                    colorPad0 = ReadByte(br),
-                    colorPad1 = ReadByte(br),
+                    startRed = startRed,
+                    startGreen = startGreen,
+                    startBlue = startBlue,
+                    endRed = endRed,
+                    endGreen = endGreen,
+                    endBlue = endBlue
                 };
 
-
             case UIMCommandType.UVScroll:
+                float amountU = ReadFloatBE(br);
+                float amountV = ReadFloatBE(br);
+
                 return new UIMUVScrollCommand
                 {
                     type = type,
@@ -231,19 +232,14 @@ public sealed class UIMParser : AssetParser
                     accelTime = accelTime,
                     decelTime = decelTime,
                     enabled = enabled,
-                    pad0 = pad0,
-                    pad1 = pad1,
-                    pad2 = pad2,
-
-                    amountU = ReadFloatBE(br),
-                    amountV = ReadFloatBE(br),
+                    amountU = amountU,
+                    amountV = amountV
                 };
-            
+
             default:
                 return null;
         }
     }
-
 
     private void WriteCommand(BinaryWriter bw, object command)
     {
@@ -258,9 +254,7 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, move.decelTime);
 
                 WriteByte(bw, move.enabled);
-                WriteByte(bw, move.pad0);
-                WriteByte(bw, move.pad1);
-                WriteByte(bw, move.pad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, move.distX);
                 WriteFloatBE(bw, move.distY);
@@ -276,17 +270,13 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, scale.decelTime);
 
                 WriteByte(bw, scale.enabled);
-                WriteByte(bw, scale.pad0);
-                WriteByte(bw, scale.pad1);
-                WriteByte(bw, scale.pad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, scale.amountX);
                 WriteFloatBE(bw, scale.amountY);
 
                 WriteByte(bw, scale.centerPivot);
-                WriteByte(bw, scale.centerPad0);
-                WriteByte(bw, scale.centerPad1);
-                WriteByte(bw, scale.centerPad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, scale.centerOffsetX);
                 WriteFloatBE(bw, scale.centerOffsetY);
@@ -302,9 +292,7 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, rotate.decelTime);
 
                 WriteByte(bw, rotate.enabled);
-                WriteByte(bw, rotate.pad0);
-                WriteByte(bw, rotate.pad1);
-                WriteByte(bw, rotate.pad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, rotate.rotation);
                 WriteFloatBE(bw, rotate.centerOffsetX);
@@ -321,14 +309,11 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, opacity.decelTime);
 
                 WriteByte(bw, opacity.enabled);
-                WriteByte(bw, opacity.pad0);
-                WriteByte(bw, opacity.pad1);
-                WriteByte(bw, opacity.pad2);
+                bw.Write(new byte[3]);
 
                 WriteByte(bw, opacity.startOpacity);
                 WriteByte(bw, opacity.endOpacity);
-                WriteByte(bw, opacity.colorPad0);
-                WriteByte(bw, opacity.colorPad1);
+                bw.Write(new byte[2]);
                 break;
 
             case UIMAbsoluteScaleCommand absoluteScale:
@@ -340,9 +325,7 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, absoluteScale.decelTime);
 
                 WriteByte(bw, absoluteScale.enabled);
-                WriteByte(bw, absoluteScale.pad0);
-                WriteByte(bw, absoluteScale.pad1);
-                WriteByte(bw, absoluteScale.pad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, absoluteScale.startX);
                 WriteFloatBE(bw, absoluteScale.startY);
@@ -351,8 +334,7 @@ public sealed class UIMParser : AssetParser
 
                 WriteByte(bw, absoluteScale.centerPivot);
                 WriteByte(bw, absoluteScale.textScale);
-                WriteByte(bw, absoluteScale.scalePad0);
-                WriteByte(bw, absoluteScale.scalePad1);
+                bw.Write(new byte[2]);
                 break;
 
 
@@ -365,14 +347,11 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, brightness.decelTime);
 
                 WriteByte(bw, brightness.enabled);
-                WriteByte(bw, brightness.pad0);
-                WriteByte(bw, brightness.pad1);
-                WriteByte(bw, brightness.pad2);
+                bw.Write(new byte[3]);
 
                 WriteByte(bw, brightness.startBrightness);
                 WriteByte(bw, brightness.endBrightness);
-                WriteByte(bw, brightness.brightnessPad0);
-                WriteByte(bw, brightness.brightnessPad1);
+                bw.Write(new byte[2]);
                 break;
 
 
@@ -385,9 +364,7 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, color.decelTime);
 
                 WriteByte(bw, color.enabled);
-                WriteByte(bw, color.pad0);
-                WriteByte(bw, color.pad1);
-                WriteByte(bw, color.pad2);
+                bw.Write(new byte[3]);
 
                 WriteByte(bw, color.startRed);
                 WriteByte(bw, color.startGreen);
@@ -397,8 +374,7 @@ public sealed class UIMParser : AssetParser
                 WriteByte(bw, color.endGreen);
                 WriteByte(bw, color.endBlue);
 
-                WriteByte(bw, color.colorPad0);
-                WriteByte(bw, color.colorPad1);
+                bw.Write(new byte[2]);
                 break;
 
 
@@ -411,9 +387,7 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, uv.decelTime);
 
                 WriteByte(bw, uv.enabled);
-                WriteByte(bw, uv.pad0);
-                WriteByte(bw, uv.pad1);
-                WriteByte(bw, uv.pad2);
+                bw.Write(new byte[3]);
 
                 WriteFloatBE(bw, uv.amountU);
                 WriteFloatBE(bw, uv.amountV);
@@ -426,8 +400,6 @@ public class UIM
 {
     public byte cmdCount { get; set; }
     public byte inn { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
     public uint cmdSize { get; set; }
     public float totalTime { get; set; }
     public float loopTime { get; set; }
@@ -465,9 +437,6 @@ public abstract class UIMCommand
     public float accelTime { get; set; }
     public float decelTime { get; set; }
     public byte enabled { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
 }
 
 public class UIMMoveCommand : UIMCommand
@@ -485,9 +454,6 @@ public class UIMScaleCommand : UIMCommand
     public float amountX { get; set; }
     public float amountY { get; set; }
     public byte centerPivot { get; set; }
-    public byte centerPad0 { get; set; }
-    public byte centerPad1 { get; set; }
-    public byte centerPad2 { get; set; }
     public float centerOffsetX { get; set; }
     public float centerOffsetY { get; set; }
 }
@@ -507,8 +473,6 @@ public class UIMOpacityCommand : UIMCommand
 
     public byte startOpacity { get; set; }
     public byte endOpacity { get; set; }
-    public byte colorPad0 { get; set; }
-    public byte colorPad1 { get; set; }
 }
 
 public class UIMAbsoluteScaleCommand : UIMCommand
@@ -521,8 +485,6 @@ public class UIMAbsoluteScaleCommand : UIMCommand
     public float endY { get; set; }
     public byte centerPivot { get; set; }
     public byte textScale { get; set; }
-    public byte scalePad0 { get; set; }
-    public byte scalePad1 { get; set; }
 }
 
 public class UIMBrightnessCommand : UIMCommand
@@ -531,8 +493,6 @@ public class UIMBrightnessCommand : UIMCommand
 
     public byte startBrightness { get; set; }
     public byte endBrightness { get; set; }
-    public byte brightnessPad0 { get; set; }
-    public byte brightnessPad1 { get; set; }
 }
 
 public class UIMColorCommand : UIMCommand
@@ -545,8 +505,6 @@ public class UIMColorCommand : UIMCommand
     public byte endRed { get; set; }
     public byte endGreen { get; set; }
     public byte endBlue { get; set; }
-    public byte colorPad0 { get; set; }
-    public byte colorPad1 { get; set; }
 }
 
 public class UIMUVScrollCommand : UIMCommand

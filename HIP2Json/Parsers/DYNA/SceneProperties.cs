@@ -20,10 +20,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         uint flags = ReadUInt32BE(br);
         float waterTileWidth = ReadFloatBE(br);
         float lodFadeDistance = ReadFloatBE(br);
-
-        uint[] padding = Enumerable.Range(0, 4)
-                .Select(_ => ReadUInt32BE(br))
-                .ToArray();
+        br.ReadBytes(4);
 
         return new SceneProperties
         {
@@ -38,8 +35,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
             musicID = musicID,
             flags = flags,
             waterTileWidth = waterTileWidth,
-            lodFadeDistance = lodFadeDistance,
-            padding = padding
+            lodFadeDistance = lodFadeDistance
         };
     }
 
@@ -62,9 +58,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         WriteUInt32BE(bw, sceneProperties.flags);
         WriteFloatBE(bw, sceneProperties.waterTileWidth);
         WriteFloatBE(bw, sceneProperties.lodFadeDistance);
-
-        foreach (var pad in sceneProperties.padding)
-            WriteUInt32BE(bw, pad);
+        bw.Write(new byte[4]);
         
         return ms.ToArray();
     }
@@ -89,5 +83,4 @@ public class SceneProperties
     public uint flags { get; set; }
     public float waterTileWidth { get; set; }
     public float lodFadeDistance { get; set; }
-    public uint[] padding { get; set; }
 }

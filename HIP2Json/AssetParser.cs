@@ -316,16 +316,22 @@ public abstract class AssetParser
             }
 
             case MotionType.Pendulum:
+                byte flags = ReadByte(br);
+                byte plane = ReadByte(br);
+                br.ReadBytes(2);
+                float length = ReadFloatBE(br);
+                float range = ReadFloatBE(br);
+                float period = ReadFloatBE(br);
+                float phase = ReadFloatBE(br);
+
                 motion.specific = new PendulumMotion
                 {
-                    flags = ReadByte(br),
-                    plane = ReadByte(br),
-                    pad = ReadUInt16BE(br),
-
-                    length = ReadFloatBE(br),
-                    range = ReadFloatBE(br),
-                    period = ReadFloatBE(br),
-                    phase = ReadFloatBE(br)
+                    flags = flags,
+                    plane = plane,
+                    length = length,
+                    range = range,
+                    period = period,
+                    phase = phase
                 };
                 break;
         }
@@ -430,7 +436,7 @@ public abstract class AssetParser
                 var m = (PendulumMotion)motion.specific;
                 WriteByte(bw, m.flags);
                 WriteByte(bw, m.plane);
-                WriteUInt16BE(bw, m.pad);
+                bw.Write(new byte[2]);
 
                 WriteFloatBE(bw, m.length);
                 WriteFloatBE(bw, m.range);
@@ -544,7 +550,6 @@ public class PendulumMotion : MotionSpecificData
 {
     public byte flags { get; set; }
     public byte plane { get; set; }
-    public ushort pad { get; set; }
     public float length { get; set; }
     public float range { get; set; }
     public float period { get; set; }

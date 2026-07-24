@@ -7,18 +7,24 @@ public sealed class FOGParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        xColor bkgndColor = ReadColorBE(br);
+        xColor fogColor = ReadColorBE(br);
+        float fogDensity = ReadFloatBE(br);
+        float fogStart = ReadFloatBE(br);
+        float fogStop = ReadFloatBE(br);
+        float transitionTime = ReadFloatBE(br);
+        byte fogType = ReadByte(br);
+        br.ReadBytes(3);
+
         return new FOG
         {
-            bkgndColor = ReadColorBE(br),
-            fogColor = ReadColorBE(br),
-            fogDensity = ReadFloatBE(br),
-            fogStart = ReadFloatBE(br),
-            fogStop = ReadFloatBE(br),
-            transitionTime = ReadFloatBE(br),
-            fogType = ReadByte(br),
-            padFog0 = ReadByte(br),
-            padFog1 = ReadByte(br),
-            padFog2 = ReadByte(br),
+            bkgndColor = bkgndColor,
+            fogColor = fogColor,
+            fogDensity = fogDensity,
+            fogStart = fogStart,
+            fogStop = fogStop,
+            transitionTime = transitionTime,
+            fogType = fogType
         };
     }
 
@@ -36,9 +42,7 @@ public sealed class FOGParser : AssetParser
         WriteFloatBE(bw, fog.fogStop);
         WriteFloatBE(bw, fog.transitionTime);
         WriteByte(bw, fog.fogType);
-        WriteByte(bw, fog.padFog0);
-        WriteByte(bw, fog.padFog1);
-        WriteByte(bw, fog.padFog2);
+        bw.Write(new byte[3]);
         
         return ms.ToArray();
     }
@@ -53,7 +57,4 @@ public class FOG
     public float fogStop { get; set; }
     public float transitionTime { get; set; }
     public byte fogType { get; set; }
-    public byte padFog0 { get; set; }
-    public byte padFog1 { get; set; }
-    public byte padFog2 { get; set; }
 }

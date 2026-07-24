@@ -7,20 +7,32 @@ public sealed class SFXParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        short flagsSFX = ReadInt16BE(br);
+        short freq = ReadInt16BE(br);
+        float freqm = ReadFloatBE(br);
+        uint soundAssetID = ReadUInt32BE(br);
+        uint attachID = ReadUInt32BE(br);
+        byte loopCount = ReadByte(br);
+        byte priority = ReadByte(br);
+        byte volume = ReadByte(br);
+        br.ReadBytes(1);
+        xVec3 pos = ReadVector3BE(br);
+        float innerRadius = ReadFloatBE(br);
+        float outerRadius = ReadFloatBE(br);
+
         return new SFX
         {
-            flagsSFX = ReadInt16BE(br),
-            freq = ReadInt16BE(br),
-            freqm = ReadFloatBE(br),
-            soundAssetID = ReadUInt32BE(br),
-            attachID = ReadUInt32BE(br),
-            loopCount = ReadByte(br),
-            priority = ReadByte(br),
-            volume = ReadByte(br),
-            pad = ReadByte(br),
-            pos = ReadVector3BE(br),
-            innerRadius = ReadFloatBE(br),
-            outerRadius = ReadFloatBE(br),
+            flagsSFX = flagsSFX,
+            freq = freq,
+            freqm = freqm,
+            soundAssetID = soundAssetID,
+            attachID = attachID,
+            loopCount = loopCount,
+            priority = priority,
+            volume = volume,
+            pos = pos,
+            innerRadius = innerRadius,
+            outerRadius = outerRadius
         };
     }
 
@@ -39,7 +51,7 @@ public sealed class SFXParser : AssetParser
         WriteByte(bw, sfx.loopCount);
         WriteByte(bw, sfx.priority);
         WriteByte(bw, sfx.volume);
-        WriteByte(bw, sfx.pad);
+        bw.Write(new byte[1]);
         WriteVector3BE(bw, sfx.pos);
         WriteFloatBE(bw, sfx.innerRadius);
         WriteFloatBE(bw, sfx.outerRadius);
@@ -60,7 +72,6 @@ public class SFX
     public byte loopCount { get; set; }
     public byte priority { get; set; }
     public byte volume { get; set; }
-    public byte pad { get; set; }
     public xVec3 pos { get; set; }
     public float innerRadius { get; set; }
     public float outerRadius { get; set; }

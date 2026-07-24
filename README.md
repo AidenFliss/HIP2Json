@@ -30,16 +30,59 @@ A tool that allows you to extract .HIP and .HOP files to a set of json files, ed
 
 # Usage
 
-To use the program you will need [a copy of the game you will be modding extracted into a folder.](https://heavyironmodding.org/wiki/Setting_up_Dolphin_for_modding)
+To use the program, you will need [a copy of the game you will be modding extracted into a folder.](https://heavyironmodding.org/wiki/Setting_up_Dolphin_for_modding)
+
+### Command Line Interface
+
+```text
+Usage:
+  HIP2Json --extract <input_path> [output_path] [options]
+  HIP2Json --pack    <input_path> [output_path] [options]
+
+Modes:
+  --extract, -e   Extract a single .hip/.hop archive OR an entire game files directory.
+  --pack, -k      Pack a project folder (*_unpacked or *_project) back into binary archive(s).
+
+Options:
+  --game, -g      Specify target game format (BFBB or TSSM). [Required]
+  --platform, -p  Specify target platform format (GC, PS2, or XBOX). [Required]
+  --progress, -c  Show parsing coverage stats.
+  --help, -h      Show this help message.
+```
 
 ### Extracting:
-Run ```HIP2Json``` with a project directory and the games ```files``` folder. Make sure to specify if the game is BFBB or TSSM.
 
-You should see folders such as ```parsed``` and ```unpacked``` be created. If there is an error, you might have a corrupted / beta file or there is an issue that needs to be reported.
+Run `HIP2Json` with `--extract` (`-e`), passing either a single `.hip`/`.hop` file or an entire `files` folder. Make sure to specify the game (`-g`) and platform (`-p`).
+
+* **Single File Example:**
+  ```bash
+  HIP2Json -e path/to/jf01.HIP -g BFBB -p GC
+  ```
+  Creates a `jf01_unpacked/` project folder containing `og/`, `mod/`, and `unpacked/`.
+
+* **Full Directory Example:**
+  ```bash
+  HIP2Json -e path/to/game/files/ -g BFBB -p GC
+  ```
+  Creates a `files_project/` folder containing all game archives unpacked into `og/`, `mod/`, and `unpacked/`.
+
+If there is an error during extraction, you might have a corrupted/beta file or an issue that needs to be reported.
 
 ### Packing:
 
-Run ```HIP2Json``` with the project directory and you should see the folder ```packed``` appear. This contains the modified HIP and HOP files to reimport into a copy of the game.
+Run `HIP2Json` with `--pack` (`-k`) on the generated project directory to reimport your changes back into `.hip` and `.hop` binary files.
+
+* **Single File Project:**
+  ```bash
+  HIP2Json -k jf01_unpacked/ -g BFBB -p GC
+  ```
+  Packs your modifications back into `jf01_unpacked/jf01.hip`.
+
+* **Full Game Project:**
+  ```bash
+  HIP2Json -k files_project/ -g BFBB -p GC
+  ```
+  Packs all modified archives into a `files_packed/` folder ready to replace in your game build.
 
 > [!NOTE]
-Note: Some asset types do not have an implemented parser so they will be ignored when editing json.
+> Note: Some asset types do not have an implemented parser so they will be ignored when editing json.

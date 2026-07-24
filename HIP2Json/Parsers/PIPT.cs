@@ -19,12 +19,11 @@ public sealed class PIPTParser : AssetParser
 
             byte layer = 0;
             byte alphaDiscard = 0;
-            ushort pipePad = 0;
             if (Program.CurrentGame == GameType.TSSM)
             {
                 layer = ReadByte(br);
                 alphaDiscard = ReadByte(br);
-                pipePad = ReadUInt16BE(br);
+                br.ReadBytes(2);
             }
 
             entries[i] = new xModelPipeInfo
@@ -33,8 +32,7 @@ public sealed class PIPTParser : AssetParser
                 subObjectBits = subObjectBits,
                 pipeFlags = pipeFlags,
                 layer = layer,
-                alphaDiscard = alphaDiscard,
-                pipePad = pipePad
+                alphaDiscard = alphaDiscard
             };
         }
 
@@ -62,7 +60,7 @@ public sealed class PIPTParser : AssetParser
             {
                 WriteByte(bw, entry.layer);
                 WriteByte(bw, entry.alphaDiscard);
-                WriteUInt16BE(bw, entry.pipePad);
+                bw.Write(new byte[2]);
             }
         }
 
@@ -84,5 +82,4 @@ public class xModelPipeInfo
     public uint pipeFlags { get; set; }
     public byte layer { get; set; }
     public byte alphaDiscard { get; set; }
-    public ushort pipePad { get; set; }
 }

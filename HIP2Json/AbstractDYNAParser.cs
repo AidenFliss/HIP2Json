@@ -217,8 +217,7 @@ public abstract class AbstractDYNAParser
 
         if (Program.CurrentGame == GameType.BFBB)
         {
-            value.pad = br.ReadByte();
-            br.ReadBytes(3);
+            br.ReadBytes(4);
         }
 
         value.surfaceID = ReadUInt32BE(br);
@@ -245,8 +244,7 @@ public abstract class AbstractDYNAParser
 
         if (Program.CurrentGame == GameType.BFBB)
         {
-            WriteByte(bw, value.pad);
-            bw.Write(new byte[3]);
+            bw.Write(new byte[4]);
         }
 
         WriteUInt32BE(bw, value.surfaceID);

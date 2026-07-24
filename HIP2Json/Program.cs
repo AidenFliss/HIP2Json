@@ -122,14 +122,13 @@ public struct xEntAsset
     public byte subtype;
     public byte pflags;
     public EntFlagsMore moreFlags;
-    public byte pad;
     public uint surfaceID;
     public xVec3 ang, pos, scale;
     public float redMult, greenMult, blueMult, seeThru, seeThruSpeed;
     [JsonConverter(typeof(AssetIDConverter))]
     public uint modelInfoID, animListID;
     public override string ToString() =>
-        $"flags: {flags}, subtype: {subtype}, pflags: {pflags}, moreFlags: {moreFlags}, pad: {pad}\n" +
+        $"flags: {flags}, subtype: {subtype}, pflags: {pflags}, moreFlags: {moreFlags}\n" +
         $"surfaceID: {surfaceID}\n" +
         $"ang: {ang}, pos: {pos}, scale: {scale}\n" +
         $"redMult: {redMult}, greenMult: {greenMult}, blueMult: {blueMult}, seeThru: {seeThru}, seeThruSpeed: {seeThruSpeed}\n" +
@@ -203,106 +202,66 @@ class Program
             if (args.Length == 0 || args.Contains("--help") || args.Contains("-h"))
             {
                 ShowUsage();
-                Environment.Exit(0);
+                return;
             }
 
-            bool extractMode = args.Contains("--extract");
-            bool packMode = args.Contains("--pack");
+            bool extractMode = args.Contains("--extract") || args.Contains("-e");
+            bool packMode = args.Contains("--pack") || args.Contains("-k");
+            bool showProgress = args.Contains("--progress") || args.Contains("-c");
 
             if (extractMode == packMode)
             {
-                Logger.LogError("Error: you must specify exactly one of --extract or --pack.");
+                Logger.LogError("Error: Specify exactly one mode (--extract or --pack).");
                 ShowUsage();
-                Environment.Exit(1);
+                return;
             }
 
-            string gameArg = null;
-            for (int i = 0; i < args.Length; i++)
-            {
-                if (string.Equals(args[i], "--game", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(args[i], "-g", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        gameArg = args[i + 1];
-                        break;
-                    }
-                    Logger.LogError("Error: --game requires a value (BFBB or TSSM).");
-                    ShowUsage();
-                    Environment.Exit(1);
-                }
-            }
+            string gameStr = GetFlagValue(args, "--game", "-g");
+            string platformStr = GetFlagValue(args, "--platform", "-p");
 
-            if (string.IsNullOrEmpty(gameArg) || !Enum.TryParse<GameType>(gameArg, true, out CurrentGame))
+            if (string.IsNullOrEmpty(gameStr) || !Enum.TryParse<GameType>(gameStr, true, out CurrentGame))
             {
-                Logger.LogError($"Error: missing or invalid game configuration. Valid options: BFBB or TSSM.");
+                Logger.LogError("Error: Invalid or missing game (--game <BFBB|TSSM>).");
                 ShowUsage();
-                Environment.Exit(1);
+                return;
             }
 
-            string platformArg = null;
-            for (int i = 0; i < args.Length; i++)
+            if (string.IsNullOrEmpty(platformStr) || !Enum.TryParse<GamePlatform>(platformStr, true, out CurrentPlatform))
             {
-                if (string.Equals(args[i], "--platform", StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(args[i], "-P", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        platformArg = args[i + 1];
-                        break;
-                    }
-                    Logger.LogError("Error: --platform requires a value (GC, PS2, or XBOX).");
-                    ShowUsage();
-                    Environment.Exit(1);
-                }
-            }
-
-            if (string.IsNullOrEmpty(platformArg) || !Enum.TryParse<GamePlatform>(platformArg, true, out CurrentPlatform))
-            {
-                Logger.LogError($"Error: missing or invalid platform configuration. Valid options: GC, PS2, or XBOX.");
+                Logger.LogError("Error: Invalid or missing platform (--platform <GC|PS2|XBOX>).");
                 ShowUsage();
-                Environment.Exit(1);
+                return;
             }
 
-            if (CurrentPlatform == GamePlatform.GC)
+            BigEndian = CurrentPlatform == GamePlatform.GC;
+
+            var pathArgs = GetPositionalArguments(args);
+
+            if (pathArgs.Length == 0)
             {
-                BigEndian = true; // gamecube is big endian, override the BE suffix globally to little endian
-            }
-            else
-            {
-                BigEndian = false;
+                Logger.LogError("Error: Missing target input path.");
+                ShowUsage();
+                return;
             }
 
-            var standardFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--extract", "--pack", "-p", "--progress" };
-            var valueFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--game", "-g", "--platform", "-P" };
-            
-            string[] paths = GetPathArguments(args, standardFlags, valueFlags);
+            string inputPath = pathArgs[0];
 
             if (extractMode)
             {
-                if (paths.Length < 2)
-                {
-                    Logger.LogError("Error: missing required arguments for extract. Expected <game_directory> and <project_directory>.");
-                    ShowUsage();
-                    Environment.Exit(2);
-                }
+                string outputDir = pathArgs.Length > 1 
+                    ? pathArgs[1] 
+                    : GetDefaultExtractPath(inputPath);
 
-                bool showProgress = args.Contains("-p") || args.Contains("--progress");
-                RunExtract(paths[0], paths[1], showProgress);
+                RunExtract(inputPath, outputDir, showProgress);
             }
-            else
+            else 
             {
-                if (paths.Length < 1)
-                {
-                    Logger.LogError("Error: missing required arguments for pack. Expected <project_directory>.");
-                    ShowUsage();
-                    Environment.Exit(2);
-                }
+                string outputPath = pathArgs.Length > 1 
+                    ? pathArgs[1] 
+                    : GetDefaultPackPath(inputPath);
 
-                RunPack(paths[0]);
+                RunPack(inputPath, outputPath);
             }
-
-            Environment.Exit(0);
         }
         catch (Exception ex)
         {
@@ -311,46 +270,96 @@ class Program
         }
     }
 
-    static void ShowUsage()
+    static string GetFlagValue(string[] args, string longName, string shortName)
     {
-        string ns = typeof(Program).Namespace;
-
-        Logger.LogInfo("Usage:");
-        Logger.LogInfo($"  {ns} --extract <game_directory> <project_directory> [--game <BFBB|TSSM>] [--platform <GC|PS2|XBOX>] [--progress]");
-        Logger.LogInfo($"  {ns} --pack <project_directory> [--game <BFBB|TSSM>] [--platform <GC|PS2|XBOX>]");
-        Logger.LogInfo("");
-        Logger.LogInfo("Modes:");
-        Logger.LogInfo("  --extract   Extract game files into a project.");
-        Logger.LogInfo("  --pack      Pack modified files from a project.");
-        Logger.LogInfo("");
-        Logger.LogInfo("Options:");
-        Logger.LogInfo("  --game, -g      Specify the game. (BFBB or TSSM)");
-        Logger.LogInfo("  --platform, -P      Specify the platform. (GC, PS2, or XBOX)");
-        Logger.LogInfo("  --progress, -p  Show parsing converage.");
-        Logger.LogInfo("  --help, -h      Show this help message.");
+        for (int i = 0; i < args.Length - 1; i++)
+        {
+            if (string.Equals(args[i], longName, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(args[i], shortName, StringComparison.OrdinalIgnoreCase))
+            {
+                return args[i + 1];
+            }
+        }
+        return null;
     }
 
-    static string[] GetPathArguments(string[] args, HashSet<string> excludedFlags, HashSet<string> flagsWithValues)
+    static string[] GetPositionalArguments(string[] args)
     {
-        var positionalArgs = new List<string>();
+        var positional = new List<string>();
+        var valueFlags = new HashSet<string>(StringComparer.OrdinalIgnoreCase) { "--game", "-g", "--platform", "-p" };
 
         for (int i = 0; i < args.Length; i++)
         {
-            if (flagsWithValues.Contains(args[i]))
+            string arg = args[i];
+
+            if (valueFlags.Contains(arg))
             {
                 i++;
                 continue;
             }
 
-            if (excludedFlags.Contains(args[i]))
-            {
+            if (arg.StartsWith("-"))
                 continue;
-            }
 
-            positionalArgs.Add(args[i]);
+            positional.Add(arg);
         }
 
-        return positionalArgs.ToArray();
+        return positional.ToArray();
+    }
+
+    static string GetDefaultExtractPath(string inputPath)
+    {
+        string folderName = Path.GetFileNameWithoutExtension(inputPath);
+        if (File.Exists(inputPath))
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), folderName + "_unpacked");
+        }
+
+        string cleanInput = inputPath.TrimEnd('/', '\\');
+        return Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileName(cleanInput) + "_project");
+    }
+
+    static string GetDefaultPackPath(string inputPath)
+    {
+        if (File.Exists(inputPath)) return inputPath;
+
+        string cleanPath = inputPath.TrimEnd('/', '\\');
+
+        if (cleanPath.EndsWith("_project", StringComparison.OrdinalIgnoreCase))
+        {
+            return cleanPath.Replace("_project", "_packed");
+        }
+
+        if (cleanPath.EndsWith("_unpacked", StringComparison.OrdinalIgnoreCase))
+        {
+            string filePrefix = Path.GetFileName(cleanPath).Replace("_unpacked", "");
+            
+            string ext = filePrefix.EndsWith("_HOP", StringComparison.OrdinalIgnoreCase) ? ".hop" : ".hip";
+            string cleanFileName = filePrefix.Replace("_HOP", "").Replace("_HIP", "");
+
+            return Path.Combine(cleanPath, cleanFileName + ext);
+        }
+
+        return cleanPath + "_packed";
+    }
+
+    static void ShowUsage()
+    {
+        string ns = typeof(Program).Namespace;
+
+        Logger.LogInfo("Usage:");
+        Logger.LogInfo($"  {ns} --extract <input_path> [output_path] [options]");
+        Logger.LogInfo($"  {ns} --pack    <input_path> [output_path] [options]");
+        Logger.LogInfo("");
+        Logger.LogInfo("Modes:");
+        Logger.LogInfo("  --extract, -e   Extract a single .hip/.hop archive OR an entire game files directory.");
+        Logger.LogInfo("  --pack, -k      Pack a project folder (*_unpacked or *_project) back into binary archive(s).");
+        Logger.LogInfo("");
+        Logger.LogInfo("Options:");
+        Logger.LogInfo("  --game, -g      Specify target game format (BFBB or TSSM). [Required]");
+        Logger.LogInfo("  --platform, -p  Specify target platform format (GC, PS2, or XBOX). [Required]");
+        Logger.LogInfo("  --progress, -c  Show parsing coverage stats.");
+        Logger.LogInfo("  --help, -h      Show this help message.");
     }
 
     static string GetElementKey(JsonElement elem)
@@ -363,128 +372,227 @@ class Program
 
         return string.Empty;
     }
-    static void RunExtract(string gameDir, string projectDir, bool showProgress)
+    static void RunExtract(string targetPath, string projectDir, bool showProgress)
     {
-        string parsedDir = Path.Combine(projectDir, "parsed");
-        string unpackedDir = Path.Combine(projectDir, "unpacked");
-
-        Directory.CreateDirectory(parsedDir);
-        Directory.CreateDirectory(unpackedDir);
-
-        foreach (string file in Directory.GetFiles(gameDir, "*.*", SearchOption.AllDirectories))
+        if (File.Exists(targetPath))
         {
-            if (SKIP_FILES.Contains(Path.GetFileNameWithoutExtension(file)))
-                continue;
+            string baseDir = Path.GetDirectoryName(targetPath) ?? targetPath;
 
-            bool isHipFile = Path.GetExtension(file).ToLower() == ".hip";
-            bool isHopFile = Path.GetExtension(file).ToLower() == ".hop";
-
-            string type = isHipFile ? "HIP" : isHopFile ? "HOP" : "Unknown";
-
-            if (type == "Unknown")
-                continue;
-
-            string parentFolder = Path.GetFileName(Path.GetDirectoryName(file)!);
-
-            if (parentFolder is "Working" or "New Folder" or "backup")
-                continue;
-
-            Logger.LogInfo($"Processing {file}...");
-            
-            (HipFile hipfile, Game game, Platform _) = HipHopFile.HipFile.FromPath(file);
-            
-            hipfile.ToIni(game, Path.Combine(unpackedDir, Path.GetFileNameWithoutExtension(file)) + "_" + type, true, true);
-
-            string extractDir = Path.Combine(
-                unpackedDir,
-                Path.GetFileNameWithoutExtension(file) + "_" + type
-            );
-
-            var files = Directory.GetFiles(extractDir, "*.*", SearchOption.AllDirectories);
-
-            var assets = new List<ParsedAsset>();
-
-            foreach (var assetFile in files)
+            string ext = Path.GetExtension(targetPath).ToLower();
+            if (ext != ".hip" && ext != ".hop")
             {
-                if (string.Equals(Path.GetFileName(assetFile), "Settings.ini", StringComparison.OrdinalIgnoreCase))
-                    continue;
-
-                var parsed = ParseAsset(assetFile);
-                if (parsed == null)
-                    continue;
-
-                parsed.AssetFriendlyName = GetFriendlyName(Path.GetFileName(assetFile)) ?? "Unknown";
-                parsed.FileName = Path.GetFileName(assetFile) ?? "Unknown";
-
-                string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
-
-                Logger.LogInfo("-------------------------------------------------");
-                Logger.LogInfo("Asset ID: " + (assetIdStr ?? "Unknown"));
-
-                if (parsed.Base != null)
-                {
-                    if (Dictionaries.BASETYPE_TO_FRIENDLY_NAME.TryGetValue(parsed.Base?.baseType, out var friendlyType))
-                        Logger.LogInfo("Asset Type: " + friendlyType);
-                    else
-                        Logger.LogWarning("Asset Type: Unknown for " + parsed.Base?.baseType);
-                }
-
-                assets.Add(parsed);
+                Logger.LogError($"Error: Target file '{targetPath}' is not a .hip or .hop file.");
+                return;
             }
 
-            var options = new JsonSerializerOptions
-            {
-                WriteIndented = true,
-                IncludeFields = true,
-                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
-                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-            };
+            Logger.LogInfo($"Extracting single archive: {targetPath} -> {projectDir}");
+            Directory.CreateDirectory(projectDir);
 
-            string json = JsonSerializer.Serialize(assets, options);
-
-            string jsonOutputFolder = GetJsonOutputFolder(gameDir, file);
-            string jsonOutputFolderOgPath = string.IsNullOrEmpty(jsonOutputFolder) ? Path.Combine(parsedDir, "og") : Path.Combine(parsedDir, "og", jsonOutputFolder);
-            string jsonOutputFolderModPath = string.IsNullOrEmpty(jsonOutputFolder) ? Path.Combine(parsedDir, "mod") : Path.Combine(parsedDir, "mod", jsonOutputFolder);
-
-            if (!Directory.Exists(jsonOutputFolderOgPath))
-                Directory.CreateDirectory(jsonOutputFolderOgPath);
-            if (!Directory.Exists(jsonOutputFolderModPath))
-                Directory.CreateDirectory(jsonOutputFolderModPath);
-
-            string jsonFileName = Path.GetFileNameWithoutExtension(file) + "_" + type + "_assets.json";
-
-            File.WriteAllText(
-                Path.Combine(jsonOutputFolderOgPath, jsonFileName),
-                json);
-            File.WriteAllText(
-                Path.Combine(jsonOutputFolderModPath, jsonFileName),
-                json);
+            ProcessSingleArchiveExtract(targetPath, baseDir, projectDir, showProgress);
         }
+        else if (Directory.Exists(targetPath))
+        {
+            Logger.LogInfo($"Extracting full directory: {targetPath} -> {projectDir}");
+            Directory.CreateDirectory(Path.Combine(projectDir, "og"));
+            Directory.CreateDirectory(Path.Combine(projectDir, "mod"));
+            Directory.CreateDirectory(Path.Combine(projectDir, "unpacked"));
 
-        if (showProgress)
-            LogParseReport();
+            foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
+            {
+                string fileExt = Path.GetExtension(file).ToLower();
+                if (fileExt != ".hip" && fileExt != ".hop") continue;
 
-        Logger.LogInfo("Program finished successfully!");
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                if (SKIP_FILES.Contains(fileName)) continue;
+
+                string parentFolder = Path.GetFileName(Path.GetDirectoryName(file)!);
+                if (parentFolder is "Working" or "New Folder" or "backup") continue;
+
+                ProcessSingleArchiveExtract(file, targetPath, projectDir, showProgress);
+            }
+        }
+        else
+        {
+            Logger.LogError($"Error: Target path '{targetPath}' does not exist.");
+        }
     }
 
-    static void RunPack(string projectDir)
+    static void ProcessSingleArchiveExtract(string filePath, string baseDir, string projectDir, bool showProgress)
     {
-        string jsonFolder = Path.Combine(projectDir, "parsed", "og");
-        string hipHopFolder = Path.Combine(projectDir, "unpacked");
-        string packedFolder = Path.Combine(projectDir, "packed");
+        string ogDir = Path.Combine(projectDir, "og");
+        string modDir = Path.Combine(projectDir, "mod");
+        string unpackedDir = Path.Combine(projectDir, "unpacked");
 
-        Directory.CreateDirectory(packedFolder);
+        bool isHipFile = Path.GetExtension(filePath).ToLower() == ".hip";
+        bool isHopFile = Path.GetExtension(filePath).ToLower() == ".hop";
 
-        Logger.LogInfo($"Pack mode selected. OG JSON folder: {jsonFolder}");
+        string type = isHipFile ? "HIP" : isHopFile ? "HOP" : "Unknown";
 
-        ScanJsonKeyDifferences(jsonFolder, hipHopFolder);
+        if (type == "Unknown")
+            return;
 
-        foreach (string hipHopFile in Directory.GetDirectories(hipHopFolder))
+        string parentFolder = Path.GetFileName(Path.GetDirectoryName(filePath)!);
+
+        if (parentFolder is "Working" or "New Folder" or "backup")
+            return;
+
+        Logger.LogInfo($"Processing {filePath}...");
+
+        (HipFile hipfile, Game game, Platform _) = HipHopFile.HipFile.FromPath(filePath);
+
+        string relativeSubFolder = GetJsonOutputFolder(baseDir, filePath);
+        string archiveName = Path.GetFileNameWithoutExtension(filePath) + "_" + type;
+
+        string extractDir = string.IsNullOrEmpty(relativeSubFolder)
+            ? unpackedDir
+            : Path.Combine(unpackedDir, relativeSubFolder);
+
+        Directory.CreateDirectory(extractDir);
+
+        hipfile.ToIni(game, extractDir, true, true);
+
+        var files = Directory.GetFiles(extractDir, "*.*", SearchOption.AllDirectories);
+        var assets = new List<ParsedAsset>();
+
+        foreach (var assetFile in files)
         {
-            (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(Path.Combine(hipHopFile, "Settings.ini"));
-            byte[] hipBytes = hipFile.ToBytes(game, platform);
-            File.WriteAllBytes(Path.Combine(packedFolder, Path.GetFileNameWithoutExtension(hipHopFile)).Replace("_", "."), hipBytes);
+            if (string.Equals(Path.GetFileName(assetFile), "Settings.ini", StringComparison.OrdinalIgnoreCase))
+                continue;
+
+            var parsed = ParseAsset(assetFile);
+            if (parsed == null)
+                continue;
+
+            parsed.AssetFriendlyName = GetFriendlyName(Path.GetFileName(assetFile)) ?? "Unknown";
+            parsed.FileName = Path.GetFileName(assetFile) ?? "Unknown";
+
+            string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
+
+            Logger.LogInfo("-------------------------------------------------");
+            Logger.LogInfo("Asset ID: " + (assetIdStr ?? "Unknown"));
+
+            if (parsed.Base != null)
+            {
+                if (Dictionaries.BASETYPE_TO_FRIENDLY_NAME.TryGetValue(parsed.Base?.baseType, out var friendlyType))
+                    Logger.LogInfo("Asset Type: " + friendlyType);
+                else
+                    Logger.LogWarning("Asset Type: Unknown for " + parsed.Base?.baseType);
+            }
+
+            assets.Add(parsed);
+        }
+
+        var options = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            IncludeFields = true,
+            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
+            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+        };
+
+        string json = JsonSerializer.Serialize(assets, options);
+
+        string jsonOutputFolderOgPath = string.IsNullOrEmpty(relativeSubFolder)
+            ? ogDir
+            : Path.Combine(ogDir, relativeSubFolder);
+
+        string jsonOutputFolderModPath = string.IsNullOrEmpty(relativeSubFolder)
+            ? modDir
+            : Path.Combine(modDir, relativeSubFolder);
+
+        Directory.CreateDirectory(jsonOutputFolderOgPath);
+        Directory.CreateDirectory(jsonOutputFolderModPath);
+
+        string jsonFileName = archiveName + "_assets.json";
+
+        File.WriteAllText(Path.Combine(jsonOutputFolderOgPath, jsonFileName), json);
+        File.WriteAllText(Path.Combine(jsonOutputFolderModPath, jsonFileName), json);
+    }
+
+    static void RunPack(string inputPath, string outputPath)
+    {
+        if (!Directory.Exists(inputPath))
+        {
+            Logger.LogError($"Error: Target directory '{inputPath}' does not exist.");
+            return;
+        }
+
+        string ogJsonFolder = Path.Combine(inputPath, "og");
+        string hipHopFolder = Path.Combine(inputPath, "unpacked");
+
+        if (!Directory.Exists(ogJsonFolder) && inputPath.EndsWith("og", StringComparison.OrdinalIgnoreCase))
+        {
+            ogJsonFolder = inputPath;
+        }
+
+        if (Directory.Exists(hipHopFolder))
+        {
+            if (Directory.Exists(ogJsonFolder))
+            {
+                ScanJsonKeyDifferences(ogJsonFolder, hipHopFolder);
+            }
+            else
+            {
+                Logger.LogWarning($"Could not find 'og' folder at '{ogJsonFolder}'. Skipping JSON diff scan.");
+            }
+
+            string directSettings = Path.Combine(hipHopFolder, "Settings.ini");
+            if (File.Exists(directSettings))
+            {
+                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(directSettings);
+                byte[] hipBytes = hipFile.ToBytes(game, platform);
+
+                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop")
+                    ? outputPath
+                    : outputPath + ".hip";
+
+                string parentDir = Path.GetDirectoryName(finalOutFile);
+                if (!string.IsNullOrEmpty(parentDir))
+                    Directory.CreateDirectory(parentDir);
+
+                File.WriteAllBytes(finalOutFile, hipBytes);
+                Logger.LogInfo($"Packed archive to {finalOutFile}");
+                return;
+            }
+
+            Directory.CreateDirectory(outputPath);
+            foreach (string archiveFolder in Directory.GetDirectories(hipHopFolder, "*", SearchOption.AllDirectories))
+            {
+                string settingsPath = Path.Combine(archiveFolder, "Settings.ini");
+                if (!File.Exists(settingsPath)) continue;
+
+                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
+                byte[] hipBytes = hipFile.ToBytes(game, platform);
+
+                string rawName = Path.GetFileName(archiveFolder);
+                string outFileName = rawName.EndsWith("_HIP") ? rawName.Replace("_HIP", ".hip") :
+                                    rawName.EndsWith("_HOP") ? rawName.Replace("_HOP", ".hop") :
+                                    rawName;
+
+                string relativePath = Path.GetRelativePath(hipHopFolder, Path.GetDirectoryName(archiveFolder)!);
+                string targetOutDir = relativePath == "." ? outputPath : Path.Combine(outputPath, relativePath);
+                Directory.CreateDirectory(targetOutDir);
+
+                File.WriteAllBytes(Path.Combine(targetOutDir, outFileName), hipBytes);
+                Logger.LogInfo($"Packed archive to {Path.Combine(targetOutDir, outFileName)}");
+            }
+        }
+        else
+        {
+            string settingsPath = Path.Combine(inputPath, "Settings.ini");
+            if (File.Exists(settingsPath))
+            {
+                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
+                byte[] hipBytes = hipFile.ToBytes(game, platform);
+
+                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop")
+                    ? outputPath
+                    : outputPath + ".hip";
+
+                File.WriteAllBytes(finalOutFile, hipBytes);
+                Logger.LogInfo($"Packed archive to {finalOutFile}");
+            }
         }
     }
 
@@ -789,11 +897,7 @@ class Program
 
                                         if (CurrentGame == GameType.BFBB)
                                         {
-                                            byte pad = entProp.TryGetProperty("pad", out var padProp) && padProp.ValueKind==JsonValueKind.Number ? (byte)padProp.GetUInt32() : (byte)0;
-                                            bw.Write(pad);
-                                            bw.Write((byte)0);
-                                            bw.Write((byte)0);
-                                            bw.Write((byte)0);
+                                            bw.Write(new byte[4]);
                                         }
 
                                         uint surfaceID = entProp.TryGetProperty("surfaceID", out var sid) && sid.ValueKind==JsonValueKind.Number ? sid.GetUInt32() : 0u;
@@ -1427,11 +1531,9 @@ class Program
         byte pflags = br.ReadByte();
         byte moreFlags = br.ReadByte();
 
-        byte pad = 0;
         if (CurrentGame == GameType.BFBB)
         {
-            pad = br.ReadByte();
-            _ = br.ReadBytes(3);
+            br.ReadBytes(4);
         }
 
         uint surfaceID = Util.ReadUInt32(br.ReadBytes(4), 0);
@@ -1469,7 +1571,6 @@ class Program
             subtype = subtype,
             pflags = pflags,
             moreFlags = (EntFlagsMore)moreFlags,
-            pad = pad,
             surfaceID = surfaceID,
             ang = ang,
             pos = pos,

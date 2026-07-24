@@ -7,24 +7,35 @@ public sealed class effect_RumbleParser : AbstractDYNAParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
+        float time = ReadFloatBE(br);
+        float intensity = ReadFloatBE(br);
+        uint id = ReadUInt32BE(br);
+        byte priority = ReadByte(br);
+        byte type = ReadByte(br);
+        byte rumbleInPause = ReadByte(br);
+        br.ReadBytes(1);
+        float param1 = ReadFloatBE(br);
+        float param2 = ReadFloatBE(br);
+        float shakeMagnitude = ReadFloatBE(br);
+        float shakeCycleMax = ReadFloatBE(br);
+        float shakeRotationMagnitude = ReadFloatBE(br);
+        byte shakeY = ReadByte(br);
+        br.ReadBytes(3);
+
         return new effect_Rumble
         {
-            time = ReadFloatBE(br),
-            intensity = ReadFloatBE(br),
-            id = ReadUInt32BE(br),
-            priority = ReadByte(br),
-            type = ReadByte(br),
-            rumbleInPause = ReadByte(br),
-            pad = ReadByte(br),
-            param1 = ReadFloatBE(br),
-            param2 = ReadFloatBE(br),
-            shakeMagnitude = ReadFloatBE(br),
-            shakeCycleMax = ReadFloatBE(br),
-            shakeRotationMagnitude = ReadFloatBE(br),
-            shakeY = ReadByte(br),
-            pad0 = ReadByte(br),
-            pad1 = ReadByte(br),
-            pad2 = ReadByte(br),
+            time = time,
+            intensity = intensity,
+            id = id,
+            priority = priority,
+            type = type,
+            rumbleInPause = rumbleInPause,
+            param1 = param1,
+            param2 = param2,
+            shakeMagnitude = shakeMagnitude,
+            shakeCycleMax = shakeCycleMax,
+            shakeRotationMagnitude = shakeRotationMagnitude,
+            shakeY = shakeY
         };
     }
 
@@ -41,16 +52,14 @@ public sealed class effect_RumbleParser : AbstractDYNAParser
         WriteByte(bw, rumble.priority);
         WriteByte(bw, rumble.type);
         WriteByte(bw, rumble.rumbleInPause);
-        WriteByte(bw, rumble.pad);
+        bw.Write(new byte[1]);
         WriteFloatBE(bw, rumble.param1);
         WriteFloatBE(bw, rumble.param2);
         WriteFloatBE(bw, rumble.shakeMagnitude);
         WriteFloatBE(bw, rumble.shakeCycleMax);
         WriteFloatBE(bw, rumble.shakeRotationMagnitude);
         WriteByte(bw, rumble.shakeY);
-        WriteByte(bw, rumble.pad0);
-        WriteByte(bw, rumble.pad1);
-        WriteByte(bw, rumble.pad2);
+        bw.Write(new byte[3]);
 
         return ms.ToArray();
     }
@@ -67,14 +76,10 @@ public class effect_Rumble
     public byte priority { get; set; }
     public byte type { get; set; }
     public byte rumbleInPause { get; set; }
-    public byte pad { get; set; }
     public float param1 { get; set; }
     public float param2 { get; set; }
     public float shakeMagnitude { get; set; }
     public float shakeCycleMax { get; set; }
     public float shakeRotationMagnitude { get; set; }
     public byte shakeY { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
 }

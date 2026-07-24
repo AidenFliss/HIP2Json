@@ -19,10 +19,9 @@ public sealed class DESTParser : AssetParser
             soundgroupidleID = ReadUInt32BE(br),
             respawn = ReadFloatBE(br),
             target_priority = ReadByte(br),
-            pad0 = ReadByte(br),
-            pad1 = ReadByte(br),
-            pad2 = ReadByte(br),
         };
+
+        br.ReadBytes(3);
 
         dest.states = new DESTState[dest.nstates];
 
@@ -79,9 +78,7 @@ public sealed class DESTParser : AssetParser
         WriteFloatBE(bw, dest.respawn);
 
         WriteByte(bw, dest.target_priority);
-        WriteByte(bw, dest.pad0);
-        WriteByte(bw, dest.pad1);
-        WriteByte(bw, dest.pad2);
+        bw.Write(new byte[3]);
 
         foreach (var state in dest.states)
         {
@@ -123,9 +120,6 @@ public class DEST
     public uint soundgroupidleID { get; set; }
     public float respawn { get; set; }
     public byte target_priority { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public DESTState[] states { get; set; }
 }
 

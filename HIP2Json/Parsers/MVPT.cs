@@ -13,7 +13,7 @@ public sealed class MVPTParser : AssetParser
         byte on = ReadByte(br);
         byte bezIndex = ReadByte(br);
         byte flg_props = ReadByte(br);
-        byte pad = ReadByte(br);
+        br.ReadBytes(1);
         ushort numPoints = ReadUInt16BE(br);
         float delay = ReadFloatBE(br);
         float zoneRadius = ReadFloatBE(br);
@@ -26,7 +26,6 @@ public sealed class MVPTParser : AssetParser
             on = (OnType)on,
             bezIndex = bezIndex,
             flg_props = flg_props,
-            pad = pad,
             numPoints = numPoints,
             delay = delay,
             zoneRadius = zoneRadius,
@@ -49,7 +48,7 @@ public sealed class MVPTParser : AssetParser
         WriteByte(bw, (byte)mvpt.on);
         WriteByte(bw, mvpt.bezIndex);
         WriteByte(bw, mvpt.flg_props);
-        WriteByte(bw, mvpt.pad);
+        bw.Write(new byte[1]);
         WriteUInt16BE(bw, mvpt.numPoints);
         WriteFloatBE(bw, mvpt.delay);
         WriteFloatBE(bw, mvpt.zoneRadius);
@@ -70,7 +69,6 @@ public class MVPT
     public OnType on { get; set; }
     public byte bezIndex { get; set; }
     public byte flg_props { get; set; }
-    public byte pad { get; set; }
     public ushort numPoints { get; set; }
     public float delay { get; set; }
     public float zoneRadius { get; set; }

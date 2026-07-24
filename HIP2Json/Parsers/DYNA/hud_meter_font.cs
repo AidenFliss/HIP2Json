@@ -29,15 +29,10 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
         xColor font_drop_c = ReadColor(br);
 
         byte counter_mode = 0;
-        byte pad_0 = 0;
-        byte pad_1 = 0;
-        byte pad_2 = 0;
         if (version == 3)
         {
             counter_mode = ReadByte(br);
-            pad_0 = ReadByte(br);
-            pad_1 = ReadByte(br);
-            pad_2 = ReadByte(br);
+            br.ReadBytes(3);
         }
 
         return new hud_meter_font
@@ -63,9 +58,6 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
             font_c = font_c,
             font_drop_c = font_drop_c,
             counter_mode = counter_mode,
-            pad_0 = pad_0,
-            pad_1 = pad_1,
-            pad_2 = pad_2,
         };
     }
 
@@ -100,9 +92,7 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
         if (version == 3)
         {
             WriteByte(bw, hudMeterFont.counter_mode);
-            WriteByte(bw, hudMeterFont.pad_0);
-            WriteByte(bw, hudMeterFont.pad_1);
-            WriteByte(bw, hudMeterFont.pad_2);
+            bw.Write(new byte[3]);
         }
 
         return ms.ToArray();
@@ -138,7 +128,4 @@ public class hud_meter_font
     public xColor font_c { get; set; }
     public xColor font_drop_c { get; set; }
     public byte counter_mode { get; set; }
-    public byte pad_0 { get; set; }
-    public byte pad_1 { get; set; }
-    public byte pad_2 { get; set; }
 }

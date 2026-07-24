@@ -9,9 +9,7 @@ public sealed class game_object_RaceTimerParser : AbstractDYNAParser
     {
         byte countDown = ReadByte(br);
 
-        byte[] padding = Enumerable.Range(0, 3)
-                .Select(_ => ReadByte(br))
-                .ToArray();
+        br.ReadBytes(3);
         
         int startTime = ReadInt32BE(br);
         int warnTime1 = ReadInt32BE(br);
@@ -21,7 +19,6 @@ public sealed class game_object_RaceTimerParser : AbstractDYNAParser
         return new game_object_RaceTimer
         {
             countDown = countDown,
-            padding = padding,
             startTime = startTime,
             warnTime1 = warnTime1,
             warnTime2 = warnTime2,
@@ -38,8 +35,7 @@ public sealed class game_object_RaceTimerParser : AbstractDYNAParser
 
         WriteByte(bw, raceTimer.countDown);
 
-        foreach (var pad in raceTimer.padding)
-            WriteByte(bw, pad);
+        bw.Write(new byte[3]);
         
         WriteInt32BE(bw, raceTimer.startTime);
         WriteInt32BE(bw, raceTimer.victoryTime);
@@ -56,7 +52,6 @@ public sealed class game_object_RaceTimerParser : AbstractDYNAParser
 public class game_object_RaceTimer
 {
     public byte countDown { get; set; }
-    public byte[] padding { get; set; }
     public int startTime { get; set; }
     public int victoryTime { get; set; }
     public float warnTime1 { get; set; }

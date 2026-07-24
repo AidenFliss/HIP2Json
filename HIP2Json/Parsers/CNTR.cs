@@ -8,8 +8,7 @@ public sealed class CNTRParser : AssetParser
     {
         return new CNTR
         {
-            count = ReadInt16BE(br),
-            pad = ReadInt16BE(br),
+            count = ReadInt16BE(br)
         };
     }
 
@@ -21,7 +20,7 @@ public sealed class CNTRParser : AssetParser
         using var bw = new BinaryWriter(ms);
 
         WriteInt16BE(bw, cntr.count);
-        WriteInt16BE(bw, cntr.pad);
+        bw.Write(new byte[1]);
         
         return ms.ToArray();
     }
@@ -30,5 +29,4 @@ public sealed class CNTRParser : AssetParser
 public class CNTR
 {
     public short count { get; set; }
-    public short pad { get; set; }
 }

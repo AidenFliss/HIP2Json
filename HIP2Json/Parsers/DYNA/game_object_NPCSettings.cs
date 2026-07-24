@@ -7,24 +7,36 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
+        BasisType basisType = (BasisType)ReadUInt32BE(br);
+        byte allowDetect = ReadByte(br);
+        byte allowPatrol = ReadByte(br);
+        byte allowWander = ReadByte(br);
+        byte reduceCollide = ReadByte(br);
+        byte useNavSplines = ReadByte(br);
+        br.ReadBytes(3);
+        byte allowChase = ReadByte(br);
+        byte allowAttack = ReadByte(br);
+        byte assumeLOS = ReadByte(br);
+        byte assumeFOV = ReadByte(br);
+        DuploWaveMode duploWaveMode = (DuploWaveMode)ReadUInt32BE(br);
+        float duploSpawnDelay = ReadFloatBE(br);
+        int duploSpawnLifeMax = ReadInt32BE(br);
+
         return new game_object_NPCSettings
         {
-            basisType = (BasisType)ReadUInt32BE(br),
-            allowDetect = ReadByte(br),
-            allowPatrol = ReadByte(br),
-            allowWander = ReadByte(br),
-            reduceCollide = ReadByte(br),
-            useNavSplines = ReadByte(br),
-            pad0 = ReadByte(br),
-            pad1 = ReadByte(br),
-            pad2 = ReadByte(br),
-            allowChase = ReadByte(br),
-            allowAttack = ReadByte(br),
-            assumeLOS = ReadByte(br),
-            assumeFOV = ReadByte(br),
-            duploWaveMode = (DuploWaveMode)ReadUInt32BE(br),
-            duploSpawnDelay = ReadFloatBE(br),
-            duploSpawnLifeMax = ReadInt32BE(br)
+            basisType = basisType,
+            allowDetect = allowDetect,
+            allowPatrol = allowPatrol,
+            allowWander = allowWander,
+            reduceCollide = reduceCollide,
+            useNavSplines = useNavSplines,
+            allowChase = allowChase,
+            allowAttack = allowAttack,
+            assumeLOS = assumeLOS,
+            assumeFOV = assumeFOV,
+            duploWaveMode = duploWaveMode,
+            duploSpawnDelay = duploSpawnDelay,
+            duploSpawnLifeMax = duploSpawnLifeMax
         };
     }
 
@@ -41,9 +53,7 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
         WriteByte(bw, npcSettings.allowWander);
         WriteByte(bw, npcSettings.reduceCollide);
         WriteByte(bw, npcSettings.useNavSplines);
-        WriteByte(bw, npcSettings.pad0);
-        WriteByte(bw, npcSettings.pad1);
-        WriteByte(bw, npcSettings.pad2);
+        bw.Write(new byte[3]);
         WriteByte(bw, npcSettings.allowChase);
         WriteByte(bw, npcSettings.allowAttack);
         WriteByte(bw, npcSettings.assumeLOS);
@@ -66,9 +76,6 @@ public class game_object_NPCSettings
     public byte allowWander { get; set; }
     public byte reduceCollide { get; set; }
     public byte useNavSplines { get; set; }
-    public byte pad0 { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
     public byte allowChase { get; set; }
     public byte allowAttack { get; set; }
     public byte assumeLOS { get; set; }

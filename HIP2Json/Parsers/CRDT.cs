@@ -303,16 +303,24 @@ public sealed class CRDTParser : AssetParser
 
     private static CRDTTexture ReadTexture(BinaryReader br)
     {
+        uint textureAssetID = ReadUInt32BE(br);
+        xColor color = ReadColorBE(br);
+        float posX = ReadFloatBE(br);
+        float posY = ReadFloatBE(br);
+        float width = ReadFloatBE(br);
+        float height = ReadFloatBE(br);
+        uint texture = ReadUInt32BE(br);
+        br.ReadBytes(4);
+
         return new CRDTTexture
         {
-            textureAssetID = ReadUInt32BE(br),
-            color = ReadColorBE(br),
-            posX = ReadFloatBE(br),
-            posY = ReadFloatBE(br),
-            width = ReadFloatBE(br),
-            height = ReadFloatBE(br),
-            texture = ReadUInt32BE(br),
-            pad = ReadUInt32BE(br)
+            textureAssetID = textureAssetID,
+            color = color,
+            posX = posX,
+            posY = posY,
+            width = width,
+            height = height,
+            texture = texture
         };
     }
 
@@ -337,7 +345,7 @@ public sealed class CRDTParser : AssetParser
         WriteFloatBE(bw, tex.width);
         WriteFloatBE(bw, tex.height);
         WriteUInt32BE(bw, tex.texture);
-        WriteUInt32BE(bw, tex.pad);
+        bw.Write(new byte[4]);
     }
 }
 
@@ -415,5 +423,4 @@ public class CRDTTexture
     public float width { get; set; }
     public float height { get; set; }
     public uint texture { get; set; }
-    public uint pad { get; set; }
 }

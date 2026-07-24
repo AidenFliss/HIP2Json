@@ -7,12 +7,16 @@ public sealed class PAREParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        byte emitFlags = ReadByte(br);
+        EmitType emitType = (EmitType)ReadByte(br);
+        br.ReadBytes(2);
+        uint propID = ReadUInt32BE(br);
+
         var par = new PARE
         {
-            emitFlags = ReadByte(br),
-            emitType = (EmitType)ReadByte(br),
-            pad = ReadInt16BE(br),
-            propID = ReadUInt32BE(br),
+            emitFlags = emitFlags,
+            emitType = emitType,
+            propID = propID
         };
 
         switch (par.emitType)
@@ -74,29 +78,44 @@ public sealed class PAREParser : AssetParser
                 break;
 
             case EmitType.EntityBone:
+            {
+                byte flags = ReadByte(br);
+                byte type = ReadByte(br);
+                byte bone = ReadByte(br);
+                br.ReadBytes(1);
+                xVec3 offset = ReadVector3BE(br);
+                float radius = ReadFloatBE(br);
+                float deflection = ReadFloatBE(br);
+
                 par.specific = new EntityBoneEmitter
                 {
-                    flags = ReadByte(br),
-                    type = ReadByte(br),
-                    bone = ReadByte(br),
-                    pad = ReadByte(br),
-                    offset = ReadVector3BE(br),
-                    radius = ReadFloatBE(br),
-                    deflection = ReadFloatBE(br)
+                    flags = flags,
+                    type = type,
+                    bone = bone,
+                    offset = offset,
+                    radius = radius,
+                    deflection = deflection
                 };
                 break;
+            }
 
             case EmitType.EntityBound:
+            {
+                byte flags = ReadByte(br);
+                byte type = ReadByte(br);
+                br.ReadBytes(2);
+                float expand = ReadFloatBE(br);
+                float deflection = ReadFloatBE(br);
+
                 par.specific = new EntityBoundEmitter
                 {
-                    flags = ReadByte(br),
-                    type = ReadByte(br),
-                    pad1 = ReadByte(br),
-                    pad2 = ReadByte(br),
-                    expand = ReadFloatBE(br),
-                    deflection = ReadFloatBE(br)
+                    flags = flags,
+                    type = type,
+                    expand = expand,
+                    deflection = deflection
                 };
                 break;
+            }
         }
 
         br.BaseStream.Position = assetStart + 0x2C;
@@ -120,7 +139,7 @@ public sealed class PAREParser : AssetParser
 
         WriteByte(bw, pare.emitFlags);
         WriteByte(bw, (byte)pare.emitType);
-        WriteInt16BE(bw, pare.pad);
+        bw.Write(new byte[2]);
         WriteUInt32BE(bw, pare.propID);
 
         switch (pare.emitType)
@@ -172,7 +191,7 @@ public sealed class PAREParser : AssetParser
                 WriteByte(bw, bone.flags);
                 WriteByte(bw, bone.type);
                 WriteByte(bw, bone.bone);
-                WriteByte(bw, bone.pad);
+                bw.Write(new byte[1]);
                 WriteVector3BE(bw, bone.offset);
                 WriteFloatBE(bw, bone.radius);
                 WriteFloatBE(bw, bone.deflection);
@@ -182,8 +201,7 @@ public sealed class PAREParser : AssetParser
                 var bound = (EntityBoundEmitter)pare.specific;
                 WriteByte(bw, bound.flags);
                 WriteByte(bw, bound.type);
-                WriteByte(bw, bound.pad1);
-                WriteByte(bw, bound.pad2);
+                bw.Write(new byte[2]);
                 WriteFloatBE(bw, bound.expand);
                 WriteFloatBE(bw, bound.deflection);
                 break;
@@ -207,14 +225,11 @@ public class PARE
 {
     public byte emitFlags { get; set; }
     public EmitType emitType { get; set; }
-    public short pad { get; set; }
     [JsonConverter(typeof(AssetIDConverter))]
     public uint propID { get; set; }
     public object specific { get; set; }
-
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attachToID { get; set; }
-
     public xVec3 pos { get; set; }
     public xVec3 vel { get; set; }
     public float velAngleVariation { get; set; }
@@ -292,10 +307,7 @@ public class EntityBoneEmitter
     public byte flags { get; set; }
     public byte type { get; set; }
     public byte bone { get; set; }
-    public byte pad { get; set; }
-
     public xVec3 offset { get; set; }
-
     public float radius { get; set; }
     public float deflection { get; set; }
 }
@@ -304,9 +316,6 @@ public class EntityBoundEmitter
 {
     public byte flags { get; set; }
     public byte type { get; set; }
-    public byte pad1 { get; set; }
-    public byte pad2 { get; set; }
-
     public float expand { get; set; }
     public float deflection { get; set; }
 }
