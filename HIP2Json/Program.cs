@@ -1128,7 +1128,12 @@ class Program
                                 }
 
                                 string safeKey = string.Join("_", key.Split(Path.GetInvalidFileNameChars()));
-                                string hipHopContainer = Path.Combine(hipHopFolder, Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", "")));
+                                string archiveName = Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", ""));
+                                
+                                string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini"))
+                                    ? hipHopFolder
+                                    : Path.Combine(hipHopFolder, archiveName);
+
                                 string outFile = Path.Combine(hipHopContainer, folder, safeKey);
 
                                 if (!Directory.Exists(Path.Combine(hipHopContainer, folder)))
@@ -1241,8 +1246,12 @@ class Program
 
                         string safeKey = string.Join("_", key.Split(Path.GetInvalidFileNameChars()));
                         string assetID = GetAssetId(safeKey).Substring(2);
+                        string archiveName = Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", ""));
 
-                        string hipHopContainer = Path.Combine(hipHopFolder, Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", "")));
+                        string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini"))
+                            ? hipHopFolder
+                            : Path.Combine(hipHopFolder, archiveName);
+
                         string outFile = Path.Combine(hipHopContainer, folder, safeKey);
 
                         string settingsIni = Path.Combine(hipHopContainer, "Settings.ini");
