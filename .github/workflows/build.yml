@@ -24,25 +24,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "10.0.x"
 
-      - name: Read Version
+      - name: Set Version Tag
         id: version
         shell: bash
         run: |
-          VERSION=$(dotnet msbuild HIP2Json/HIP2Json.csproj -getProperty:FileVersion)
-
-          if [ -z "$VERSION" ]; then
-            echo "::error::No FileVersion found"
-            exit 1
-          fi
-
+          VERSION=$(date -u +'%Y.%m.%d')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
@@ -52,6 +44,9 @@ jobs:
             -c Release \
             -r ${{ matrix.runtime }} \
             --self-contained false \
+            /p:AssemblyVersion=${{ steps.version.outputs.version }} \
+            /p:FileVersion=${{ steps.version.outputs.version }} \
+            /p:Version=${{ steps.version.outputs.version }} \
             -o publish/${{ matrix.runtime }}
 
       - name: Create ZIP
@@ -73,21 +68,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "10.0.x"
-
-      - name: Read Version
+      - name: Set Version Tag
         id: version
+        shell: bash
         run: |
-          VERSION=$(dotnet msbuild HIP2Json/HIP2Json.csproj -getProperty:FileVersion)
-
-          if [ -z "$VERSION" ]; then
-            echo "::error::No FileVersion found"
-            exit 1
-          fi
-
+          VERSION=$(date -u +'%Y.%m.%d')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "tag=v$VERSION" >> "$GITHUB_OUTPUT"
 
@@ -101,17 +86,19 @@ jobs:
           mkdir release
           find artifacts -name "*.zip" -exec cp {} release/ \;
 
-      - name: Delete existing release (if any)
+      - name: Create or Update Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release delete "${{ steps.version.outputs.tag }}" --cleanup-tag -y || true
+          TAG="${{ steps.version.outputs.tag }}"
 
-      - name: Create Release
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release create "${{ steps.version.outputs.tag }}" \
-            release/*.zip \
-            --title "HIP2Json ${{ steps.version.outputs.tag }}" \
-            --generate-notes
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists. Uploading/updating release assets..."
+            gh release upload "$TAG" release/*.zip --clobber
+          else
+            echo "Creating new release $TAG..."
+            gh release create "$TAG" \
+              release/*.zip \
+              --title "HIP2Json $TAG" \
+              --generate-notes
+          fi

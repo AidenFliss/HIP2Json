@@ -2,12 +2,14 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <OutputType>Exe</OutputType>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <AssemblyTitle>HIP2Json</AssemblyTitle>
     <Product>HIP2Json</Product>
     <Copyright>Copyright © Aiden 2025</Copyright>
-    <AssemblyVersion>2026.07.17</AssemblyVersion>
-    <FileVersion>2026.07.17</FileVersion>
+    <CurrentDate>$([System.DateTime]::Now.ToString("yyyy.MM.dd"))</CurrentDate>
+    <AssemblyVersion>$(CurrentDate)</AssemblyVersion>
+    <FileVersion>$(CurrentDate)</FileVersion>
+    <Version>$(CurrentDate)</Version>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\HipHopTool\HipHopFile\HipHopFile.csproj" />
