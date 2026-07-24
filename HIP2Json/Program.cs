@@ -325,11 +325,6 @@ class Program
 
         string cleanPath = inputPath.TrimEnd('/', '\\');
 
-        if (cleanPath.EndsWith("_project", StringComparison.OrdinalIgnoreCase))
-        {
-            return cleanPath.Replace("_project", "_packed");
-        }
-
         if (cleanPath.EndsWith("_unpacked", StringComparison.OrdinalIgnoreCase))
         {
             string filePrefix = Path.GetFileName(cleanPath).Replace("_unpacked", "");
@@ -340,7 +335,7 @@ class Program
             return Path.Combine(cleanPath, cleanFileName + ext);
         }
 
-        return cleanPath + "_packed";
+        return Path.Combine(cleanPath, "packed");
     }
 
     static void ShowUsage()
@@ -393,8 +388,8 @@ class Program
         else if (Directory.Exists(targetPath))
         {
             Logger.LogInfo($"Extracting full directory: {targetPath} -> {projectDir}");
-            Directory.CreateDirectory(Path.Combine(projectDir, "og"));
-            Directory.CreateDirectory(Path.Combine(projectDir, "mod"));
+            Directory.CreateDirectory(Path.Combine(projectDir, "parsed", "og"));
+            Directory.CreateDirectory(Path.Combine(projectDir, "parsed", "mod"));
             Directory.CreateDirectory(Path.Combine(projectDir, "unpacked"));
 
             foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
@@ -419,8 +414,6 @@ class Program
 
     static void ProcessSingleArchiveExtract(string filePath, string baseDir, string projectDir, bool showProgress)
     {
-        string ogDir = Path.Combine(projectDir, "og");
-        string modDir = Path.Combine(projectDir, "mod");
         string unpackedDir = Path.Combine(projectDir, "unpacked");
 
         bool isHipFile = Path.GetExtension(filePath).ToLower() == ".hip";
@@ -443,9 +436,7 @@ class Program
         string relativeSubFolder = GetJsonOutputFolder(baseDir, filePath);
         string archiveName = Path.GetFileNameWithoutExtension(filePath) + "_" + type;
 
-        string extractDir = string.IsNullOrEmpty(relativeSubFolder)
-            ? unpackedDir
-            : Path.Combine(unpackedDir, relativeSubFolder);
+        string extractDir = Path.Combine(unpackedDir, archiveName);
 
         Directory.CreateDirectory(extractDir);
 
@@ -493,13 +484,15 @@ class Program
 
         string json = JsonSerializer.Serialize(assets, options);
 
-        string jsonOutputFolderOgPath = string.IsNullOrEmpty(relativeSubFolder)
-            ? ogDir
-            : Path.Combine(ogDir, relativeSubFolder);
+        bool isBulkExtract = Directory.Exists(baseDir) && baseDir != Path.GetDirectoryName(filePath);
 
-        string jsonOutputFolderModPath = string.IsNullOrEmpty(relativeSubFolder)
-            ? modDir
-            : Path.Combine(modDir, relativeSubFolder);
+        string jsonOutputFolderOgPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder)
+            ? Path.Combine(projectDir, "parsed", "og", relativeSubFolder)
+            : Path.Combine(projectDir, "og");
+
+        string jsonOutputFolderModPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder)
+            ? Path.Combine(projectDir, "parsed", "mod", relativeSubFolder)
+            : Path.Combine(projectDir, "mod");
 
         Directory.CreateDirectory(jsonOutputFolderOgPath);
         Directory.CreateDirectory(jsonOutputFolderModPath);

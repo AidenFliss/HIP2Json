@@ -58,13 +58,13 @@ Run `HIP2Json` with `--extract` (`-e`), passing either a single `.hip`/`.hop` fi
   ```bash
   HIP2Json -e path/to/jf01.HIP -g BFBB -p GC
   ```
-  Creates a `jf01_unpacked/` project folder containing `og/`, `mod/`, and `unpacked/`.
+  Creates a `jf01_unpacked/` project folder containing `og/`, `mod/`, and `unpacked/` directly inside the folder.
 
 * **Full Directory Example:**
   ```bash
   HIP2Json -e path/to/game/files/ -g BFBB -p GC
   ```
-  Creates a `files_project/` folder containing all game archives unpacked into `og/`, `mod/`, and `unpacked/`.
+  Creates a `files_project/` folder containing `parsed/` (with the `og/` and `mod/` folder structure) and `unpacked/`.
 
 If there is an error during extraction, you might have a corrupted/beta file or an issue that needs to be reported.
 
@@ -76,13 +76,13 @@ Run `HIP2Json` with `--pack` (`-k`) on the generated project directory to reimpo
   ```bash
   HIP2Json -k jf01_unpacked/ -g BFBB -p GC
   ```
-  Packs your modifications back into `jf01_unpacked/jf01.hip`.
+  Packs your modifications directly into `jf01_unpacked/jf01.hip`.
 
 * **Full Game Project:**
   ```bash
   HIP2Json -k files_project/ -g BFBB -p GC
   ```
-  Packs all modified archives into a `files_packed/` folder ready to replace in your game build.
+  Packs all modified archives into `files_project/packed/` ready to replace in your game build.
 
 > [!NOTE]
 > Note: Some asset types do not have an implemented parser so they will be ignored when editing json.
