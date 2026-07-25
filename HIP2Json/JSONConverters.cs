@@ -198,3 +198,29 @@ public class xMotionConverter : JsonConverter<xMotion>
         writer.WriteEndObject();
     }
 }
+
+public class GameEnumConverter<TBFBB, TTSSM> : JsonConverter<object> where TBFBB : struct, Enum where TTSSM : struct, Enum
+{
+    public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        string enumString = reader.GetString();
+
+        if (Program.CurrentGame == GameType.BFBB)
+        {
+            if (Enum.TryParse<TBFBB>(enumString, out var bfbbVal))
+                return bfbbVal;
+        }
+        else if (Program.CurrentGame == GameType.TSSM)
+        {
+            if (Enum.TryParse<TTSSM>(enumString, out var tssmVal))
+                return tssmVal;
+        }
+
+        return 0;
+    }
+
+    public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+    {
+        writer.WriteStringValue(value?.ToString());
+    }
+}

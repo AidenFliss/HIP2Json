@@ -28,10 +28,12 @@ public sealed class SCRPParser : AssetParser
             evnt.time = ReadFloatBE(br);
             evnt.widget = ReadUInt32BE(br);
 
+            ushort eventId = (ushort)ReadUInt32BE(br);
+
             if (Program.CurrentGame == GameType.BFBB)
-                evnt.paramEventBFBB = (EventBFBB)(ushort)ReadUInt32BE(br);
+                evnt.paramEvent = (EventBFBB)eventId;
             if (Program.CurrentGame == GameType.TSSM)
-                evnt.paramEventTSSM = (EventTSSM)(ushort)ReadUInt32BE(br);
+                evnt.paramEvent = (EventTSSM)eventId;
             evnt.param = Enumerable.Range(0, 4).Select(_ => ReadUInt32BE(br)).ToArray();
             evnt.paramWidget = ReadUInt32BE(br);
 
@@ -67,9 +69,9 @@ public sealed class SCRPParser : AssetParser
             WriteFloatBE(bw, evnt.time);
             WriteUInt32BE(bw, evnt.widget);
             if (Program.CurrentGame == GameType.BFBB)
-                WriteUInt32BE(bw, (ushort)evnt.paramEventBFBB);
+                WriteUInt32BE(bw, (ushort)evnt.paramEvent);
             if (Program.CurrentGame == GameType.TSSM)
-                WriteUInt32BE(bw, (ushort)evnt.paramEventTSSM);
+                WriteUInt32BE(bw, (ushort)evnt.paramEvent);
             foreach (var param in evnt.param)
             {
                 WriteUInt32BE(bw, param);
@@ -96,11 +98,8 @@ public class xScriptEventAsset
     [JsonConverter(typeof(AssetIDConverter))]
     public uint widget { get; set; }
 
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public EventBFBB paramEventBFBB { get; set; }
-
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public EventTSSM paramEventTSSM { get; set; }
+    [JsonConverter(typeof(GameEnumConverter<EventBFBB, EventTSSM>))]
+    public object paramEvent { get; set; }
 
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] param { get; set; }

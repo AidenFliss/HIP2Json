@@ -6,6 +6,8 @@ public static class ParserMaps
 {
     public static Dictionary<string, AssetParser> AssetToParser = new()
     {
+        { "ALST", new ALSTParser() },
+        { "ATBL", new ATBLParser() },
         { "BOUL", new BOULParser() },
         { "BUTN", new BUTNParser() },
         { "CAM", new CAMParser() },

@@ -9,18 +9,14 @@ public sealed class CONDParser : AssetParser
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
         int constNum = ReadInt32BE(br);
+        uint rawExprl = ReadUInt32BE(br);
 
-        ConditionalVariableBFBB exprlBFBB = ConditionalVariableBFBB.SoundMode;
-        ConditionalVariableTSSM exprlTSSM = ConditionalVariableTSSM.SoundMode;
-
-        if (Program.CurrentGame == GameType.BFBB)
+        object exprl = Program.CurrentGame switch
         {
-            exprlBFBB = (ConditionalVariableBFBB)ReadUInt32BE(br);
-        }
-        else if (Program.CurrentGame == GameType.TSSM)
-        {
-            exprlTSSM = (ConditionalVariableTSSM)ReadUInt32BE(br);
-        }
+            GameType.BFBB => (ConditionalVariableBFBB)rawExprl,
+            GameType.TSSM => (ConditionalVariableTSSM)rawExprl,
+            _ => rawExprl
+        };
 
         int op = ReadInt32BE(br);
         uint valueAsset = ReadUInt32BE(br);
@@ -28,8 +24,7 @@ public sealed class CONDParser : AssetParser
         return new COND
         {
             constNum = constNum,
-            exprlBFBB = exprlBFBB,
-            exprlTSSM = exprlTSSM,
+            exprl = exprl,
             op = Enum.IsDefined(typeof(Operation), op) ? (Operation)op : Operation.UNKNOWN,
             value_asset = valueAsset,
         };
@@ -43,14 +38,16 @@ public sealed class CONDParser : AssetParser
         using var bw = new BinaryWriter(ms);
 
         WriteInt32BE(bw, cond.constNum);
-        if (Program.CurrentGame == GameType.BFBB)
+
+        uint rawExprl = cond.exprl switch
         {
-            WriteUInt32BE(bw, (uint)cond.exprlBFBB);
-        }
-        else if (Program.CurrentGame == GameType.TSSM)
-        {
-            WriteUInt32BE(bw, (uint)cond.exprlTSSM);
-        }
+            ConditionalVariableBFBB bfbb => (uint)bfbb,
+            ConditionalVariableTSSM tssm => (uint)tssm,
+            uint val => val,
+            _ => 0
+        };
+
+        WriteUInt32BE(bw, rawExprl);
         WriteInt32BE(bw, (int)cond.op);
         WriteUInt32BE(bw, cond.value_asset);
 
@@ -61,8 +58,8 @@ public sealed class CONDParser : AssetParser
 public class COND
 {
     public int constNum { get; set; }
-    public ConditionalVariableBFBB exprlBFBB { get; set; }
-    public ConditionalVariableTSSM exprlTSSM { get; set; }
+    [JsonConverter(typeof(GameEnumConverter<ConditionalVariableBFBB, ConditionalVariableTSSM>))]
+    public object exprl { get; set; }
     public Operation op { get; set; }
 
     [JsonConverter(typeof(AssetIDConverter))]
