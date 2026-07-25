@@ -18,29 +18,19 @@ public sealed class ATBLParser : AssetParser
         {
             GameType.BFBB => (ConstructFuncBFBB)rawConstructFunc,
             GameType.TSSM => (ConstructFuncTSSM)rawConstructFunc,
-            _ => rawConstructFunc
+            _ => rawConstructFunc,
         };
 
-        uint[] raw = Enumerable.Range(0, (int)numRaw)
-            .Select(_ => ReadUInt32BE(br))
-            .ToArray();
+        uint[] raw = Enumerable.Range(0, (int)numRaw).Select(_ => ReadUInt32BE(br)).ToArray();
 
-        AnimFile[] files = Enumerable.Range(0, (int)numFiles)
-            .Select(_ => ReadAnimFile(br))
-            .ToArray();
+        AnimFile[] files = Enumerable.Range(0, (int)numFiles).Select(_ => ReadAnimFile(br)).ToArray();
 
-        AnimState[] states = Enumerable.Range(0, (int)numStates)
-            .Select(_ => ReadAnimState(br))
-            .ToArray();
+        AnimState[] states = Enumerable.Range(0, (int)numStates).Select(_ => ReadAnimState(br)).ToArray();
 
         int effectCount = states.Sum(s => (int)s.effectCount);
-        AnimEffect[] effects = Enumerable.Range(0, effectCount)
-            .Select(_ => ReadAnimEffect(br))
-            .ToArray();
+        AnimEffect[] effects = Enumerable.Range(0, effectCount).Select(_ => ReadAnimEffect(br)).ToArray();
 
-        uint[] listUnknown = Enumerable.Range(0, (int)numRaw)
-            .Select(_ => ReadUInt32BE(br))
-            .ToArray();
+        uint[] listUnknown = Enumerable.Range(0, (int)numRaw).Select(_ => ReadUInt32BE(br)).ToArray();
 
         return new ATBL
         {
@@ -74,7 +64,7 @@ public sealed class ATBLParser : AssetParser
             ConstructFuncBFBB bfbb => (uint)bfbb,
             ConstructFuncTSSM tssm => (uint)tssm,
             uint val => val,
-            _ => 0
+            _ => 0,
         };
 
         WriteUInt32BE(bw, rawConstructFunc);
@@ -197,6 +187,7 @@ public class ATBL
     public uint numRaw { get; set; }
     public uint numFiles { get; set; }
     public uint numStates { get; set; }
+
     [JsonConverter(typeof(GameEnumConverter<ConstructFuncBFBB, ConstructFuncTSSM>))]
     public object constructFunc { get; set; }
     public uint[] raw { get; set; }

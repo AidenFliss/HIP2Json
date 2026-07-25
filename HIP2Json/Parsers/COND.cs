@@ -15,7 +15,7 @@ public sealed class CONDParser : AssetParser
         {
             GameType.BFBB => (ConditionalVariableBFBB)rawExprl,
             GameType.TSSM => (ConditionalVariableTSSM)rawExprl,
-            _ => rawExprl
+            _ => rawExprl,
         };
 
         int op = ReadInt32BE(br);
@@ -44,7 +44,7 @@ public sealed class CONDParser : AssetParser
             ConditionalVariableBFBB bfbb => (uint)bfbb,
             ConditionalVariableTSSM tssm => (uint)tssm,
             uint val => val,
-            _ => 0
+            _ => 0,
         };
 
         WriteUInt32BE(bw, rawExprl);
@@ -58,6 +58,7 @@ public sealed class CONDParser : AssetParser
 public class COND
 {
     public int constNum { get; set; }
+
     [JsonConverter(typeof(GameEnumConverter<ConditionalVariableBFBB, ConditionalVariableTSSM>))]
     public object exprl { get; set; }
     public Operation op { get; set; }

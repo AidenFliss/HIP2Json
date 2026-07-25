@@ -199,7 +199,9 @@ public class xMotionConverter : JsonConverter<xMotion>
     }
 }
 
-public class GameEnumConverter<TBFBB, TTSSM> : JsonConverter<object> where TBFBB : struct, Enum where TTSSM : struct, Enum
+public class GameEnumConverter<TBFBB, TTSSM> : JsonConverter<object>
+    where TBFBB : struct, Enum
+    where TTSSM : struct, Enum
 {
     public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
