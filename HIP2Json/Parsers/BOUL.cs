@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -38,7 +37,7 @@ public sealed class BOULParser : AssetParser
         {
             uSoundGroupHash = ReadUInt32BE(br);
         }
-        
+
         float minSoundVel = ReadFloatBE(br);
         float maxSoundVel = ReadFloatBE(br);
 
@@ -81,7 +80,7 @@ public sealed class BOULParser : AssetParser
             innerRadius = innerRadius,
             outerRadius = outerRadius,
             fSphereRadius = fSphereRadius,
-            uBoneIndex = uBoneIndex
+            uBoneIndex = uBoneIndex,
         };
     }
 
@@ -99,7 +98,7 @@ public sealed class BOULParser : AssetParser
 
         if (Program.CurrentGame == GameType.BFBB)
             WriteFloatBE(bw, boul.statFric);
-            
+
         WriteFloatBE(bw, boul.maxVel);
         WriteFloatBE(bw, boul.maxAngVel);
         WriteFloatBE(bw, boul.stickiness);
@@ -151,8 +150,10 @@ public class BOUL
     public BoulderFlags flags { get; set; }
     public float killtimer { get; set; }
     public uint hitpoints { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint uSoundGroupHash { get; set; } //movie only
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundID { get; set; }
     public float volume { get; set; }
@@ -162,21 +163,4 @@ public class BOUL
     public float outerRadius { get; set; } //bfbb only
     public float fSphereRadius { get; set; } //movie only
     public byte uBoneIndex { get; set; } //movie only
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BoulderFlags : uint
-{
-    None = 0,
-    HitWalls = 0x001,
-    DamagePlayer = 0x002,
-    Unknown004 = 0x004,
-    DamageNpcs = 0x008,
-    Unknown010 = 0x010,
-    DieOnOobSurfaces = 0x020,
-    Unknown040 = 0x040,
-    Unknown080 = 0x080,
-    DieOnPlayerAttack = 0x100,
-    DieAfterKillTimer = 0x200,
 }

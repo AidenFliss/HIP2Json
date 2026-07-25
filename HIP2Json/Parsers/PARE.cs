@@ -16,107 +16,9 @@ public sealed class PAREParser : AssetParser
         {
             emitFlags = emitFlags,
             emitType = emitType,
-            propID = propID
+            propID = propID,
+            specific = ReadEmitter(br, emitType),
         };
-
-        switch (par.emitType)
-        {
-            case EmitType.Circle:
-                par.specific = new CircleEmitter
-                {
-                    radius = ReadFloatBE(br),
-                    deflection = ReadFloatBE(br),
-                    dir = ReadVector3BE(br)
-                };
-                break;
-
-            case EmitType.Sphere:
-                par.specific = new SphereEmitter
-                {
-                    radius = ReadFloatBE(br)
-                };
-                break;
-
-            case EmitType.Rect:
-                par.specific = new RectEmitter
-                {
-                    xLen = ReadFloatBE(br),
-                    zLen = ReadFloatBE(br)
-                };
-                break;
-
-            case EmitType.Line:
-                par.specific = new LineEmitter
-                {
-                    pos1 = ReadVector3BE(br),
-                    pos2 = ReadVector3BE(br),
-                    radius = ReadFloatBE(br)
-                };
-                break;
-
-            case EmitType.Volume:
-                par.specific = new VolumeEmitter
-                {
-                    volumeID = ReadUInt32BE(br)
-                };
-                break;
-
-            case EmitType.OffsetPoint:
-                par.specific = new OffsetPointEmitter
-                {
-                    offset = ReadVector3BE(br)
-                };
-                break;
-
-            case EmitType.VCylEdge:
-                par.specific = new VCylEmitter
-                {
-                    height = ReadFloatBE(br),
-                    radius = ReadFloatBE(br),
-                    deflection = ReadFloatBE(br)
-                };
-                break;
-
-            case EmitType.EntityBone:
-            {
-                byte flags = ReadByte(br);
-                byte type = ReadByte(br);
-                byte bone = ReadByte(br);
-                br.ReadBytes(1);
-                xVec3 offset = ReadVector3BE(br);
-                float radius = ReadFloatBE(br);
-                float deflection = ReadFloatBE(br);
-
-                par.specific = new EntityBoneEmitter
-                {
-                    flags = flags,
-                    type = type,
-                    bone = bone,
-                    offset = offset,
-                    radius = radius,
-                    deflection = deflection
-                };
-                break;
-            }
-
-            case EmitType.EntityBound:
-            {
-                byte flags = ReadByte(br);
-                byte type = ReadByte(br);
-                br.ReadBytes(2);
-                float expand = ReadFloatBE(br);
-                float deflection = ReadFloatBE(br);
-
-                par.specific = new EntityBoundEmitter
-                {
-                    flags = flags,
-                    type = type,
-                    expand = expand,
-                    deflection = deflection
-                };
-                break;
-            }
-        }
 
         br.BaseStream.Position = assetStart + 0x2C;
 
@@ -133,7 +35,7 @@ public sealed class PAREParser : AssetParser
     public override object Serialize(object obj)
     {
         PARE pare = (PARE)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -142,70 +44,8 @@ public sealed class PAREParser : AssetParser
         bw.Write(new byte[2]);
         WriteUInt32BE(bw, pare.propID);
 
-        switch (pare.emitType)
-        {
-            case EmitType.Circle:
-                var circle = (CircleEmitter)pare.specific;
-                WriteFloatBE(bw, circle.radius);
-                WriteFloatBE(bw, circle.deflection);
-                WriteVector3BE(bw, circle.dir);
-                break;
-
-            case EmitType.Sphere:
-                var sphere = (SphereEmitter)pare.specific;
-                WriteFloatBE(bw, sphere.radius);
-                break;
-
-            case EmitType.Rect:
-                var rect = (RectEmitter)pare.specific;
-                WriteFloatBE(bw, rect.xLen);
-                WriteFloatBE(bw, rect.zLen);
-                break;
-
-            case EmitType.Line:
-                var line = (LineEmitter)pare.specific;
-                WriteVector3BE(bw, line.pos1);
-                WriteVector3BE(bw, line.pos2);
-                WriteFloatBE(bw, line.radius);
-                break;
-
-            case EmitType.Volume:
-                var volume = (VolumeEmitter)pare.specific;
-                WriteUInt32BE(bw, volume.volumeID);
-                break;
-
-            case EmitType.OffsetPoint:
-                var offsetPoint = (OffsetPointEmitter)pare.specific;
-                WriteVector3BE(bw, offsetPoint.offset);
-                break;
-
-            case EmitType.VCylEdge:
-                var vcyl = (VCylEmitter)pare.specific;
-                WriteFloatBE(bw, vcyl.height);
-                WriteFloatBE(bw, vcyl.radius);
-                WriteFloatBE(bw, vcyl.deflection);
-                break;
-
-            case EmitType.EntityBone:
-                var bone = (EntityBoneEmitter)pare.specific;
-                WriteByte(bw, bone.flags);
-                WriteByte(bw, bone.type);
-                WriteByte(bw, bone.bone);
-                bw.Write(new byte[1]);
-                WriteVector3BE(bw, bone.offset);
-                WriteFloatBE(bw, bone.radius);
-                WriteFloatBE(bw, bone.deflection);
-                break;
-
-            case EmitType.EntityBound:
-                var bound = (EntityBoundEmitter)pare.specific;
-                WriteByte(bw, bound.flags);
-                WriteByte(bw, bound.type);
-                bw.Write(new byte[2]);
-                WriteFloatBE(bw, bound.expand);
-                WriteFloatBE(bw, bound.deflection);
-                break;
-        }
+        if (pare.specific != null)
+            WriteEmitter(bw, pare.specific);
 
         while (ms.Length < 0x2C)
             WriteByte(bw, 0);
@@ -219,15 +59,146 @@ public sealed class PAREParser : AssetParser
 
         return ms.ToArray();
     }
+
+    private EmitterData ReadEmitter(BinaryReader br, EmitType emitType)
+    {
+        return emitType switch
+        {
+            EmitType.Circle => new CircleEmitter
+            {
+                radius = ReadFloatBE(br),
+                deflection = ReadFloatBE(br),
+                dir = ReadVector3BE(br),
+            },
+            EmitType.Sphere => new SphereEmitter { radius = ReadFloatBE(br) },
+            EmitType.Rect => new RectEmitter { xLen = ReadFloatBE(br), zLen = ReadFloatBE(br) },
+            EmitType.Line => new LineEmitter
+            {
+                pos1 = ReadVector3BE(br),
+                pos2 = ReadVector3BE(br),
+                radius = ReadFloatBE(br),
+            },
+            EmitType.Volume => new VolumeEmitter { volumeID = ReadUInt32BE(br) },
+            EmitType.OffsetPoint => new OffsetPointEmitter { offset = ReadVector3BE(br) },
+            EmitType.VCylEdge => new VCylEmitter
+            {
+                height = ReadFloatBE(br),
+                radius = ReadFloatBE(br),
+                deflection = ReadFloatBE(br),
+            },
+            EmitType.EntityBone => ReadEntityBone(br),
+            EmitType.EntityBound => ReadEntityBound(br),
+            _ => null,
+        };
+    }
+
+    private EntityBoneEmitter ReadEntityBone(BinaryReader br)
+    {
+        byte flags = ReadByte(br);
+        byte type = ReadByte(br);
+        byte bone = ReadByte(br);
+        br.ReadBytes(1);
+        xVec3 offset = ReadVector3BE(br);
+        float radius = ReadFloatBE(br);
+        float deflection = ReadFloatBE(br);
+
+        return new EntityBoneEmitter
+        {
+            flags = flags,
+            type = type,
+            bone = bone,
+            offset = offset,
+            radius = radius,
+            deflection = deflection,
+        };
+    }
+
+    private EntityBoundEmitter ReadEntityBound(BinaryReader br)
+    {
+        byte flags = ReadByte(br);
+        byte type = ReadByte(br);
+        br.ReadBytes(2);
+        float expand = ReadFloatBE(br);
+        float deflection = ReadFloatBE(br);
+
+        return new EntityBoundEmitter
+        {
+            flags = flags,
+            type = type,
+            expand = expand,
+            deflection = deflection,
+        };
+    }
+
+    private void WriteEmitter(BinaryWriter bw, EmitterData emitter)
+    {
+        switch (emitter)
+        {
+            case CircleEmitter circle:
+                WriteFloatBE(bw, circle.radius);
+                WriteFloatBE(bw, circle.deflection);
+                WriteVector3BE(bw, circle.dir);
+                break;
+
+            case SphereEmitter sphere:
+                WriteFloatBE(bw, sphere.radius);
+                break;
+
+            case RectEmitter rect:
+                WriteFloatBE(bw, rect.xLen);
+                WriteFloatBE(bw, rect.zLen);
+                break;
+
+            case LineEmitter line:
+                WriteVector3BE(bw, line.pos1);
+                WriteVector3BE(bw, line.pos2);
+                WriteFloatBE(bw, line.radius);
+                break;
+
+            case VolumeEmitter volume:
+                WriteUInt32BE(bw, volume.volumeID);
+                break;
+
+            case OffsetPointEmitter offsetPoint:
+                WriteVector3BE(bw, offsetPoint.offset);
+                break;
+
+            case VCylEmitter vcyl:
+                WriteFloatBE(bw, vcyl.height);
+                WriteFloatBE(bw, vcyl.radius);
+                WriteFloatBE(bw, vcyl.deflection);
+                break;
+
+            case EntityBoneEmitter bone:
+                WriteByte(bw, bone.flags);
+                WriteByte(bw, bone.type);
+                WriteByte(bw, bone.bone);
+                bw.Write(new byte[1]);
+                WriteVector3BE(bw, bone.offset);
+                WriteFloatBE(bw, bone.radius);
+                WriteFloatBE(bw, bone.deflection);
+                break;
+
+            case EntityBoundEmitter bound:
+                WriteByte(bw, bound.flags);
+                WriteByte(bw, bound.type);
+                bw.Write(new byte[2]);
+                WriteFloatBE(bw, bound.expand);
+                WriteFloatBE(bw, bound.deflection);
+                break;
+        }
+    }
 }
 
 public class PARE
 {
     public byte emitFlags { get; set; }
     public EmitType emitType { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint propID { get; set; }
-    public object specific { get; set; }
+    public EmitterData specific { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attachToID { get; set; }
     public xVec3 pos { get; set; }
@@ -235,87 +206,4 @@ public class PARE
     public float velAngleVariation { get; set; }
     public uint cullMode { get; set; }
     public float cullDistSqr { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EmitType : byte
-{
-    Point = 0,
-    CircleEdge = 1,
-    Circle = 2,
-    RectEdge = 3,
-    Rect = 4,
-    Line = 5,
-    Volume = 6,
-    SphereEdge = 7,
-    Sphere = 8,
-    OffsetPoint = 9,
-    SphereEdge2 = 10,
-    SphereEdge3 = 11,
-    VCylEdge = 12,
-    OCircleEdge = 13,
-    OCircle = 14,
-    EntityBone = 15,
-    EntityBound = 16
-}
-
-public class CircleEmitter
-{
-    public float radius { get; set; }
-    public float deflection { get; set; }
-    public xVec3 dir { get; set; }
-}
-
-public class SphereEmitter
-{
-    public float radius { get; set; }
-}
-
-public class RectEmitter
-{
-    public float xLen { get; set; }
-    public float zLen { get; set; }
-}
-
-public class LineEmitter
-{
-    public xVec3 pos1 { get; set; }
-    public xVec3 pos2 { get; set; }
-    public float radius { get; set; }
-}
-
-public class VolumeEmitter
-{
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint volumeID { get; set; }
-}
-
-public class OffsetPointEmitter
-{
-    public xVec3 offset { get; set; }
-}
-
-public class VCylEmitter
-{
-    public float height { get; set; }
-    public float radius { get; set; }
-    public float deflection { get; set; }
-}
-
-public class EntityBoneEmitter
-{
-    public byte flags { get; set; }
-    public byte type { get; set; }
-    public byte bone { get; set; }
-    public xVec3 offset { get; set; }
-    public float radius { get; set; }
-    public float deflection { get; set; }
-}
-
-public class EntityBoundEmitter
-{
-    public byte flags { get; set; }
-    public byte type { get; set; }
-    public float expand { get; set; }
-    public float deflection { get; set; }
 }

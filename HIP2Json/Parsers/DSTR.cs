@@ -42,14 +42,14 @@ public sealed class DSTRParser : AssetParser
             sfx_destroy = sfx_destroy,
             sfx_hit = sfx_hit,
             hitModel = hitModel,
-            destroyModel = destroyModel
+            destroyModel = destroyModel,
         };
     }
 
     public override object Serialize(object obj)
     {
         DSTR dstr = (DSTR)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -69,7 +69,7 @@ public sealed class DSTRParser : AssetParser
         WriteUInt32BE(bw, dstr.sfx_hit);
         WriteUInt32BE(bw, dstr.hitModel);
         WriteUInt32BE(bw, dstr.destroyModel);
-        
+
         return ms.ToArray();
     }
 }
@@ -79,6 +79,7 @@ public class DSTR
     public float animSpeed { get; set; }
     public uint initAnimState { get; set; }
     public uint health { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint spawnItemID { get; set; }
     public uint dflags { get; set; }
@@ -86,16 +87,22 @@ public class DSTR
     public byte fxType { get; set; }
     public float blast_radius { get; set; }
     public float blast_strength { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint shrapnelID_destroy { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint shrapnelID_hit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sfx_destroy { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sfx_hit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint hitModel { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint destroyModel { get; set; }
 }

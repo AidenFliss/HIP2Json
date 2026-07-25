@@ -56,7 +56,7 @@ public static class ParserMaps
         { "UI", new UIParser() },
         { "UIFT", new UIFTParser() },
         { "UIM", new UIMParser() },
-        { "VIL", new VILParser() }
+        { "VIL", new VILParser() },
     };
 
     public static Dictionary<string, AbstractDYNAParser> DYNAToParser = new()

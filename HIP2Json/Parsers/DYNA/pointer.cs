@@ -6,17 +6,13 @@ public sealed class pointerParser : AbstractDYNAParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
-        return new pointer
-        {
-            loc = ReadVector3BE(br),
-            rotation = ReadVector3BE(br),
-        };
+        return new pointer { loc = ReadVector3BE(br), rotation = ReadVector3BE(br) };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         pointer pointer = (pointer)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -26,7 +22,10 @@ public sealed class pointerParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Pointer"; }
+    public override string GetFolderName()
+    {
+        return "Pointer";
+    }
 }
 
 #pragma warning disable CS8981

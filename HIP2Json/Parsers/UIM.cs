@@ -1,6 +1,5 @@
 using System.IO;
 using System.Linq;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -15,9 +14,7 @@ public sealed class UIMParser : AssetParser
         float totalTime = ReadFloatBE(br);
         float loopTime = ReadFloatBE(br);
 
-        UIMCommand[] commands = Enumerable.Range(0, cmdCount)
-            .Select(_ => ReadCommand(br))
-            .ToArray();
+        UIMCommand[] commands = Enumerable.Range(0, cmdCount).Select(_ => ReadCommand(br)).ToArray();
 
         return new UIM
         {
@@ -26,7 +23,7 @@ public sealed class UIMParser : AssetParser
             cmdSize = cmdSize,
             totalTime = totalTime,
             loopTime = loopTime,
-            commands = commands
+            commands = commands,
         };
     }
 
@@ -83,7 +80,7 @@ public sealed class UIMParser : AssetParser
                     decelTime = decelTime,
                     enabled = enabled,
                     distX = distX,
-                    distY = distY
+                    distY = distY,
                 };
 
             case UIMCommandType.Scale:
@@ -109,7 +106,7 @@ public sealed class UIMParser : AssetParser
                     amountY = amountY,
                     centerPivot = centerPivot,
                     centerOffsetX = centerOffsetX,
-                    centerOffsetY = centerOffsetY
+                    centerOffsetY = centerOffsetY,
                 };
 
             case UIMCommandType.Rotate:
@@ -127,7 +124,7 @@ public sealed class UIMParser : AssetParser
                     enabled = enabled,
                     rotation = rotation,
                     centerOffsetX = rotCenterOffsetX,
-                    centerOffsetY = rotCenterOffsetY
+                    centerOffsetY = rotCenterOffsetY,
                 };
 
             case UIMCommandType.Opacity:
@@ -145,7 +142,7 @@ public sealed class UIMParser : AssetParser
                     decelTime = decelTime,
                     enabled = enabled,
                     startOpacity = startOpacity,
-                    endOpacity = endOpacity
+                    endOpacity = endOpacity,
                 };
 
             case UIMCommandType.AbsoluteScale:
@@ -172,7 +169,7 @@ public sealed class UIMParser : AssetParser
                     endX = endX,
                     endY = endY,
                     centerPivot = absCenterPivot,
-                    textScale = textScale
+                    textScale = textScale,
                 };
 
             case UIMCommandType.Brightness:
@@ -190,7 +187,7 @@ public sealed class UIMParser : AssetParser
                     decelTime = decelTime,
                     enabled = enabled,
                     startBrightness = startBrightness,
-                    endBrightness = endBrightness
+                    endBrightness = endBrightness,
                 };
 
             case UIMCommandType.Color:
@@ -217,7 +214,7 @@ public sealed class UIMParser : AssetParser
                     startBlue = startBlue,
                     endRed = endRed,
                     endGreen = endGreen,
-                    endBlue = endBlue
+                    endBlue = endBlue,
                 };
 
             case UIMCommandType.UVScroll:
@@ -233,7 +230,7 @@ public sealed class UIMParser : AssetParser
                     decelTime = decelTime,
                     enabled = enabled,
                     amountU = amountU,
-                    amountV = amountV
+                    amountV = amountV,
                 };
 
             default:
@@ -260,7 +257,6 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, move.distY);
                 break;
 
-
             case UIMScaleCommand scale:
                 WriteUInt32BE(bw, (uint)scale.type);
 
@@ -282,7 +278,6 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, scale.centerOffsetY);
                 break;
 
-
             case UIMRotateCommand rotate:
                 WriteUInt32BE(bw, (uint)rotate.type);
 
@@ -298,7 +293,6 @@ public sealed class UIMParser : AssetParser
                 WriteFloatBE(bw, rotate.centerOffsetX);
                 WriteFloatBE(bw, rotate.centerOffsetY);
                 break;
-
 
             case UIMOpacityCommand opacity:
                 WriteUInt32BE(bw, (uint)opacity.type);
@@ -337,7 +331,6 @@ public sealed class UIMParser : AssetParser
                 bw.Write(new byte[2]);
                 break;
 
-
             case UIMBrightnessCommand brightness:
                 WriteUInt32BE(bw, (uint)brightness.type);
 
@@ -353,7 +346,6 @@ public sealed class UIMParser : AssetParser
                 WriteByte(bw, brightness.endBrightness);
                 bw.Write(new byte[2]);
                 break;
-
 
             case UIMColorCommand color:
                 WriteUInt32BE(bw, (uint)color.type);
@@ -376,7 +368,6 @@ public sealed class UIMParser : AssetParser
 
                 bw.Write(new byte[2]);
                 break;
-
 
             case UIMUVScrollCommand uv:
                 WriteUInt32BE(bw, (uint)uv.type);
@@ -404,113 +395,4 @@ public class UIM
     public float totalTime { get; set; }
     public float loopTime { get; set; }
     public UIMCommand[] commands { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum UIMCommandType : uint
-{
-    Move = 0,
-    Scale = 1,
-    Rotate = 2,
-    Opacity = 3,
-    AbsoluteScale = 4,
-    Brightness = 5,
-    Color = 6,
-    UVScroll = 7
-}
-
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
-[JsonDerivedType(typeof(UIMMoveCommand), "Move")] 
-[JsonDerivedType(typeof(UIMScaleCommand), "Scale")]
-[JsonDerivedType(typeof(UIMRotateCommand), "Rotate")]
-[JsonDerivedType(typeof(UIMOpacityCommand), "Opacity")]
-[JsonDerivedType(typeof(UIMAbsoluteScaleCommand), "AbsoluteScale")]
-[JsonDerivedType(typeof(UIMBrightnessCommand), "Brightness")]
-[JsonDerivedType(typeof(UIMColorCommand), "Color")]
-[JsonDerivedType(typeof(UIMUVScrollCommand), "UVScroll")]
-public abstract class UIMCommand
-{
-    [JsonIgnore]
-    public UIMCommandType type { get; set; }
-    public float startTime { get; set; }
-    public float endTime { get; set; }
-    public float accelTime { get; set; }
-    public float decelTime { get; set; }
-    public byte enabled { get; set; }
-}
-
-public class UIMMoveCommand : UIMCommand
-{
-    public UIMMoveCommand() => type = UIMCommandType.Move;
-
-    public float distX { get; set; }
-    public float distY { get; set; }
-}
-
-public class UIMScaleCommand : UIMCommand
-{
-    public UIMScaleCommand() => type = UIMCommandType.Scale;
-
-    public float amountX { get; set; }
-    public float amountY { get; set; }
-    public byte centerPivot { get; set; }
-    public float centerOffsetX { get; set; }
-    public float centerOffsetY { get; set; }
-}
-
-public class UIMRotateCommand : UIMCommand
-{
-    public UIMRotateCommand() => type = UIMCommandType.Rotate;
-
-    public float rotation { get; set; }
-    public float centerOffsetX { get; set; }
-    public float centerOffsetY { get; set; }
-}
-
-public class UIMOpacityCommand : UIMCommand
-{
-    public UIMOpacityCommand() => type = UIMCommandType.Opacity;
-
-    public byte startOpacity { get; set; }
-    public byte endOpacity { get; set; }
-}
-
-public class UIMAbsoluteScaleCommand : UIMCommand
-{
-    public UIMAbsoluteScaleCommand() => type = UIMCommandType.AbsoluteScale;
-
-    public float startX { get; set; }
-    public float startY { get; set; }
-    public float endX { get; set; }
-    public float endY { get; set; }
-    public byte centerPivot { get; set; }
-    public byte textScale { get; set; }
-}
-
-public class UIMBrightnessCommand : UIMCommand
-{
-    public UIMBrightnessCommand() => type = UIMCommandType.Brightness;
-
-    public byte startBrightness { get; set; }
-    public byte endBrightness { get; set; }
-}
-
-public class UIMColorCommand : UIMCommand
-{
-    public UIMColorCommand() => type = UIMCommandType.Color;
-
-    public byte startRed { get; set; }
-    public byte startGreen { get; set; }
-    public byte startBlue { get; set; }
-    public byte endRed { get; set; }
-    public byte endGreen { get; set; }
-    public byte endBlue { get; set; }
-}
-
-public class UIMUVScrollCommand : UIMCommand
-{
-    public UIMUVScrollCommand() => type = UIMCommandType.UVScroll;
-
-    public float amountU { get; set; }
-    public float amountV { get; set; }
 }

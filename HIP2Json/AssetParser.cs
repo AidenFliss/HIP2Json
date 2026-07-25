@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -16,10 +15,32 @@ public abstract class AssetParser
         return br.BaseStream.Length - (linkCount * 32L);
     }
 
+    protected static byte ReadByte(BinaryReader br)
+    {
+        return br.ReadByte();
+    }
+
+    protected static short ReadInt16BE(BinaryReader br)
+    {
+        byte[] b = br.ReadBytes(2);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        return BitConverter.ToInt16(b, 0);
+    }
+
+    protected static ushort ReadUInt16BE(BinaryReader br)
+    {
+        byte[] b = br.ReadBytes(2);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        return BitConverter.ToUInt16(b, 0);
+    }
+
     protected static float ReadFloatBE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        if (Program.BigEndian == true) Array.Reverse(b);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
         return BitConverter.ToSingle(b, 0);
     }
 
@@ -32,7 +53,8 @@ public abstract class AssetParser
     protected static int ReadInt32BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        if (Program.BigEndian == true) Array.Reverse(b);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
         return BitConverter.ToInt32(b, 0);
     }
 
@@ -42,105 +64,17 @@ public abstract class AssetParser
         return BitConverter.ToInt32(b, 0);
     }
 
-    protected static short ReadInt16BE(BinaryReader br)
-    {
-        byte[] b = br.ReadBytes(2);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        return BitConverter.ToInt16(b, 0);
-    }
-
-    protected static ushort ReadUInt16BE(BinaryReader br)
-    {
-        byte[] b = br.ReadBytes(2);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        return BitConverter.ToUInt16(b, 0);
-    }
-
     protected static uint ReadUInt32BE(BinaryReader br)
     {
         byte[] b = br.ReadBytes(4);
-        if (Program.BigEndian == true) Array.Reverse(b);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
         return BitConverter.ToUInt32(b, 0);
-    }
-
-    protected static byte ReadByte(BinaryReader br)
-    {
-        return br.ReadByte();
-    }
-
-    protected static void WriteFloatBE(BinaryWriter bw, float value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        bw.Write(b);
-    }
-
-    protected static void WriteFloatLE(BinaryWriter bw, float value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        bw.Write(b);
-    }
-
-    protected static void WriteInt32LE(BinaryWriter bw, int value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        bw.Write(b);
-    }
-
-    protected static void WriteUInt32BE(BinaryWriter bw, uint value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        bw.Write(b);
-    }
-
-    protected static void WriteUInt16BE(BinaryWriter bw, ushort value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        bw.Write(b);
-    }
-
-    protected static void WriteInt32BE(BinaryWriter bw, int value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        bw.Write(b);
-    }
-
-    protected static void WriteInt16BE(BinaryWriter bw, short value)
-    {
-        byte[] b = BitConverter.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(b);
-        bw.Write(b);
-    }
-
-    protected static void WriteByte(BinaryWriter bw, byte value)
-    {
-        bw.Write(value);
-    }
-
-    protected static void WriteString(BinaryWriter bw, string value)
-    {
-        byte[] bytes = Encoding.ASCII.GetBytes(value);
-        if (Program.BigEndian == true) Array.Reverse(bytes);
-        bw.Write(bytes);
-        bw.Write((byte)0);
     }
 
     protected static xVec2 ReadVector2BE(BinaryReader br)
     {
-        return new xVec2
-        {
-            x = ReadFloatBE(br),
-            y = ReadFloatBE(br)
-        };
-    }
-
-    protected static void WriteVector2BE(BinaryWriter bw, xVec2 vec)
-    {
-        WriteFloatBE(bw, vec.x);
-        WriteFloatBE(bw, vec.y);
+        return new xVec2 { x = ReadFloatBE(br), y = ReadFloatBE(br) };
     }
 
     protected static xVec3 ReadVector3BE(BinaryReader br)
@@ -149,15 +83,19 @@ public abstract class AssetParser
         {
             x = ReadFloatBE(br),
             y = ReadFloatBE(br),
-            z = ReadFloatBE(br)
+            z = ReadFloatBE(br),
         };
     }
 
-    protected static void WriteVector3BE(BinaryWriter bw, xVec3 vec)
+    protected static xVec4 ReadVector4BE(BinaryReader br)
     {
-        WriteFloatBE(bw, vec.x);
-        WriteFloatBE(bw, vec.y);
-        WriteFloatBE(bw, vec.z);
+        return new xVec4
+        {
+            x = ReadFloatBE(br),
+            y = ReadFloatBE(br),
+            z = ReadFloatBE(br),
+            w = ReadFloatBE(br),
+        };
     }
 
     protected static xColor ReadColorBE(BinaryReader br)
@@ -171,23 +109,9 @@ public abstract class AssetParser
         };
     }
 
-    protected static void WriteColorBE(BinaryWriter bw, xColor color)
-    {
-        WriteByte(bw, (byte)color.r);
-        WriteByte(bw, (byte)color.g);
-        WriteByte(bw, (byte)color.b);
-        WriteByte(bw, (byte)color.a);
-    }
-
     protected static string UInt32ToASCII(uint value)
     {
-        return Encoding.ASCII.GetString(new[]
-        {
-            (byte)(value >> 24),
-            (byte)(value >> 16),
-            (byte)(value >> 8),
-            (byte)value
-        });
+        return Encoding.ASCII.GetString(new[] { (byte)(value >> 24), (byte)(value >> 16), (byte)(value >> 8), (byte)value });
     }
 
     protected static xMotion ReadMotion(BinaryReader br)
@@ -196,7 +120,7 @@ public abstract class AssetParser
         {
             type = (MotionType)ReadByte(br),
             useBanking = ReadByte(br),
-            flags = ReadUInt16BE(br)
+            flags = ReadUInt16BE(br),
         };
 
         switch (motion.type)
@@ -209,7 +133,7 @@ public abstract class AssetParser
                     extTm = ReadFloatBE(br),
                     extWaitTm = ReadFloatBE(br),
                     retTm = ReadFloatBE(br),
-                    retWaitTm = ReadFloatBE(br)
+                    retWaitTm = ReadFloatBE(br),
                 };
                 break;
 
@@ -219,7 +143,7 @@ public abstract class AssetParser
                     center = ReadVector3BE(br),
                     w = ReadFloatBE(br),
                     h = ReadFloatBE(br),
-                    period = ReadFloatBE(br)
+                    period = ReadFloatBE(br),
                 };
                 break;
 
@@ -227,10 +151,7 @@ public abstract class AssetParser
             {
                 if (Program.CurrentGame == GameType.BFBB)
                 {
-                    motion.specific = new SplineMotion
-                    {
-                        unknown = ReadInt32BE(br)
-                    };
+                    motion.specific = new SplineMotion { unknown = ReadInt32BE(br) };
                 }
                 else
                 {
@@ -238,7 +159,7 @@ public abstract class AssetParser
                     {
                         splineID = ReadUInt32BE(br),
                         speed = ReadFloatBE(br),
-                        leanModifier = ReadFloatBE(br)
+                        leanModifier = ReadFloatBE(br),
                     };
                 }
 
@@ -250,7 +171,7 @@ public abstract class AssetParser
                 {
                     flags = ReadUInt32BE(br),
                     mpID = ReadUInt32BE(br),
-                    speed = ReadFloatBE(br)
+                    speed = ReadFloatBE(br),
                 };
                 break;
 
@@ -276,7 +197,7 @@ public abstract class AssetParser
                         rotateDecelTime = ReadFloatBE(br),
 
                         returnDelay = ReadFloatBE(br),
-                        postReturnDelay = ReadFloatBE(br)
+                        postReturnDelay = ReadFloatBE(br),
                     };
                 }
                 else
@@ -288,7 +209,7 @@ public abstract class AssetParser
                         slideAxis = (Axis)ReadByte(br),
                         rotateAxis = (Axis)ReadByte(br),
 
-                        scaleAxis = ReadByte(br)
+                        scaleAxis = ReadByte(br),
                     };
 
                     br.BaseStream.Position += 3;
@@ -331,12 +252,107 @@ public abstract class AssetParser
                     length = length,
                     range = range,
                     period = period,
-                    phase = phase
+                    phase = phase,
                 };
                 break;
         }
 
         return motion;
+    }
+
+    protected static void WriteByte(BinaryWriter bw, byte value)
+    {
+        bw.Write(value);
+    }
+
+    protected static void WriteInt16BE(BinaryWriter bw, short value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        bw.Write(b);
+    }
+
+    protected static void WriteUInt16BE(BinaryWriter bw, ushort value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        bw.Write(b);
+    }
+
+    protected static void WriteFloatBE(BinaryWriter bw, float value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        bw.Write(b);
+    }
+
+    protected static void WriteFloatLE(BinaryWriter bw, float value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        bw.Write(b);
+    }
+
+    protected static void WriteInt32BE(BinaryWriter bw, int value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        bw.Write(b);
+    }
+
+    protected static void WriteInt32LE(BinaryWriter bw, int value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        bw.Write(b);
+    }
+
+    protected static void WriteUInt32BE(BinaryWriter bw, uint value)
+    {
+        byte[] b = BitConverter.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(b);
+        bw.Write(b);
+    }
+
+    protected static void WriteString(BinaryWriter bw, string value)
+    {
+        byte[] bytes = Encoding.ASCII.GetBytes(value);
+        if (Program.BigEndian == true)
+            Array.Reverse(bytes);
+        bw.Write(bytes);
+        bw.Write((byte)0);
+    }
+
+    protected static void WriteVector2BE(BinaryWriter bw, xVec2 vec)
+    {
+        WriteFloatBE(bw, vec.x);
+        WriteFloatBE(bw, vec.y);
+    }
+
+    protected static void WriteVector3BE(BinaryWriter bw, xVec3 vec)
+    {
+        WriteFloatBE(bw, vec.x);
+        WriteFloatBE(bw, vec.y);
+        WriteFloatBE(bw, vec.z);
+    }
+
+    protected static void WriteVector4BE(BinaryWriter bw, xVec4 vec)
+    {
+        WriteFloatBE(bw, vec.x);
+        WriteFloatBE(bw, vec.y);
+        WriteFloatBE(bw, vec.z);
+        WriteFloatBE(bw, vec.w);
+    }
+
+    protected static void WriteColorBE(BinaryWriter bw, xColor color)
+    {
+        WriteByte(bw, (byte)color.r);
+        WriteByte(bw, (byte)color.g);
+        WriteByte(bw, (byte)color.b);
+        WriteByte(bw, (byte)color.a);
     }
 
     protected static void WriteMotion(BinaryWriter bw, xMotion motion)
@@ -449,109 +465,11 @@ public abstract class AssetParser
         //fix: ensure correct padding for a fixed length
         long expectedSize = (Program.CurrentGame == GameType.BFBB) ? 0x30 : 0x3C;
         long bytesWritten = bw.BaseStream.Position - motionStart;
-        
+
         if (bytesWritten < expectedSize)
         {
             int padNeeded = (int)(expectedSize - bytesWritten);
             bw.Write(new byte[padNeeded]);
         }
     }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MotionType : byte
-{
-    ExtendRetract = 0,
-    Orbit = 1,
-    Spline = 2,
-    MovePoint = 3,
-    Mechanism = 4,
-    Pendulum = 5,
-    None = 6
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MechanismType : byte
-{
-    Slide = 0,
-    Rotate = 1,
-    SlideAndRotate = 2,
-    SlideThenRotate = 3,
-    RotateThenSlide = 4
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum Axis : byte
-{
-    X = 0,
-    Y = 1,
-    Z = 2
-}
-
-public class ExtendRetractMotion : MotionSpecificData
-{
-    public xVec3 retPos { get; set; }
-    public xVec3 extDPos { get; set; }
-    public float extTm { get; set; }
-    public float extWaitTm { get; set; }
-    public float retTm { get; set; }
-    public float retWaitTm { get; set; }
-}
-
-public class OrbitMotion : MotionSpecificData
-{
-    public xVec3 center { get; set; }
-    public float w { get; set; }
-    public float h { get; set; }
-    public float period { get; set; }
-}
-
-public class SplineMotion : MotionSpecificData
-{
-    public int unknown { get; set; } //bfbb only
-    [JsonConverter(typeof(AssetIDConverter))] //movie momento
-    public uint splineID { get; set; }
-    public float speed { get; set; }
-    public float leanModifier { get; set; }
-}
-
-public class MovePointMotion : MotionSpecificData
-{
-    public uint flags { get; set; }
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint mpID { get; set; }
-    public float speed { get; set; }
-}
-
-public class MechanismMotion : MotionSpecificData
-{
-    public MechanismType mechanismType { get; set; }
-    public byte flags { get; set; }
-    public Axis slideAxis { get; set; }
-    public Axis rotateAxis { get; set; }
-    //movie movie movie movie movie movie
-    public byte scaleAxis { get; set; }
-    public float slideDistance { get; set; }
-    public float slideTime { get; set; }
-    public float slideAccelTime { get; set; }
-    public float slideDecelTime { get; set; }
-    public float rotateDistance { get; set; }
-    public float rotateTime { get; set; }
-    public float rotateAccelTime { get; set; }
-    public float rotateDecelTime { get; set; }
-    public float returnDelay { get; set; }
-    public float postReturnDelay { get; set; }
-    //motion video only
-    public float scaleAmount { get; set; }
-    public float scaleDuration { get; set; }
-}
-
-public class PendulumMotion : MotionSpecificData
-{
-    public byte flags { get; set; }
-    public byte plane { get; set; }
-    public float length { get; set; }
-    public float range { get; set; }
-    public float period { get; set; }
-    public float phase { get; set; }
 }

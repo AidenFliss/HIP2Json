@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -38,21 +37,17 @@ public sealed class LODTParser : AssetParser
                 lodModel3 = lodModel3,
                 lodDist1 = lodDist1,
                 lodDist2 = lodDist2,
-                lodDist3 = lodDist3
+                lodDist3 = lodDist3,
             };
         }
 
-        return new LODT
-        {
-            numextra = numextra,
-            lodTables = tables
-        };
+        return new LODT { numextra = numextra, lodTables = tables };
     }
 
     public override object Serialize(object obj)
     {
         LODT lodt = (LODT)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -70,7 +65,7 @@ public sealed class LODTParser : AssetParser
             WriteFloatBE(bw, table.lodDist2);
             WriteFloatBE(bw, table.lodDist3);
         }
-        
+
         return ms.ToArray();
     }
 }
@@ -87,10 +82,13 @@ public class zLODTable
     public uint baseBucket { get; set; }
     public float noRenderDist { get; set; }
     public uint flags { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint lodModel1 { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint lodModel2 { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint lodModel3 { get; set; }
     public float lodDist1 { get; set; }

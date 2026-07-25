@@ -11,14 +11,14 @@ public sealed class hud_modelParser : AbstractDYNAParser
         {
             loc = ReadVector3BE(br),
             size = ReadVector3BE(br),
-            model = ReadUInt32BE(br)
+            model = ReadUInt32BE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         hud_model hud_model = (hud_model)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -29,13 +29,17 @@ public sealed class hud_modelParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "HUDModel"; }
+    public override string GetFolderName()
+    {
+        return "HUDModel";
+    }
 }
 
 public class hud_model
 {
     public xVec3 loc { get; set; }
     public xVec3 size { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint model { get; set; }
 }

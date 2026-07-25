@@ -15,16 +15,14 @@ public sealed class game_object_task_boxParser : AbstractDYNAParser
             enable = ReadBoolean(br),
             talk_box = ReadUInt32BE(br),
             next_task = ReadUInt32BE(br),
-            stages = Enumerable.Range(0, 6)
-                .Select(_ => ReadUInt32BE(br))
-                .ToArray(),
+            stages = Enumerable.Range(0, 6).Select(_ => ReadUInt32BE(br)).ToArray(),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_task_box taskBox = (game_object_task_box)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -40,7 +38,10 @@ public sealed class game_object_task_boxParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "TaskBox"; }
+    public override string GetFolderName()
+    {
+        return "TaskBox";
+    }
 }
 
 public class game_object_task_box
@@ -49,10 +50,13 @@ public class game_object_task_box
     public bool loop { get; set; }
     public bool enable { get; set; }
     public bool retry { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint talk_box { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint next_task { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] stages { get; set; }
 }

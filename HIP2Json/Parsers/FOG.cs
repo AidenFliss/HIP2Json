@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -24,14 +23,14 @@ public sealed class FOGParser : AssetParser
             fogStart = fogStart,
             fogStop = fogStop,
             transitionTime = transitionTime,
-            fogType = fogType
+            fogType = fogType,
         };
     }
 
     public override object Serialize(object obj)
     {
         FOG fog = (FOG)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -43,7 +42,7 @@ public sealed class FOGParser : AssetParser
         WriteFloatBE(bw, fog.transitionTime);
         WriteByte(bw, fog.fogType);
         bw.Write(new byte[3]);
-        
+
         return ms.ToArray();
     }
 }

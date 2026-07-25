@@ -30,16 +30,14 @@ public sealed class MVPTParser : AssetParser
             delay = delay,
             zoneRadius = zoneRadius,
             arenaRadius = arenaRadius,
-            points = Enumerable.Range(0, numPoints)
-                .Select(_ => ReadUInt32BE(br))
-                .ToArray(),
+            points = Enumerable.Range(0, numPoints).Select(_ => ReadUInt32BE(br)).ToArray(),
         };
     }
 
     public override object Serialize(object obj)
     {
         MVPT mvpt = (MVPT)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -57,7 +55,7 @@ public sealed class MVPTParser : AssetParser
         {
             WriteUInt32BE(bw, point);
         }
-        
+
         return ms.ToArray();
     }
 }
@@ -73,13 +71,7 @@ public class MVPT
     public float delay { get; set; }
     public float zoneRadius { get; set; }
     public float arenaRadius { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] points { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum OnType : byte
-{
-    Arena = 0,
-    Zone = 1
 }

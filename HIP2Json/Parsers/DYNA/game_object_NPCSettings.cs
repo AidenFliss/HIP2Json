@@ -1,5 +1,4 @@
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -36,14 +35,14 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
             assumeFOV = assumeFOV,
             duploWaveMode = duploWaveMode,
             duploSpawnDelay = duploSpawnDelay,
-            duploSpawnLifeMax = duploSpawnLifeMax
+            duploSpawnLifeMax = duploSpawnLifeMax,
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_NPCSettings npcSettings = (game_object_NPCSettings)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -65,7 +64,10 @@ public sealed class game_object_NPCSettingsParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "NPCSettingsObject"; }
+    public override string GetFolderName()
+    {
+        return "NPCSettingsObject";
+    }
 }
 
 public class game_object_NPCSettings
@@ -83,21 +85,4 @@ public class game_object_NPCSettings
     public DuploWaveMode duploWaveMode { get; set; }
     public float duploSpawnDelay { get; set; }
     public int duploSpawnLifeMax { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BasisType : uint
-{
-    None = 0,
-    EvilRobot = 1,
-    FriendlyRobot = 2,
-    LovingCitizen = 3,
-    GrumpyCitizen = 4
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DuploWaveMode : uint
-{
-    Continuous = 0,
-    Discreet = 1
 }

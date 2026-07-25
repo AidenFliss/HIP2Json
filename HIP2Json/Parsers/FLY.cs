@@ -16,26 +16,19 @@ public sealed class FLYParser : AssetParser
             keys[i] = new zFlyKey
             {
                 frame = ReadInt32LE(br),
-                matrix = Enumerable.Range(0, 12)
-                    .Select(_ => ReadFloatLE(br))
-                    .ToArray(),
-                aperture = Enumerable.Range(0, 2)
-                    .Select(_ => ReadFloatLE(br))
-                    .ToArray(),
-                focal = ReadFloatLE(br)
+                matrix = Enumerable.Range(0, 12).Select(_ => ReadFloatLE(br)).ToArray(),
+                aperture = Enumerable.Range(0, 2).Select(_ => ReadFloatLE(br)).ToArray(),
+                focal = ReadFloatLE(br),
             };
         }
 
-        return new FLY
-        {
-            keys = keys
-        };
+        return new FLY { keys = keys };
     }
 
     public override object Serialize(object obj)
     {
         FLY fly = (FLY)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -48,7 +41,7 @@ public sealed class FLYParser : AssetParser
                 WriteFloatLE(bw, value);
             WriteFloatLE(bw, key.focal);
         }
-        
+
         return ms.ToArray();
     }
 }

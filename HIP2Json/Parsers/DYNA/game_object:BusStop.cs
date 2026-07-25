@@ -13,14 +13,14 @@ public sealed class game_object_BusStopParser : AbstractDYNAParser
             character = (PlayableCharacter)ReadInt32BE(br),
             cameraID = ReadUInt32BE(br),
             busID = ReadUInt32BE(br),
-            delay = ReadFloatBE(br)
+            delay = ReadFloatBE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_BusStop busStop = (game_object_BusStop)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -33,7 +33,10 @@ public sealed class game_object_BusStopParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "BusStop"; }
+    public override string GetFolderName()
+    {
+        return "BusStop";
+    }
 }
 
 public class game_object_BusStop
@@ -41,16 +44,11 @@ public class game_object_BusStop
     [JsonConverter(typeof(AssetIDConverter))]
     public uint marker { get; set; }
     public PlayableCharacter character { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint cameraID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint busID { get; set; }
     public float delay { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum PlayableCharacter
-{
-    Patrick = 0,
-    Sandy = 1
 }

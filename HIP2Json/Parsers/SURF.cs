@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -40,7 +38,7 @@ public sealed class SURFParser : AssetParser
         {
             mode = texture_anm_0_mode,
             group = texture_anm_0_group,
-            speed = texture_anm_0_speed
+            speed = texture_anm_0_speed,
         };
 
         br.ReadBytes(2);
@@ -52,7 +50,7 @@ public sealed class SURFParser : AssetParser
         {
             mode = texture_anm_1_mode,
             group = texture_anm_1_group,
-            speed = texture_anm_1_speed
+            speed = texture_anm_1_speed,
         };
 
         uint uvfx_flags = ReadUInt32BE(br);
@@ -79,7 +77,7 @@ public sealed class SURFParser : AssetParser
             scale_spd = uvfx_0_scale_spd,
             min = uvfx_0_min,
             max = uvfx_0_max,
-            minmax_spd = uvfx_0_minmax_spd
+            minmax_spd = uvfx_0_minmax_spd,
         };
 
         int uvfx_1_mode = ReadInt32BE(br);
@@ -104,7 +102,7 @@ public sealed class SURFParser : AssetParser
             scale_spd = uvfx_1_scale_spd,
             min = uvfx_1_min,
             max = uvfx_1_max,
-            minmax_spd = uvfx_1_minmax_spd
+            minmax_spd = uvfx_1_minmax_spd,
         };
 
         byte on = ReadByte(br);
@@ -135,14 +133,14 @@ public sealed class SURFParser : AssetParser
                 envmapID = envmapID,
                 shininess = shininess,
                 bumpiness = bumpiness,
-                dualmapID = dualmapID
+                dualmapID = dualmapID,
             },
 
             colorfx = new zSurfColorFX
             {
                 flags = colorfx_flags,
                 mode = mode,
-                speed = speed
+                speed = speed,
             },
 
             texture_anim_flags = texture_anim_flags,
@@ -159,14 +157,14 @@ public sealed class SURFParser : AssetParser
             walljump_scale_xz = walljump_scale_xz,
             walljump_scale_y = walljump_scale_y,
             damage_timer = damage_timer,
-            damage_bounce = damage_bounce
+            damage_bounce = damage_bounce,
         };
     }
 
     public override object Serialize(object obj)
     {
         SURF surf = (SURF)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -260,55 +258,4 @@ public class SURF
     public float walljump_scale_y { get; set; }
     public float damage_timer { get; set; }
     public float damage_bounce { get; set; }
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum PhysFlags : byte
-{
-    SlideOffPlayer = 0,
-    AnglePlayer = 0x02,
-    NoStand = 0x04,
-    OutOfBounds = 0x08,
-    WallJump = 0x10,
-    LedgeGrab = 0x20,
-    Unknown40 = 0x40
-}
-
-public class zSurfMatFX
-{
-    public uint flags { get; set; }
-    public uint bumpmapID { get; set; }
-    public uint envmapID { get; set; }
-    public float shininess { get; set; }
-    public float bumpiness { get; set; }
-    public uint dualmapID { get; set; }
-}
-
-public class zSurfColorFX
-{
-    public ushort flags { get; set; }
-    public ushort mode { get; set; }
-    public float speed { get; set; }
-}
-
-public class zSurfTextureAnim
-{
-    public ushort mode { get; set; }
-    public uint group { get; set; }
-    public float speed { get; set; }
-}
-
-public class zSurfUVFX
-{
-    public int mode { get; set; }
-    public float rot { get; set; }
-    public float rot_spd { get; set; }
-    public xVec3 trans { get; set; }
-    public xVec3 trans_spd { get; set; }
-    public xVec3 scale { get; set; }
-    public xVec3 scale_spd { get; set; }
-    public xVec3 min { get; set; }
-    public xVec3 max { get; set; }
-    public xVec3 minmax_spd { get; set; }
 }

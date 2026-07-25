@@ -14,15 +14,11 @@ public sealed class game_object_RingControlParser : AbstractDYNAParser
         uint ringCount = ReadUInt32BE(br);
         uint notUsedOffset = ReadUInt32BE(br);
 
-        uint[] sounds = Enumerable.Range(0, 4)
-                    .Select(_ => ReadUInt32BE(br))
-                    .ToArray();
-        
+        uint[] sounds = Enumerable.Range(0, 4).Select(_ => ReadUInt32BE(br)).ToArray();
+
         uint numNextRingsToShow = ReadUInt32BE(br);
 
-        uint[] ringList = Enumerable.Range(0, (int)ringCount)
-                    .Select(_ => ReadUInt32BE(br))
-                    .ToArray();
+        uint[] ringList = Enumerable.Range(0, (int)ringCount).Select(_ => ReadUInt32BE(br)).ToArray();
 
         return new game_object_RingControl
         {
@@ -33,14 +29,14 @@ public sealed class game_object_RingControlParser : AbstractDYNAParser
             notUsedOffset = notUsedOffset,
             sounds = sounds,
             numNextRingsToShow = numNextRingsToShow,
-            ringList = ringList
+            ringList = ringList,
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_RingControl ringControl = (game_object_RingControl)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -57,24 +53,30 @@ public sealed class game_object_RingControlParser : AbstractDYNAParser
 
         foreach (var ring in ringControl.ringList)
             WriteUInt32BE(bw, ring);
-        
+
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "RingControl"; }
+    public override string GetFolderName()
+    {
+        return "RingControl";
+    }
 }
 
 public class game_object_RingControl
 {
     public int player { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint modelForRings { get; set; }
     public float defaultWarningTime { get; set; }
     public uint ringCount { get; set; }
     public uint notUsedOffset { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] sounds { get; set; }
     public uint numNextRingsToShow { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] ringList { get; set; }
 }

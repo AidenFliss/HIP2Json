@@ -31,14 +31,14 @@ public sealed class game_object_talk_boxParser : AbstractDYNAParser
             prompt_noskip = ReadUInt32BE(br),
             prompt_quit = ReadUInt32BE(br),
             prompt_noquit = ReadUInt32BE(br),
-            prompt_yesno = ReadUInt32BE(br)
+            prompt_yesno = ReadUInt32BE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_talk_box talkBox = (game_object_talk_box)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -69,15 +69,20 @@ public sealed class game_object_talk_boxParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "TalkBox"; }
+    public override string GetFolderName()
+    {
+        return "TalkBox";
+    }
 }
 
 public class game_object_talk_box
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint dialog_box { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_box { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint quit_box { get; set; }
     public byte trap { get; set; }
@@ -88,6 +93,7 @@ public class game_object_talk_box
     public byte show { get; set; }
     public byte hide { get; set; }
     public byte audio_effect { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint teleport { get; set; }
     public byte auto_wait_type_time { get; set; }
@@ -96,14 +102,19 @@ public class game_object_talk_box
     public byte auto_wait_type_event { get; set; }
     public float auto_wait_delay { get; set; }
     public int auto_wait_which_event { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_skip { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_noskip { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_quit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_noquit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint prompt_yesno { get; set; }
 }

@@ -14,25 +14,21 @@ public sealed class MAPRParser : AssetParser
 
         for (int i = 0; i < count; i++)
         {
-            entries[i] = new zMaterialMapEntry
-            {
-                surfaceAssetID = ReadUInt32BE(br),
-                materialIndex = ReadUInt32BE(br),
-            };
+            entries[i] = new zMaterialMapEntry { surfaceAssetID = ReadUInt32BE(br), materialIndex = ReadUInt32BE(br) };
         }
 
         return new MAPR
         {
             id = id,
             count = count,
-            materialMapEntries = entries
+            materialMapEntries = entries,
         };
     }
 
     public override object Serialize(object obj)
     {
         MAPR mapr = (MAPR)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -43,7 +39,7 @@ public sealed class MAPRParser : AssetParser
             WriteUInt32BE(bw, entry.surfaceAssetID);
             WriteUInt32BE(bw, entry.materialIndex);
         }
-        
+
         return ms.ToArray();
     }
 }
@@ -55,7 +51,6 @@ public class MAPR
     public uint count { get; set; }
     public zMaterialMapEntry[] materialMapEntries { get; set; }
 }
-
 
 public class zMaterialMapEntry
 {

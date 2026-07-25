@@ -16,7 +16,7 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             life = new xParInterp
@@ -24,7 +24,7 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             size_birth = new xParInterp
@@ -32,7 +32,7 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             size_death = new xParInterp
@@ -40,7 +40,7 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             color_birth = new[]
@@ -50,29 +50,29 @@ public sealed class PARPParser : AssetParser
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
-                }
+                    oofreq = ReadFloatBE(br),
+                },
             },
 
             color_death = new[]
@@ -82,29 +82,29 @@ public sealed class PARPParser : AssetParser
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
+                    oofreq = ReadFloatBE(br),
                 },
                 new xParInterp
                 {
                     val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                     interp = ReadUInt32BE(br),
                     freq = ReadFloatBE(br),
-                    oofreq = ReadFloatBE(br)
-                }
+                    oofreq = ReadFloatBE(br),
+                },
             },
 
             vel_scale = new xParInterp
@@ -112,7 +112,7 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             vel_angle = new xParInterp
@@ -120,20 +120,20 @@ public sealed class PARPParser : AssetParser
                 val = new[] { ReadFloatBE(br), ReadFloatBE(br) },
                 interp = ReadUInt32BE(br),
                 freq = ReadFloatBE(br),
-                oofreq = ReadFloatBE(br)
+                oofreq = ReadFloatBE(br),
             },
 
             vel = ReadVector3BE(br),
 
             emit_limit = ReadUInt32BE(br),
-            emit_limit_reset_time = ReadFloatBE(br)
+            emit_limit_reset_time = ReadFloatBE(br),
         };
     }
 
     public override object Serialize(object obj)
     {
         PARP parp = (PARP)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 

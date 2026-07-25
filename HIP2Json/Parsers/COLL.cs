@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -17,21 +16,17 @@ public sealed class COLLParser : AssetParser
             {
                 baseModel = ReadUInt32BE(br),
                 colModel = ReadUInt32BE(br),
-                camcolModel = ReadUInt32BE(br)
+                camcolModel = ReadUInt32BE(br),
             };
         }
 
-        return new COLL
-        {
-            sTableCount = sTableCount,
-            entries = entries
-        };
+        return new COLL { sTableCount = sTableCount, entries = entries };
     }
 
     public override object Serialize(object obj)
     {
         COLL coll = (COLL)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -42,7 +37,7 @@ public sealed class COLLParser : AssetParser
             WriteUInt32BE(bw, entry.colModel);
             WriteUInt32BE(bw, entry.camcolModel);
         }
-        
+
         return ms.ToArray();
     }
 }
@@ -57,8 +52,10 @@ public class zCollGeomTable
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint baseModel { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint colModel { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint camcolModel { get; set; }
 }

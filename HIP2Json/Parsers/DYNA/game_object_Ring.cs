@@ -26,7 +26,7 @@ public sealed class game_object_RingParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Ring ring = (game_object_Ring)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -45,7 +45,10 @@ public sealed class game_object_RingParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Ring"; }
+    public override string GetFolderName()
+    {
+        return "Ring";
+    }
 }
 
 public class game_object_Ring
@@ -60,13 +63,7 @@ public class game_object_Ring
     public float height { get; set; }
     public float timeOut { get; set; }
     public float warningTime { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint drivenById { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TriggerBoundsType : uint
-{
-    HalfSizeShadow = 0,
-    FullSizeShadow = 1
 }

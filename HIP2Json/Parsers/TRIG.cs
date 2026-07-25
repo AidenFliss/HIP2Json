@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Text.Json.Serialization;
+﻿using System.IO;
 
 namespace HIP2Json;
 
@@ -28,14 +26,14 @@ internal sealed class TRIGParser : AssetParser
             Type = (TriggerType)t,
             Positions = positions,
             Direction = direction,
-            Flags = flags
+            Flags = flags,
         };
     }
 
     public override object Serialize(object obj)
     {
         TRIG trig = (TRIG)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms); //not writing type here, becase the program.cs sphagetti needs to, because out of the byte array
 
@@ -43,7 +41,7 @@ internal sealed class TRIGParser : AssetParser
             WriteVector3BE(bw, pos);
         WriteVector3BE(bw, trig.Direction);
         WriteUInt32BE(bw, trig.Flags);
-        
+
         return ms.ToArray();
     }
 }
@@ -54,13 +52,4 @@ class TRIG
     public xVec3[] Positions { get; set; }
     public xVec3 Direction { get; set; }
     public uint Flags { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-enum TriggerType : byte
-{
-    Box = 0,
-    Sphere = 1,
-    Cylinder = 2,
-    Unknown = 255,
 }

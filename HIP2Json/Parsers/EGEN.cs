@@ -22,14 +22,14 @@ public sealed class EGENParser : AssetParser
             damage_type = damage_type,
             flags = flags,
             ontime = ontime,
-            onAnimID = onAnimID
+            onAnimID = onAnimID,
         };
     }
 
     public override object Serialize(object obj)
     {
         EGEN egen = (EGEN)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -39,7 +39,7 @@ public sealed class EGENParser : AssetParser
         bw.Write(new byte[2]);
         WriteFloatBE(bw, egen.ontime);
         WriteUInt32BE(bw, egen.onAnimID);
-        
+
         return ms.ToArray();
     }
 }
@@ -50,6 +50,7 @@ public class EGEN
     public byte damage_type { get; set; }
     public byte flags { get; set; }
     public float ontime { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint onAnimID { get; set; }
 }

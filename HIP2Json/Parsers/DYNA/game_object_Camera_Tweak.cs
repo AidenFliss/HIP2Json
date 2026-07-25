@@ -11,14 +11,14 @@ public sealed class game_object_Camera_TweakParser : AbstractDYNAParser
             priority = ReadInt32BE(br),
             time = ReadFloatBE(br),
             pitch_adjust = ReadFloatBE(br),
-            dist_adjust = ReadFloatBE(br)
+            dist_adjust = ReadFloatBE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Camera_Tweak cameraTweak = (game_object_Camera_Tweak)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -30,7 +30,10 @@ public sealed class game_object_Camera_TweakParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "CameraTweak"; }
+    public override string GetFolderName()
+    {
+        return "CameraTweak";
+    }
 }
 
 public class game_object_Camera_Tweak

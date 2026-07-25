@@ -180,7 +180,7 @@ public static class Dictionaries
         { "UIM", "UserInterfaceMotion" },
         { "VOLU", "Volume" },
         { "WIRE", "WireframeModel" },
-        { "ZLIN", "ZipLine" }
+        { "ZLIN", "ZipLine" },
     };
 
     public static readonly Dictionary<string, string> BASETYPE_TO_FRIENDLY_NAME = new Dictionary<string, string>

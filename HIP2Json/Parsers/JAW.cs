@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -19,7 +18,7 @@ public sealed class JAWParser : AssetParser
             {
                 soundHashID = ReadUInt32BE(br),
                 dataStart = ReadInt32BE(br),
-                dataLength = ReadInt32BE(br)
+                dataLength = ReadInt32BE(br),
             };
         }
 
@@ -33,27 +32,21 @@ public sealed class JAWParser : AssetParser
 
             int frameCount = br.ReadInt32();
 
-            jawData[i] = new xJawData
-            {
-                length = frameCount,
-                data = Enumerable.Range(0, frameCount)
-                    .Select(_ => (int)ReadByte(br))
-                    .ToArray()
-            };
+            jawData[i] = new xJawData { length = frameCount, data = Enumerable.Range(0, frameCount).Select(_ => (int)ReadByte(br)).ToArray() };
         }
 
         return new JAW
         {
             entryCount = entryCount,
             jawDataTables = table,
-            jawData = jawData
+            jawData = jawData,
         };
     }
 
     public override object Serialize(object obj)
     {
         JAW jaw = (JAW)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -70,7 +63,7 @@ public sealed class JAWParser : AssetParser
             foreach (var value in data.data)
                 WriteByte(bw, (byte)value);
         }
-        
+
         return ms.ToArray();
     }
 }

@@ -14,7 +14,7 @@ public sealed class game_object_TeleportParser : AbstractDYNAParser
         uint camAngle = 0;
         if (version == 2 && Program.CurrentGame == GameType.BFBB)
             camAngle = ReadUInt32BE(br); // only in bfbb version 2
-        
+
         uint targetID = ReadUInt32BE(br);
 
         return new game_object_Teleport
@@ -30,7 +30,7 @@ public sealed class game_object_TeleportParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Teleport teleport = (game_object_Teleport)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -46,7 +46,10 @@ public sealed class game_object_TeleportParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "TeleportBox"; }
+    public override string GetFolderName()
+    {
+        return "TeleportBox";
+    }
 }
 
 public class game_object_Teleport
@@ -56,6 +59,7 @@ public class game_object_Teleport
     public uint opened { get; set; }
     public uint launchAngle { get; set; }
     public uint camAngle { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint targetID { get; set; }
 }

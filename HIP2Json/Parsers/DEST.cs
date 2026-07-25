@@ -45,11 +45,7 @@ public sealed class DESTParser : AssetParser
 
             uint nanimations = ReadUInt32BE(br);
 
-            dest.states[i].animlist = new DESTAttachedAnimList
-            {
-                nanimations = nanimations,
-                animationIDs = new uint[nanimations]
-            };
+            dest.states[i].animlist = new DESTAttachedAnimList { nanimations = nanimations, animationIDs = new uint[nanimations] };
 
             for (int j = 0; j < nanimations; j++)
             {
@@ -105,7 +101,6 @@ public sealed class DESTParser : AssetParser
     }
 }
 
-
 public class DEST
 {
     [JsonConverter(typeof(AssetIDConverter))]
@@ -116,6 +111,7 @@ public class DEST
     public uint launch_flag { get; set; }
     public uint behaviour { get; set; }
     public uint flags { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgroupidleID { get; set; }
     public float respawn { get; set; }
@@ -123,38 +119,47 @@ public class DEST
     public DESTState[] states { get; set; }
 }
 
-
 public class DESTState
 {
     public uint percent { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint modelID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint shrapnelID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint shrapnelhitID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgroupidleID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgroupfxID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgrouphitID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgroupfxIDswitch { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundgrouphitIDswitch { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint rumbleIDhit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint rumbleIDswitch { get; set; }
     public uint fx_flags { get; set; }
     public DESTAttachedAnimList animlist { get; set; }
 }
 
-
 public class DESTAttachedAnimList
 {
     public uint nanimations { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] animationIDs { get; set; }
 }

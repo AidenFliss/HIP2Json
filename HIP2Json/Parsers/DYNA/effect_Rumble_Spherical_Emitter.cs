@@ -22,7 +22,7 @@ public sealed class effect_Rumble_Spherical_EmitterParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_Rumble_Spherical_Emitter rumbleSphericalEmitter = (effect_Rumble_Spherical_Emitter)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -37,7 +37,10 @@ public sealed class effect_Rumble_Spherical_EmitterParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "RumbleSphericalEmitter"; }
+    public override string GetFolderName()
+    {
+        return "RumbleSphericalEmitter";
+    }
 }
 
 public class effect_Rumble_Spherical_Emitter

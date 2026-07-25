@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -20,7 +19,7 @@ public sealed class PORTParser : AssetParser
     public override object Serialize(object obj)
     {
         PORT port = (PORT)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -37,6 +36,7 @@ public class PORT
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint assetCameraID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint assetMarkerID { get; set; }
     public float ang { get; set; }

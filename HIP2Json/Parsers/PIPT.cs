@@ -32,21 +32,17 @@ public sealed class PIPTParser : AssetParser
                 subObjectBits = subObjectBits,
                 pipeFlags = pipeFlags,
                 layer = layer,
-                alphaDiscard = alphaDiscard
+                alphaDiscard = alphaDiscard,
             };
         }
 
-        return new PIPT
-        {
-            entryCount = entryCount,
-            entries = entries,
-        };
+        return new PIPT { entryCount = entryCount, entries = entries };
     }
 
     public override object Serialize(object obj)
     {
         PIPT pipt = (PIPT)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 

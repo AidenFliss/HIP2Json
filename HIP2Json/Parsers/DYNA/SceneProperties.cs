@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -35,14 +34,14 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
             musicID = musicID,
             flags = flags,
             waterTileWidth = waterTileWidth,
-            lodFadeDistance = lodFadeDistance
+            lodFadeDistance = lodFadeDistance,
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         SceneProperties sceneProperties = (SceneProperties)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -59,25 +58,31 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         WriteFloatBE(bw, sceneProperties.waterTileWidth);
         WriteFloatBE(bw, sceneProperties.lodFadeDistance);
         bw.Write(new byte[4]);
-        
+
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "SceneProperties"; }
+    public override string GetFolderName()
+    {
+        return "SceneProperties";
+    }
 }
 
 public class SceneProperties
 {
     public int idle03ExtraCount { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint idle03Extras { get; set; }
     public int idle04ExtraCount { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint idle04Extras { get; set; }
     public byte bombCount { get; set; }
     public byte extraIdleDelay { get; set; }
     public byte hdrGlow { get; set; }
     public byte hdrDarken { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint musicID { get; set; }
     public uint flags { get; set; }

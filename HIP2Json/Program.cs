@@ -1,179 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Encodings.Web;
-using System.Collections.Generic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using HipHopFile;
 
 namespace HIP2Json;
-
-public struct xVec2
-{
-    public float x, y;
-    public xVec2(float x, float y) { this.x = x; this.y = y; }
-    public override string ToString() => $"({x}, {y})";
-}
-
-public struct xVec3
-{
-    public float x, y, z;
-    public xVec3(float x, float y, float z) { this.x = x; this.y = y; this.z = z; }
-    public override string ToString() => $"({x}, {y}, {z})";
-}
-
-public struct xVec4
-{
-    public float x, y, z, w;
-    public xVec4(float x, float y, float z, float w) { this.x = x; this.y = y; this.z = z; this.w = w; }
-    public override string ToString() => $"({x}, {y}, {z}, {w})";
-}
-
-public struct xColor
-{
-    public float r, g, b, a;
-    public xColor(float r, float g, float b, float a) { this.r = r; this.g = g; this.b = b; this.a = a; }
-    public override string ToString() => $"({r}, {g}, {b}, {a})";
-}
-
-public abstract class MotionSpecificData { }
-
-[JsonConverter(typeof(xMotionConverter))]
-public class xMotion
-{
-    public MotionType type { get; set; }
-    public byte useBanking { get; set; }
-    public ushort flags { get; set; }
-    public MotionSpecificData specific { get; set; }
-}
-
-public struct xLinkAsset
-{
-    public string srcEvent;
-    public string dstEvent;
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint dstAssetID;
-    [JsonConverter(typeof(AssetIDArrayConverter))]
-    public uint[] paramU32;
-    public float[] paramF32;
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint paramWidgetAssetID;
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint chkAssetID;
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BaseFlags : ushort
-{
-    None = 0,
-    Enabled = 0x01,
-    Persistent = 0x02,
-    Valid = 0x04,
-    VisibleDuringCutscenes = 0x08,
-    ReceiveShadows = 0x10,
-}
-
-public struct xBaseAsset
-{
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint id;
-    public string baseType;
-    public byte linkCount;
-    public BaseFlags baseFlags;
-    public override string ToString()
-        => $"id: {id}, baseType: {baseType}, linkCount: {linkCount}, baseFlags: {baseFlags}";
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EntFlags : byte
-{
-    None = 0,
-    Visible = 0x01,
-    Stackable = 0x02,
-    Unused04 = 0x04,
-    Unknown08 = 0x08,
-    Unused10 = 0x10,
-    Unused20 = 0x20,
-    NoShadow = 0x40,
-    Unused80 = 0x80,
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum EntFlagsMore : byte
-{
-    None = 0,
-    Unused01 = 0x01,
-    PreciseCollision = 0x02,
-    Unknown04 = 0x04,
-    Grabbable = 0x08,
-    Hittable = 0x10,
-    AnimateCollision = 0x20,
-    Unused40 = 0x40,
-    LedgeGrab = 0x80,
-}
-
-public struct xEntAsset
-{
-    public EntFlags flags;
-    public byte subtype;
-    public byte pflags;
-    public EntFlagsMore moreFlags;
-    public uint surfaceID;
-    public xVec3 ang, pos, scale;
-    public float redMult, greenMult, blueMult, seeThru, seeThruSpeed;
-    [JsonConverter(typeof(AssetIDConverter))]
-    public uint modelInfoID, animListID;
-    public override string ToString() =>
-        $"flags: {flags}, subtype: {subtype}, pflags: {pflags}, moreFlags: {moreFlags}\n" +
-        $"surfaceID: {surfaceID}\n" +
-        $"ang: {ang}, pos: {pos}, scale: {scale}\n" +
-        $"redMult: {redMult}, greenMult: {greenMult}, blueMult: {blueMult}, seeThru: {seeThru}, seeThruSpeed: {seeThruSpeed}\n" +
-        $"modelInfoID: {modelInfoID}, animListID: {animListID}";
-}
-
-public enum AssetType
-{
-    Binary,
-    Base,
-    Entity
-}
-
-public class AssetDescriptor
-{
-    public string AssetType { get; set; }
-    public AssetType AssetStorage { get; set; }
-}
-
-public class ParsedAsset
-{
-    #nullable enable
-    public xBaseAsset? Base { get; set; }
-    public xLinkAsset[]? Links { get; set; }
-    public xEntAsset? Entity { get; set; }
-    #nullable disable
-
-    [JsonExtensionData]
-    public Dictionary<string, object> AssetData { get; set; } = new();
-    public string AssetFriendlyName { get; set; }
-    public string FileName { get; set; }
-}
-
-public enum GameType
-{
-    BFBB,
-    TSSM
-}
-
-public enum GamePlatform
-{
-    GC,
-    PS2,
-    XBOX
-}
 
 class Program
 {
@@ -182,7 +16,50 @@ class Program
     public static bool BigEndian = true;
 
     static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "RWTX", "TEXS", "ANIM", "SNDS", "SND", "SHRP", "ATBL", "ALST" };
-    static readonly HashSet<string> BASE_ASSETS = new HashSet<string> { "CAM", "CCRV", "CNTR", "COND", "CSNM", "DPAT", "DSCO", "DTRK", "DUPC", "DYNA", "ENV", "FOG", "GRSM", "GRUP", "GUST", "LITE", "LOBM", "MVPT", "NGMS", "PARE", "PARP", "PARS", "PGRS", "PORT", "PRJT", "RANM", "SCRP", "SDFX", "SFX", "SGRP", "SLID", "SPLN", "SSET", "SUBT", "SURF", "TIMR", "TPIK", "TRWT", "UIM", "VOLU", "ZLIN" };
+    static readonly HashSet<string> BASE_ASSETS = new HashSet<string>
+    {
+        "CAM",
+        "CCRV",
+        "CNTR",
+        "COND",
+        "CSNM",
+        "DPAT",
+        "DSCO",
+        "DTRK",
+        "DUPC",
+        "DYNA",
+        "ENV",
+        "FOG",
+        "GRSM",
+        "GRUP",
+        "GUST",
+        "LITE",
+        "LOBM",
+        "MVPT",
+        "NGMS",
+        "PARE",
+        "PARP",
+        "PARS",
+        "PGRS",
+        "PORT",
+        "PRJT",
+        "RANM",
+        "SCRP",
+        "SDFX",
+        "SFX",
+        "SGRP",
+        "SLID",
+        "SPLN",
+        "SSET",
+        "SUBT",
+        "SURF",
+        "TIMR",
+        "TPIK",
+        "TRWT",
+        "UIM",
+        "VOLU",
+        "ZLIN",
+    };
     static readonly HashSet<string> ENTITY_ASSETS = new HashSet<string> { "BOUL", "BUTN", "DSTR", "EGEN", "HANG", "NPC", "PEND", "PKUP", "PLAT", "PLYR", "SIMP", "TRIG", "UI", "UIFT", "VIL" };
 
     static readonly HashSet<string> SKIP_FILES = new HashSet<string> { "font2", "db05", "b301" };
@@ -248,17 +125,13 @@ class Program
 
             if (extractMode)
             {
-                string outputDir = pathArgs.Length > 1 
-                    ? pathArgs[1] 
-                    : GetDefaultExtractPath(inputPath);
+                string outputDir = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultExtractPath(inputPath);
 
                 RunExtract(inputPath, outputDir, showProgress);
             }
-            else 
+            else
             {
-                string outputPath = pathArgs.Length > 1 
-                    ? pathArgs[1] 
-                    : GetDefaultPackPath(inputPath);
+                string outputPath = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultPackPath(inputPath);
 
                 RunPack(inputPath, outputPath);
             }
@@ -274,8 +147,7 @@ class Program
     {
         for (int i = 0; i < args.Length - 1; i++)
         {
-            if (string.Equals(args[i], longName, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(args[i], shortName, StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(args[i], longName, StringComparison.OrdinalIgnoreCase) || string.Equals(args[i], shortName, StringComparison.OrdinalIgnoreCase))
             {
                 return args[i + 1];
             }
@@ -321,14 +193,15 @@ class Program
 
     static string GetDefaultPackPath(string inputPath)
     {
-        if (File.Exists(inputPath)) return inputPath;
+        if (File.Exists(inputPath))
+            return inputPath;
 
         string cleanPath = inputPath.TrimEnd('/', '\\');
 
         if (cleanPath.EndsWith("_unpacked", StringComparison.OrdinalIgnoreCase))
         {
             string filePrefix = Path.GetFileName(cleanPath).Replace("_unpacked", "");
-            
+
             string ext = filePrefix.EndsWith("_HOP", StringComparison.OrdinalIgnoreCase) ? ".hop" : ".hip";
             string cleanFileName = filePrefix.Replace("_HOP", "").Replace("_HIP", "");
 
@@ -367,6 +240,7 @@ class Program
 
         return string.Empty;
     }
+
     static void RunExtract(string targetPath, string projectDir, bool showProgress)
     {
         if (File.Exists(targetPath))
@@ -395,13 +269,16 @@ class Program
             foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
             {
                 string fileExt = Path.GetExtension(file).ToLower();
-                if (fileExt != ".hip" && fileExt != ".hop") continue;
+                if (fileExt != ".hip" && fileExt != ".hop")
+                    continue;
 
                 string fileName = Path.GetFileNameWithoutExtension(file);
-                if (SKIP_FILES.Contains(fileName)) continue;
+                if (SKIP_FILES.Contains(fileName))
+                    continue;
 
                 string parentFolder = Path.GetFileName(Path.GetDirectoryName(file)!);
-                if (parentFolder is "Working" or "New Folder" or "backup") continue;
+                if (parentFolder is "Working" or "New Folder" or "backup")
+                    continue;
 
                 ProcessSingleArchiveExtract(file, targetPath, projectDir, showProgress);
             }
@@ -410,6 +287,9 @@ class Program
         {
             Logger.LogError($"Error: Target path '{targetPath}' does not exist.");
         }
+
+        if (showProgress)
+            LogParseReport();
     }
 
     static void ProcessSingleArchiveExtract(string filePath, string baseDir, string projectDir, bool showProgress)
@@ -419,7 +299,10 @@ class Program
         bool isHipFile = Path.GetExtension(filePath).ToLower() == ".hip";
         bool isHopFile = Path.GetExtension(filePath).ToLower() == ".hop";
 
-        string type = isHipFile ? "HIP" : isHopFile ? "HOP" : "Unknown";
+        string type =
+            isHipFile ? "HIP"
+            : isHopFile ? "HOP"
+            : "Unknown";
 
         if (type == "Unknown")
             return;
@@ -486,13 +369,9 @@ class Program
 
         bool isBulkExtract = Directory.Exists(baseDir) && baseDir != Path.GetDirectoryName(filePath);
 
-        string jsonOutputFolderOgPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder)
-            ? Path.Combine(projectDir, "parsed", "og", relativeSubFolder)
-            : Path.Combine(projectDir, "og");
+        string jsonOutputFolderOgPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder) ? Path.Combine(projectDir, "parsed", "og", relativeSubFolder) : Path.Combine(projectDir, "og");
 
-        string jsonOutputFolderModPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder)
-            ? Path.Combine(projectDir, "parsed", "mod", relativeSubFolder)
-            : Path.Combine(projectDir, "mod");
+        string jsonOutputFolderModPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder) ? Path.Combine(projectDir, "parsed", "mod", relativeSubFolder) : Path.Combine(projectDir, "mod");
 
         Directory.CreateDirectory(jsonOutputFolderOgPath);
         Directory.CreateDirectory(jsonOutputFolderModPath);
@@ -536,9 +415,7 @@ class Program
                 (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(directSettings);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
-                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop")
-                    ? outputPath
-                    : outputPath + ".hip";
+                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop") ? outputPath : outputPath + ".hip";
 
                 string parentDir = Path.GetDirectoryName(finalOutFile);
                 if (!string.IsNullOrEmpty(parentDir))
@@ -553,15 +430,17 @@ class Program
             foreach (string archiveFolder in Directory.GetDirectories(hipHopFolder, "*", SearchOption.AllDirectories))
             {
                 string settingsPath = Path.Combine(archiveFolder, "Settings.ini");
-                if (!File.Exists(settingsPath)) continue;
+                if (!File.Exists(settingsPath))
+                    continue;
 
                 (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
                 string rawName = Path.GetFileName(archiveFolder);
-                string outFileName = rawName.EndsWith("_HIP") ? rawName.Replace("_HIP", ".hip") :
-                                    rawName.EndsWith("_HOP") ? rawName.Replace("_HOP", ".hop") :
-                                    rawName;
+                string outFileName =
+                    rawName.EndsWith("_HIP") ? rawName.Replace("_HIP", ".hip")
+                    : rawName.EndsWith("_HOP") ? rawName.Replace("_HOP", ".hop")
+                    : rawName;
 
                 string relativePath = Path.GetRelativePath(hipHopFolder, Path.GetDirectoryName(archiveFolder)!);
                 string targetOutDir = relativePath == "." ? outputPath : Path.Combine(outputPath, relativePath);
@@ -579,9 +458,7 @@ class Program
                 (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
-                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop")
-                    ? outputPath
-                    : outputPath + ".hip";
+                string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop") ? outputPath : outputPath + ".hip";
 
                 File.WriteAllBytes(finalOutFile, hipBytes);
                 Logger.LogInfo($"Packed archive to {finalOutFile}");
@@ -690,12 +567,14 @@ class Program
                         if (addedProps.Count > 0 || removedProps.Count > 0)
                         {
                             invalidStructure = true;
-                            structureErrors.Add(new Dictionary<string, object>
-                            {
-                                { "key", k },
-                                { "added_props", addedProps },
-                                { "removed_props", removedProps }
-                            });
+                            structureErrors.Add(
+                                new Dictionary<string, object>
+                                {
+                                    { "key", k },
+                                    { "added_props", addedProps },
+                                    { "removed_props", removedProps },
+                                }
+                            );
                             continue;
                         }
                     }
@@ -711,29 +590,34 @@ class Program
                     Logger.LogError($"Invalid structure changes detected in {rel} for {structureErrors.Count} element(s).\n");
                     foreach (var e in structureErrors)
                     {
-                        Logger.LogInfo($"  Element {e["key"]}: added_props={JsonSerializer.Serialize(e["added_props"])}, removed_props={JsonSerializer.Serialize(e["removed_props"]) }");
+                        Logger.LogInfo($"  Element {e["key"]}: added_props={JsonSerializer.Serialize(e["added_props"])}, removed_props={JsonSerializer.Serialize(e["removed_props"])}");
                     }
-                    changes.Add(new Dictionary<string, object>
-                    {
-                        { "file", rel },
-                        { "error", "invalid_structure" },
-                        { "details", structureErrors }
-                    });
+                    changes.Add(
+                        new Dictionary<string, object>
+                        {
+                            { "file", rel },
+                            { "error", "invalid_structure" },
+                            { "details", structureErrors },
+                        }
+                    );
                 }
                 else if (added.Count > 0 || removed.Count > 0 || modified.Count > 0)
                 {
                     Logger.LogInfo($"Changed: {rel} (added:{added.Count}, removed:{removed.Count}, modified:{modified.Count})");
-                   
-                    if (added.Count > 0) Logger.LogInfo($"  Added element keys: {string.Join(", ", added)}");
-                    if (removed.Count > 0) Logger.LogInfo($"  Removed element keys: {string.Join(", ", removed)}");
-                    if (modified.Count > 0) Logger.LogInfo($"  Modified element keys: {string.Join(", ", modified)}");
+
+                    if (added.Count > 0)
+                        Logger.LogInfo($"  Added element keys: {string.Join(", ", added)}");
+                    if (removed.Count > 0)
+                        Logger.LogInfo($"  Removed element keys: {string.Join(", ", removed)}");
+                    if (modified.Count > 0)
+                        Logger.LogInfo($"  Modified element keys: {string.Join(", ", modified)}");
 
                     var changeEntry = new Dictionary<string, object>
                     {
                         { "file", rel },
                         { "added", added },
                         { "removed", removed },
-                        { "modified", modified }
+                        { "modified", modified },
                     };
 
                     var serializedOutputs = new List<Dictionary<string, object>>();
@@ -761,7 +645,14 @@ class Program
 
                             if (!ParserMaps.AssetToParser.TryGetValue(detectedAssetType, out AssetParser assetParser))
                             {
-                                serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "no_parser" } });
+                                serializedOutputs.Add(
+                                    new Dictionary<string, object>
+                                    {
+                                        { "key", key },
+                                        { "asset", detectedAssetType },
+                                        { "error", "no_parser" },
+                                    }
+                                );
                                 continue;
                             }
 
@@ -771,7 +662,14 @@ class Program
 
                             if (targetType == null)
                             {
-                                serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "type_not_found" } });
+                                serializedOutputs.Add(
+                                    new Dictionary<string, object>
+                                    {
+                                        { "key", key },
+                                        { "asset", detectedAssetType },
+                                        { "error", "type_not_found" },
+                                    }
+                                );
                                 continue;
                             }
 
@@ -786,44 +684,26 @@ class Program
                                 if (obj is DYNA dyna && dyna.dynaSpecificData is JsonElement dynaElem)
                                 {
                                     string className = dyna.typeNameInternal.Replace(':', '_');
-
                                     Type payloadType = Type.GetType($"{ns}.{className}");
 
                                     if (payloadType != null)
                                     {
                                         dyna.dynaSpecificData = dynaElem.Deserialize(payloadType, serOpts)!;
-
-                                        if (dyna.typeNameInternal.StartsWith("Enemy:SB:") && dyna.dynaSpecificData is Enemy_SB enemy)
-                                        {
-                                            Type enemyType = dyna.typeNameInternal switch
-                                            {
-                                                "Enemy:SB:BucketOTron" => typeof(Enemy_SB_BucketOTron),
-                                                "Enemy:SB:CastNCrew"   => typeof(Enemy_SB_CastNCrew),
-                                                "Enemy:SB:Critter"     => typeof(Enemy_SB_Critter),
-                                                "Enemy:SB:Dennis"      => typeof(Enemy_SB_Dennis),
-                                                "Enemy:SB:FrogFish"    => typeof(Enemy_SB_FrogFish),
-                                                "Enemy:SB:Mindy"       => typeof(Enemy_SB_Mindy),
-                                                "Enemy:SB:Neptune"     => typeof(Enemy_SB_Neptune),
-                                                "Enemy:SB:Standard"    => typeof(Enemy_SB_Standard),
-                                                "Enemy:SB:SupplyCrate" => typeof(Enemy_SB_SupplyCrate),
-                                                "Enemy:SB:Turret"      => typeof(Enemy_SB_Turret),
-                                                _ => null
-                                            };
-
-                                            if (enemyType != null &&
-                                                enemy.enemyData is JsonElement enemyElem)
-                                            {
-                                                enemy.enemyData = enemyElem.Deserialize(enemyType, serOpts)!;
-                                            }
-                                        }
                                     }
                                 }
-                                
+
                                 serialized = assetParser.Serialize(obj);
                             }
                             catch (NotImplementedException)
                             {
-                                serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "serialize_not_implemented" } });
+                                serializedOutputs.Add(
+                                    new Dictionary<string, object>
+                                    {
+                                        { "key", key },
+                                        { "asset", detectedAssetType },
+                                        { "error", "serialize_not_implemented" },
+                                    }
+                                );
                                 continue;
                             }
 
@@ -879,8 +759,8 @@ class Program
                                     if (modElem.ValueKind == JsonValueKind.Object && modElem.TryGetProperty("Entity", out var entProp) && entProp.ValueKind == JsonValueKind.Object)
                                     {
                                         EntFlags flags = entProp.TryGetProperty("flags", out var f) ? f.Deserialize<EntFlags>() : EntFlags.None;
-                                        byte subtype = entProp.TryGetProperty("subtype", out var st) && st.ValueKind==JsonValueKind.Number ? (byte)st.GetUInt32() : (byte)0;
-                                        byte pflags = entProp.TryGetProperty("pflags", out var pf) && pf.ValueKind==JsonValueKind.Number ? (byte)pf.GetUInt32() : (byte)0;
+                                        byte subtype = entProp.TryGetProperty("subtype", out var st) && st.ValueKind == JsonValueKind.Number ? (byte)st.GetUInt32() : (byte)0;
+                                        byte pflags = entProp.TryGetProperty("pflags", out var pf) && pf.ValueKind == JsonValueKind.Number ? (byte)pf.GetUInt32() : (byte)0;
                                         EntFlagsMore moreFlags = entProp.TryGetProperty("moreFlags", out var mf) ? mf.Deserialize<EntFlagsMore>() : EntFlagsMore.None;
 
                                         bw.Write((byte)flags);
@@ -893,44 +773,63 @@ class Program
                                             bw.Write(new byte[4]);
                                         }
 
-                                        uint surfaceID = entProp.TryGetProperty("surfaceID", out var sid) && sid.ValueKind==JsonValueKind.Number ? sid.GetUInt32() : 0u;
+                                        uint surfaceID = entProp.TryGetProperty("surfaceID", out var sid) && sid.ValueKind == JsonValueKind.Number ? sid.GetUInt32() : 0u;
                                         Util.WriteUInt32(bw, surfaceID);
 
-                                        double Deg2Rad = 1.0 / 57.29577951308232;
-                                        if (entProp.TryGetProperty("ang", out var ang) && ang.ValueKind==JsonValueKind.Object)
+                                        if (entProp.TryGetProperty("ang", out var ang) && ang.ValueKind == JsonValueKind.Object)
                                         {
-                                            float ax = ang.TryGetProperty("x", out var axp) && axp.ValueKind==JsonValueKind.Number ? axp.GetSingle() : 0f;
-                                            float ay = ang.TryGetProperty("y", out var ayp) && ayp.ValueKind==JsonValueKind.Number ? ayp.GetSingle() : 0f;
-                                            float az = ang.TryGetProperty("z", out var azp) && azp.ValueKind==JsonValueKind.Number ? azp.GetSingle() : 0f;
-                                            Util.WriteFloat(bw, (float)(ax * Deg2Rad));
-                                            Util.WriteFloat(bw, (float)(ay * Deg2Rad));
-                                            Util.WriteFloat(bw, (float)(az * Deg2Rad));
+                                            float ax = ang.TryGetProperty("x", out var axp) && axp.ValueKind == JsonValueKind.Number ? axp.GetSingle() : 0f;
+                                            float ay = ang.TryGetProperty("y", out var ayp) && ayp.ValueKind == JsonValueKind.Number ? ayp.GetSingle() : 0f;
+                                            float az = ang.TryGetProperty("z", out var azp) && azp.ValueKind == JsonValueKind.Number ? azp.GetSingle() : 0f;
+                                            var rad = ToRadians(new xVec3(ax, ay, az));
+                                            Util.WriteFloat(bw, rad.x);
+                                            Util.WriteFloat(bw, rad.y);
+                                            Util.WriteFloat(bw, rad.z);
                                         }
-                                        else { Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); }
-
-                                        if (entProp.TryGetProperty("pos", out var pos) && pos.ValueKind==JsonValueKind.Object)
+                                        else
                                         {
-                                            float px = pos.TryGetProperty("x", out var pxp) && pxp.ValueKind==JsonValueKind.Number ? pxp.GetSingle() : 0f;
-                                            float py = pos.TryGetProperty("y", out var pyp) && pyp.ValueKind==JsonValueKind.Number ? pyp.GetSingle() : 0f;
-                                            float pz = pos.TryGetProperty("z", out var pzp) && pzp.ValueKind==JsonValueKind.Number ? pzp.GetSingle() : 0f;
-                                            Util.WriteFloat(bw, px); Util.WriteFloat(bw, py); Util.WriteFloat(bw, pz);
+                                            Util.WriteFloat(bw, 0f);
+                                            Util.WriteFloat(bw, 0f);
+                                            Util.WriteFloat(bw, 0f);
                                         }
-                                        else { Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); Util.WriteFloat(bw, 0f); }
 
-                                        if (entProp.TryGetProperty("scale", out var scale) && scale.ValueKind==JsonValueKind.Object)
+                                        if (entProp.TryGetProperty("pos", out var pos) && pos.ValueKind == JsonValueKind.Object)
                                         {
-                                            float sx = scale.TryGetProperty("x", out var sxp) && sxp.ValueKind==JsonValueKind.Number ? sxp.GetSingle() : 1f;
-                                            float sy = scale.TryGetProperty("y", out var syp) && syp.ValueKind==JsonValueKind.Number ? syp.GetSingle() : 1f;
-                                            float sz = scale.TryGetProperty("z", out var szp) && szp.ValueKind==JsonValueKind.Number ? szp.GetSingle() : 1f;
-                                            Util.WriteFloat(bw, sx); Util.WriteFloat(bw, sy); Util.WriteFloat(bw, sz);
+                                            float px = pos.TryGetProperty("x", out var pxp) && pxp.ValueKind == JsonValueKind.Number ? pxp.GetSingle() : 0f;
+                                            float py = pos.TryGetProperty("y", out var pyp) && pyp.ValueKind == JsonValueKind.Number ? pyp.GetSingle() : 0f;
+                                            float pz = pos.TryGetProperty("z", out var pzp) && pzp.ValueKind == JsonValueKind.Number ? pzp.GetSingle() : 0f;
+                                            Util.WriteFloat(bw, px);
+                                            Util.WriteFloat(bw, py);
+                                            Util.WriteFloat(bw, pz);
                                         }
-                                        else { Util.WriteFloat(bw, 1f); Util.WriteFloat(bw, 1f); Util.WriteFloat(bw, 1f); }
+                                        else
+                                        {
+                                            Util.WriteFloat(bw, 0f);
+                                            Util.WriteFloat(bw, 0f);
+                                            Util.WriteFloat(bw, 0f);
+                                        }
 
-                                        float redMult = entProp.TryGetProperty("redMult", out var rm) && rm.ValueKind==JsonValueKind.Number ? rm.GetSingle() : 1f;
-                                        float greenMult = entProp.TryGetProperty("greenMult", out var gm) && gm.ValueKind==JsonValueKind.Number ? gm.GetSingle() : 1f;
-                                        float blueMult = entProp.TryGetProperty("blueMult", out var bm) && bm.ValueKind==JsonValueKind.Number ? bm.GetSingle() : 1f;
-                                        float seeThru = entProp.TryGetProperty("seeThru", out var stt) && stt.ValueKind==JsonValueKind.Number ? stt.GetSingle() : 0f;
-                                        float seeThruSpeed = entProp.TryGetProperty("seeThruSpeed", out var sts) && sts.ValueKind==JsonValueKind.Number ? sts.GetSingle() : 0f;
+                                        if (entProp.TryGetProperty("scale", out var scale) && scale.ValueKind == JsonValueKind.Object)
+                                        {
+                                            float sx = scale.TryGetProperty("x", out var sxp) && sxp.ValueKind == JsonValueKind.Number ? sxp.GetSingle() : 1f;
+                                            float sy = scale.TryGetProperty("y", out var syp) && syp.ValueKind == JsonValueKind.Number ? syp.GetSingle() : 1f;
+                                            float sz = scale.TryGetProperty("z", out var szp) && szp.ValueKind == JsonValueKind.Number ? szp.GetSingle() : 1f;
+                                            Util.WriteFloat(bw, sx);
+                                            Util.WriteFloat(bw, sy);
+                                            Util.WriteFloat(bw, sz);
+                                        }
+                                        else
+                                        {
+                                            Util.WriteFloat(bw, 1f);
+                                            Util.WriteFloat(bw, 1f);
+                                            Util.WriteFloat(bw, 1f);
+                                        }
+
+                                        float redMult = entProp.TryGetProperty("redMult", out var rm) && rm.ValueKind == JsonValueKind.Number ? rm.GetSingle() : 1f;
+                                        float greenMult = entProp.TryGetProperty("greenMult", out var gm) && gm.ValueKind == JsonValueKind.Number ? gm.GetSingle() : 1f;
+                                        float blueMult = entProp.TryGetProperty("blueMult", out var bm) && bm.ValueKind == JsonValueKind.Number ? bm.GetSingle() : 1f;
+                                        float seeThru = entProp.TryGetProperty("seeThru", out var stt) && stt.ValueKind == JsonValueKind.Number ? stt.GetSingle() : 0f;
+                                        float seeThruSpeed = entProp.TryGetProperty("seeThruSpeed", out var sts) && sts.ValueKind == JsonValueKind.Number ? sts.GetSingle() : 0f;
 
                                         Util.WriteFloat(bw, redMult);
                                         Util.WriteFloat(bw, greenMult);
@@ -939,11 +838,15 @@ class Program
                                         Util.WriteFloat(bw, seeThruSpeed);
 
                                         uint modelInfoID = 0;
-                                        if (entProp.TryGetProperty("modelInfoID", out var mid) && mid.ValueKind==JsonValueKind.String && mid.GetString().StartsWith("0x")) modelInfoID = Convert.ToUInt32(mid.GetString().Substring(2), 16);
-                                        else if (entProp.TryGetProperty("modelInfoID", out var mid2) && mid2.ValueKind==JsonValueKind.Number) modelInfoID = mid2.GetUInt32();
+                                        if (entProp.TryGetProperty("modelInfoID", out var mid) && mid.ValueKind == JsonValueKind.String && mid.GetString().StartsWith("0x"))
+                                            modelInfoID = Convert.ToUInt32(mid.GetString().Substring(2), 16);
+                                        else if (entProp.TryGetProperty("modelInfoID", out var mid2) && mid2.ValueKind == JsonValueKind.Number)
+                                            modelInfoID = mid2.GetUInt32();
                                         uint animListID = 0;
-                                        if (entProp.TryGetProperty("animListID", out var aid) && aid.ValueKind==JsonValueKind.String && aid.GetString().StartsWith("0x")) animListID = Convert.ToUInt32(aid.GetString().Substring(2), 16);
-                                        else if (entProp.TryGetProperty("animListID", out var aid2) && aid2.ValueKind==JsonValueKind.Number) animListID = aid2.GetUInt32();
+                                        if (entProp.TryGetProperty("animListID", out var aid) && aid.ValueKind == JsonValueKind.String && aid.GetString().StartsWith("0x"))
+                                            animListID = Convert.ToUInt32(aid.GetString().Substring(2), 16);
+                                        else if (entProp.TryGetProperty("animListID", out var aid2) && aid2.ValueKind == JsonValueKind.Number)
+                                            animListID = aid2.GetUInt32();
 
                                         Util.WriteUInt32(bw, modelInfoID);
                                         Util.WriteUInt32(bw, animListID);
@@ -955,7 +858,7 @@ class Program
                                     {
                                         GameType.BFBB => asm.GetType($"{ns}.EventBFBB", true, true),
                                         GameType.TSSM => asm.GetType($"{ns}.EventTSSM", true, true),
-                                        _ => throw new Exception($"Unsupported game type: {CurrentGame}")
+                                        _ => throw new Exception($"Unsupported game type: {CurrentGame}"),
                                     };
 
                                     if (eventType == null)
@@ -970,7 +873,8 @@ class Program
                                         {
                                             long p = ms.Position;
                                             long aligned = (p + 3) & ~3L;
-                                            while (ms.Position < aligned) bw.Write((byte)0);
+                                            while (ms.Position < aligned)
+                                                bw.Write((byte)0);
 
                                             ushort srcEvent = 0;
                                             ushort dstEvent = 0;
@@ -1007,29 +911,35 @@ class Program
                                             Util.WriteUInt16(bw, dstEvent);
 
                                             uint dstAssetID = 0;
-                                            if (link.TryGetProperty("dstAssetID", out var da) && da.ValueKind==JsonValueKind.String && da.GetString().StartsWith("0x")) dstAssetID = Convert.ToUInt32(da.GetString().Substring(2), 16);
-                                            else if (link.TryGetProperty("dstAssetID", out var da2) && da2.ValueKind==JsonValueKind.Number) dstAssetID = da2.GetUInt32();
+                                            if (link.TryGetProperty("dstAssetID", out var da) && da.ValueKind == JsonValueKind.String && da.GetString().StartsWith("0x"))
+                                                dstAssetID = Convert.ToUInt32(da.GetString().Substring(2), 16);
+                                            else if (link.TryGetProperty("dstAssetID", out var da2) && da2.ValueKind == JsonValueKind.Number)
+                                                dstAssetID = da2.GetUInt32();
                                             Util.WriteUInt32(bw, dstAssetID);
 
                                             uint[] pU32 = new uint[4];
-                                            if (link.TryGetProperty("paramU32", out var pu) && pu.ValueKind==JsonValueKind.Array)
+                                            if (link.TryGetProperty("paramU32", out var pu) && pu.ValueKind == JsonValueKind.Array)
                                             {
                                                 int i = 0;
                                                 foreach (var item in pu.EnumerateArray())
                                                 {
-                                                    if (i >= 4) break;
-                                                    if (item.ValueKind==JsonValueKind.String && item.GetString().StartsWith("0x")) pU32[i] = Convert.ToUInt32(item.GetString().Substring(2), 16);
-                                                    else if (item.ValueKind==JsonValueKind.Number) pU32[i] = item.GetUInt32();
+                                                    if (i >= 4)
+                                                        break;
+                                                    if (item.ValueKind == JsonValueKind.String && item.GetString().StartsWith("0x"))
+                                                        pU32[i] = Convert.ToUInt32(item.GetString().Substring(2), 16);
+                                                    else if (item.ValueKind == JsonValueKind.Number)
+                                                        pU32[i] = item.GetUInt32();
                                                     i++;
                                                 }
                                             }
-                                            else if (link.TryGetProperty("paramF32", out var pf) && pf.ValueKind==JsonValueKind.Array)
+                                            else if (link.TryGetProperty("paramF32", out var pf) && pf.ValueKind == JsonValueKind.Array)
                                             {
                                                 int i = 0;
                                                 foreach (var item in pf.EnumerateArray())
                                                 {
-                                                    if (i >= 4) break;
-                                                    float fv = item.ValueKind==JsonValueKind.Number ? item.GetSingle() : 0f;
+                                                    if (i >= 4)
+                                                        break;
+                                                    float fv = item.ValueKind == JsonValueKind.Number ? item.GetSingle() : 0f;
                                                     if (float.IsFinite(fv)) //can have coincidental NaN as a float interpretation... thx for no metadata :heavyironmoment:
                                                     {
                                                         int iv = BitConverter.SingleToInt32Bits(fv);
@@ -1039,23 +949,26 @@ class Program
                                                 }
                                             }
 
-                                            for (int i = 0; i < 4; i++) Util.WriteUInt32(bw, pU32[i]);
+                                            for (int i = 0; i < 4; i++)
+                                                Util.WriteUInt32(bw, pU32[i]);
 
                                             linkIndex++;
 
                                             uint paramWidgetAssetID = 0;
-                                            if (link.TryGetProperty("paramWidgetAssetID", out var pw) && pw.ValueKind==JsonValueKind.String && pw.GetString().StartsWith("0x")) paramWidgetAssetID = Convert.ToUInt32(pw.GetString().Substring(2), 16);
-                                            else if (link.TryGetProperty("paramWidgetAssetID", out var pw2) && pw2.ValueKind==JsonValueKind.Number) paramWidgetAssetID = pw2.GetUInt32();
+                                            if (link.TryGetProperty("paramWidgetAssetID", out var pw) && pw.ValueKind == JsonValueKind.String && pw.GetString().StartsWith("0x"))
+                                                paramWidgetAssetID = Convert.ToUInt32(pw.GetString().Substring(2), 16);
+                                            else if (link.TryGetProperty("paramWidgetAssetID", out var pw2) && pw2.ValueKind == JsonValueKind.Number)
+                                                paramWidgetAssetID = pw2.GetUInt32();
                                             uint chkAssetID = 0;
-                                            if (link.TryGetProperty("chkAssetID", out var ck) && ck.ValueKind==JsonValueKind.String && ck.GetString().StartsWith("0x")) chkAssetID = Convert.ToUInt32(ck.GetString().Substring(2), 16);
-                                            else if (link.TryGetProperty("chkAssetID", out var ck2) && ck2.ValueKind==JsonValueKind.Number) chkAssetID = ck2.GetUInt32();
+                                            if (link.TryGetProperty("chkAssetID", out var ck) && ck.ValueKind == JsonValueKind.String && ck.GetString().StartsWith("0x"))
+                                                chkAssetID = Convert.ToUInt32(ck.GetString().Substring(2), 16);
+                                            else if (link.TryGetProperty("chkAssetID", out var ck2) && ck2.ValueKind == JsonValueKind.Number)
+                                                chkAssetID = ck2.GetUInt32();
 
                                             Util.WriteUInt32(bw, paramWidgetAssetID);
                                             Util.WriteUInt32(bw, chkAssetID);
                                         }
                                     }
-
-                                    fullBytes = ms.ToArray();
 
                                     if (detectedAssetType == "TRIG") //yep code.... i appreaciate you heavy iron my beloved
                                     {
@@ -1069,6 +982,8 @@ class Program
                                         PKUP objectAsPkup = (PKUP)obj;
                                         bw.Write((byte)objectAsPkup.pickupType);
                                     }
+
+                                    fullBytes = ms.ToArray();
                                 }
 
                                 string folder = "";
@@ -1129,10 +1044,8 @@ class Program
 
                                 string safeKey = string.Join("_", key.Split(Path.GetInvalidFileNameChars()));
                                 string archiveName = Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", ""));
-                                
-                                string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini"))
-                                    ? hipHopFolder
-                                    : Path.Combine(hipHopFolder, archiveName);
+
+                                string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini")) ? hipHopFolder : Path.Combine(hipHopFolder, archiveName);
 
                                 string outFile = Path.Combine(hipHopContainer, folder, safeKey);
 
@@ -1145,43 +1058,85 @@ class Program
                                 {
                                     string iniLine = "";
                                     if (detectedAssetType == "DYNA")
-                                        iniLine = "Asset=" + GetAssetId(safeKey).Substring(2) + ";" + folder + ";" + "2" + ";" + "0" + ";" + safeKey.Substring(11) + ";;" + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
+                                        iniLine =
+                                            "Asset="
+                                            + GetAssetId(safeKey).Substring(2)
+                                            + ";"
+                                            + folder
+                                            + ";"
+                                            + "2"
+                                            + ";"
+                                            + "0"
+                                            + ";"
+                                            + safeKey.Substring(11)
+                                            + ";;"
+                                            + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
                                     else
-                                        iniLine = "Asset=" + GetAssetId(safeKey).Substring(2) + ";" + folder + ";" + "2" + ";" + "-1" + ";" + safeKey.Substring(11) + ";;" + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
-                                    
+                                        iniLine =
+                                            "Asset="
+                                            + GetAssetId(safeKey).Substring(2)
+                                            + ";"
+                                            + folder
+                                            + ";"
+                                            + "2"
+                                            + ";"
+                                            + "-1"
+                                            + ";"
+                                            + safeKey.Substring(11)
+                                            + ";;"
+                                            + Crc32Mpeg2.Compute(fullBytes).ToString("X8");
+
                                     Logger.LogInfo(iniLine);
 
                                     string settingsIni = Path.Combine(hipHopContainer, "Settings.ini");
-                                    
+
                                     var lines = File.ReadAllLines(settingsIni);
 
                                     var newLines = File.ReadLines(settingsIni) //remove duplicates to prevent crash on packing
                                         .Where(line => !line.StartsWith("Asset=" + GetAssetId(safeKey).Substring(2) + ";"))
                                         .ToArray();
-                                    
+
                                     int start = Array.FindIndex(newLines, l => l == "LayerType=0 DEFAULT");
                                     int end = Array.FindIndex(newLines, start + 1, l => l == "EndLayer");
-                                    
-                                    var newerLines = newLines
-                                        .Take(end)
-                                        .Append(iniLine)
-                                        .Concat(newLines.Skip(end));
+
+                                    var newerLines = newLines.Take(end).Append(iniLine).Concat(newLines.Skip(end));
 
                                     File.WriteAllLines(settingsIni, newerLines);
                                 }
 
                                 File.WriteAllBytes(outFile, fullBytes);
 
-                                serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "out_file", outFile } });
+                                serializedOutputs.Add(
+                                    new Dictionary<string, object>
+                                    {
+                                        { "key", key },
+                                        { "asset", detectedAssetType },
+                                        { "out_file", outFile },
+                                    }
+                                );
                             }
                             else
                             {
-                                serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "serialize_returned_non_bytes" } });
+                                serializedOutputs.Add(
+                                    new Dictionary<string, object>
+                                    {
+                                        { "key", key },
+                                        { "asset", detectedAssetType },
+                                        { "error", "serialize_returned_non_bytes" },
+                                    }
+                                );
                             }
                         }
                         catch (Exception ex)
                         {
-                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "error", "exception" }, { "message", ex.Message } });
+                            serializedOutputs.Add(
+                                new Dictionary<string, object>
+                                {
+                                    { "key", key },
+                                    { "error", "exception" },
+                                    { "message", ex.Message },
+                                }
+                            );
                         }
                     }
 
@@ -1207,7 +1162,14 @@ class Program
 
                         if (!ParserMaps.AssetToParser.TryGetValue(detectedAssetType, out AssetParser assetParser))
                         {
-                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "no_parser" } });
+                            serializedOutputs.Add(
+                                new Dictionary<string, object>
+                                {
+                                    { "key", key },
+                                    { "asset", detectedAssetType },
+                                    { "error", "no_parser" },
+                                }
+                            );
                             continue;
                         }
 
@@ -1218,7 +1180,14 @@ class Program
 
                         if (targetType == null)
                         {
-                            serializedOutputs.Add(new Dictionary<string, object> { { "key", key }, { "asset", detectedAssetType }, { "error", "type_not_found" } });
+                            serializedOutputs.Add(
+                                new Dictionary<string, object>
+                                {
+                                    { "key", key },
+                                    { "asset", detectedAssetType },
+                                    { "error", "type_not_found" },
+                                }
+                            );
                             continue;
                         }
 
@@ -1248,9 +1217,7 @@ class Program
                         string assetID = GetAssetId(safeKey).Substring(2);
                         string archiveName = Path.GetFileNameWithoutExtension(modFile.Replace("_assets.json", ""));
 
-                        string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini"))
-                            ? hipHopFolder
-                            : Path.Combine(hipHopFolder, archiveName);
+                        string hipHopContainer = File.Exists(Path.Combine(hipHopFolder, "Settings.ini")) ? hipHopFolder : Path.Combine(hipHopFolder, archiveName);
 
                         string outFile = Path.Combine(hipHopContainer, folder, safeKey);
 
@@ -1282,7 +1249,14 @@ class Program
             catch (JsonException jex)
             {
                 Logger.LogError($"Invalid JSON in {rel}: {jex.Message}");
-                changes.Add(new Dictionary<string, object> { { "file", rel }, { "error", "invalid_json" }, { "message", jex.Message } });
+                changes.Add(
+                    new Dictionary<string, object>
+                    {
+                        { "file", rel },
+                        { "error", "invalid_json" },
+                        { "message", jex.Message },
+                    }
+                );
             }
             catch (Exception ex)
             {
@@ -1360,11 +1334,7 @@ class Program
                 return null;
             }
 
-            assetDescriptor = new AssetDescriptor()
-            {
-                AssetType = "DYNA",
-                AssetStorage = AssetType.Base
-            };
+            assetDescriptor = new AssetDescriptor() { AssetType = "DYNA", AssetStorage = AssetType.Base };
         }
 
         if (BLACKLIST_ASSETS.Contains(assetDescriptor.AssetType))
@@ -1406,7 +1376,7 @@ class Program
                 id = id,
                 baseType = baseTypeStr,
                 linkCount = linkCount,
-                baseFlags = (BaseFlags)baseFlags
+                baseFlags = (BaseFlags)baseFlags,
             };
         }
 
@@ -1448,10 +1418,14 @@ class Program
                     links[i] = ReadLinkAsset(br);
             }
 
-            if (category == "binary") _parsedBinary++;
-            if (category == "dyna") _parsedDyna++;
-            if (category == "base") _parsedBase++;
-            if (category == "entity") _parsedEntity++;
+            if (category == "binary")
+                _parsedBinary++;
+            if (category == "dyna")
+                _parsedDyna++;
+            if (category == "base")
+                _parsedBase++;
+            if (category == "entity")
+                _parsedEntity++;
         }
         else
         {
@@ -1461,7 +1435,7 @@ class Program
                 _unimplByType[type] = 1;
             else
                 _unimplByType[type] = count + 1;
-        
+
             _unimplemented++;
 
             Logger.LogWarning($"Unimplemented parser for {type} ({assetType})");
@@ -1472,7 +1446,7 @@ class Program
             Base = baseAsset,
             Links = links,
             Entity = ent,
-            AssetData = additionalData
+            AssetData = additionalData,
         };
     }
 
@@ -1502,8 +1476,7 @@ class Program
         Logger.LogInfo(" UNIMPLEMENTED:");
         Logger.LogInfo("------------------------------------");
 
-        foreach (var kvp in _unimplByType
-            .OrderByDescending(x => x.Value))
+        foreach (var kvp in _unimplByType.OrderByDescending(x => x.Value))
         {
             Logger.LogInfo($"{kvp.Key}: {kvp.Value}");
         }
@@ -1522,7 +1495,7 @@ class Program
 
         if (BASE_ASSETS.Contains(assetType))
             return "base";
-        
+
         return "binary";
     }
 
@@ -1540,23 +1513,11 @@ class Program
 
         uint surfaceID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
-        xVec3 ang = ToDegrees(new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0)
-        ));
+        xVec3 ang = ToDegrees(new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0)));
 
-        xVec3 pos = new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0)
-        );
+        xVec3 pos = new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0));
 
-        xVec3 scale = new xVec3(
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0),
-            Util.ReadFloat(br.ReadBytes(4), 0)
-        );
+        xVec3 scale = new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0));
 
         float redMult = Util.ReadFloat(br.ReadBytes(4), 0);
         float greenMult = Util.ReadFloat(br.ReadBytes(4), 0);
@@ -1583,13 +1544,16 @@ class Program
             seeThru = seeThru,
             seeThruSpeed = seeThruSpeed,
             modelInfoID = modelInfoID,
-            animListID = animListID
+            animListID = animListID,
         };
     }
 
     static xLinkAsset ReadLinkAsset(BinaryReader br)
     {
-        Align4(br);
+        long p = br.BaseStream.Position;
+        long aligned = (p + 3) & ~3;
+        if (aligned != p)
+            br.BaseStream.Position = aligned;
 
         ushort srcEvent = Util.ReadUInt16(br.ReadBytes(2), 0);
         ushort dstEvent = Util.ReadUInt16(br.ReadBytes(2), 0);
@@ -1615,7 +1579,7 @@ class Program
             pU32[i] = Util.ReadUInt32(br.ReadBytes(4), 0);
             pF32[i] = BitConverter.Int32BitsToSingle(unchecked((int)pU32[i]));
         }
-        
+
         uint paramWidgetAssetID = Util.ReadUInt32(br.ReadBytes(4), 0);
         uint chkAssetID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
@@ -1627,21 +1591,8 @@ class Program
             paramU32 = pU32,
             paramF32 = pF32,
             paramWidgetAssetID = paramWidgetAssetID,
-            chkAssetID = chkAssetID
+            chkAssetID = chkAssetID,
         };
-    }
-
-    static void Align4(BinaryReader br)
-    {
-        long p = br.BaseStream.Position;
-        long aligned = (p + 3) & ~3;
-        if (aligned != p)
-            br.BaseStream.Position = aligned;
-    }
-
-    static bool IsPlatformBigEndian(GamePlatform p)
-    {
-        return p == GamePlatform.GC;
     }
 
     static string GetFriendlyName(string fileName)
@@ -1675,13 +1626,15 @@ class Program
         return Path.GetFileName(fileDir) ?? string.Empty;
     }
 
-    static xVec3 ToDegrees(xVec3 radiansVec)
+    public static xVec3 ToDegrees(xVec3 radiansVec)
     {
-        const double Rad2Deg = 57.29577951308232;
-        return new xVec3(
-            (float)(radiansVec.x * Rad2Deg),
-            (float)(radiansVec.y * Rad2Deg),
-            (float)(radiansVec.z * Rad2Deg)
-        );
+        const double Rad2Deg = 180.0 / Math.PI;
+        return new xVec3((float)(radiansVec.x * Rad2Deg), (float)(radiansVec.y * Rad2Deg), (float)(radiansVec.z * Rad2Deg));
+    }
+
+    public static xVec3 ToRadians(xVec3 degreesVec)
+    {
+        const double Deg2Rad = Math.PI / 180.0;
+        return new xVec3((float)(degreesVec.x * Deg2Rad), (float)(degreesVec.y * Deg2Rad), (float)(degreesVec.z * Deg2Rad));
     }
 }

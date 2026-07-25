@@ -542,5 +542,5 @@ public enum EventBFBB : ushort
     PlatformPause = 0x0219,
     PlatformUnpause = 0x021A,
     StoreOptions = 0x021B,
-    RestoreOptions = 0x021C
+    RestoreOptions = 0x021C,
 }

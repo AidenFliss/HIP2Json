@@ -22,7 +22,7 @@ public sealed class PICKParser : AssetParser
                 pickupFlags = ReadUInt16BE(br),
                 quantity = ReadUInt32BE(br),
                 modelID = ReadUInt32BE(br),
-                animID = ReadUInt32BE(br)
+                animID = ReadUInt32BE(br),
             };
         }
 
@@ -30,14 +30,14 @@ public sealed class PICKParser : AssetParser
         {
             magic = magic,
             count = count,
-            pickups = pickups
+            pickups = pickups,
         };
     }
 
     public override object Serialize(object obj)
     {
         PICK pick = (PICK)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -74,8 +74,10 @@ public class zAssetPickup
     public byte pickupIndex { get; set; }
     public ushort pickupFlags { get; set; }
     public uint quantity { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint modelID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint animID { get; set; }
 }

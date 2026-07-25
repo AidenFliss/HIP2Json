@@ -15,7 +15,7 @@ public sealed class DYNAParser : AssetParser //god save me..
         {
             type = type,
             version = version,
-            handle = handle
+            handle = handle,
         };
 
         string typeHex = dyna.type.ToString("X8");
@@ -44,7 +44,7 @@ public sealed class DYNAParser : AssetParser //god save me..
     public override object Serialize(object obj)
     {
         DYNA dyna = (DYNA)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 

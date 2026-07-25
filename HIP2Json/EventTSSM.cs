@@ -804,5 +804,5 @@ public enum EventTSSM : ushort
     Prompt_is_dead = 0x031F,
     UI_Flip_Visibility = 0x0320,
     XBLive_Reboot_To_Dashboard = 0x0321,
-    First_Powerup_Point = 0x0322
+    First_Powerup_Point = 0x0322,
 }

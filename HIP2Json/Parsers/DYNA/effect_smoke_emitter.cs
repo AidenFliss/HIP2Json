@@ -36,7 +36,7 @@ public sealed class effect_smoke_emitterParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_smoke_emitter smokeEmitter = (effect_smoke_emitter)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -65,17 +65,22 @@ public sealed class effect_smoke_emitterParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "SmokeEmitter"; }
+    public override string GetFolderName()
+    {
+        return "SmokeEmitter";
+    }
 }
 
 public class effect_smoke_emitter
 {
     public uint flags { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attach_to { get; set; }
     public xVec3 loc { get; set; }
     public xVec3 dir { get; set; }
     public xVec3 scale { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint texture { get; set; }
     public ushort texture_rows { get; set; }

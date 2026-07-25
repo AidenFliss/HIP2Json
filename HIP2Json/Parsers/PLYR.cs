@@ -6,15 +6,13 @@ public sealed class PLYRParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
-        return new PLYR
-        {
-        };
+        return new PLYR { };
     }
 
     public override object Serialize(object obj)
     {
         PLYR plyr = (PLYR)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -22,6 +20,4 @@ public sealed class PLYRParser : AssetParser
     }
 }
 
-public class PLYR
-{
-}
+public class PLYR { }

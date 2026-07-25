@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -19,14 +17,14 @@ public sealed class SIMPParser : AssetParser
             animSpeed = animSpeed,
             initAnimState = initAnimState,
             collType = collType,
-            flags = flags
+            flags = flags,
         };
     }
 
     public override object Serialize(object obj)
     {
         SIMP simp = (SIMP)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -46,16 +44,4 @@ public class SIMP
     public int initAnimState { get; set; }
     public CollisionType collType { get; set; }
     public byte flags { get; set; }
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum CollisionType : byte //weird bit stuff again, yay
-{
-    None    = 0,
-    Trigger = 1 << 0,
-    Static  = 1 << 1,
-    Dynamic = 1 << 2,
-    NPC     = 1 << 3,
-    Player  = 1 << 4
 }

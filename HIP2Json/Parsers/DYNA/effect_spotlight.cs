@@ -41,7 +41,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
             size_min = size_min,
             size_max = size_max,
             glow_min = glow_min,
-            glow_max = glow_max
+            glow_max = glow_max,
         };
     }
 
@@ -73,14 +73,19 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Spotlight"; }
+    public override string GetFolderName()
+    {
+        return "Spotlight";
+    }
 }
 
 public class effect_spotlight
 {
     public uint flags { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attach_to { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint target { get; set; }
     public byte attach_bone { get; set; }
@@ -90,6 +95,7 @@ public class effect_spotlight
     public float max_dist { get; set; }
     public xColor lightColor { get; set; }
     public xColor auraColor { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint flareTexture { get; set; }
     public float size_min { get; set; }

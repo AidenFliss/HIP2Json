@@ -28,7 +28,7 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
         {
             0 => TextJustify.Left,
             1 => TextJustify.Center,
-            _ => TextJustify.Right
+            _ => TextJustify.Right,
         };
 
         int expandValue = ReadInt32BE(br);
@@ -37,7 +37,7 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
             0 => TextExpandMode.Up,
             1 => TextExpandMode.Center,
             2 => TextExpandMode.Down,
-            _ => TextExpandMode.Clip
+            _ => TextExpandMode.Clip,
         };
 
         float max_height = ReadFloatBE(br);
@@ -81,14 +81,14 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
             max_height = max_height,
             backdrop_type = backdrop_type,
             backdrop_color = backdrop_color,
-            backdrop_texture = backdrop_texture
+            backdrop_texture = backdrop_texture,
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_text_box textBox = (game_object_text_box)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -117,7 +117,10 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "TextBox"; }
+    public override string GetFolderName()
+    {
+        return "TextBox";
+    }
 }
 
 public class game_object_text_box
@@ -143,40 +146,7 @@ public class game_object_text_box
     public float max_height { get; set; }
     public BackdropType backdrop_type { get; set; }
     public xColor backdrop_color { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint backdrop_texture { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TextFont : uint
-{
-    Default = 0,
-    Arial = 1,
-    System = 2,
-    Numbers = 3
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TextJustify
-{
-    Left = 0,
-    Center = 1,
-    Right = 2
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum TextExpandMode
-{
-    Up = 0,
-    Center = 1,
-    Down = 2,
-    Clip = 3
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum BackdropType : uint
-{
-    SolidColor = 0,
-    Texture = 1,
-    None = 100
 }

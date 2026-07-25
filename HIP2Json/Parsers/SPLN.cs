@@ -18,11 +18,12 @@ public sealed class SPLNParser : AssetParser
         xVec4[] points = new xVec4[point_count];
         for (int i = 0; i < point_count; i++)
         {
+            xVec3 vec = ReadVector3BE(br);
             points[i] = new xVec4
             {
-                x = ReadFloatBE(br),
-                y = ReadFloatBE(br),
-                z = ReadFloatBE(br)
+                x = vec.x,
+                y = vec.y,
+                z = vec.z,
             };
         }
 
@@ -45,7 +46,7 @@ public sealed class SPLNParser : AssetParser
             spline_type = spline_type,
             unknown_hash_14 = unknown_hash_14,
             unknown_hash_18 = unknown_hash_18,
-            points = points
+            points = points,
         };
     }
 
@@ -68,9 +69,15 @@ public sealed class SPLNParser : AssetParser
         {
             foreach (var point in spln.points)
             {
-                WriteFloatBE(bw, point.x);
-                WriteFloatBE(bw, point.y);
-                WriteFloatBE(bw, point.z);
+                WriteVector3BE(
+                    bw,
+                    new xVec3
+                    {
+                        x = point.x,
+                        y = point.y,
+                        z = point.z,
+                    }
+                );
             }
         }
 

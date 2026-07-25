@@ -1,5 +1,4 @@
 using System.IO;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -24,7 +23,7 @@ public sealed class game_object_TaxiParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Taxi taxi = (game_object_Taxi)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -40,21 +39,29 @@ public sealed class game_object_TaxiParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Taxi"; }
+    public override string GetFolderName()
+    {
+        return "Taxi";
+    }
 }
 
 public class game_object_Taxi
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint marker { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint cameraID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint portalID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint talkBoxID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint textID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint taxiID { get; set; }
     public float invTimer { get; set; }

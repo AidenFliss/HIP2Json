@@ -98,7 +98,10 @@ public sealed class hud_meter_fontParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "HUDMeterFont"; }
+    public override string GetFolderName()
+    {
+        return "HUDMeterFont";
+    }
 }
 
 public class hud_meter_font
@@ -110,12 +113,16 @@ public class hud_meter_font
     public float max_value { get; set; }
     public float increment_time { get; set; }
     public float decrement_time { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_start_increment { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_increment { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_start_decrement { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_decrement { get; set; }
     public TextFont font_id { get; set; }

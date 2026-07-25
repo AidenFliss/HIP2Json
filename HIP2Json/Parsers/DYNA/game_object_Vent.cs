@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -26,7 +25,7 @@ public sealed class game_object_VentParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_Vent vent = (game_object_Vent)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -40,11 +39,14 @@ public sealed class game_object_VentParser : AbstractDYNAParser
         WriteFloatBE(bw, vent.idle_time);
         WriteFloatBE(bw, vent.warn_time);
         WriteFloatBE(bw, vent.damage_time);
-        
+
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Vent"; }
+    public override string GetFolderName()
+    {
+        return "Vent";
+    }
 }
 
 public class game_object_Vent
@@ -60,14 +62,4 @@ public class game_object_Vent
     public float idle_time { get; set; }
     public float warn_time { get; set; }
     public float damage_time { get; set; }
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum VentFlags : uint
-{
-    None = 0,
-    BreakBoulders = 0x1,
-    Automatic = 0x2,
-    DamageSpongeBall = 0x4
 }

@@ -19,14 +19,14 @@ public sealed class PARSParser : AssetParser
             renderSrcBlendMode = ReadByte(br),
             renderDstBlendMode = ReadByte(br),
             cmdCount = ReadByte(br),
-            cmdSize = ReadInt32BE(br)
+            cmdSize = ReadInt32BE(br),
         };
     }
 
     public override object Serialize(object obj)
     {
         PARS pars = (PARS)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -49,8 +49,10 @@ public sealed class PARSParser : AssetParser
 public class PARS
 {
     public int type { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint parentParSysID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint textureID { get; set; }
     public byte parFlags { get; set; }

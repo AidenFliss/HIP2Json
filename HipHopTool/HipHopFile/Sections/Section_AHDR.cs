@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Security.Cryptography;
 using static HipHopFile.Functions;
 
 namespace HipHopFile
@@ -90,7 +89,7 @@ namespace HipHopFile
         }
 
         public bool IsDyna => assetType.IsDyna();
-        
+
         public AssetType AssetTypeFromString(string type, Platform platform)
         {
             type = type.Trim();
@@ -400,7 +399,7 @@ namespace HipHopFile
                 case AssetType.HUDText: return 590;
                 case AssetType.HUDCompassObject: return 591;
                 case AssetType.HUDCompassSystem: return 592;
-               
+
                 case AssetType.IncrediblesIcon: return 600;
                 case AssetType.InteractionIceBridge: return 601;
                 case AssetType.InteractionLaunch: return 602;

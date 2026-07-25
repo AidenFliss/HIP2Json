@@ -38,14 +38,14 @@ public sealed class RANMParser : AssetParser
         {
             version = version,
             numRows = numRows,
-            entries = entries
+            entries = entries,
         };
     }
 
     public override object Serialize(object obj)
     {
         RANM ranm = (RANM)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -86,23 +86,32 @@ public class asset_entry
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint model_static { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint model_bound { get; set; }
     public float lod_dist { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint anim_idle { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint anim_move_through { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint anim_hit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_idle { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_move_through { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_hit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint model_burnt { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint anim_burnt { get; set; }
     public float burn_fuel { get; set; }

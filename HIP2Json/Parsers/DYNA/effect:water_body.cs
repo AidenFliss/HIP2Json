@@ -35,20 +35,28 @@ public sealed class effect_water_bodyParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Spotlight"; }
+    public override string GetFolderName()
+    {
+        return "Spotlight";
+    }
 }
 
 public class effect_water_body
 {
     public uint flags { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint motion_type { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint body { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint facade_refract { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint facade_reflect { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint light_dir { get; set; }
 }

@@ -26,7 +26,7 @@ public sealed class hud_meter_unitParser : AbstractDYNAParser
             model_1_id = ReadUInt32BE(br),
             model_1_loc = ReadVector3BE(br),
             model_1_size = ReadVector3BE(br),
-            fill_forward = (MeterFillDirection)ReadUInt32BE(br)
+            fill_forward = (MeterFillDirection)ReadUInt32BE(br),
         };
     }
 
@@ -59,7 +59,10 @@ public sealed class hud_meter_unitParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "HUDMeterUnit"; }
+    public override string GetFolderName()
+    {
+        return "HUDMeterUnit";
+    }
 }
 
 public class hud_meter_unit
@@ -71,12 +74,16 @@ public class hud_meter_unit
     public float max_value { get; set; }
     public float increment_time { get; set; }
     public float decrement_time { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_start_increment { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_increment { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_start_decrement { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound_decrement { get; set; }
     public uint model_0_id { get; set; }
@@ -86,11 +93,4 @@ public class hud_meter_unit
     public xVec3 model_1_loc { get; set; }
     public xVec3 model_1_size { get; set; }
     public MeterFillDirection fill_forward { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MeterFillDirection : uint
-{
-    RightToLeft = 0,
-    LeftToRight = 1
 }

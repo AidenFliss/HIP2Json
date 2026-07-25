@@ -1,6 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -22,7 +22,7 @@ public sealed class CRDTParser : AssetParser
 
         if (state == 3)
             Util.DecryptCRDT(ref data);
-        
+
         int dumpLen = System.Math.Min(0x100, data.Length);
 
         for (int i = 0; i < dumpLen; i += 16)
@@ -74,7 +74,7 @@ public sealed class CRDTParser : AssetParser
                     num = ReadUInt16BE(reader),
                     align = ReadUInt16BE(reader),
                     delay = ReadFloatBE(reader),
-                    innerspace = ReadFloatBE(reader)
+                    innerspace = ReadFloatBE(reader),
                 };
 
                 if (preset.align == 4)
@@ -126,38 +126,42 @@ public sealed class CRDTParser : AssetParser
                     text1 = Encoding.ASCII.GetString(bytes.ToArray());
                 }
 
-                hunks.Add(new CRDTHunk
-                {
-                    hunk_size = hunk_size,
-                    preset = preset,
-                    t0 = t0,
-                    t1 = t1,
-                    text1 = text1
-                });
+                hunks.Add(
+                    new CRDTHunk
+                    {
+                        hunk_size = hunk_size,
+                        preset = preset,
+                        t0 = t0,
+                        t1 = t1,
+                        text1 = text1,
+                    }
+                );
             }
 
-            sections.Add(new CRDTSection
-            {
-                credits_size = credits_size,
-                len = len,
-                flags = flags,
+            sections.Add(
+                new CRDTSection
+                {
+                    credits_size = credits_size,
+                    len = len,
+                    flags = flags,
 
-                in_x = in_x,
-                in_y = in_y,
-                out_x = out_x,
-                out_y = out_y,
+                    in_x = in_x,
+                    in_y = in_y,
+                    out_x = out_x,
+                    out_y = out_y,
 
-                scroll_rate = scroll_rate,
-                lifetime = lifetime,
+                    scroll_rate = scroll_rate,
+                    lifetime = lifetime,
 
-                fin_start = fin_start,
-                fin_end = fin_end,
-                fout_start = fout_start,
-                fout_end = fout_end,
+                    fin_start = fin_start,
+                    fin_end = fin_end,
+                    fout_start = fout_start,
+                    fout_end = fout_end,
 
-                presets = presets,
-                hunks = hunks.ToArray()
-            });
+                    presets = presets,
+                    hunks = hunks.ToArray(),
+                }
+            );
         }
 
         return new CRDT
@@ -168,7 +172,7 @@ public sealed class CRDTParser : AssetParser
             state = state,
             total_time = total_time,
             total_size = total_size,
-            sections = sections.ToArray()
+            sections = sections.ToArray(),
         };
     }
 
@@ -297,7 +301,7 @@ public sealed class CRDTParser : AssetParser
             spacingX = ReadFloatBE(br),
             spacingY = ReadFloatBE(br),
             maxWidth = ReadFloatBE(br),
-            maxHeight = ReadFloatBE(br)
+            maxHeight = ReadFloatBE(br),
         };
     }
 
@@ -320,7 +324,7 @@ public sealed class CRDTParser : AssetParser
             posY = posY,
             width = width,
             height = height,
-            texture = texture
+            texture = texture,
         };
     }
 
@@ -354,6 +358,7 @@ public class CRDT
     [JsonConverter(typeof(AssetIDConverter))]
     public uint magic { get; set; }
     public uint version { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint crdID { get; set; }
     public uint state { get; set; }
@@ -379,48 +384,4 @@ public class CRDTSection
     public float fout_end { get; set; }
     public CRDTPreset[] presets { get; set; }
     public CRDTHunk[] hunks { get; set; }
-}
-
-public class CRDTPreset
-{
-    public ushort num { get; set; }
-    public ushort align { get; set; }
-    public float delay { get; set; }
-    public float innerspace { get; set; }
-    public CRDTTextBox textStyle { get; set; }
-    public CRDTTextBox backdropStyle { get; set; }
-    public CRDTTexture textureFront { get; set; }
-    public CRDTTexture textureBack { get; set; }
-}
-
-public class CRDTHunk
-{
-    public uint hunk_size { get; set; }
-    public uint preset { get; set; }
-    public float t0 { get; set; }
-    public float t1 { get; set; }
-    public string text1 { get; set; }
-}
-
-public class CRDTTextBox
-{
-    public TextFont font { get; set; }
-    public xColor color { get; set; }
-    public float charWidth { get; set; }
-    public float charHeight { get; set; }
-    public float spacingX { get; set; }
-    public float spacingY { get; set; }
-    public float maxWidth { get; set; }
-    public float maxHeight { get; set; }
-}
-
-public class CRDTTexture
-{
-    public uint textureAssetID { get; set; }
-    public xColor color { get; set; }
-    public float posX { get; set; }
-    public float posY { get; set; }
-    public float width { get; set; }
-    public float height { get; set; }
-    public uint texture { get; set; }
 }

@@ -1,7 +1,5 @@
-using System;
 using System.IO;
 using System.Text;
-using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -19,7 +17,7 @@ public sealed class DSCOParser : AssetParser
             prefix_offset_on = ReadUInt32BE(br),
             state_mask_size = ReadUInt32BE(br),
             states_offset = ReadUInt32BE(br),
-            states_size = ReadUInt32BE(br)
+            states_size = ReadUInt32BE(br),
         };
 
         long currentPos = br.BaseStream.Position;
@@ -80,7 +78,7 @@ public sealed class DSCOParser : AssetParser
             prefix_transition = prefix_transition,
             prefix_on = prefix_on,
             state_offsets = state_offsets,
-            state_masks = state_masks
+            state_masks = state_masks,
         };
     }
 
@@ -142,15 +140,6 @@ public class DSCO
     public string prefix_on { get; set; }
     public uint[] state_offsets { get; set; }
     public byte[][] state_masks { get; set; }
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum DiscoFloorFlags : uint
-{
-    None = 0,
-    Loop = 0x1,
-    Enabled = 0x2
 }
 
 public class z_disco_floor_asset

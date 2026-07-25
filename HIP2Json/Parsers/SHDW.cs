@@ -1,6 +1,4 @@
-using System;
 using System.IO;
-using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -23,17 +21,13 @@ public sealed class SHDWParser : AssetParser
             };
         }
 
-        return new SHDW
-        {
-            entryCount = entryCount,
-            entries = entries,
-        };
+        return new SHDW { entryCount = entryCount, entries = entries };
     }
 
     public override object Serialize(object obj)
     {
         SHDW shdw = (SHDW)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -59,6 +53,7 @@ public class ShadowInfoEntry
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint modelAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint shadowAssetID { get; set; }
     public uint unknown { get; set; }

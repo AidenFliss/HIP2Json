@@ -18,7 +18,7 @@ public sealed class game_object_bungee_dropParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_bungee_drop bungeeDrop = (game_object_bungee_drop)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -29,7 +29,10 @@ public sealed class game_object_bungee_dropParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "BungeeDrop"; }
+    public override string GetFolderName()
+    {
+        return "BungeeDrop";
+    }
 }
 
 public class game_object_bungee_drop

@@ -35,14 +35,14 @@ public sealed class game_object_bungee_hookParser : AbstractDYNAParser
             camera_unused0 = ReadVector3BE(br),
             collision_hit_loss = ReadFloatBE(br),
             collision_damage_velocity = ReadFloatBE(br),
-            collision_hit_velocity = ReadFloatBE(br)
+            collision_hit_velocity = ReadFloatBE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_bungee_hook bungeeHook = (game_object_bungee_hook)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -77,7 +77,10 @@ public sealed class game_object_bungee_hookParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "BungeeHook"; }
+    public override string GetFolderName()
+    {
+        return "BungeeHook";
+    }
 }
 
 public class game_object_bungee_hook

@@ -24,23 +24,17 @@ public sealed class UIFTParser : AssetParser
             textAssetID = ReadUInt32BE(br),
             bcolor = ReadColorBE(br),
             color = ReadColorBE(br),
-            inset = Enumerable.Range(0, 3)
-                    .Select(_ => ReadInt16BE(br))
-                    .ToArray(),
-            space = Enumerable.Range(0, 1)
-                    .Select(_ => ReadInt16BE(br))
-                    .ToArray(),
-            cdim = Enumerable.Range(0, 1)
-                    .Select(_ => ReadInt16BE(br))
-                    .ToArray(),
-            max_height = ReadInt32BE(br)
+            inset = Enumerable.Range(0, 3).Select(_ => ReadInt16BE(br)).ToArray(),
+            space = Enumerable.Range(0, 1).Select(_ => ReadInt16BE(br)).ToArray(),
+            cdim = Enumerable.Range(0, 1).Select(_ => ReadInt16BE(br)).ToArray(),
+            max_height = ReadInt32BE(br),
         };
     }
 
     public override object Serialize(object obj)
     {
         UIFT uift = (UIFT)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -65,7 +59,7 @@ public sealed class UIFTParser : AssetParser
         foreach (short s in uift.cdim)
             WriteInt16BE(bw, s);
         WriteInt32BE(bw, uift.max_height);
-        
+
         return ms.ToArray();
     }
 }
@@ -75,6 +69,7 @@ public class UIFT
     public int uiFlags { get; set; }
     public short width { get; set; }
     public short height { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint texture { get; set; }
     public xVec2 uva { get; set; }

@@ -7,25 +7,25 @@ public sealed class logic_referenceParser : AbstractDYNAParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart, short version, string dynaType)
     {
-        return new logic_reference
-        {
-            initial = ReadUInt32BE(br),
-        };
+        return new logic_reference { initial = ReadUInt32BE(br) };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         logic_reference logicReference = (logic_reference)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
         WriteUInt32BE(bw, logicReference.initial);
-        
+
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "LogicReference"; }
+    public override string GetFolderName()
+    {
+        return "LogicReference";
+    }
 }
 
 public class logic_reference

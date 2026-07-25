@@ -32,14 +32,14 @@ public sealed class SFXParser : AssetParser
             volume = volume,
             pos = pos,
             innerRadius = innerRadius,
-            outerRadius = outerRadius
+            outerRadius = outerRadius,
         };
     }
 
     public override object Serialize(object obj)
     {
         SFX sfx = (SFX)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -65,8 +65,10 @@ public class SFX
     public short flagsSFX { get; set; }
     public short freq { get; set; }
     public float freqm { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attachID { get; set; }
     public byte loopCount { get; set; }

@@ -1,7 +1,7 @@
 using System;
 using System.IO;
-using System.Text;
 using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -38,7 +38,7 @@ public sealed class MINFParser : AssetParser
                 right = right,
                 up = up,
                 at = at,
-                pos = pos
+                pos = pos,
             };
         }
 
@@ -59,12 +59,16 @@ public sealed class MINFParser : AssetParser
 
             string value = Encoding.ASCII.GetString(data, 0, end);
 
-            parameters = parameters.Append(new MinfParam
-            {
-                type = type,
-                length = dataLength,
-                value = value
-            }).ToArray();
+            parameters = parameters
+                .Append(
+                    new MinfParam
+                    {
+                        type = type,
+                        length = dataLength,
+                        value = value,
+                    }
+                )
+                .ToArray();
         }
 
         return new MINF
@@ -75,14 +79,14 @@ public sealed class MINFParser : AssetParser
             combatID = combatID,
             brainID = brainID,
             modelInstances = modelInstances,
-            parameters = parameters
+            parameters = parameters,
         };
     }
 
     public override object Serialize(object obj)
     {
         MINF minf = (MINF)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -121,7 +125,7 @@ public sealed class MINFParser : AssetParser
 
             WriteByte(bw, 0);
         }
-        
+
         return ms.ToArray();
     }
 }
@@ -131,10 +135,13 @@ public class MINF
     [JsonConverter(typeof(AssetIDConverter))]
     public uint magic { get; set; }
     public uint numModelInst { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint animTableID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint combatID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint brainID { get; set; }
     public ModelInst[] modelInstances { get; set; }

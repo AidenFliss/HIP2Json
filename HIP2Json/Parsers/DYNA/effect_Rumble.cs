@@ -35,14 +35,14 @@ public sealed class effect_RumbleParser : AbstractDYNAParser
             shakeMagnitude = shakeMagnitude,
             shakeCycleMax = shakeCycleMax,
             shakeRotationMagnitude = shakeRotationMagnitude,
-            shakeY = shakeY
+            shakeY = shakeY,
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_Rumble rumble = (effect_Rumble)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -64,13 +64,17 @@ public sealed class effect_RumbleParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Rumble"; }
+    public override string GetFolderName()
+    {
+        return "Rumble";
+    }
 }
 
 public class effect_Rumble
 {
     public float time { get; set; }
     public float intensity { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint id { get; set; }
     public byte priority { get; set; }

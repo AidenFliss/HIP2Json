@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -15,9 +14,7 @@ public sealed class LITEParser : AssetParser
         br.ReadBytes(2);
 
         LightFlags lightFlags = (LightFlags)ReadUInt32BE(br);
-        float[] lightColor = Enumerable.Range(0, 3)
-            .Select(_ => ReadFloatBE(br))
-            .ToArray();
+        float[] lightColor = Enumerable.Range(0, 3).Select(_ => ReadFloatBE(br)).ToArray();
         xVec3 lightDir = ReadVector3BE(br);
         float lightConeAngle = ReadFloatBE(br);
         xVec3 lightSphere_center = ReadVector3BE(br);
@@ -32,14 +29,14 @@ public sealed class LITEParser : AssetParser
             lightDir = lightDir,
             lightConeAngle = lightConeAngle,
             lightSphere_center = lightSphere_center,
-            lightSphere_r = lightSphere_r
+            lightSphere_r = lightSphere_r,
         };
     }
 
     public override object Serialize(object obj)
     {
         LITE lite = (LITE)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -53,7 +50,7 @@ public sealed class LITEParser : AssetParser
         WriteFloatBE(bw, lite.lightConeAngle);
         WriteVector3BE(bw, lite.lightSphere_center);
         WriteFloatBE(bw, lite.lightSphere_r);
-        
+
         return ms.ToArray();
     }
 }
@@ -68,47 +65,7 @@ public class LITE
     public float lightConeAngle { get; set; }
     public xVec3 lightSphere_center { get; set; }
     public float lightSphere_r { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint attachID { get; set; }
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum LightType : byte
-{
-    Point = 0,
-    Spot = 1,
-    Point2 = 2,
-    Point3 = 3
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum LightEffect : byte
-{
-    None = 0,
-    NoneAlt = 1,
-    FlickerSlow = 2,
-    Flicker = 3,
-    FlickerErratic = 4,
-    StrobeSlow = 5,
-    Strobe = 6,
-    StrobeFast = 7,
-    DimSlow = 8,
-    Dim = 9,
-    DimFast = 10,
-    HalfDimSlow = 11,
-    HalfDim = 12,
-    HalfDimFast = 13,
-    RandomColorSlow = 14,
-    RandomColor = 15,
-    RandomColorFast = 16,
-    Cauldron = 17
-}
-
-[Flags]
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum LightFlags : uint
-{
-    None = 0,
-    Environment = 0x08,
-    On = 0x20
 }

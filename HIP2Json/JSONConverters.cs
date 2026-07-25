@@ -1,7 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Collections.Generic;
 
 namespace HIP2Json;
 
@@ -15,8 +15,7 @@ public static class AssetIDUtil
         return Convert.ToUInt32(value, 16);
     }
 
-    public static string Format(uint value)
-        => $"0x{value:X8}";
+    public static string Format(uint value) => $"0x{value:X8}";
 }
 
 public sealed class AssetIDConverter : JsonConverter<uint>
@@ -27,7 +26,7 @@ public sealed class AssetIDConverter : JsonConverter<uint>
         {
             JsonTokenType.String => AssetIDUtil.Parse(reader.GetString()!),
             JsonTokenType.Number => reader.GetUInt32(),
-            _ => throw new JsonException()
+            _ => throw new JsonException(),
         };
     }
 
@@ -51,12 +50,14 @@ public sealed class AssetIDArrayConverter : JsonConverter<uint[]>
             if (reader.TokenType == JsonTokenType.EndArray)
                 return list.ToArray();
 
-            list.Add(reader.TokenType switch
-            {
-                JsonTokenType.String => AssetIDUtil.Parse(reader.GetString()!),
-                JsonTokenType.Number => reader.GetUInt32(),
-                _ => throw new JsonException()
-            });
+            list.Add(
+                reader.TokenType switch
+                {
+                    JsonTokenType.String => AssetIDUtil.Parse(reader.GetString()!),
+                    JsonTokenType.Number => reader.GetUInt32(),
+                    _ => throw new JsonException(),
+                }
+            );
         }
 
         throw new JsonException("Unexpected end of JSON array");
@@ -138,5 +139,62 @@ public sealed class ButtonHitmaskConverter : JsonConverter<ButtonHitmask>
             writer.WriteStringValue($"0x{remaining:X8}");
 
         writer.WriteEndArray();
+    }
+}
+
+public class xMotionConverter : JsonConverter<xMotion>
+{
+    public override xMotion Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        using var doc = JsonDocument.ParseValue(ref reader);
+        var root = doc.RootElement;
+
+        var motion = new xMotion();
+
+        if (root.TryGetProperty("type", out var typeProp))
+            motion.type = JsonSerializer.Deserialize<MotionType>(typeProp.GetRawText(), options);
+
+        if (root.TryGetProperty("useBanking", out var bankingProp))
+            motion.useBanking = bankingProp.GetByte();
+
+        if (root.TryGetProperty("flags", out var flagsProp))
+            motion.flags = flagsProp.GetUInt16();
+
+        if (root.TryGetProperty("specific", out var specificProp) && specificProp.ValueKind == JsonValueKind.Object)
+        {
+            Type targetType = motion.type switch
+            {
+                MotionType.ExtendRetract => typeof(ExtendRetractMotion),
+                MotionType.Orbit => typeof(OrbitMotion),
+                MotionType.Spline => typeof(SplineMotion),
+                MotionType.MovePoint => typeof(MovePointMotion),
+                MotionType.Mechanism => typeof(MechanismMotion),
+                MotionType.Pendulum => typeof(PendulumMotion),
+                _ => null,
+            };
+
+            if (targetType != null)
+            {
+                motion.specific = (MotionSpecificData)JsonSerializer.Deserialize(specificProp.GetRawText(), targetType, options);
+            }
+        }
+
+        return motion;
+    }
+
+    public override void Write(Utf8JsonWriter writer, xMotion value, JsonSerializerOptions options)
+    {
+        writer.WriteStartObject();
+
+        writer.WritePropertyName("type");
+        JsonSerializer.Serialize(writer, value.type, options);
+
+        writer.WriteNumber("useBanking", value.useBanking);
+        writer.WriteNumber("flags", value.flags);
+
+        writer.WritePropertyName("specific");
+        JsonSerializer.Serialize(writer, (object)value.specific, options);
+
+        writer.WriteEndObject();
     }
 }

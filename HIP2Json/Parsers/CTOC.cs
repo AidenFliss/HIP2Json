@@ -10,10 +10,7 @@ public sealed class CTOCParser : AssetParser
     {
         uint headerCount = ReadUInt32BE(br);
 
-        CTOC ctoc = new()
-        {
-            headerCount = headerCount
-        };
+        CTOC ctoc = new() { headerCount = headerCount };
 
         if (Program.CurrentGame == GameType.BFBB)
             ctoc.cutsceneInfoEntriesBFBB = new xCutsceneInfoBFBB[headerCount];
@@ -50,12 +47,8 @@ public sealed class CTOCParser : AssetParser
                     visCount = visCount,
                     visSize = visSize,
                     breakCount = breakCount,
-                    soundLeft = Enumerable.Range(0, 16)
-                        .Select(_ => ReadByte(br))
-                        .ToArray(),
-                    soundRight = Enumerable.Range(0, 16)
-                        .Select(_ => ReadByte(br))
-                        .ToArray()
+                    soundLeft = Enumerable.Range(0, 16).Select(_ => ReadByte(br)).ToArray(),
+                    soundRight = Enumerable.Range(0, 16).Select(_ => ReadByte(br)).ToArray(),
                 };
             }
             else
@@ -75,12 +68,8 @@ public sealed class CTOCParser : AssetParser
                     breakCount = breakCount,
                     uLeftSoundID = ReadUInt32BE(br),
                     uRightSoundID = ReadUInt32BE(br),
-                    szLeftSound = Enumerable.Range(0, 28)
-                        .Select(_ => ReadByte(br))
-                        .ToArray(),
-                    szRightSound = Enumerable.Range(0, 28)
-                        .Select(_ => ReadByte(br))
-                        .ToArray()
+                    szLeftSound = Enumerable.Range(0, 28).Select(_ => ReadByte(br)).ToArray(),
+                    szRightSound = Enumerable.Range(0, 28).Select(_ => ReadByte(br)).ToArray(),
                 };
             }
         }
@@ -163,6 +152,7 @@ public class xCutsceneInfoBFBB
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint magic { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint assetID { get; set; }
     public uint numData { get; set; }
@@ -182,6 +172,7 @@ public class xCutsceneInfoTSSM
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint magic { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint assetID { get; set; }
     public uint numData { get; set; }

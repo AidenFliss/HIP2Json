@@ -23,7 +23,7 @@ public sealed class ENVParser : AssetParser
             bspMapperID = ReadUInt32BE(br),
             bspMapperCollisionID = ReadUInt32BE(br),
             bspMapperFXID = ReadUInt32BE(br),
-            loldHeight = ReadFloatLE(br)
+            loldHeight = ReadFloatLE(br),
         };
 
         if (Program.CurrentGame != GameType.BFBB)
@@ -38,7 +38,7 @@ public sealed class ENVParser : AssetParser
     public override object Serialize(object obj)
     {
         ENV env = (ENV)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -72,26 +72,35 @@ public class ENV
 {
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint startCameraAssetID { get; set; }
     public int climateFlags { get; set; }
     public float climateStrengthMin { get; set; }
     public float climateStrengthMax { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspLightKit { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint objectLightKit { get; set; }
     public int flags { get; set; } //pad in bfbb, flags in motion video game
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspCollisionAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspFXAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspCameraAssetID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspMapperID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspMapperCollisionID { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint bspMapperFXID { get; set; }
     public float loldHeight { get; set; }

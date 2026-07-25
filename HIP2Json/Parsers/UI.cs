@@ -23,7 +23,7 @@ public sealed class UIParser : AssetParser
     public override object Serialize(object obj)
     {
         UI ui = (UI)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -35,7 +35,7 @@ public sealed class UIParser : AssetParser
         WriteVector2BE(bw, ui.uvb);
         WriteVector2BE(bw, ui.uvc);
         WriteVector2BE(bw, ui.uvd);
-        
+
         return ms.ToArray();
     }
 }
@@ -45,6 +45,7 @@ public class UI
     public int uiFlags { get; set; }
     public short width { get; set; }
     public short height { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint texture { get; set; }
     public xVec2 uva { get; set; }

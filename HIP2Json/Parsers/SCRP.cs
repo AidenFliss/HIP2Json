@@ -1,6 +1,5 @@
 using System.IO;
 using System.Linq;
-using System.Reflection.Metadata;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -33,9 +32,7 @@ public sealed class SCRPParser : AssetParser
                 evnt.paramEventBFBB = (EventBFBB)(ushort)ReadUInt32BE(br);
             if (Program.CurrentGame == GameType.TSSM)
                 evnt.paramEventTSSM = (EventTSSM)(ushort)ReadUInt32BE(br);
-            evnt.param = Enumerable.Range(0, 4)
-                    .Select(_ => ReadUInt32BE(br))
-                    .ToArray();
+            evnt.param = Enumerable.Range(0, 4).Select(_ => ReadUInt32BE(br)).ToArray();
             evnt.paramWidget = ReadUInt32BE(br);
 
             events[i] = evnt;
@@ -52,7 +49,7 @@ public sealed class SCRPParser : AssetParser
     public override object Serialize(object obj)
     {
         SCRP scrp = (SCRP)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -95,14 +92,19 @@ public class SCRP
 public class xScriptEventAsset
 {
     public float time { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint widget { get; set; }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public EventBFBB paramEventBFBB { get; set; }
+
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public EventTSSM paramEventTSSM { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] param { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint paramWidget { get; set; }
 }

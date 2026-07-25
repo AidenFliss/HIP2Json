@@ -18,7 +18,7 @@ public sealed class effect_ScreenFadeParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_ScreenFade screenFade = (effect_ScreenFade)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -30,7 +30,10 @@ public sealed class effect_ScreenFadeParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "ScreenFade"; }
+    public override string GetFolderName()
+    {
+        return "ScreenFade";
+    }
 }
 
 public class effect_ScreenFade

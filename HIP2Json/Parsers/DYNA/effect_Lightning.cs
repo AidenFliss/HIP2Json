@@ -30,7 +30,7 @@ public sealed class effect_LightningParser : AbstractDYNAParser
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         effect_Lightning lightning = (effect_Lightning)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -53,7 +53,10 @@ public sealed class effect_LightningParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "Lightning"; }
+    public override string GetFolderName()
+    {
+        return "Lightning";
+    }
 }
 
 public class effect_Lightning
@@ -63,20 +66,27 @@ public class effect_Lightning
     public xColor color { get; set; }
     public float thickness { get; set; }
     public float branchSpeed { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint mainTexture { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint branchTexture { get; set; }
     public int damage { get; set; }
     public float knockBackSpeed { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint sound { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundHit1 { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint soundHit2 { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint followStart { get; set; }
+
     [JsonConverter(typeof(AssetIDConverter))]
     public uint followEnd { get; set; }
     public uint collisionEnabled { get; set; }

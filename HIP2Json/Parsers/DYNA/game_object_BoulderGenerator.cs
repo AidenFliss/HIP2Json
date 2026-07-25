@@ -16,14 +16,14 @@ public sealed class game_object_BoulderGeneratorParser : AbstractDYNAParser
             velAngleRand = ReadFloatBE(br),
             velMagRand = ReadFloatBE(br),
             initaxis = ReadVector3BE(br),
-            angvel = ReadFloatBE(br)
+            angvel = ReadFloatBE(br),
         };
     }
 
     public override byte[] Serialize(object obj, short version, string dynaType)
     {
         game_object_BoulderGenerator boulderGenerator = (game_object_BoulderGenerator)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -39,7 +39,10 @@ public sealed class game_object_BoulderGeneratorParser : AbstractDYNAParser
         return ms.ToArray();
     }
 
-    public override string GetFolderName() { return "BoulderGenerator"; }
+    public override string GetFolderName()
+    {
+        return "BoulderGenerator";
+    }
 }
 
 public class game_object_BoulderGenerator

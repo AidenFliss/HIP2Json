@@ -16,15 +16,9 @@ public sealed class CSNMParser : AssetParser
         if (Program.CurrentGame != GameType.BFBB)
             uSubtitlesID = ReadUInt32BE(br);
 
-        float[] startTime = Enumerable.Range(0, 14)
-                    .Select(_ => ReadFloatBE(br))
-                    .ToArray();
-        float[] endTime = Enumerable.Range(0, 14)
-                    .Select(_ => ReadFloatBE(br))
-                    .ToArray();
-        uint[] emitID = Enumerable.Range(0, 14)
-                    .Select(_ => ReadUInt32BE(br))
-                    .ToArray();
+        float[] startTime = Enumerable.Range(0, 14).Select(_ => ReadFloatBE(br)).ToArray();
+        float[] endTime = Enumerable.Range(0, 14).Select(_ => ReadFloatBE(br)).ToArray();
+        uint[] emitID = Enumerable.Range(0, 14).Select(_ => ReadUInt32BE(br)).ToArray();
 
         return new CSNM
         {
@@ -34,14 +28,14 @@ public sealed class CSNMParser : AssetParser
             uSubtitlesID = uSubtitlesID,
             startTime = startTime,
             endTime = endTime,
-            emitID = emitID
+            emitID = emitID,
         };
     }
 
     public override object Serialize(object obj)
     {
         CSNM csnm = (CSNM)obj;
-        
+
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
@@ -56,7 +50,7 @@ public sealed class CSNMParser : AssetParser
             WriteFloatBE(bw, time);
         foreach (var emit in csnm.emitID)
             WriteUInt32BE(bw, emit);
-        
+
         return ms.ToArray();
     }
 }
@@ -70,6 +64,7 @@ public class CSNM
     public uint uSubtitlesID { get; set; } // movie only
     public float[] startTime { get; set; }
     public float[] endTime { get; set; }
+
     [JsonConverter(typeof(AssetIDArrayConverter))]
     public uint[] emitID { get; set; }
 }
