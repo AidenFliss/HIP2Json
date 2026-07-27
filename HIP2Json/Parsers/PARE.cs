@@ -105,7 +105,7 @@ public sealed class PAREParser : AssetParser
         return new EntityBoneEmitter
         {
             flags = flags,
-            type = type,
+            entityBoneType = type,
             bone = bone,
             offset = offset,
             radius = radius,
@@ -124,7 +124,7 @@ public sealed class PAREParser : AssetParser
         return new EntityBoundEmitter
         {
             flags = flags,
-            type = type,
+            entityBoundType = type,
             expand = expand,
             deflection = deflection,
         };
@@ -171,7 +171,7 @@ public sealed class PAREParser : AssetParser
 
             case EntityBoneEmitter bone:
                 WriteByte(bw, bone.flags);
-                WriteByte(bw, bone.type);
+                WriteByte(bw, bone.entityBoneType);
                 WriteByte(bw, bone.bone);
                 bw.Write(new byte[1]);
                 WriteVector3BE(bw, bone.offset);
@@ -181,7 +181,7 @@ public sealed class PAREParser : AssetParser
 
             case EntityBoundEmitter bound:
                 WriteByte(bw, bound.flags);
-                WriteByte(bw, bound.type);
+                WriteByte(bw, bound.entityBoundType);
                 bw.Write(new byte[2]);
                 WriteFloatBE(bw, bound.expand);
                 WriteFloatBE(bw, bound.deflection);

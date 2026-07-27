@@ -80,7 +80,7 @@ public class EntityBoneEmitter : EmitterData
     public EntityBoneEmitter() => Type = EmitType.EntityBone;
 
     public byte flags { get; set; }
-    public byte type { get; set; }
+    public byte entityBoneType { get; set; }
     public byte bone { get; set; }
     public xVec3 offset { get; set; }
     public float radius { get; set; }
@@ -92,7 +92,7 @@ public class EntityBoundEmitter : EmitterData
     public EntityBoundEmitter() => Type = EmitType.EntityBound;
 
     public byte flags { get; set; }
-    public byte type { get; set; }
+    public byte entityBoundType { get; set; }
     public float expand { get; set; }
     public float deflection { get; set; }
 }
