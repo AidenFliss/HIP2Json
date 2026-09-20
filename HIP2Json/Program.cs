@@ -15,7 +15,7 @@ class Program
     public static GamePlatform CurrentPlatform;
     public static bool BigEndian = true;
 
-    static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "TEXS", "ANIM", "SNDS", "SND", "SHRP" };
+    static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "TEXS", "ANIM", "SHRP" };
     static readonly HashSet<string> BASE_ASSETS = new HashSet<string>
     {
         "CAM",
