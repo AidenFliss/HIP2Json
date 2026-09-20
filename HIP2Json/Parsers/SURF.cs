@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -112,8 +113,9 @@ public sealed class SURFParser : AssetParser
         float oob_delay = ReadFloatBE(br);
         float walljump_scale_xz = ReadFloatBE(br);
         float walljump_scale_y = ReadFloatBE(br);
-        float damage_timer = ReadFloatLE(br);
-        float damage_bounce = ReadFloatLE(br);
+        bool shortForm = br.BaseStream.Position + 8 > br.BaseStream.Length;
+        float damage_timer = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatLE(br) : 0f;
+        float damage_bounce = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatLE(br) : 0f;
 
         return new SURF
         {
@@ -158,6 +160,7 @@ public sealed class SURFParser : AssetParser
             walljump_scale_y = walljump_scale_y,
             damage_timer = damage_timer,
             damage_bounce = damage_bounce,
+            ShortForm = shortForm,
         };
     }
 
@@ -189,12 +192,14 @@ public sealed class SURFParser : AssetParser
         WriteUInt16BE(bw, surf.colorfx.mode);
         WriteFloatBE(bw, surf.colorfx.speed);
 
-        bw.Write(new byte[1]);
+        WriteUInt32BE(bw, surf.texture_anim_flags);
+
+        bw.Write(new byte[2]);
         WriteUInt16BE(bw, surf.texture_anm_0.mode);
         WriteUInt32BE(bw, surf.texture_anm_0.group);
         WriteFloatBE(bw, surf.texture_anm_0.speed);
 
-        bw.Write(new byte[1]);
+        bw.Write(new byte[2]);
         WriteUInt16BE(bw, surf.texture_anm_1.mode);
         WriteUInt32BE(bw, surf.texture_anm_1.group);
         WriteFloatBE(bw, surf.texture_anm_1.speed);
@@ -207,6 +212,7 @@ public sealed class SURFParser : AssetParser
         WriteVector3BE(bw, surf.uvfx_0.trans);
         WriteVector3BE(bw, surf.uvfx_0.trans_spd);
         WriteVector3BE(bw, surf.uvfx_0.scale);
+        WriteVector3BE(bw, surf.uvfx_0.scale_spd);
         WriteVector3BE(bw, surf.uvfx_0.min);
         WriteVector3BE(bw, surf.uvfx_0.max);
         WriteVector3BE(bw, surf.uvfx_0.minmax_spd);
@@ -217,6 +223,7 @@ public sealed class SURFParser : AssetParser
         WriteVector3BE(bw, surf.uvfx_1.trans);
         WriteVector3BE(bw, surf.uvfx_1.trans_spd);
         WriteVector3BE(bw, surf.uvfx_1.scale);
+        WriteVector3BE(bw, surf.uvfx_1.scale_spd);
         WriteVector3BE(bw, surf.uvfx_1.min);
         WriteVector3BE(bw, surf.uvfx_1.max);
         WriteVector3BE(bw, surf.uvfx_1.minmax_spd);
@@ -258,4 +265,7 @@ public class SURF
     public float walljump_scale_y { get; set; }
     public float damage_timer { get; set; }
     public float damage_bounce { get; set; }
+
+    [JsonIgnore]
+    public bool ShortForm { get; set; }
 }

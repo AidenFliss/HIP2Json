@@ -1,6 +1,6 @@
 namespace HIP2Json;
 
-public enum AssetType
+public enum AssetStorage
 {
     Binary,
     Base,

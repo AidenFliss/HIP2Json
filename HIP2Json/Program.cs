@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using HipHopFile;
 
 namespace HIP2Json;
 
@@ -16,7 +15,7 @@ class Program
     public static GamePlatform CurrentPlatform;
     public static bool BigEndian = true;
 
-    static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "RWTX", "TEXS", "ANIM", "SNDS", "SND", "SHRP" };
+    static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "TEXS", "ANIM", "SNDS", "SND", "SHRP" };
     static readonly HashSet<string> BASE_ASSETS = new HashSet<string>
     {
         "CAM",
@@ -383,7 +382,7 @@ class Program
 
         Logger.LogInfo($"Processing {filePath}...");
 
-        (HipFile hipfile, Game game, Platform platform) = HipHopFile.HipFile.FromPath(filePath);
+        (HipFile hipfile, Game game, Platform platform) = HipFile.FromPath(filePath);
 
         ResolveGamePlatform(game, platform);
 
@@ -410,10 +409,38 @@ class Program
 
             parsed.AssetFriendlyName = GetFriendlyName(Path.GetFileName(assetFile)) ?? "Unknown";
             parsed.FileName = Path.GetFileName(assetFile) ?? "Unknown";
+string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
 
-            string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
+            bool shortForm = (parsed.AssetData.TryGetValue("TIMR", out var timrObj) && timrObj is TIMR { ShortForm: true })
+                          || (parsed.AssetData.TryGetValue("SURF", out var surfObj) && surfObj is SURF { ShortForm: true });
 
-            Logger.LogInfo("-------------------------------------------------");
+            if (shortForm)
+            {
+                try
+                {
+                    var expandOpts = new JsonSerializerOptions
+                    {
+                        WriteIndented = false,
+                        IncludeFields = true,
+                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                        NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
+                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+                    };
+                    JsonElement elem = JsonSerializer.SerializeToElement(parsed, expandOpts);
+                    byte[] fullBytes = SerializeModdedAsset(elem, out _, out _);
+                    long rawLen = new FileInfo(assetFile).Length;
+                    if (fullBytes.Length > rawLen)
+                    {
+                        File.WriteAllBytes(assetFile, fullBytes);
+                        Logger.LogWarning($"Short-form base asset {Path.GetFileName(assetFile)} expanded from {rawLen} to {fullBytes.Length} bytes (full struct)");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogWarning($"Could not expand short-form asset {Path.GetFileName(assetFile)}: {ex.Message}");
+                }
+            }
+
             Logger.LogInfo("Asset ID: " + (assetIdStr ?? "Unknown"));
 
             if (parsed.Base != null)
@@ -501,7 +528,7 @@ class Program
     {
         try
         {
-            (HipFile hipfile, Game game, Platform platform) = HipHopFile.HipFile.FromPath(filePath);
+            (HipFile hipfile, Game game, Platform platform) = HipFile.FromPath(filePath);
 
             ResolveGamePlatform(game, platform);
 
@@ -636,7 +663,7 @@ class Program
     {
         try
         {
-            (HipFile hipfile, Game game, Platform platform) = HipHopFile.HipFile.FromPath(filePath);
+            (HipFile hipfile, Game game, Platform platform) = HipFile.FromPath(filePath);
 
             ResolveGamePlatform(game, platform);
 
@@ -1110,7 +1137,7 @@ class Program
             string directSettings = Path.Combine(hipHopFolder, "Settings.ini");
             if (File.Exists(directSettings))
             {
-                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(directSettings);
+                (HipFile hipFile, Game game, Platform platform) = HipFile.FromINI(directSettings);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
                 string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop") ? outputPath : outputPath + ".hip";
@@ -1131,7 +1158,7 @@ class Program
                 if (!File.Exists(settingsPath))
                     continue;
 
-                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
+                (HipFile hipFile, Game game, Platform platform) = HipFile.FromINI(settingsPath);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
                 string rawName = Path.GetFileName(archiveFolder);
@@ -1153,7 +1180,7 @@ class Program
             string settingsPath = Path.Combine(inputPath, "Settings.ini");
             if (File.Exists(settingsPath))
             {
-                (HipFile hipFile, Game game, Platform platform) = HipHopFile.HipFile.FromINI(settingsPath);
+                (HipFile hipFile, Game game, Platform platform) = HipFile.FromINI(settingsPath);
                 byte[] hipBytes = hipFile.ToBytes(game, platform);
 
                 string finalOutFile = outputPath.EndsWith(".hip") || outputPath.EndsWith(".hop") ? outputPath : outputPath + ".hip";
@@ -2042,7 +2069,7 @@ class Program
                 return null;
             }
 
-            assetDescriptor = new AssetDescriptor() { AssetType = "DYNA", AssetStorage = AssetType.Base };
+            assetDescriptor = new AssetDescriptor() { AssetType = "DYNA", AssetStorage = AssetStorage.Base };
         }
 
         if (BLACKLIST_ASSETS.Contains(assetDescriptor.AssetType))
@@ -2066,7 +2093,7 @@ class Program
 
         xBaseAsset? baseAsset = null;
 
-        if (assetDescriptor.AssetStorage != AssetType.Binary)
+        if (assetDescriptor.AssetStorage != AssetStorage.Binary)
         {
             byte[] header = br.ReadBytes(8);
             if (header.Length < 8)
@@ -2101,7 +2128,7 @@ class Program
         xLinkAsset[] links = Array.Empty<xLinkAsset>();
         xEntAsset? ent = null;
 
-        if (assetDescriptor.AssetStorage == AssetType.Entity)
+        if (assetDescriptor.AssetStorage == AssetStorage.Entity)
         {
             ent = ParseEntityChunk(br);
         }
@@ -2110,11 +2137,20 @@ class Program
 
         if (ParserMaps.AssetToParser.TryGetValue(assetType, out AssetParser parser))
         {
-            object parsed = parser.Parse(br, assetStart, dataStart);
+            object parsed;
+            try
+            {
+                parsed = parser.Parse(br, assetStart, dataStart);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning($"Could not parse {Path.GetFileName(filePath)} as {assetType}: {ex.Message}. Keeping raw bytes.");
+                return null;
+            }
 
             additionalData[assetType] = parsed;
 
-            if (assetDescriptor.AssetStorage != AssetType.Binary)
+            if (assetDescriptor.AssetStorage != AssetStorage.Binary)
             {
                 long linksOffset = parser.GetLinksOffset(br, linkCount);
 
@@ -2170,9 +2206,9 @@ class Program
         {
             AssetType = assetType,
             AssetStorage =
-                ENTITY_ASSETS.Contains(assetType) ? AssetType.Entity
-                : BASE_ASSETS.Contains(assetType) ? AssetType.Base
-                : AssetType.Binary,
+                ENTITY_ASSETS.Contains(assetType) ? AssetStorage.Entity
+                : BASE_ASSETS.Contains(assetType) ? AssetStorage.Base
+                : AssetStorage.Binary,
         };
 
         using var ms = new MemoryStream(data);
@@ -2184,7 +2220,7 @@ class Program
 
         xBaseAsset? baseAsset = null;
 
-        if (assetDescriptor.AssetStorage != AssetType.Binary)
+        if (assetDescriptor.AssetStorage != AssetStorage.Binary)
         {
             byte[] header = br.ReadBytes(8);
             if (header.Length < 8)
@@ -2209,7 +2245,7 @@ class Program
         xLinkAsset[] links = Array.Empty<xLinkAsset>();
         xEntAsset? ent = null;
 
-        if (assetDescriptor.AssetStorage == AssetType.Entity)
+        if (assetDescriptor.AssetStorage == AssetStorage.Entity)
         {
             ent = ParseEntityChunk(br);
         }
@@ -2234,7 +2270,7 @@ class Program
 
             additionalData[assetType] = parsed;
 
-            if (assetDescriptor.AssetStorage != AssetType.Binary)
+            if (assetDescriptor.AssetStorage != AssetStorage.Binary)
             {
                 long linksOffset = parser.GetLinksOffset(br, linkCount);
 

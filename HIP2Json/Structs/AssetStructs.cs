@@ -64,7 +64,7 @@ public struct xLinkAsset
 public class AssetDescriptor
 {
     public string AssetType { get; set; }
-    public AssetType AssetStorage { get; set; }
+    public AssetStorage AssetStorage { get; set; }
 }
 
 public class ParsedAsset

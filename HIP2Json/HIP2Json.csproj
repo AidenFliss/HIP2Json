@@ -12,9 +12,6 @@
     <Version>$(CurrentDate)</Version>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HipHopTool\HipHopFile\HipHopFile.csproj" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">

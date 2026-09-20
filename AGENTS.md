@@ -4,10 +4,10 @@ Tool that extracts Heavy Iron engine (EvilEngine) HIP/HOP game archives (Battle 
 
 ## Solution layout
 
-- `HipHopTool/HipHopFile` — legacy grain-size container library (reads + writes HIP/HOP). Decodes the block/section tree but treats asset payloads as opaque bytes.
-- `HIP2Json` — the CLI app (`Program.cs` + `dotnet run`) and all JSON parsing. Holds per-asset-type parsers, dictionaries, conversion, and serialization.
+- `HIP2Json` — the CLI app (`Program.cs` + `dotnet run`) and all JSON parsing. Holds per-asset-type parsers, dictionaries, conversion, serialization, and the embedded HIP/HOP container library.
+- `HIP2Json/HipFile` — the in-tree container library (`HipFile.cs` + `HipFile.Types.cs`, namespace `HIP2Json`). Reads + writes HIP/HOP, decodes the block/section tree, and slices asset payloads as bytes. Ported in from the former `HipHopTool/HipHopFile` dependency (now removed).
 - `HIP2Json/Parsers` — one `AssetParser` subclass per asset type (TRIG, PLYR, PLAT, HANG, NPC, SIMP, VIL, etc.) plus the `AbstractDYNAParser` family. Entry points are regiestered in `ParserMaps.cs`.
-- `HipHopFile/HipHopFile.csproj` targets `netstandard2.0` (no dependencies); `HIP2Json` is `net10.0` exe with no package refs. Build/verify with `dotnet build HIP2Json.sln -c Release`.
+- `HIP2Json` is a `net10.0` exe with no package refs (JSON is `System.Text.Json`). Build/verify with `dotnet build HIP2Json.sln -c Release`.
 
 ## The HIP/HOP container (per heavyironmodding.org/wiki/EvilEngine/HIP)
 
@@ -31,7 +31,7 @@ Rules that matter:
 ## Endianness model (HIP2Json)
 
 - `Program.BigEndian` defaults `true`; set `BigEndian = CurrentPlatform == GamePlatform.GC` in `Main`.
-- Container reading/writing in HipHopFile is always big-endian (never consults `Program.BigEndian`).
+- Container reading/writing in `HIP2Json/HipFile` is always big-endian (never consults `Program.BigEndian`).
 - Asset payload reading in HIP2Json uses `AssetParser.Read*/Write*` helpers which swap when `BigEndian == false`. `ReadFloatLE/WriteFloatLE/ReadInt32LE` are always little-endian (used where the format fixes it, e.g. some parsers).
 - `AssetParser.GetAssetIDConverter` produces the string/int forms of asset ids, and `Util` maps JHG in/out for id handling. Never assume little-endian on GC.
 - Linked (sub) headers use id (`AssetID`) forms that swap on little-endian platforms.
@@ -48,7 +48,7 @@ Rules that matter:
 
 `Main --extract` → `RunExtract` → per .hip/.hop file `ProcessSingleArchiveExtract`:
 
-1. `HipHopFile.HipFile.FromPath(file)` — detects `Game` + `Platform` from container bytes, builds the section tree, slices each asset payload (by AHDR offset/size) into `asset.data`, and fills `asset.FileName`.
+1. `HipFile.FromPath(file)` — detects `Game` + `Platform` from container bytes, builds the section tree, slices each asset payload (by AHDR offset/size) into `asset.data`, and fills `asset.FileName`.
 2. `hipfile.ToIni(...)` — writes raw per-asset files into `unpacked/<Archive>_<HIP|HOP>/<assetType>/[<id>] <name>` plus a `Settings.ini` describing archive name/game/platform, and a `HLSAVE*` placeholder if present.
 3. HIP2Json re-reads those raw files, runs the per-type `AssetParser`, and writes a parsed JSON array to BOTH `parsed/og/<Archive>_assets.json` and `parsed/mod/<Archive>_assets.json`.
 
@@ -96,7 +96,7 @@ Round-trip fidelity: raw/base64 assets repack byte-identically (verified). Parse
 - `.editorconfig` enforces file-scoped `namespace` blocks, UTF-8 (with BOM) C# files, strict visibility. Follow the file-scoped + `using System...;` ordering as-is.
 - Logging is via `Logger.LogInfo/LogWarning/LogError` (shunt to console).
 - Do not use `var` for new code; only for existing patterns. No package dependencies allowed in HIP2Json — JSON is `System.Text.Json`.
-- C#/dotnet version is blocking: do not add modern-only C# lang features to HipHopTool (netstandard2.0).
+- C#/dotnet version is blocking: HIP2Json uses C# lang features compatible with `net10.0`.
 
 ## Known gotchas / glaring potential issues (avoid-new)
 

@@ -45,6 +45,7 @@ public static class ParserMaps
         { "PLYR", new PLYRParser() },
         { "PORT", new PORTParser() },
         { "RANM", new RANMParser() },
+        { "RWTX", new RWTXParser() },
         { "SCRP", new SCRPParser() },
         { "SDFX", new SDFXParser() },
         { "SFX", new SFXParser() },
