@@ -31,4 +31,5 @@ public class AnimEffect
     public uint flags { get; set; }
     public uint effectType { get; set; }
     public uint userDataSize { get; set; }
+    public byte[] userData { get; set; }
 }

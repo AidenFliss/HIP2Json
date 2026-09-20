@@ -122,8 +122,6 @@ public sealed class MINFParser : AssetParser
 
             for (int i = valueBytes.Length; i < paddedLength - 1; i++)
                 WriteByte(bw, 0);
-
-            WriteByte(bw, 0);
         }
 
         return ms.ToArray();

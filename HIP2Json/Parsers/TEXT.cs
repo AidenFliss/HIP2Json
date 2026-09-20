@@ -19,9 +19,11 @@ public sealed class TEXTParser : AssetParser
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
-        WriteInt32BE(bw, text.charCount);
-        WriteString(bw, text.text);
-        while (ms.Length % 4 != 0) //padded to 0x04, bc i AM worrying abt writing to files now....
+        byte[] textBytes = Encoding.UTF8.GetBytes(text.text ?? string.Empty);
+        WriteInt32BE(bw, textBytes.Length);
+        bw.Write(textBytes);
+        WriteByte(bw, 0);
+        while (ms.Length % 4 != 0)
         {
             WriteByte(bw, 0);
         }

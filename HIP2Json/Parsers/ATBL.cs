@@ -30,7 +30,8 @@ public sealed class ATBLParser : AssetParser
         int effectCount = states.Sum(s => (int)s.effectCount);
         AnimEffect[] effects = Enumerable.Range(0, effectCount).Select(_ => ReadAnimEffect(br)).ToArray();
 
-        uint[] listUnknown = Enumerable.Range(0, (int)numRaw).Select(_ => ReadUInt32BE(br)).ToArray();
+        int listUnknownCount = (int)((br.BaseStream.Length - br.BaseStream.Position) / 4);
+        uint[] listUnknown = Enumerable.Range(0, listUnknownCount).Select(_ => ReadUInt32BE(br)).ToArray();
 
         return new ATBL
         {
@@ -157,9 +158,9 @@ public sealed class ATBLParser : AssetParser
         WriteUInt32BE(bw, state.subStateCount);
     }
 
-    private AnimEffect ReadAnimEffect(BinaryReader br)
+private AnimEffect ReadAnimEffect(BinaryReader br)
     {
-        return new AnimEffect
+        AnimEffect effect = new AnimEffect
         {
             stateID = ReadUInt32BE(br),
             startTime = ReadFloatBE(br),
@@ -168,6 +169,8 @@ public sealed class ATBLParser : AssetParser
             effectType = ReadUInt32BE(br),
             userDataSize = ReadUInt32BE(br),
         };
+        effect.userData = br.ReadBytes((int)effect.userDataSize);
+        return effect;
     }
 
     private void WriteAnimEffect(BinaryWriter bw, AnimEffect effect)
@@ -178,6 +181,8 @@ public sealed class ATBLParser : AssetParser
         WriteUInt32BE(bw, effect.flags);
         WriteUInt32BE(bw, effect.effectType);
         WriteUInt32BE(bw, effect.userDataSize);
+        if (effect.userData != null)
+            bw.Write(effect.userData);
     }
 }
 

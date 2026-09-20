@@ -47,7 +47,7 @@ public sealed class PAREParser : AssetParser
         if (pare.specific != null)
             WriteEmitter(bw, pare.specific);
 
-        while (ms.Length < 0x2C)
+        while (ms.Length < 0x24) //tail starts at assetStart+0x2C; 8-byte xBase header excluded here
             WriteByte(bw, 0);
 
         WriteUInt32BE(bw, pare.attachToID);
@@ -64,14 +64,14 @@ public sealed class PAREParser : AssetParser
     {
         return emitType switch
         {
-            EmitType.Circle => new CircleEmitter
+            EmitType.CircleEdge or EmitType.Circle or EmitType.OCircleEdge or EmitType.OCircle => new CircleEmitter
             {
                 radius = ReadFloatBE(br),
                 deflection = ReadFloatBE(br),
                 dir = ReadVector3BE(br),
             },
-            EmitType.Sphere => new SphereEmitter { radius = ReadFloatBE(br) },
-            EmitType.Rect => new RectEmitter { xLen = ReadFloatBE(br), zLen = ReadFloatBE(br) },
+            EmitType.SphereEdge or EmitType.Sphere or EmitType.SphereEdge2 or EmitType.SphereEdge3 => new SphereEmitter { radius = ReadFloatBE(br) },
+            EmitType.RectEdge or EmitType.Rect => new RectEmitter { xLen = ReadFloatBE(br), zLen = ReadFloatBE(br) },
             EmitType.Line => new LineEmitter
             {
                 pos1 = ReadVector3BE(br),

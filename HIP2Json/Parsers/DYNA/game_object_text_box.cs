@@ -48,7 +48,7 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
 
         long remaining = br.BaseStream.Length - br.BaseStream.Position;
 
-        if (remaining >= 16)
+        if (remaining >= 8)
         {
             backdrop_color = ReadColor(br);
             backdrop_texture = ReadUInt32BE(br);
