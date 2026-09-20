@@ -7,7 +7,14 @@ public sealed class PLYRParser : AssetParser
 {
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
+        br.BaseStream.Seek(br.BaseStream.Length - 4, SeekOrigin.Begin);
+
         return new PLYR { lightKitID = ReadUInt32BE(br) };
+    }
+
+    public override long GetLinksOffset(BinaryReader br, byte linkCount)
+    {
+        return br.BaseStream.Length - (linkCount * 32L) - 4;
     }
 
     public override object Serialize(object obj)

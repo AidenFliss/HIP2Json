@@ -32,8 +32,11 @@ namespace HipHopFile
 
             foreach (var AHDR in ATOC.AHDRList)
                 if (AHDR.assetType == AssetType.JSP)
-                    if (LTOC.LHDRList.Where(LHDR => LHDR.assetIDlist.Contains(AHDR.assetID)).FirstOrDefault().layerType > 9)
+                {
+                    var containingLayer = LTOC.LHDRList.Where(LHDR => LHDR.assetIDlist.Contains(AHDR.assetID)).FirstOrDefault();
+                    if (containingLayer != null && containingLayer.layerType > 9)
                         AHDR.assetType = AssetType.JSPInfo;
+                }
         }
 
         public override void SetListBytes(Game game, Platform platform, ref List<byte> listBytes)

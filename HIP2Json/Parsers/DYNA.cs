@@ -19,7 +19,12 @@ public sealed class DYNAParser : AssetParser //god save me..
         };
 
         string typeHex = dyna.type.ToString("X8");
-        string typeName = Dictionaries.DYNA_TO_NAME_MAPPING[typeHex];
+        if (!Dictionaries.DYNA_TO_NAME_MAPPING.TryGetValue(typeHex, out string typeName))
+        {
+            Program._unimplByType["DYNA_" + typeHex] = 1;
+            Program._unimplemented++;
+            return dyna;
+        }
 
         if (ParserMaps.TryGetDYNAParser(typeName, out AbstractDYNAParser parser))
         {

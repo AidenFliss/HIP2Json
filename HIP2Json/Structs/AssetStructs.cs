@@ -80,6 +80,15 @@ public class ParsedAsset
     public Dictionary<string, object> AssetData { get; set; } = new();
     public string AssetFriendlyName { get; set; }
     public string FileName { get; set; }
+    public string Type { get; set; }
+    public string AssetID { get; set; }
+    public int? AssetFlags { get; set; }
+    public int? Alignment { get; set; }
+    public string AssetName { get; set; }
+    public string AssetFileName { get; set; }
+    public string AssetTypeName { get; set; }
+    public int? AssetChecksum { get; set; }
+    public string RawBase64 { get; set; }
 }
 
 public abstract class MotionSpecificData { }

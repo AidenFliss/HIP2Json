@@ -25,6 +25,8 @@ namespace HipHopFile
 
         public static (HipFile, Game, Platform) FromPath(string fileName)
         {
+            Section_ATOC.noAHDR = false;
+
             HipFile hipFile = new HipFile();
             Game game = Game.Unknown;
             Platform platform = Platform.Unknown;
@@ -86,6 +88,8 @@ namespace HipHopFile
 
         public static (HipFile, Game, Platform) FromINI(string fileName)
         {
+            Section_ATOC.noAHDR = false;
+
             HipFile hipFile = new HipFile();
             hipFile.SetupFromINI(fileName, out Game game, out Platform platform);
             return (hipFile, game, platform);
@@ -235,16 +239,20 @@ namespace HipHopFile
                 }
 
             // Now that we have all files data, we can give them to the AHDRs.
+            List<Section_AHDR> missingAssets = new List<Section_AHDR>();
             foreach (Section_AHDR AHDR in DICT.ATOC.AHDRList)
             {
-                if (!assetDataDictionary.Keys.Contains(AHDR.assetID))
+                if (!assetDataDictionary.ContainsKey(AHDR.assetID))
                 {
                     SendMessage($"Error: asset with ID [{AHDR.assetID.ToString("X8")}] was not found. The asset will be removed from the archive.");
-                    DICT.ATOC.AHDRList.Remove(AHDR);
+                    missingAssets.Add(AHDR);
                 }
                 else
                     AHDR.data = assetDataDictionary[AHDR.assetID];
             }
+
+            foreach (Section_AHDR missingAsset in missingAssets)
+                DICT.ATOC.AHDRList.Remove(missingAsset);
         }
 
         private void AddAsset(string[] j, ref List<uint> assetIDlist)
@@ -267,6 +275,10 @@ namespace HipHopFile
 
         private void SetupSTRM(Game game, Platform platform)
         {
+            int pcnA = PACK.PCNT?.sizeOfLargestSourceFileAsset ?? 0;
+            int pcnL = PACK.PCNT?.sizeOfLargestLayer ?? 0;
+            int pcnV = PACK.PCNT?.sizeOfLargestSourceVirtualAsset ?? 0;
+
             // Let's generate a temporary HIP file that will be discarded. This sets a correct STRM.DPAK.globalRelativeStartOffset
             List<byte> temporaryFile = new List<byte>();
 
@@ -289,7 +301,7 @@ namespace HipHopFile
             STRM.DPAK.data = BuildStream(game, platform, assetDictionary);
 
             // I'll create a new PCNT, because I'm sure you'll forget to do so.
-            PACK.PCNT = new Section_PCNT(DICT.ATOC.AHDRList.Count, DICT.LTOC.LHDRList.Count);
+            PACK.PCNT = new Section_PCNT(DICT.ATOC.AHDRList.Count, DICT.LTOC.LHDRList.Count, pcnA, pcnL, pcnV);
         }
 
         private byte[] BuildStream(Game game, Platform platform, Dictionary<uint, Section_AHDR> assetDictionary)

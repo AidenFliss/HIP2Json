@@ -69,7 +69,7 @@ namespace HipHopFile
                 return Platform.GameCube;
             if (targetPlatform == "P2" || targetPlatform == "PS2" || targetPlatformName == "PlayStation 2")
                 return Platform.PS2;
-            throw new Exception("PLAT reading error: unknown platform: " + targetPlatform);
+            return Platform.Unknown;
         }
     }
 }

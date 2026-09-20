@@ -36,37 +36,74 @@ To use the program, you will need [a copy of the game you will be modding extrac
 
 ```text
 Usage:
+  HIP2Json --unpack  <input_path> [output_path] [options]
   HIP2Json --extract <input_path> [output_path] [options]
+  HIP2Json --project <input_path> [output_path] [options]
   HIP2Json --pack    <input_path> [output_path] [options]
 
 Modes:
-  --extract, -e   Extract a single .hip/.hop archive OR an entire game files directory.
-  --pack, -k      Pack a project folder (*_unpacked or *_project) back into binary archive(s).
+  --unpack, -u   Unpack .hip/.hop archive(s) to raw asset files + Settings.ini only (no JSON/repack).
+  --extract, -e  Extract a single .hip/.hop archive OR an entire game files directory.
+  --project, -j  Build an in-memory project from .hip/.hop (project.json + assets.json + mod_assets.json, raw bytes as base64).
+  --pack, -k     Pack a project folder (*_unpacked or *_project) back into binary archive(s).
 
 Options:
-  --game, -g      Specify target game format (BFBB or TSSM). [Required]
-  --platform, -p  Specify target platform format (GC, PS2, or XBOX). [Required]
-  --progress, -c  Show parsing coverage stats.
-  --help, -h      Show this help message.
+  --game, -g       Specify target game format (BFBB or TSSM). [optional; auto-detected from the archive when omitted]
+  --platform, -p   Specify target platform format (GC, PS2, or XBOX). [optional; auto-detected from the archive when omitted]
+  --overwrite, -o  When packing a *_project folder, overwrite the original source archive in its own spot (sha-256 verified).
+  --progress, -c   Show parsing coverage stats.
+  --help, -h       Show this help message.
 ```
 
-### Extracting:
+### Unpacking:
 
-Run `HIP2Json` with `--extract` (`-e`), passing either a single `.hip`/`.hop` file or an entire `files` folder. Make sure to specify the game (`-g`) and platform (`-p`).
+Run `HIP2Json` with `--unpack` (`-u`) to dump the raw contents of `.hip`/`.hop` archives into per-asset binary files and a `Settings.ini` — the game and platform are auto-detected from the archive contents, so `-g`/`-p` are not required.
 
 * **Single File Example:**
   ```bash
-  HIP2Json -e path/to/jf01.HIP -g BFBB -p GC
+  HIP2Json -u path/to/jf01.HIP
+  ```
+  Creates a `jf01_raw/` folder containing `jf01_HIP/` with the raw asset files (`[id] name`) and `Settings.ini`.
+
+* **Full Directory Example:**
+  ```bash
+  HIP2Json -u path/to/game/files/
+  ```
+  Unpacks every `.hip`/`.hop` in the tree into `<output_path>/<archive>_<HIP|HOP>/...`. Pass `-g`/`-p` to force a game/platform override on archives whose container doesn't say.
+
+### Extracting:
+
+Run `HIP2Json` with `--extract` (`-e`), passing either a single `.hip`/`.hop` file or an entire `files` folder. The game and platform are auto-detected from the archive contents; pass `-g`/`-p` only to force an override.
+
+* **Single File Example:**
+  ```bash
+  HIP2Json -e path/to/jf01.HIP
   ```
   Creates a `jf01_unpacked/` project folder containing `og/`, `mod/`, and `unpacked/` directly inside the folder.
 
 * **Full Directory Example:**
   ```bash
-  HIP2Json -e path/to/game/files/ -g BFBB -p GC
+  HIP2Json -e path/to/game/files/
   ```
   Creates a `files_project/` folder containing `parsed/` (with the `og/` and `mod/` folder structure) and `unpacked/`.
 
 If there is an error during extraction, you might have a corrupted/beta file or an issue that needs to be reported.
+
+### Project Building:
+
+Run `HIP2Json` with `--project` (`-j`) on a `.hip`/`.hop` file or a whole `files` folder to build a lightweight in-memory project. Unlike `--extract`, this reads assets straight from the archive — no raw file dump (and no `Settings.ini`) is written. Unsupported payload types (models, textures, animation, sound stacks, BSP/JSP) are stored inline as base64 in `mod_assets.json`, so they transplant byte-for-byte.
+
+* **Single File Example:**
+  ```bash
+  HIP2Json -j path/to/jf01.HIP
+  ```
+  Creates `<source_dir>/jf01_proj/` with `project.json` (source path + sha-256, game/platform, layers) and `assets.json` + `mod_assets.json`.
+
+* **Full Directory Example:**
+  ```bash
+  HIP2Json -j path/to/game/files/
+  ```
+  Builds a `<name>_proj/` project folder for every archive in the tree.
 
 ### Packing:
 
@@ -83,6 +120,20 @@ Run `HIP2Json` with `--pack` (`-k`) on the generated project directory to reimpo
   HIP2Json -k files_project/ -g BFBB -p GC
   ```
   Packs all modified archives into `files_project/packed/` ready to replace in your game build.
+
+A `*_proj` project folder is packed back into its original spot, next to the source:
+
+* **In-Memory Project (no overwrite):**
+  ```bash
+  HIP2Json -k jf01_proj/
+  ```
+  Writes `jf01.new.hip` next to the original source archive — the source file is never touched.
+
+* **In-Memory Project (overwrite source):**
+  ```bash
+  HIP2Json -k jf01_proj/ -o
+  ```
+  Repacks straight into the original `jf01.HIP`. This only succeeds if the current source archive still matches the sha-256 recorded in `project.json`; a modified/renamed source is refused to protect your original.
 
 > [!NOTE]
 > Note: Some asset types do not have an implemented parser so they will be ignored when editing json.
