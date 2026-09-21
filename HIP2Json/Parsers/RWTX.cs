@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.IO;
 using System.IO.Compression;
 using System.Text;
@@ -89,8 +89,8 @@ public sealed class RWTXParser : AssetParser
 
         byte[] prefix = Convert.FromBase64String(rwtx.prefix ?? string.Empty);
 
-        if (prefix.Length != PixelOffset)
-            throw new InvalidDataException("RWTX prefix length mismatch");
+        if (prefix.Length < PixelOffset)
+            return prefix;
 
         if (rwtx.platformType == 6)
         {
@@ -1251,14 +1251,14 @@ public static class PngCodec
                         val += (a + b) / 2;
                         break;
                     case 4:
-                    {
-                        int p = a + b - c;
-                        int pa = Math.Abs(p - a);
-                        int pb = Math.Abs(p - b);
-                        int pc = Math.Abs(p - c);
-                        val += (pa <= pb && pa <= pc) ? a : (pb <= pc ? b : c);
-                        break;
-                    }
+                        {
+                            int p = a + b - c;
+                            int pa = Math.Abs(p - a);
+                            int pb = Math.Abs(p - b);
+                            int pc = Math.Abs(p - c);
+                            val += (pa <= pb && pa <= pc) ? a : (pb <= pc ? b : c);
+                            break;
+                        }
                     default:
                         throw new InvalidDataException("PNG unknown filter");
                 }

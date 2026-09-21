@@ -148,23 +148,23 @@ public abstract class AssetParser
                 break;
 
             case MotionType.Spline:
-            {
-                if (Program.CurrentGame == GameType.BFBB)
                 {
-                    motion.specific = new SplineMotion { unknown = ReadInt32BE(br) };
-                }
-                else
-                {
-                    motion.specific = new SplineMotion
+                    if (Program.CurrentGame == GameType.BFBB)
                     {
-                        splineID = ReadUInt32BE(br),
-                        speed = ReadFloatBE(br),
-                        leanModifier = ReadFloatBE(br),
-                    };
-                }
+                        motion.specific = new SplineMotion { unknown = ReadInt32BE(br) };
+                    }
+                    else
+                    {
+                        motion.specific = new SplineMotion
+                        {
+                            splineID = ReadUInt32BE(br),
+                            speed = ReadFloatBE(br),
+                            leanModifier = ReadFloatBE(br),
+                        };
+                    }
 
-                break;
-            }
+                    break;
+                }
 
             case MotionType.MovePoint:
                 motion.specific = new MovePointMotion
@@ -176,65 +176,65 @@ public abstract class AssetParser
                 break;
 
             case MotionType.Mechanism:
-            {
-                if (Program.CurrentGame == GameType.BFBB)
                 {
-                    motion.specific = new MechanismMotion
+                    if (Program.CurrentGame == GameType.BFBB)
                     {
-                        mechanismType = (MechanismType)ReadByte(br),
-                        flags = ReadByte(br),
-                        slideAxis = (Axis)ReadByte(br),
-                        rotateAxis = (Axis)ReadByte(br),
+                        motion.specific = new MechanismMotion
+                        {
+                            mechanismType = (MechanismType)ReadByte(br),
+                            flags = ReadByte(br),
+                            slideAxis = (Axis)ReadByte(br),
+                            rotateAxis = (Axis)ReadByte(br),
 
-                        slideDistance = ReadFloatBE(br),
-                        slideTime = ReadFloatBE(br),
-                        slideAccelTime = ReadFloatBE(br),
-                        slideDecelTime = ReadFloatBE(br),
+                            slideDistance = ReadFloatBE(br),
+                            slideTime = ReadFloatBE(br),
+                            slideAccelTime = ReadFloatBE(br),
+                            slideDecelTime = ReadFloatBE(br),
 
-                        rotateDistance = ReadFloatBE(br),
-                        rotateTime = ReadFloatBE(br),
-                        rotateAccelTime = ReadFloatBE(br),
-                        rotateDecelTime = ReadFloatBE(br),
+                            rotateDistance = ReadFloatBE(br),
+                            rotateTime = ReadFloatBE(br),
+                            rotateAccelTime = ReadFloatBE(br),
+                            rotateDecelTime = ReadFloatBE(br),
 
-                        returnDelay = ReadFloatBE(br),
-                        postReturnDelay = ReadFloatBE(br),
-                    };
-                }
-                else
-                {
-                    motion.specific = new MechanismMotion
+                            returnDelay = ReadFloatBE(br),
+                            postReturnDelay = ReadFloatBE(br),
+                        };
+                    }
+                    else
                     {
-                        mechanismType = (MechanismType)ReadByte(br),
-                        flags = ReadByte(br),
-                        slideAxis = (Axis)ReadByte(br),
-                        rotateAxis = (Axis)ReadByte(br),
+                        motion.specific = new MechanismMotion
+                        {
+                            mechanismType = (MechanismType)ReadByte(br),
+                            flags = ReadByte(br),
+                            slideAxis = (Axis)ReadByte(br),
+                            rotateAxis = (Axis)ReadByte(br),
 
-                        scaleAxis = ReadByte(br),
-                    };
+                            scaleAxis = ReadByte(br),
+                        };
 
-                    br.BaseStream.Position += 3;
+                        br.BaseStream.Position += 3;
 
-                    var m = (MechanismMotion)motion.specific;
+                        var m = (MechanismMotion)motion.specific;
 
-                    m.slideDistance = ReadFloatBE(br);
-                    m.slideTime = ReadFloatBE(br);
-                    m.slideAccelTime = ReadFloatBE(br);
-                    m.slideDecelTime = ReadFloatBE(br);
+                        m.slideDistance = ReadFloatBE(br);
+                        m.slideTime = ReadFloatBE(br);
+                        m.slideAccelTime = ReadFloatBE(br);
+                        m.slideDecelTime = ReadFloatBE(br);
 
-                    m.rotateDistance = ReadFloatBE(br);
-                    m.rotateTime = ReadFloatBE(br);
-                    m.rotateAccelTime = ReadFloatBE(br);
-                    m.rotateDecelTime = ReadFloatBE(br);
+                        m.rotateDistance = ReadFloatBE(br);
+                        m.rotateTime = ReadFloatBE(br);
+                        m.rotateAccelTime = ReadFloatBE(br);
+                        m.rotateDecelTime = ReadFloatBE(br);
 
-                    m.returnDelay = ReadFloatBE(br);
-                    m.postReturnDelay = ReadFloatBE(br);
+                        m.returnDelay = ReadFloatBE(br);
+                        m.postReturnDelay = ReadFloatBE(br);
 
-                    m.scaleAmount = ReadFloatBE(br);
-                    m.scaleDuration = ReadFloatBE(br);
+                        m.scaleAmount = ReadFloatBE(br);
+                        m.scaleDuration = ReadFloatBE(br);
+                    }
+
+                    break;
                 }
-
-                break;
-            }
 
             case MotionType.Pendulum:
                 byte flags = ReadByte(br);
@@ -366,100 +366,100 @@ public abstract class AssetParser
         switch (motion.type)
         {
             case MotionType.ExtendRetract:
-            {
-                var m = (ExtendRetractMotion)motion.specific;
-                WriteVector3BE(bw, m.retPos);
-                WriteVector3BE(bw, m.extDPos);
-                WriteFloatBE(bw, m.extTm);
-                WriteFloatBE(bw, m.extWaitTm);
-                WriteFloatBE(bw, m.retTm);
-                WriteFloatBE(bw, m.retWaitTm);
-                break;
-            }
+                {
+                    var m = (ExtendRetractMotion)motion.specific;
+                    WriteVector3BE(bw, m.retPos);
+                    WriteVector3BE(bw, m.extDPos);
+                    WriteFloatBE(bw, m.extTm);
+                    WriteFloatBE(bw, m.extWaitTm);
+                    WriteFloatBE(bw, m.retTm);
+                    WriteFloatBE(bw, m.retWaitTm);
+                    break;
+                }
 
             case MotionType.Orbit:
-            {
-                var m = (OrbitMotion)motion.specific;
-                WriteVector3BE(bw, m.center);
-                WriteFloatBE(bw, m.w);
-                WriteFloatBE(bw, m.h);
-                WriteFloatBE(bw, m.period);
-                break;
-            }
+                {
+                    var m = (OrbitMotion)motion.specific;
+                    WriteVector3BE(bw, m.center);
+                    WriteFloatBE(bw, m.w);
+                    WriteFloatBE(bw, m.h);
+                    WriteFloatBE(bw, m.period);
+                    break;
+                }
 
             case MotionType.Spline:
-            {
-                var m = (SplineMotion)motion.specific;
-                if (Program.CurrentGame == GameType.BFBB)
                 {
-                    WriteInt32BE(bw, m.unknown);
+                    var m = (SplineMotion)motion.specific;
+                    if (Program.CurrentGame == GameType.BFBB)
+                    {
+                        WriteInt32BE(bw, m.unknown);
+                    }
+                    else
+                    {
+                        WriteUInt32BE(bw, m.splineID);
+                        WriteFloatBE(bw, m.speed);
+                        WriteFloatBE(bw, m.leanModifier);
+                    }
+                    break;
                 }
-                else
-                {
-                    WriteUInt32BE(bw, m.splineID);
-                    WriteFloatBE(bw, m.speed);
-                    WriteFloatBE(bw, m.leanModifier);
-                }
-                break;
-            }
 
             case MotionType.MovePoint:
-            {
-                var m = (MovePointMotion)motion.specific;
-                WriteUInt32BE(bw, m.flags);
-                WriteUInt32BE(bw, m.mpID);
-                WriteFloatBE(bw, m.speed);
-                break;
-            }
+                {
+                    var m = (MovePointMotion)motion.specific;
+                    WriteUInt32BE(bw, m.flags);
+                    WriteUInt32BE(bw, m.mpID);
+                    WriteFloatBE(bw, m.speed);
+                    break;
+                }
 
             case MotionType.Mechanism:
-            {
-                var m = (MechanismMotion)motion.specific;
-                WriteByte(bw, (byte)m.mechanismType);
-                WriteByte(bw, m.flags);
-                WriteByte(bw, (byte)m.slideAxis);
-                WriteByte(bw, (byte)m.rotateAxis);
-
-                if (Program.CurrentGame == GameType.TSSM)
                 {
-                    WriteByte(bw, m.scaleAxis);
-                    bw.Write(new byte[2]);
+                    var m = (MechanismMotion)motion.specific;
+                    WriteByte(bw, (byte)m.mechanismType);
+                    WriteByte(bw, m.flags);
+                    WriteByte(bw, (byte)m.slideAxis);
+                    WriteByte(bw, (byte)m.rotateAxis);
+
+                    if (Program.CurrentGame == GameType.TSSM)
+                    {
+                        WriteByte(bw, m.scaleAxis);
+                        bw.Write(new byte[2]);
+                    }
+
+                    WriteFloatBE(bw, m.slideDistance);
+                    WriteFloatBE(bw, m.slideTime);
+                    WriteFloatBE(bw, m.slideAccelTime);
+                    WriteFloatBE(bw, m.slideDecelTime);
+
+                    WriteFloatBE(bw, m.rotateDistance);
+                    WriteFloatBE(bw, m.rotateTime);
+                    WriteFloatBE(bw, m.rotateAccelTime);
+                    WriteFloatBE(bw, m.rotateDecelTime);
+
+                    WriteFloatBE(bw, m.returnDelay);
+                    WriteFloatBE(bw, m.postReturnDelay);
+
+                    if (Program.CurrentGame == GameType.TSSM)
+                    {
+                        WriteFloatBE(bw, m.scaleAmount);
+                        WriteFloatBE(bw, m.scaleDuration);
+                    }
+                    break;
                 }
-
-                WriteFloatBE(bw, m.slideDistance);
-                WriteFloatBE(bw, m.slideTime);
-                WriteFloatBE(bw, m.slideAccelTime);
-                WriteFloatBE(bw, m.slideDecelTime);
-
-                WriteFloatBE(bw, m.rotateDistance);
-                WriteFloatBE(bw, m.rotateTime);
-                WriteFloatBE(bw, m.rotateAccelTime);
-                WriteFloatBE(bw, m.rotateDecelTime);
-
-                WriteFloatBE(bw, m.returnDelay);
-                WriteFloatBE(bw, m.postReturnDelay);
-
-                if (Program.CurrentGame == GameType.TSSM)
-                {
-                    WriteFloatBE(bw, m.scaleAmount);
-                    WriteFloatBE(bw, m.scaleDuration);
-                }
-                break;
-            }
 
             case MotionType.Pendulum:
-            {
-                var m = (PendulumMotion)motion.specific;
-                WriteByte(bw, m.flags);
-                WriteByte(bw, m.plane);
-                bw.Write(new byte[2]);
+                {
+                    var m = (PendulumMotion)motion.specific;
+                    WriteByte(bw, m.flags);
+                    WriteByte(bw, m.plane);
+                    bw.Write(new byte[2]);
 
-                WriteFloatBE(bw, m.length);
-                WriteFloatBE(bw, m.range);
-                WriteFloatBE(bw, m.period);
-                WriteFloatBE(bw, m.phase);
-                break;
-            }
+                    WriteFloatBE(bw, m.length);
+                    WriteFloatBE(bw, m.range);
+                    WriteFloatBE(bw, m.period);
+                    WriteFloatBE(bw, m.phase);
+                    break;
+                }
         }
 
         //fix: ensure correct padding for a fixed length

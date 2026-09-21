@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  pull_request:
+    branches: [ "main", "master" ]
+  push:
+    branches: [ "main", "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    name: build + fuzz gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Build (Release)
+        run: dotnet build HIP2Json.sln -c Release
+
+      - name: Fuzz gate (crashes==0 AND idem-miss==0)
+        run: >-
+          dotnet run --project HIP2Json.Tests/HIP2Json.Tests.csproj
+          -c Release -- --fuzz 8 --seed 0x5EEDF00D
+
+  format:
+    name: dotnet-format (no-changes)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Check formatting
+        run: dotnet format HIP2Json.Tests/HIP2Json.Tests.csproj --verify-no-changes --no-restore

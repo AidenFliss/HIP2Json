@@ -158,7 +158,7 @@ public sealed class ATBLParser : AssetParser
         WriteUInt32BE(bw, state.subStateCount);
     }
 
-private AnimEffect ReadAnimEffect(BinaryReader br)
+    private AnimEffect ReadAnimEffect(BinaryReader br)
     {
         AnimEffect effect = new AnimEffect
         {

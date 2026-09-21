@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -409,7 +409,7 @@ class Program
 
             parsed.AssetFriendlyName = GetFriendlyName(Path.GetFileName(assetFile)) ?? "Unknown";
             parsed.FileName = Path.GetFileName(assetFile) ?? "Unknown";
-string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
+            string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
 
             bool shortForm = (parsed.AssetData.TryGetValue("TIMR", out var timrObj) && timrObj is TIMR { ShortForm: true })
                           || (parsed.AssetData.TryGetValue("SURF", out var surfObj) && surfObj is SURF { ShortForm: true });
@@ -823,7 +823,7 @@ string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
         }
     }
 
-    static byte[] SerializeModdedAsset(JsonElement modElem, out string detectedAssetType, out object obj)
+    internal static byte[] SerializeModdedAsset(JsonElement modElem, out string detectedAssetType, out object obj)
     {
         detectedAssetType = null;
         foreach (var prop in modElem.EnumerateObject())
@@ -2194,7 +2194,7 @@ string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
         };
     }
 
-    static ParsedAsset ParseAssetBytes(byte[] data, string assetType, string assetName)
+    internal static ParsedAsset ParseAssetBytes(byte[] data, string assetType, string assetName)
     {
         if (data == null || data.Length == 0)
             return null;
