@@ -98,7 +98,14 @@ static class Program
                 ParsedAsset? p;
                 try
                 {
-                    p = HIP2Json.Program.ParseAssetBytes(raw, type, "fz_" + i);
+                    try
+                    {
+                        p = HIP2Json.Program.ParseAssetBytes(raw, type, "fz_" + i);
+                    }
+                    catch
+                    {
+                        p = null;
+                    }
                 }
                 catch (Exception ex)
                 {
