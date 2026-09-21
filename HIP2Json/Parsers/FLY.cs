@@ -1,4 +1,8 @@
-using System;
+﻿using System;
+using System.IO;
+using System.Linq;
+
+namespace HIP2Json;
 ﻿using System.IO;
 using System.Linq;
 
