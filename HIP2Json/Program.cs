@@ -92,11 +92,11 @@ class Program
             bool showProgress = args.Contains("--progress") || args.Contains("-c");
             bool overwriteFlag = args.Contains("--overwrite") || args.Contains("-o");
 
-            int modeCount = (extractMode ? 1 : 0) + (packMode ? 1 : 0) + (unpackMode ? 1 : 0) + (projectMode ? 1 : 0);
+            int modeCount = ((extractMode || projectMode) ? 1 : 0) + (packMode ? 1 : 0) + (unpackMode ? 1 : 0);
 
             if (modeCount != 1)
             {
-                Logger.LogError("Error: Specify exactly one mode (--extract, --unpack, --pack, or --project).");
+                Logger.LogError("Error: Specify exactly one mode. --extract and --project are the same in-memory project flow (use either, or both); --unpack dumps raw assets; --pack repacks.");
                 ShowUsage();
                 return;
             }
