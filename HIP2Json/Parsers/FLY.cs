@@ -1,4 +1,5 @@
-using System.IO;
+using System;
+﻿using System.IO;
 using System.Linq;
 
 namespace HIP2Json;
@@ -9,6 +10,13 @@ public sealed class FLYParser : AssetParser
     {
         long sizeOfAsset = br.BaseStream.Length;
         long entries = sizeOfAsset / 64;
+        long remainder = sizeOfAsset - (entries * 64);
+        string rawTail = null;
+        if (remainder > 0)
+        {
+            rawTail = Convert.ToBase64String(br.ReadBytes((int)remainder));
+            entries -= 0;
+        }
 
         zFlyKey[] keys = new zFlyKey[entries];
         for (uint i = 0; i < entries; i++)
@@ -22,7 +30,7 @@ public sealed class FLYParser : AssetParser
             };
         }
 
-        return new FLY { keys = keys };
+        return new FLY { keys = keys, tail = rawTail };
     }
 
     public override object Serialize(object obj)
@@ -42,6 +50,9 @@ public sealed class FLYParser : AssetParser
             WriteFloatLE(bw, key.focal);
         }
 
+        if (!string.IsNullOrEmpty(fly.tail))
+            bw.Write(Convert.FromBase64String(fly.tail));
+
         return ms.ToArray();
     }
 }
@@ -49,6 +60,7 @@ public sealed class FLYParser : AssetParser
 public class FLY
 {
     public zFlyKey[] keys;
+    public string tail;
 }
 
 public class zFlyKey
