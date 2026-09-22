@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using HIP2Json;
 using HIPProg = HIP2Json.Program;
 
 namespace HIP2Json.Tests;

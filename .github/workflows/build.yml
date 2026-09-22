@@ -40,7 +40,7 @@ jobs:
 
       - name: Publish
         run: |
-          dotnet publish HIP2Json/HIP2Json.csproj \
+          dotnet publish HIP2Json.CLI/HIP2Json.CLI.csproj \
             -c Release \
             -r ${{ matrix.runtime }} \
             --self-contained false \

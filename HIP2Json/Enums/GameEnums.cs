@@ -395,7 +395,7 @@ public enum PhysFlags : byte
 }
 
 [JsonConverter(typeof(JsonStringEnumConverter))]
-enum TriggerType : byte
+public enum TriggerType : byte
 {
     Box = 0,
     Sphere = 1,

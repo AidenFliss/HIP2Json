@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <AssemblyTitle>HIP2Json</AssemblyTitle>
-    <Product>HIP2Json</Product>
+    <AssemblyName>HIP2Json.CLI</AssemblyName>
+    <RootNamespace>HIP2Json.CLI</RootNamespace>
+    <AssemblyTitle>HIP2Json.CLI</AssemblyTitle>
+    <Product>HIP2Json.CLI</Product>
     <Copyright>Copyright © Aiden 2025</Copyright>
     <CurrentDate>$([System.DateTime]::Now.ToString("yyyy.MM.dd"))</CurrentDate>
     <AssemblyVersion>$(CurrentDate)</AssemblyVersion>
@@ -12,11 +14,7 @@
     <Version>$(CurrentDate)</Version>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <InternalsVisibleTo Include="HIP2Json.Tests" />
-    <InternalsVisibleTo Include="HIP2Json.CLI" />
+    <ProjectReference Include="..\HIP2Json\HIP2Json.csproj" />
   </ItemGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <DebugSymbols>false</DebugSymbols>
