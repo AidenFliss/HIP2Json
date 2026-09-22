@@ -360,7 +360,7 @@ public abstract class AssetParser
         WriteByte(bw, (byte)color.a);
     }
 
-    protected static void WriteMotion(BinaryWriter bw, xMotion motion)
+    protected static void WriteMotion(BinaryWriter bw, xMotion motion, long regionSize)
     {
         long motionStart = bw.BaseStream.Position;
 
@@ -470,12 +470,11 @@ public abstract class AssetParser
         }
 
         //fix: ensure correct padding for a fixed length
-        long expectedSize = (Program.CurrentGame == GameType.BFBB) ? 0x30 : 0x3C;
         long bytesWritten = bw.BaseStream.Position - motionStart;
 
-        if (bytesWritten < expectedSize)
+        if (bytesWritten < regionSize)
         {
-            int padNeeded = (int)(expectedSize - bytesWritten);
+            int padNeeded = (int)(regionSize - bytesWritten);
             bw.Write(new byte[padNeeded]);
         }
     }

@@ -38,7 +38,7 @@ public sealed class BUTNParser : AssetParser
         WriteInt32BE(bw, butn.isReset);
         WriteFloatBE(bw, butn.resetDelay);
         WriteInt32BE(bw, (int)butn.buttonActFlags);
-        WriteMotion(bw, butn.motion);
+        WriteMotion(bw, butn.motion, Program.CurrentGame == GameType.BFBB ? 0x2CL : 0x3CL);
 
         return ms.ToArray();
     }

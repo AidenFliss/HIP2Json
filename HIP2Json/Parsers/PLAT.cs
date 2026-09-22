@@ -185,7 +185,7 @@ public sealed class PLATParser : AssetParser
         if (padNeeded > 0)
             bw.Write(new byte[padNeeded]);
 
-        WriteMotion(bw, plat.motion);
+        WriteMotion(bw, plat.motion, Program.CurrentGame == GameType.BFBB ? 0x30L : 0x3CL);
 
         return ms.ToArray();
     }
