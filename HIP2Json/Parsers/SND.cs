@@ -17,14 +17,17 @@ public abstract class SoundAssetParser : AssetParser
     {
         byte[] data = br.ReadBytes((int)(br.BaseStream.Length - br.BaseStream.Position));
 
-        string codec = "DSPADPCM";
+        bool isVag = Program.CurrentPlatform == GamePlatform.PS2;
+
+        string codec = isVag ? "VAG" : "DSPADPCM";
         int sampleRate = 22050;
         string wavBase64 = null;
 
         if (data.Length > 0)
         {
-            short[] samples = SoundCodec.Decode(data);
-            wavBase64 = Convert.ToBase64String(WavCodec.Encode(samples, sampleRate));
+            short[] samples = isVag ? SoundCodec.DecodeVAG(data) : SoundCodec.Decode(data);
+            if (samples.Length > 0)
+                wavBase64 = Convert.ToBase64String(WavCodec.Encode(samples, sampleRate));
         }
 
         return new SND
@@ -40,6 +43,9 @@ public abstract class SoundAssetParser : AssetParser
     public override object Serialize(object obj)
     {
         SoundAssetBase snd = (SoundAssetBase)obj;
+
+        bool isVag = Program.CurrentPlatform == GamePlatform.PS2;
+
         byte[] original = string.IsNullOrEmpty(snd.dataBase64) ? Array.Empty<byte>() : Convert.FromBase64String(snd.dataBase64);
 
         if (string.IsNullOrEmpty(snd.wavBase64))
@@ -53,12 +59,12 @@ public abstract class SoundAssetParser : AssetParser
 
         if (original.Length > 0)
         {
-            short[] origSamples = SoundCodec.Decode(original);
+            short[] origSamples = isVag ? SoundCodec.DecodeVAG(original) : SoundCodec.Decode(original);
             if (SoundCodec.EqualSamples(origSamples, wavSamples))
                 return original;
         }
 
-        return SoundCodec.Encode(wavSamples);
+        return isVag ? SoundCodec.EncodeVAG(wavSamples) : SoundCodec.Encode(wavSamples);
     }
 }
 
