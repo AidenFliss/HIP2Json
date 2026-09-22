@@ -1,0 +1,57 @@
+# game=TSSM platform=GameCube archive=sc02.HIP asset=0x9ADF7541 type=LIGHTNING call=DYNA size=92 checksum=-814612527 name=LIGHTNING_15
+BLOB:
+mt91QQAAAB2UuO8tAAIAAMOJwkpCRVesw4cX/sOJwkpCJO30w4cX/v////8/gAAAP4AAACTpngb5vz1pAAAAAQAAAADrdYGxAAAAAAAAAAAAAAAAAAAAAAAAAAE=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x9ADF7541",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "LIGHTNING_15",
+  "FileName": "LIGHTNING_15",
+  "Type": "LIGHTNING",
+  "AssetID": "0x9ADF7541",
+  "AssetName": "LIGHTNING_15",
+  "AssetFileName": "",
+  "AssetTypeName": "LIGHTNING",
+  "AssetChecksum": -814612527,
+  "DYNA": {
+    "type": "0x94B8EF2D",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "effect:Lightning",
+    "dynaSpecificData": {
+      "start": {
+        "x": -275.51788,
+        "y": 49.335617,
+        "z": -270.18744
+      },
+      "end": {
+        "x": -275.51788,
+        "y": 41.232376,
+        "z": -270.18744
+      },
+      "color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      },
+      "thickness": 1,
+      "branchSpeed": 1,
+      "mainTexture": "0x24E99E06",
+      "branchTexture": "0xF9BF3D69",
+      "damage": 1,
+      "knockBackSpeed": 0,
+      "sound": "0xEB7581B1",
+      "soundHit1": "0x00000000",
+      "soundHit2": "0x00000000",
+      "followStart": "0x00000000",
+      "followEnd": "0x00000000",
+      "collisionEnabled": 1
+    }
+  }
+}

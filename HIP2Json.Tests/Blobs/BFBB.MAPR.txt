@@ -1,0 +1,20 @@
+# game=BFBB platform=GameCube archive=bb03.HOP asset=0xD88D00C1 type=MAPR call=MAPR size=8 checksum=-1111420205 name=bb03_downtown_bb_lighthouse Mat
+BLOB:
+2I0AwQAAAAA=
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "bb03_downtown_bb_lighthouse Mat",
+  "FileName": "bb03_downtown_bb_lighthouse Mat",
+  "Type": "MAPR",
+  "AssetID": "0xD88D00C1",
+  "AssetName": "bb03_downtown_bb_lighthouse Mat",
+  "AssetFileName": "",
+  "AssetTypeName": "MAPR",
+  "AssetChecksum": -1111420205,
+  "MAPR": {
+    "id": "0xD88D00C1",
+    "count": 0,
+    "materialMapEntries": []
+  }
+}

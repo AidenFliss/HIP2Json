@@ -1,0 +1,19 @@
+# game=BFBB platform=GameCube archive=bb02.HIP asset=0x5118F98D type=TEXT call=TEXT size=84 checksum=-150107919 name=text_button_small_02
+BLOB:
+AAAATHtjPWZmZmZmZmZmfXt+OnRleH17dGV4OnBhZF9idXR0b240O3NjYWxlPXNpemU7ZHN0PTAsMCwuNSwuNTtvZmY9LjUsLjV9e346Y30AAAAA
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "text_button_small_02",
+  "FileName": "text_button_small_02",
+  "Type": "TEXT",
+  "AssetID": "0x5118F98D",
+  "AssetName": "text_button_small_02",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT",
+  "AssetChecksum": -150107919,
+  "TEXT": {
+    "charCount": 76,
+    "text": "{c=ffffffff}{~:tex}{tex:pad_button4;scale=size;dst=0,0,.5,.5;off=.5,.5}{~:c}"
+  }
+}

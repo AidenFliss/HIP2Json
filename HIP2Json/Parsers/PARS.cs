@@ -24,6 +24,11 @@ public sealed class PARSParser : AssetParser
             cmdSize = ReadInt32BE(br),
         };
 
+        if (Program.CurrentGame != GameType.BFBB)
+        {
+            pars.parFlags2 = ReadUInt32BE(br);
+        }
+
         int cmdCountRead = pars.cmdCount;
         List<ParticleCommand> commands = new List<ParticleCommand>(cmdCountRead);
         for (int i = 0; i < cmdCountRead; i++)
@@ -52,6 +57,11 @@ public sealed class PARSParser : AssetParser
                 WriteByte(bw, pars.renderDstBlendMode);
                 WriteByte(bw, (byte)(pars.commands?.Length ?? 0));
                 WriteInt32BE(bw, pars.commands?.Sum(c => GetCommandSize(c.commandType)) ?? 0);
+
+                if (Program.CurrentGame != GameType.BFBB)
+                {
+                    WriteUInt32BE(bw, pars.parFlags2);
+                }
 
                 if (pars.commands != null)
                 {
@@ -481,6 +491,7 @@ public class PARS
     public byte renderDstBlendMode { get; set; }
     public byte cmdCount { get; set; }
     public int cmdSize { get; set; }
+    public uint parFlags2 { get; set; }
     public ParticleCommand[] commands { get; set; }
 }
 

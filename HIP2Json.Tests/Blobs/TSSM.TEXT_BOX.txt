@@ -1,0 +1,61 @@
+# game=TSSM platform=GameCube archive=jk02.HIP asset=0x47C97696 type=TEXT_BOX call=DYNA size=132 checksum=349336794 name=CHALLENGE_TEXTBOX
+BLOB:
+R8l2lgAAAB1ELhM3AAMAAAAAAAA9zMzNPszMzT9MzM0+zMzNAAAAAD11wo89uFHsAAAAAAAAAAD/5kb/PUzMzTwj1wo9TMzNPCPXCgAAAAEAAAABAAAAZAAAAAAAAABk/////wAAAAA6gxJvOoMSbzqDEm86gxJvAAAA/0AAAABAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x47C97696",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "CHALLENGE_TEXTBOX",
+  "FileName": "CHALLENGE_TEXTBOX",
+  "Type": "TEXT_BOX",
+  "AssetID": "0x47C97696",
+  "AssetName": "CHALLENGE_TEXTBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT_BOX",
+  "AssetChecksum": 349336794,
+  "DYNA": {
+    "type": "0x442E1337",
+    "version": 3,
+    "handle": 0,
+    "typeNameInternal": "game_object:text_box",
+    "dynaSpecificData": {
+      "text": "0x00000000",
+      "pos_x": 0.1,
+      "pox_y": 0.4,
+      "bounds_w": 0.8,
+      "bounds_h": 0.4,
+      "font": "Default",
+      "text_width": 0.06,
+      "text_height": 0.09,
+      "char_spacing_x": 0,
+      "char_spacing_y": 0,
+      "color": {
+        "r": 255,
+        "g": 230,
+        "b": 70,
+        "a": 255
+      },
+      "inset_left": 0.05,
+      "inset_top": 0.01,
+      "inset_right": 0.05,
+      "inset_bottom": 0.01,
+      "xjustify": "Center",
+      "expand": "Center",
+      "max_height": 1.4E-43,
+      "backdrop_type": "SolidColor",
+      "backdrop_color": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 100
+      },
+      "backdrop_texture": "0xFFFFFFFF",
+      "trailing": "AAAAADqDEm86gxJvOoMSbzqDEm8AAAD/QAAAAEAAAAA="
+    }
+  }
+}

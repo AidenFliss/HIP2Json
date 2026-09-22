@@ -1,0 +1,47 @@
+# game=TSSM platform=GameCube archive=tt01.HIP asset=0x18815FF6 type=DSCO call=DSCO size=152 checksum=1501800691 name=S1_DISCO_A_02
+BLOB:
+GIFf9gAAAB0AAAADPwAAAD8AAAAAAAAkAAAAOAAAAFAAAAAoAAAAZAAAAANESVNDT19BX09GRl9TSU1QXzAxAERJU0NPX0FfV0FSTl9TSU1QXzAxAM3NzURJU0NPX0FfT05fU0lNUF8wMQDNAAAAcAAAAHoAAACEEAQEQUEQBEEQBARBQRAQBEEQBEFBEBAEBEEQBEEQzc0=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x18815FF6",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "S1_DISCO_A_02",
+  "FileName": "S1_DISCO_A_02",
+  "Type": "DSCO",
+  "AssetID": "0x18815FF6",
+  "AssetName": "S1_DISCO_A_02",
+  "AssetFileName": "",
+  "AssetTypeName": "DSCO",
+  "AssetChecksum": 1501800691,
+  "DSCO": {
+    "discoFloorAsset": {
+      "flags": "Loop, Enabled",
+      "interval_transition": 0.5,
+      "interval_state": 0.5,
+      "prefix_offset_off": 36,
+      "prefix_offset_transition": 56,
+      "prefix_offset_on": 80,
+      "state_mask_size": 40,
+      "states_offset": 100,
+      "states_size": 3
+    },
+    "prefix_off": "DISCO_A_OFF_SIMP_01",
+    "prefix_transition": "DISCO_A_WARN_SIMP_01",
+    "prefix_on": "DISCO_A_ON_SIMP_01",
+    "state_offsets": [
+      112,
+      122,
+      132
+    ],
+    "state_masks": [
+      "EAQEQUEQBEEQBA==",
+      "BEFBEBAEQRAEQQ==",
+      "QRAQBARBEARBEA=="
+    ]
+  }
+}

@@ -1,0 +1,2158 @@
+# game=TSSM platform=GameCube archive=gg02.HOP asset=0x0E556E16 type=SPLN call=SPLN size=5724 checksum=1763104336 name=curve_gg02
+BLOB:
+Fm5VDkkAHQAAAAADAAABZgAAAWIoYpQ0hFGUNEKWaAzBQfvnQRJYUUJXzBjBWwKawjBlBkJH24bBZaXjwnTnHEJkE/XBcBK2wpcgg0KISffBZkFCwqov2UKXLurBaYZJwsoojUKS4mnBYIzAwuU9U0Ju91TBaOB8wvIGEEJFIGPBcVP4wvIpJEIBwvbBZlapwwAirkHgqM/Bb/H4ww7pmUHK3EHBPAM5wyMLS0G+2abBWBz2wzb+80GSpC/BSf0Fw0yakUF++CbBVtDbw1nboUFcSX3A+7Fyw2QDvUFaD5fBSv2Rw21gnEEZSaHBRsHOw333xkDcXGjBLmeWw4XLqkA6Y+nBN35cw5VmnMGOYe/BK+bXw5ghv8I55MzBNClDw5tRacJc4mzBI7T2w5zWJMJ5MjrAtql0w5zP88KTELXBSQM0w5uORsMD1F3BZbZGw5Xbc8MKM7DBgYT/w4yj28MNjkfBfxuZw4VKeMMQZyrBgTTEw33WSsMSLBLBhtUhw3bILsMTrarBMfxaw3ANwsMXf1/BhfO2w2RbsMMZ2J3Bjp6Iw1dUtsMTH6PBioSnwzdwPcMM+pPBib62wyxJbMMAO+3BixiwwybTJcLVOijBhDpcwyILp8Ku/jbBhl02wxxbHcKIwkXBfMzNww/WusI+rVTBcV7bwwb2h8HxKYfBbVeQwvlxg8DH9zzBchmcwtzEjb+8HdrBRIAWwsAXmMEIZXjBLyeNwqnJ9sGQqp/BOoQAwqTINcIUzTPBLcAVwqNqo8JhRRbBR2SWwqf33sKY1NLBRoDgwqVSoMK7k1bBYRl9wqVSoMLofR/BZVs4wqfdccMKRvzBZ84pwpzZO8ML+N3BXruRwneZMMMDEwDBVngYwk7sGcLua7PBVr6zwitUpcLWsWXBWaGzwchLd8K8bEbBWEanwWcbDcKew2XBVO1cwIjNYMJX1hDBWv0mwCUigcILkYTBV6uiwUv8/cEyoTXBVc6OwXtxmUFJA6XBUHybwCUigUGrsLvBRgLSQYPkyEFPyynBUayYQgkhTUCrh8bBWd5HQiDbmsGS8HvBVtJLQiKNe8H8BPjBVtrNQeYxwMI5VD7BWsSzQgQLqsJX1hDBWx4PQj9dbMJ0pgDBWOQeQm7SB8KX++HBUJ3zQnqvLsLEDLrBMqJkQmm8ZMLeNpfBI8U1QlmDpcMBdNfBJeFMQiUoecMWJCPBKa/XQf3sDcMmPfzBI1gQQakuHcNCoXXA/AgxQZufFcNPxATA0N0vQfBdBsNQMHzAq3L+QlBQNcNFmL7AhU/fQnqvLsM1fuW/5wo9Qmm8ZMMq5ye/SIuoQjpHycMi4jJAOqf4Qe8E8cMgu+HAVA98QcuOV8MfCgDARDkNQAUoKMMt3nHAUUqMwQgx18NG3ifAaKrSwUv8/cNaW8K/yRaHPsV/UsNqdZy/m6XjQYPkyMNsJ32/mVgQQg/o0cNq4hS/m6XjQm7SB8NjQZ+/m6XjQpUR5cNZFlq/rMhQQqDvC8M/O5vAP1wpQrxNgcM5WkrAJ/4RQsD5jsMqkfjBBKv/QtDHtcL0WkbBSN0vQvaF7cLbxwjBUfvnQxAF+sKvti/BNEc1QxX0jsKSDU7BBaGcQxjr18IchE7A5zNXQyAf08GqqsnBLF41QyAf08CZ4PbBIwo9QxvjIb/r3vjBGN0WQw0OsMCZ4PbA4QYlQvnprsDCjg3AwEm6QtjdC0Crh8bAwEGJQsp1E0IMFH3BFZFoQsEivkI7iRjBNf7iQripWUKD5tLBXEtgQsSGgEK2vy/BXUlaQtPHaULLFbvBUEO2QrAv9EKHRPvBWF6TQmA74ULc4XXBTe7pQl3fPULyEPHBVs64Qh132ELOeX3BR6sCQZ8C10KfBOLBUEJrQRtRUEKTjPjBVZbiwFmP0kKP3g3BYIf6wYbYmEKGlFDBZdM2wdrwuEJXABHBW4rEwjPR7kJIzFfBZXNfwnbQgkJkE/XBcBK2wpcgg0KISffBZkFCwqov2UKXLurBaYZJwsoojUKS4mnBYIzAwuU9U0Ju91TBaOB8wvIGEEJFIGPBcVP4wvIpJEIBwvbBZlapwwAirkHgqM/Bb/H4ww7pmUHK3EHBPAM5wyMLS0G+2abBShRgwzb+80INkenBL6zAw0KBCUJraqfBSdmsw05VRELBpUHBRZLOw0UAmkLvrOXBKhMwwztWBUMEdvLBBwFwwx8NHUMRfqXBEf/mwwmFKkMeIJLBBnwpwue2DEMjiB3AwfrIwrZe4kMS6LPAs2Oywp/2B0MBFlDAoNHXwqYI9EL2tDDApVAawsZgzULgjjHApJkmwuGrjUK3SvnAhGgEwuTOzEKdfafAsGPFwwXdd0Krj8K/+QhPwyR3e8IUAaG/3eKkwxMIEcBq4I/AAdE5w0HTQsKEpMi/skzPw0OO1sLmw10+wqKhw03oNMKkTXLBIM7+w4Z0UcGAYsXBQ2bZw3U1p8IqL93BHsUfw1v/CcK3JXbBT8OJw2KWTcLZPqvBejyzwz4rQcKu/jbBhl02wxxbHcKIwkXBfMzNww/WusI+rVTBcV7bwwb2h8HxKYfBbVeQwvlxg8DH9zzBbohSwtzEjb+8HdrBRIAWwsAXmMEIZXjBLKXkwqnJ9sGQqp/BOoQAwqTINcIUzTPBLcAVwqNqo8JhRRbBR2SWwqf33sKY1NLBRoDgwqVSoMK7k1bBYRl9wqVSoMLofR/BZVs4wqfdccMKRvzBZ84pwpzZO8ML+N3BXruRwneZMMMDEwDBVngYwk7sGcLua7PBVr6zwitUpcLWsWXBWaGzwchLd8K8bEbBWEanwWcbDcKew2XBVO1cwIjNYMJX1hDBWv0mwCUigcILkYTBWV+DwUv8/cEyoTXBVmUcwXtxmUFJA6XBTwdHwCUigUGrsLvBRgLSQYPkyEFPyynBUayYQgkhTUCrh8bBWd5HQiDbmsGS8HvBVtJLQiKNe8H8BPjBVtrNQeYxwMI5VD7BWsSzQgQLqsJX1hDBWx4PQj9dbMJ0pgDBWOQeQm7SB8KX++HBUJ3zQnqvLsLEDLrBMqJkQmm8ZMLeNpfBI8U1QlmDpcMBdNfBJeFMQiUoecMWJCPBKa/XQf3sDcMmPfzBI1gQQakuHcNCoXXA/AgxQZufFcNPxATA0N0vQfBdBsNQMHzAq3L+QlBQNcNFmL7AhU/fQnqvLsM1fuW/5wo9Qmm8ZMMq5ye/SIuoQjpHycMi4jJAOqf4Qe8E8cMgu+HAVA98QcuOV8MfCgDARDkNQAUoKMMt3nHAUUqMwQgx18NG3ifAaKrSwUv8/cNaW8K/yRaHPsV/UsNqdZy/m6XjQYPkyMNsJ32/mVgQQg/o0cNq4hS/m6XjQm7SB8NjQZ+/m6XjQpUR5cNZFlq/rMhQQqDvC8M/O5vAP1wpQrxNgcM5WkrAJ/4RQsD5jsMqkfjBBKv/QtDHtcL0WkbBSN0vQvaF7cLbxwjBUfvnQxAF+sKvti/BNEc1QxX0jsKSDU7BBaGcQxjr18IchE7A5zNXQyAf08GqqsnBLF41QyAf08CZ4PbBIwo9QxvjIb/r3vjBGN0WQw0OsMCZ4PbA4QYlQvnprsDCjg3AwEm6QtjdC0Crh8bAwEGJQsp1E0IMFH3BFZFoQsEivkI7iRjBNf7iQripWUKD5tLBXEtgQsSGgEK2vy/BXUlaQtPHaULLFbvBUEO2QrAv9EKHRPvBWF6TQmA74ULc4XXBTe7pQl3fPULyEPHBVs64Qh132ELOeX3BR6sCQZ8C10KfBOLBUEJrQRtRUEKTjPjBVZbiwFmP0kKVUmfBXaLGwYbYmEKQwebBYxgnwbn06kJ7dP3BcJcRwiYx+kJIzFfBdAlkwnbQgkJkE/XBaw0/wpcgg0KISffBZ3L4wqov2UKXLurBaYZJwsoojUKS4mnBYIzAwuU9U0Ju91TBaOB8wvIGEEJFIGPBcVP4wvIpJEIBwvbBZlapwwAirkHgqM/Bb/H4ww7pmUHK3EHBPAM5wyMLS0G+2abBWBz2wzb+80GSpC/BSCONw0yakUF++CbBWZNBw1nboUFcSX3A+7Fyw2PTyUFaD5fBSv2Rw22HlEEZSaHBRsHOw333xkDcXGjBLmeWw4XLqkA6Y+nBN35cw5VmnMGOYe/BK+bXw5ghv8I55MzBNClDw5tRacJc4mzBI7T2w5zWJMJ5MjrAtql0w5zP88KTELXBSQM0w5uORsMD1F3BZbZGw5Xbc8MKM7DBgA/kw4yj28MNjkfBfxuZw4VKeMMQZyrBgTTEw33WSsMSLBLBhw2Nw3bILsMT5CrBLzR3w3BDxsMXzcnBjO6Jw2JfAMMZ2J3BiL/jw1dUtsMTBXnBioSnwzd/eMMM4IjBib62wyxYlcMAO+3BixiwwybTJcLVOijBhDpcwyILp8Ku/jbBhrk0wxxbHcKIwkXBgaEAww/WusI+rVTBcBqXwwb2h8HxKYfBbVhewvlxg8DH9zzBbQjRwtzEjb+8HdrBQ5JywsAXmMEIZXjBKiWwwqnJ9sGQqp/BQK9lwqTINcIUzTPBLHcVwqNqo8JhRRbBRzJdwqf33sKY1NLBSA3EwqVSoMK7k1bBX1M6wqVSoMLofR/BZQxmwqfdccMKRvzBZFxBwpzZO8ML+N3BXrMHwneZMMMDEwDBUtO3wk7sGcLua7PBVmojwitUpcLWsWXBV6u8wchLd8K8bEbBWKYMwWcbDcKew2XBWT6twIjNYMJX1hDBVAqmwCUigcILkYTBV3dwwUv8/cEyoTXBVsgRwXtxmUFJA6XBTUWRwCUigUGrsLvBRYhMQYPkyEFPyynBUsOZQgkhTUCrh8bBWcrDQiDbmsGS8HvBWBoUQiKNe8H8BPjBV0ZNQeYxwMI5VD7BWdAFQgQLqsJX1hDBXQuKQj9dbMJ0pgDBWiQfQm7SB8KX++HBU3auQnqvLsLEDLrBMhNIQmm8ZMLeNpfBIdZTQlmDpcMBdNfBI7FbQiUoecMWJCPBK9dwQf3sDcMmPfzBI1gQQakuHcNCoXXBAObXQZufFcNPxATAxh7cQfBdBsNQMHzAuNLYQlBQNcNFmL7AixHYQnqvLsM1fuW/4J4sQmm8ZMMq5ye/k9ilQjpHycMiBjFAKwO0QfAR38Mgu+HAVA98QcuOV8MfCgDAK0CvQAUoKMMt3nHASxjXwQgx18NG3ifAZKnKwUv8/cNpUCq/x2i+QSHkBcN8cgM/Z5KfQenQaMOAkaU/KNG3Qj5fh8OBPq5BA4pQQocl3sN2vbpBOmyWQpyQZcN0cOJBRgHBQr1pWsNqqTdBPgMlQsz1h8NciwNBOFaRQrtn2MNADFdBQ1F0QuerUMMw96pBIv33QoBfTsMhU/5Bd7nmQoag+sL3v9a/zIoFQq6L2MLDouhAgOn5Qrv2b8KFdMRA81xGQrmHXsJKPPpBISN3Qqwf0sBsl33BBhbDQp5X70C+EtPAJa0VQqBb/EFQL3PA7MoEQqQcs0G14C3BCjnOQqdHcUHtelrBJkQsQrQBB0IMFH3BF8eyQsEivkI7iRjBQS/QQripWUKD5tLBbvkkQsSGgEK2vy/BYUh2QtPHaULLFbvBb3X6QrAv9EKeyEnBWG47QobR60Lc4XXBdSyyQl3fPULyEPHBT/Y3Qh132ELOeX3BV+3PQZ8C10KfBOLBT3NTQRtRUEKTJ7vBV0/qwHZ8r0Kkxb/BS7RswondkUMDRvPBS3KtwgZpoAAAAAAAAAAAAAAAAAAAAABBn6YxQh+mMUJveUpCn6YxQsePvULveUpDC7FrQx+mMUMzmvdDR4+9Q1uEg0NveUpDgbcIQ4uxa0OVq85Dn6YxQ6mglEOzmvdDvZVaQ8ePvUPRiiBD24SDQ+V+5kPveUpD+XOtRAG3CEQGtDlEC7FrRBCunEQVq85EGqj/RB+mMUQko2NEKaCURC6dxkQzmvdEOJgpRD2VWkRCkoxER4+9REyM70RRiiBEVodSRFuEg0RggbVEZX7mRGp8GERveUpEdHZ7RHlzrUR+cN5EgbcIRIQ1oUSGtDlEiTLSRIuxa0SOMAREkK6cRJMtNUSVq85EmCpnRJqo/0SdJ5hEn6YxRKIkykSko2NEpyH7RKmglESsHy1Erp3GRLEcXkSzmvdEthmQRLiYKUS7FsFEvZVaRMAT80TCkoxExREkRMePvUTKDlZEzIzvRM8LiETRiiBE1Ai5RNaHUkTZBetE24SDRN4DHETggbVE4wBOROV+5kTn/X9E6nwYROz6sUTveUpE8ffiRPR2e0T29RRE+XOtRPvyRUT+cN5FAHe7RQG3CEUC9lRFBDWhRQV07UUGtDlFB/OGRQky0kUKch5FC7FrRQzwt0UOMARFD29QRRCOrkUQrpxFEM6KRRHt6UUTLTVFFGyCRRWrzkUW6xpFGCpnRRlps0UaqP9FG+hMRR0nmEUeZuVFH6YxRSDlfUUiJMpFI2QWRSSjY0Ul4q9FJyH7RShhSEUpoJRFKt/gRSwfLUUtXnlFLp3GRS/dEkUxHF5FMlurRTOa90U02kRFNhmQRTdY3EU4mClFOdd1RTsWwUU8Vg5FPZVaRT7Up0VAE/NFQVM/RUKSjEVD0dhFRREkRUZQcUVHj71FSM8KRUoOVkVLTaJFTIzvRU3MO0VPC4hFUErURVGKIEVSyW1FVAi5RVVIBUVWh1JFV8aeRVkF60VaRTdFW4SDRVzD0EVeAxxFX0JpRWCBtUVhwQFFYwBORWQ/mkVlfuZFZr4zRWf9f0VpPMxFanwYRWu7ZEVs+rFFbjn9RW95SkVwuJZFcffiRXM3L0V0dntFdbXHRXb1FEV4NGBFeXOtRXqy+UV78kVFfTGSRX5w3kV/sCpFgHe7RYEXYkWBtwhFglauRYL2VEWDlfpFhDWhRYTVR0WFdO1FhhSTRYa0OUWHU+BFh/OGRYiTLEWJMtJFidJ4RYpyHkWLEcVFi7FrRYxREUWM8LdFjZBdRY4wBEWOz6pFj29QRZAO9kWQnqVFkK6cRZC+lEWRTkNFke3pRZKNj0WTLTVFk8zbRZRsgkWVDChFlavORZZLdEWW6xpFl4rBRZgqZ0WYyg1FmWmzRZoJWUWaqP9Fm0imRZvoTEWch/JFnSeYRZ3HPkWeZuVFnwaLRZ+mMUWgRddFoOV9RaGFJEWiJMpFosRwRaNkFkWkA7xFpKNjRaVDCUWl4q9FpoJVRach+0WnwaFFqGFIRakA7kWpoJRFqkA6Rarf4EWrf4dFrB8tRay+00WtXnlFrf4fRa6dxkWvPWxFr90SRbB8uEWxHF5FsbwFRbJbq0Wy+1FFs5r3RbQ6nUW02kRFtXnqRbYZkEW2uTZFt1jcRbf4gkW4mClFuTfPRbnXdUW6dxtFuxbBRbu2aEW8Vg5FvPW0Rb2VWkW+NQBFvtSnRb90TUXAE/NFwLOZRcFTP0XB8uZFwpKMRcMyMkXD0dhFxHF+RcURJEXFsMtFxlBxRcbwF0XHj71FyC9jRcjPCkXJbrBFyg5WRcqt/EXLTaJFy+1JRcyM70XNLJVFzcw7Rc5r4UXPC4hFz6suRdBK1EXQ6npF0YogRdIpx0XSyW1F02kTRdQIuUXUqF9F1UgFRdXnrEXWh1JF1yb4RdfGnkXYZkRF2QXrRdkF60XZBetF2QXr
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x166E550E",
+    "baseType": "0x49",
+    "linkCount": 0,
+    "baseFlags": 7424
+  },
+  "Links": [],
+  "AssetFriendlyName": "curve_gg02",
+  "FileName": "curve_gg02",
+  "Type": "SPLN",
+  "AssetID": "0x0E556E16",
+  "AssetName": "curve_gg02",
+  "AssetFileName": "",
+  "AssetTypeName": "SPLN",
+  "AssetChecksum": 1763104336,
+  "SPLN": {
+    "spline_type": 3,
+    "unknown_hash_14": 677549108,
+    "unknown_hash_18": 2219938868,
+    "points": [
+      {
+        "x": 75.20322,
+        "y": -12.124,
+        "z": 9.146562,
+        "w": 19.956148
+      },
+      {
+        "x": 53.94931,
+        "y": -13.688135,
+        "z": -44.098656,
+        "w": 39.912296
+      },
+      {
+        "x": 49.96438,
+        "y": -14.353,
+        "z": -61.225693,
+        "w": 59.868446
+      },
+      {
+        "x": 57.01949,
+        "y": -15.004568,
+        "z": -75.5635,
+        "w": 79.82459
+      },
+      {
+        "x": 68.14446,
+        "y": -14.390932,
+        "z": -85.09345,
+        "w": 99.78074
+      },
+      {
+        "x": 75.59163,
+        "y": -14.595284,
+        "z": -101.0792,
+        "w": 119.73689
+      },
+      {
+        "x": 73.44221,
+        "y": -14.034363,
+        "z": -114.619774,
+        "w": 139.69304
+      },
+      {
+        "x": 59.74153,
+        "y": -14.554806,
+        "z": -121.01184,
+        "w": 159.64919
+      },
+      {
+        "x": 49.281628,
+        "y": -15.083,
+        "z": -121.08035,
+        "w": 179.60533
+      },
+      {
+        "x": 32.44039,
+        "y": -14.396157,
+        "z": -128.13547,
+        "w": 199.56148
+      },
+      {
+        "x": 28.082426,
+        "y": -14.996574,
+        "z": -142.91249,
+        "w": 219.51762
+      },
+      {
+        "x": 25.357546,
+        "y": -11.750787,
+        "z": -163.04411,
+        "w": 239.47379
+      },
+      {
+        "x": 23.856274,
+        "y": -13.507071,
+        "z": -182.9959,
+        "w": 259.42993
+      },
+      {
+        "x": 18.330168,
+        "y": -12.624272,
+        "z": -204.60378,
+        "w": 279.38608
+      },
+      {
+        "x": 15.935583,
+        "y": -13.42599,
+        "z": -217.85793,
+        "w": 299.34222
+      },
+      {
+        "x": 13.767941,
+        "y": -7.865411,
+        "z": -228.0146,
+        "w": 319.29837
+      },
+      {
+        "x": 13.628806,
+        "y": -12.686906,
+        "z": -237.37738,
+        "w": 339.25452
+      },
+      {
+        "x": 9.580476,
+        "y": -12.422316,
+        "z": -253.96786,
+        "w": 359.21066
+      },
+      {
+        "x": 6.88628,
+        "y": -10.90029,
+        "z": -267.59113,
+        "w": 379.1668
+      },
+      {
+        "x": 2.912348,
+        "y": -11.468349,
+        "z": -298.80164,
+        "w": 399.12296
+      },
+      {
+        "x": -17.79782,
+        "y": -10.743857,
+        "z": -304.26364,
+        "w": 419.0791
+      },
+      {
+        "x": -46.473434,
+        "y": -11.260074,
+        "z": -310.63602,
+        "w": 439.03525
+      },
+      {
+        "x": -55.221115,
+        "y": -10.23168,
+        "z": -313.67297,
+        "w": 458.9914
+      },
+      {
+        "x": -62.29905,
+        "y": -5.708185,
+        "z": -313.6246,
+        "w": 478.94757
+      },
+      {
+        "x": -73.53263,
+        "y": -12.563282,
+        "z": -311.1115,
+        "w": 498.90372
+      },
+      {
+        "x": -131.82954,
+        "y": -14.357,
+        "z": -299.71445,
+        "w": 518.85986
+      },
+      {
+        "x": -138.2019,
+        "y": -16.18994,
+        "z": -281.28012,
+        "w": 538.816
+      },
+      {
+        "x": -141.55577,
+        "y": -15.944238,
+        "z": -266.5818,
+        "w": 558.77216
+      },
+      {
+        "x": -144.40298,
+        "y": -16.150764,
+        "z": -253.83707,
+        "w": 578.7283
+      },
+      {
+        "x": -146.17215,
+        "y": -16.854067,
+        "z": -246.78195,
+        "w": 598.68445
+      },
+      {
+        "x": -147.67838,
+        "y": -11.124109,
+        "z": -240.05374,
+        "w": 618.64056
+      },
+      {
+        "x": -151.49754,
+        "y": -16.744,
+        "z": -228.35815,
+        "w": 638.59674
+      },
+      {
+        "x": -153.84615,
+        "y": -17.827408,
+        "z": -215.3309,
+        "w": 658.5529
+      },
+      {
+        "x": -147.12358,
+        "y": -17.314772,
+        "z": -183.43843,
+        "w": 678.50903
+      },
+      {
+        "x": -140.9788,
+        "y": -17.21812,
+        "z": -172.2868,
+        "w": 698.4652
+      },
+      {
+        "x": -128.23409,
+        "y": -17.387054,
+        "z": -166.82478,
+        "w": 718.4213
+      },
+      {
+        "x": -106.61359,
+        "y": -16.528496,
+        "z": -162.04552,
+        "w": 738.3775
+      },
+      {
+        "x": -87.496506,
+        "y": -16.795513,
+        "z": -156.35591,
+        "w": 758.3336
+      },
+      {
+        "x": -68.37943,
+        "y": -15.8,
+        "z": -143.83878,
+        "w": 778.2898
+      },
+      {
+        "x": -47.669266,
+        "y": -15.085658,
+        "z": -134.963,
+        "w": 798.2459
+      },
+      {
+        "x": -30.145277,
+        "y": -14.833878,
+        "z": -124.7217,
+        "w": 818.2021
+      },
+      {
+        "x": -6.24893,
+        "y": -15.131252,
+        "z": -110.38389,
+        "w": 838.1582
+      },
+      {
+        "x": -1.469661,
+        "y": -12.281271,
+        "z": -96.04608,
+        "w": 858.1144
+      },
+      {
+        "x": -8.524773,
+        "y": -10.947156,
+        "z": -84.894455,
+        "w": 878.0705
+      },
+      {
+        "x": -18.083311,
+        "y": -11.657227,
+        "z": -82.39103,
+        "w": 898.0267
+      },
+      {
+        "x": -37.20039,
+        "y": -10.859395,
+        "z": -81.708275,
+        "w": 917.9828
+      },
+      {
+        "x": -56.317467,
+        "y": -12.462057,
+        "z": -83.984116,
+        "w": 937.93896
+      },
+      {
+        "x": -76.415665,
+        "y": -12.406464,
+        "z": -82.66138,
+        "w": 957.89514
+      },
+      {
+        "x": -93.787766,
+        "y": -14.068723,
+        "z": -82.66138,
+        "w": 977.85126
+      },
+      {
+        "x": -116.24438,
+        "y": -14.33477,
+        "z": -83.9325,
+        "w": 997.80743
+      },
+      {
+        "x": -138.27728,
+        "y": -14.487832,
+        "z": -78.42428,
+        "w": 1017.76355
+      },
+      {
+        "x": -139.97212,
+        "y": -13.920793,
+        "z": -61.899597,
+        "w": 1037.7197
+      },
+      {
+        "x": -131.07422,
+        "y": -13.40432,
+        "z": -51.730564,
+        "w": 1057.6759
+      },
+      {
+        "x": -119.21035,
+        "y": -13.421557,
+        "z": -42.83266,
+        "w": 1077.632
+      },
+      {
+        "x": -107.34647,
+        "y": -13.601977,
+        "z": -25.036848,
+        "w": 1097.5881
+      },
+      {
+        "x": -94.21147,
+        "y": -13.517249,
+        "z": -14.444104,
+        "w": 1117.5443
+      },
+      {
+        "x": -79.38163,
+        "y": -13.307949,
+        "z": -4.27507,
+        "w": 1137.5005
+      },
+      {
+        "x": -53.959045,
+        "y": -13.686804,
+        "z": -2.580231,
+        "w": 1157.4565
+      },
+      {
+        "x": -34.892105,
+        "y": -13.479403,
+        "z": -12.749265,
+        "w": 1177.4127
+      },
+      {
+        "x": -11.164357,
+        "y": -13.362928,
+        "z": -15.715234,
+        "w": 1197.3689
+      },
+      {
+        "x": 12.56339,
+        "y": -13.030421,
+        "z": -2.580231,
+        "w": 1217.3251
+      },
+      {
+        "x": 21.461294,
+        "y": -12.375689,
+        "z": 16.48671,
+        "w": 1237.2811
+      },
+      {
+        "x": 12.9871,
+        "y": -13.104637,
+        "z": 34.28252,
+        "w": 1257.2373
+      },
+      {
+        "x": 5.360324,
+        "y": -13.616767,
+        "z": 40.214455,
+        "w": 1277.1935
+      },
+      {
+        "x": -18.367422,
+        "y": -13.426341,
+        "z": 40.638165,
+        "w": 1297.1497
+      },
+      {
+        "x": -31.502426,
+        "y": -13.428418,
+        "z": 28.774292,
+        "w": 1317.1058
+      },
+      {
+        "x": -46.332268,
+        "y": -13.673022,
+        "z": 33.01139,
+        "w": 1337.0619
+      },
+      {
+        "x": -53.959045,
+        "y": -13.694839,
+        "z": 47.841232,
+        "w": 1357.0181
+      },
+      {
+        "x": -61.16211,
+        "y": -13.555693,
+        "z": 59.705105,
+        "w": 1376.9742
+      },
+      {
+        "x": -75.99195,
+        "y": -13.038562,
+        "z": 62.671074,
+        "w": 1396.9304
+      },
+      {
+        "x": -98.02486,
+        "y": -11.164646,
+        "z": 58.433975,
+        "w": 1416.8865
+      },
+      {
+        "x": -111.10662,
+        "y": -10.235646,
+        "z": 54.37856,
+        "w": 1436.8427
+      },
+      {
+        "x": -129.4564,
+        "y": -10.367504,
+        "z": 41.289524,
+        "w": 1456.7988
+      },
+      {
+        "x": -150.14116,
+        "y": -10.60543,
+        "z": 31.74026,
+        "w": 1476.755
+      },
+      {
+        "x": -166.24213,
+        "y": -10.209,
+        "z": 21.147516,
+        "w": 1496.711
+      },
+      {
+        "x": -194.63069,
+        "y": -7.876,
+        "z": 19.452677,
+        "w": 1516.6672
+      },
+      {
+        "x": -207.76569,
+        "y": -6.527,
+        "z": 30.045422,
+        "w": 1536.6234
+      },
+      {
+        "x": -208.18939,
+        "y": -5.357787,
+        "z": 52.078327,
+        "w": 1556.5796
+      },
+      {
+        "x": -197.59665,
+        "y": -4.166,
+        "z": 62.671074,
+        "w": 1576.5356
+      },
+      {
+        "x": -181.49568,
+        "y": -1.805,
+        "z": 58.433975,
+        "w": 1596.4918
+      },
+      {
+        "x": -170.90294,
+        "y": -0.783381,
+        "z": 46.570103,
+        "w": 1616.448
+      },
+      {
+        "x": -162.88358,
+        "y": 2.916502,
+        "z": 29.877413,
+        "w": 1636.4042
+      },
+      {
+        "x": -160.7339,
+        "y": -3.313445,
+        "z": 25.444502,
+        "w": 1656.3604
+      },
+      {
+        "x": -159.03906,
+        "y": -3.065982,
+        "z": 2.080576,
+        "w": 1676.3164
+      },
+      {
+        "x": -173.86891,
+        "y": -3.270175,
+        "z": -8.512168,
+        "w": 1696.2726
+      },
+      {
+        "x": -198.86778,
+        "y": -3.635426,
+        "z": -12.749265,
+        "w": 1716.2288
+      },
+      {
+        "x": -218.35843,
+        "y": -1.571,
+        "z": 0.385737,
+        "w": 1736.1849
+      },
+      {
+        "x": -234.45941,
+        "y": -1.216,
+        "z": 16.48671,
+        "w": 1756.141
+      },
+      {
+        "x": -236.15425,
+        "y": -1.198,
+        "z": 35.97736,
+        "w": 1776.0972
+      },
+      {
+        "x": -234.88312,
+        "y": -1.216,
+        "z": 59.705105,
+        "w": 1796.0533
+      },
+      {
+        "x": -227.25633,
+        "y": -1.216,
+        "z": 74.53495,
+        "w": 1816.0095
+      },
+      {
+        "x": -217.08731,
+        "y": -1.349863,
+        "z": 80.46688,
+        "w": 1835.9656
+      },
+      {
+        "x": -191.23283,
+        "y": -2.99,
+        "z": 94.151375,
+        "w": 1855.9218
+      },
+      {
+        "x": -185.35269,
+        "y": -2.624882,
+        "z": 96.48741,
+        "w": 1875.8779
+      },
+      {
+        "x": -170.57019,
+        "y": -8.291991,
+        "z": 104.39005,
+        "w": 1895.8341
+      },
+      {
+        "x": -122.176315,
+        "y": -12.554,
+        "z": 123.26157,
+        "w": 1915.7903
+      },
+      {
+        "x": -109.88873,
+        "y": -13.124,
+        "z": 144.02335,
+        "w": 1935.7463
+      },
+      {
+        "x": -87.85583,
+        "y": -11.267385,
+        "z": 149.95529,
+        "w": 1955.7025
+      },
+      {
+        "x": -73.025986,
+        "y": -8.351955,
+        "z": 152.92125,
+        "w": 1975.6587
+      },
+      {
+        "x": -39.129204,
+        "y": -7.225017,
+        "z": 160.12431,
+        "w": 1995.6149
+      },
+      {
+        "x": -21.333391,
+        "y": -10.773,
+        "z": 160.12431,
+        "w": 2015.5709
+      },
+      {
+        "x": -4.808711,
+        "y": -10.19,
+        "z": 155.88722,
+        "w": 2035.5271
+      },
+      {
+        "x": -1.842742,
+        "y": -9.553976,
+        "z": 141.05737,
+        "w": 2055.4832
+      },
+      {
+        "x": -4.808711,
+        "y": -7.032,
+        "z": 124.956406,
+        "w": 2075.4395
+      },
+      {
+        "x": -6.07984,
+        "y": -6.009,
+        "z": 108.431725,
+        "w": 2095.3955
+      },
+      {
+        "x": 5.360324,
+        "y": -6.008,
+        "z": 101.22866,
+        "w": 2115.3518
+      },
+      {
+        "x": 35.020008,
+        "y": -9.348,
+        "z": 96.567856,
+        "w": 2135.3079
+      },
+      {
+        "x": 46.88388,
+        "y": -11.374727,
+        "z": 92.33076,
+        "w": 2155.264
+      },
+      {
+        "x": 65.95082,
+        "y": -13.768402,
+        "z": 98.262695,
+        "w": 2175.2202
+      },
+      {
+        "x": 91.373405,
+        "y": -13.830408,
+        "z": 105.88947,
+        "w": 2195.1763
+      },
+      {
+        "x": 101.54244,
+        "y": -13.016531,
+        "z": 88.09366,
+        "w": 2215.1323
+      },
+      {
+        "x": 67.63473,
+        "y": -13.523089,
+        "z": 56.058475,
+        "w": 2235.0886
+      },
+      {
+        "x": 110.440346,
+        "y": -12.870828,
+        "z": 55.468006,
+        "w": 2255.0447
+      },
+      {
+        "x": 121.03309,
+        "y": -13.425468,
+        "z": 39.367035,
+        "w": 2275.001
+      },
+      {
+        "x": 103.23728,
+        "y": -12.47925,
+        "z": 19.876387,
+        "w": 2294.957
+      },
+      {
+        "x": 79.50954,
+        "y": -13.016215,
+        "z": 9.707352,
+        "w": 2312.9175
+      },
+      {
+        "x": 73.77533,
+        "y": -13.349337,
+        "z": -3.399403,
+        "w": 2314.913
+      },
+      {
+        "x": 71.93369,
+        "y": -14.033197,
+        "z": -16.855759,
+        "w": 2316.9087
+      },
+      {
+        "x": 67.28967,
+        "y": -14.364065,
+        "z": -27.367538,
+        "w": 2334.8694
+      },
+      {
+        "x": 53.750065,
+        "y": -13.721378,
+        "z": -44.95501,
+        "w": 2354.8254
+      },
+      {
+        "x": 50.19955,
+        "y": -14.340667,
+        "z": -61.70362,
+        "w": 2374.7817
+      },
+      {
+        "x": 57.01949,
+        "y": -15.004568,
+        "z": -75.5635,
+        "w": 2394.7378
+      },
+      {
+        "x": 68.14446,
+        "y": -14.390932,
+        "z": -85.09345,
+        "w": 2414.6938
+      },
+      {
+        "x": 75.59163,
+        "y": -14.595284,
+        "z": -101.0792,
+        "w": 2434.6501
+      },
+      {
+        "x": 73.44221,
+        "y": -14.034363,
+        "z": -114.619774,
+        "w": 2454.6062
+      },
+      {
+        "x": 59.74153,
+        "y": -14.554806,
+        "z": -121.01184,
+        "w": 2474.5623
+      },
+      {
+        "x": 49.281628,
+        "y": -15.083,
+        "z": -121.08035,
+        "w": 2494.5186
+      },
+      {
+        "x": 32.44039,
+        "y": -14.396157,
+        "z": -128.13547,
+        "w": 2514.4746
+      },
+      {
+        "x": 28.082426,
+        "y": -14.996574,
+        "z": -142.91249,
+        "w": 2534.431
+      },
+      {
+        "x": 25.357546,
+        "y": -11.750787,
+        "z": -163.04411,
+        "w": 2554.387
+      },
+      {
+        "x": 23.856274,
+        "y": -12.629974,
+        "z": -182.9959,
+        "w": 2574.343
+      },
+      {
+        "x": 35.39249,
+        "y": -10.979675,
+        "z": -194.50404,
+        "w": 2594.2993
+      },
+      {
+        "x": 58.854153,
+        "y": -12.615643,
+        "z": -206.33307,
+        "w": 2614.2554
+      },
+      {
+        "x": 96.82276,
+        "y": -12.348341,
+        "z": -197.00235,
+        "w": 2634.2117
+      },
+      {
+        "x": 119.837685,
+        "y": -10.629684,
+        "z": -187.33601,
+        "w": 2654.1677
+      },
+      {
+        "x": 132.46463,
+        "y": -8.437851,
+        "z": -159.05122,
+        "w": 2674.1238
+      },
+      {
+        "x": 145.4947,
+        "y": -9.124975,
+        "z": -137.52017,
+        "w": 2694.08
+      },
+      {
+        "x": 158.12723,
+        "y": -8.405313,
+        "z": -115.85556,
+        "w": 2714.0361
+      },
+      {
+        "x": 163.5317,
+        "y": -6.061863,
+        "z": -91.18532,
+        "w": 2733.9922
+      },
+      {
+        "x": 146.90898,
+        "y": -5.60592,
+        "z": -79.98052,
+        "w": 2753.9485
+      },
+      {
+        "x": 129.08716,
+        "y": -5.025615,
+        "z": -83.01749,
+        "w": 2773.9045
+      },
+      {
+        "x": 123.35193,
+        "y": -5.166028,
+        "z": -99.189064,
+        "w": 2793.8608
+      },
+      {
+        "x": 112.27772,
+        "y": -5.143695,
+        "z": -112.83506,
+        "w": 2813.817
+      },
+      {
+        "x": 91.64643,
+        "y": -4.137697,
+        "z": -114.4039,
+        "w": 2833.773
+      },
+      {
+        "x": 78.745415,
+        "y": -5.512179,
+        "z": -133.8651,
+        "w": 2853.7292
+      },
+      {
+        "x": 85.78078,
+        "y": -1.945566,
+        "z": -164.46672,
+        "w": 2873.6853
+      },
+      {
+        "x": -37.00159,
+        "y": -1.733479,
+        "z": -147.03151,
+        "w": 2893.6416
+      },
+      {
+        "x": -3.669956,
+        "y": -2.028395,
+        "z": -193.82523,
+        "w": 2913.5977
+      },
+      {
+        "x": -66.32184,
+        "y": -1.392969,
+        "z": -195.55795,
+        "w": 2933.5537
+      },
+      {
+        "x": -115.38157,
+        "y": 0.380147,
+        "z": -205.90704,
+        "w": 2953.51
+      },
+      {
+        "x": -82.15126,
+        "y": -10.050535,
+        "z": -268.90872,
+        "w": 2973.466
+      },
+      {
+        "x": -16.048227,
+        "y": -12.212609,
+        "z": -245.20958,
+        "w": 2993.422
+      },
+      {
+        "x": -42.54674,
+        "y": -9.923125,
+        "z": -219.99623,
+        "w": 3013.3784
+      },
+      {
+        "x": -91.573166,
+        "y": -12.985238,
+        "z": -226.58711,
+        "w": 3033.3345
+      },
+      {
+        "x": -108.6224,
+        "y": -15.639819,
+        "z": -190.16896,
+        "w": 3053.2908
+      },
+      {
+        "x": -87.496506,
+        "y": -16.795513,
+        "z": -156.35591,
+        "w": 3073.2468
+      },
+      {
+        "x": -68.37943,
+        "y": -15.8,
+        "z": -143.83878,
+        "w": 3093.203
+      },
+      {
+        "x": -47.669266,
+        "y": -15.085658,
+        "z": -134.963,
+        "w": 3113.1592
+      },
+      {
+        "x": -30.145277,
+        "y": -14.833878,
+        "z": -124.7217,
+        "w": 3133.1152
+      },
+      {
+        "x": -6.24893,
+        "y": -14.908281,
+        "z": -110.38389,
+        "w": 3153.0713
+      },
+      {
+        "x": -1.469661,
+        "y": -12.281271,
+        "z": -96.04608,
+        "w": 3173.0276
+      },
+      {
+        "x": -8.524773,
+        "y": -10.790501,
+        "z": -84.894455,
+        "w": 3192.9836
+      },
+      {
+        "x": -18.083311,
+        "y": -11.657227,
+        "z": -82.39103,
+        "w": 3212.94
+      },
+      {
+        "x": -37.20039,
+        "y": -10.859395,
+        "z": -81.708275,
+        "w": 3232.896
+      },
+      {
+        "x": -56.317467,
+        "y": -12.462057,
+        "z": -83.984116,
+        "w": 3252.852
+      },
+      {
+        "x": -76.415665,
+        "y": -12.406464,
+        "z": -82.66138,
+        "w": 3272.8083
+      },
+      {
+        "x": -93.787766,
+        "y": -14.068723,
+        "z": -82.66138,
+        "w": 3292.7644
+      },
+      {
+        "x": -116.24438,
+        "y": -14.33477,
+        "z": -83.9325,
+        "w": 3312.7207
+      },
+      {
+        "x": -138.27728,
+        "y": -14.487832,
+        "z": -78.42428,
+        "w": 3332.6768
+      },
+      {
+        "x": -139.97212,
+        "y": -13.920793,
+        "z": -61.899597,
+        "w": 3352.6328
+      },
+      {
+        "x": -131.07422,
+        "y": -13.40432,
+        "z": -51.730564,
+        "w": 3372.589
+      },
+      {
+        "x": -119.21035,
+        "y": -13.421557,
+        "z": -42.83266,
+        "w": 3392.5452
+      },
+      {
+        "x": -107.34647,
+        "y": -13.601977,
+        "z": -25.036848,
+        "w": 3412.5012
+      },
+      {
+        "x": -94.21147,
+        "y": -13.517249,
+        "z": -14.444104,
+        "w": 3432.4575
+      },
+      {
+        "x": -79.38163,
+        "y": -13.307949,
+        "z": -4.27507,
+        "w": 3452.4136
+      },
+      {
+        "x": -53.959045,
+        "y": -13.686804,
+        "z": -2.580231,
+        "w": 3472.3699
+      },
+      {
+        "x": -34.892105,
+        "y": -13.585818,
+        "z": -12.749265,
+        "w": 3492.326
+      },
+      {
+        "x": -11.164357,
+        "y": -13.399685,
+        "z": -15.715234,
+        "w": 3512.282
+      },
+      {
+        "x": 12.56339,
+        "y": -12.939277,
+        "z": -2.580231,
+        "w": 3532.2383
+      },
+      {
+        "x": 21.461294,
+        "y": -12.375689,
+        "z": 16.48671,
+        "w": 3552.1943
+      },
+      {
+        "x": 12.9871,
+        "y": -13.104637,
+        "z": 34.28252,
+        "w": 3572.1506
+      },
+      {
+        "x": 5.360324,
+        "y": -13.616767,
+        "z": 40.214455,
+        "w": 3592.1067
+      },
+      {
+        "x": -18.367422,
+        "y": -13.426341,
+        "z": 40.638165,
+        "w": 3612.0627
+      },
+      {
+        "x": -31.502426,
+        "y": -13.428418,
+        "z": 28.774292,
+        "w": 3632.019
+      },
+      {
+        "x": -46.332268,
+        "y": -13.673022,
+        "z": 33.01139,
+        "w": 3651.975
+      },
+      {
+        "x": -53.959045,
+        "y": -13.694839,
+        "z": 47.841232,
+        "w": 3671.9312
+      },
+      {
+        "x": -61.16211,
+        "y": -13.555693,
+        "z": 59.705105,
+        "w": 3691.8875
+      },
+      {
+        "x": -75.99195,
+        "y": -13.038562,
+        "z": 62.671074,
+        "w": 3711.8435
+      },
+      {
+        "x": -98.02486,
+        "y": -11.164646,
+        "z": 58.433975,
+        "w": 3731.7998
+      },
+      {
+        "x": -111.10662,
+        "y": -10.235646,
+        "z": 54.37856,
+        "w": 3751.7559
+      },
+      {
+        "x": -129.4564,
+        "y": -10.367504,
+        "z": 41.289524,
+        "w": 3771.712
+      },
+      {
+        "x": -150.14116,
+        "y": -10.60543,
+        "z": 31.74026,
+        "w": 3791.6682
+      },
+      {
+        "x": -166.24213,
+        "y": -10.209,
+        "z": 21.147516,
+        "w": 3811.6243
+      },
+      {
+        "x": -194.63069,
+        "y": -7.876,
+        "z": 19.452677,
+        "w": 3831.5806
+      },
+      {
+        "x": -207.76569,
+        "y": -6.527,
+        "z": 30.045422,
+        "w": 3851.5366
+      },
+      {
+        "x": -208.18939,
+        "y": -5.357787,
+        "z": 52.078327,
+        "w": 3871.4927
+      },
+      {
+        "x": -197.59665,
+        "y": -4.166,
+        "z": 62.671074,
+        "w": 3891.449
+      },
+      {
+        "x": -181.49568,
+        "y": -1.805,
+        "z": 58.433975,
+        "w": 3911.405
+      },
+      {
+        "x": -170.90294,
+        "y": -0.783381,
+        "z": 46.570103,
+        "w": 3931.361
+      },
+      {
+        "x": -162.88358,
+        "y": 2.916502,
+        "z": 29.877413,
+        "w": 3951.3174
+      },
+      {
+        "x": -160.7339,
+        "y": -3.313445,
+        "z": 25.444502,
+        "w": 3971.2734
+      },
+      {
+        "x": -159.03906,
+        "y": -3.065982,
+        "z": 2.080576,
+        "w": 3991.2297
+      },
+      {
+        "x": -173.86891,
+        "y": -3.270175,
+        "z": -8.512168,
+        "w": 4011.1858
+      },
+      {
+        "x": -198.86778,
+        "y": -3.635426,
+        "z": -12.749265,
+        "w": 4031.1418
+      },
+      {
+        "x": -218.35843,
+        "y": -1.571,
+        "z": 0.385737,
+        "w": 4051.0981
+      },
+      {
+        "x": -234.45941,
+        "y": -1.216,
+        "z": 16.48671,
+        "w": 4071.0542
+      },
+      {
+        "x": -236.15425,
+        "y": -1.198,
+        "z": 35.97736,
+        "w": 4091.0103
+      },
+      {
+        "x": -234.88312,
+        "y": -1.216,
+        "z": 59.705105,
+        "w": 4110.9663
+      },
+      {
+        "x": -227.25633,
+        "y": -1.216,
+        "z": 74.53495,
+        "w": 4130.923
+      },
+      {
+        "x": -217.08731,
+        "y": -1.349863,
+        "z": 80.46688,
+        "w": 4150.879
+      },
+      {
+        "x": -191.23283,
+        "y": -2.99,
+        "z": 94.151375,
+        "w": 4170.835
+      },
+      {
+        "x": -185.35269,
+        "y": -2.624882,
+        "z": 96.48741,
+        "w": 4190.791
+      },
+      {
+        "x": -170.57019,
+        "y": -8.291991,
+        "z": 104.39005,
+        "w": 4210.747
+      },
+      {
+        "x": -122.176315,
+        "y": -12.554,
+        "z": 123.26157,
+        "w": 4230.7036
+      },
+      {
+        "x": -109.88873,
+        "y": -13.124,
+        "z": 144.02335,
+        "w": 4250.6597
+      },
+      {
+        "x": -87.85583,
+        "y": -11.267385,
+        "z": 149.95529,
+        "w": 4270.6157
+      },
+      {
+        "x": -73.025986,
+        "y": -8.351955,
+        "z": 152.92125,
+        "w": 4290.572
+      },
+      {
+        "x": -39.129204,
+        "y": -7.225017,
+        "z": 160.12431,
+        "w": 4310.528
+      },
+      {
+        "x": -21.333391,
+        "y": -10.773,
+        "z": 160.12431,
+        "w": 4330.4844
+      },
+      {
+        "x": -4.808711,
+        "y": -10.19,
+        "z": 155.88722,
+        "w": 4350.4404
+      },
+      {
+        "x": -1.842742,
+        "y": -9.553976,
+        "z": 141.05737,
+        "w": 4370.3965
+      },
+      {
+        "x": -4.808711,
+        "y": -7.032,
+        "z": 124.956406,
+        "w": 4390.3525
+      },
+      {
+        "x": -6.07984,
+        "y": -6.009,
+        "z": 108.431725,
+        "w": 4410.3086
+      },
+      {
+        "x": 5.360324,
+        "y": -6.008,
+        "z": 101.22866,
+        "w": 4430.2646
+      },
+      {
+        "x": 35.020008,
+        "y": -9.348,
+        "z": 96.567856,
+        "w": 4450.221
+      },
+      {
+        "x": 46.88388,
+        "y": -11.374727,
+        "z": 92.33076,
+        "w": 4470.1772
+      },
+      {
+        "x": 65.95082,
+        "y": -13.768402,
+        "z": 98.262695,
+        "w": 4490.1333
+      },
+      {
+        "x": 91.373405,
+        "y": -13.830408,
+        "z": 105.88947,
+        "w": 4510.0894
+      },
+      {
+        "x": 101.54244,
+        "y": -13.016531,
+        "z": 88.09366,
+        "w": 4530.0454
+      },
+      {
+        "x": 67.63473,
+        "y": -13.523089,
+        "z": 56.058475,
+        "w": 4550.002
+      },
+      {
+        "x": 110.440346,
+        "y": -12.870828,
+        "z": 55.468006,
+        "w": 4569.958
+      },
+      {
+        "x": 121.03309,
+        "y": -13.425468,
+        "z": 39.367035,
+        "w": 4589.914
+      },
+      {
+        "x": 103.23728,
+        "y": -12.47925,
+        "z": 19.876387,
+        "w": 4609.87
+      },
+      {
+        "x": 79.50954,
+        "y": -13.016215,
+        "z": 9.707352,
+        "w": 4627.8306
+      },
+      {
+        "x": 73.77533,
+        "y": -13.349337,
+        "z": -3.399403,
+        "w": 4629.826
+      },
+      {
+        "x": 74.66094,
+        "y": -13.85224,
+        "z": -16.855759,
+        "w": 4631.8223
+      },
+      {
+        "x": 72.37871,
+        "y": -14.193397,
+        "z": -23.244587,
+        "w": 4649.7827
+      },
+      {
+        "x": 62.864246,
+        "y": -15.036881,
+        "z": -41.548805,
+        "w": 4669.739
+      },
+      {
+        "x": 50.19955,
+        "y": -15.252293,
+        "z": -61.70362,
+        "w": 4689.695
+      },
+      {
+        "x": 57.01949,
+        "y": -14.690734,
+        "z": -75.5635,
+        "w": 4709.651
+      },
+      {
+        "x": 68.14446,
+        "y": -14.465569,
+        "z": -85.09345,
+        "w": 4729.607
+      },
+      {
+        "x": 75.59163,
+        "y": -14.595284,
+        "z": -101.0792,
+        "w": 4749.5635
+      },
+      {
+        "x": 73.44221,
+        "y": -14.034363,
+        "z": -114.619774,
+        "w": 4769.5195
+      },
+      {
+        "x": 59.74153,
+        "y": -14.554806,
+        "z": -121.01184,
+        "w": 4789.4756
+      },
+      {
+        "x": 49.281628,
+        "y": -15.083,
+        "z": -121.08035,
+        "w": 4809.4316
+      },
+      {
+        "x": 32.44039,
+        "y": -14.396157,
+        "z": -128.13547,
+        "w": 4829.3877
+      },
+      {
+        "x": 28.082426,
+        "y": -14.996574,
+        "z": -142.91249,
+        "w": 4849.344
+      },
+      {
+        "x": 25.357546,
+        "y": -11.750787,
+        "z": -163.04411,
+        "w": 4869.3003
+      },
+      {
+        "x": 23.856274,
+        "y": -13.507071,
+        "z": -182.9959,
+        "w": 4889.2563
+      },
+      {
+        "x": 18.330168,
+        "y": -12.508679,
+        "z": -204.60378,
+        "w": 4909.2124
+      },
+      {
+        "x": 15.935583,
+        "y": -13.598451,
+        "z": -217.85793,
+        "w": 4929.1685
+      },
+      {
+        "x": 13.767941,
+        "y": -7.865411,
+        "z": -227.82729,
+        "w": 4949.1245
+      },
+      {
+        "x": 13.628806,
+        "y": -12.686906,
+        "z": -237.5296,
+        "w": 4969.081
+      },
+      {
+        "x": 9.580476,
+        "y": -12.422316,
+        "z": -253.96786,
+        "w": 4989.037
+      },
+      {
+        "x": 6.88628,
+        "y": -10.90029,
+        "z": -267.59113,
+        "w": 5008.993
+      },
+      {
+        "x": 2.912348,
+        "y": -11.468349,
+        "z": -298.80164,
+        "w": 5028.949
+      },
+      {
+        "x": -17.79782,
+        "y": -10.743857,
+        "z": -304.26364,
+        "w": 5048.9053
+      },
+      {
+        "x": -46.473434,
+        "y": -11.260074,
+        "z": -310.63602,
+        "w": 5068.862
+      },
+      {
+        "x": -55.221115,
+        "y": -10.23168,
+        "z": -313.67297,
+        "w": 5088.818
+      },
+      {
+        "x": -62.29905,
+        "y": -5.708185,
+        "z": -313.6246,
+        "w": 5108.774
+      },
+      {
+        "x": -73.53263,
+        "y": -12.563282,
+        "z": -311.1115,
+        "w": 5128.73
+      },
+      {
+        "x": -131.82954,
+        "y": -14.357,
+        "z": -299.71445,
+        "w": 5148.686
+      },
+      {
+        "x": -138.2019,
+        "y": -16.00776,
+        "z": -281.28012,
+        "w": 5168.6426
+      },
+      {
+        "x": -141.55577,
+        "y": -15.944238,
+        "z": -266.5818,
+        "w": 5188.5986
+      },
+      {
+        "x": -144.40298,
+        "y": -16.150764,
+        "z": -253.83707,
+        "w": 5208.5547
+      },
+      {
+        "x": -146.17215,
+        "y": -16.881617,
+        "z": -246.78195,
+        "w": 5228.5107
+      },
+      {
+        "x": -147.89127,
+        "y": -10.950309,
+        "z": -240.26474,
+        "w": 5248.467
+      },
+      {
+        "x": -151.80385,
+        "y": -17.616472,
+        "z": -226.3711,
+        "w": 5268.4233
+      },
+      {
+        "x": -153.84615,
+        "y": -17.093695,
+        "z": -215.3309,
+        "w": 5288.3794
+      },
+      {
+        "x": -147.02138,
+        "y": -17.314772,
+        "z": -183.49792,
+        "w": 5308.3354
+      },
+      {
+        "x": -140.87708,
+        "y": -17.21812,
+        "z": -172.34602,
+        "w": 5328.2915
+      },
+      {
+        "x": -128.23409,
+        "y": -17.387054,
+        "z": -166.82478,
+        "w": 5348.2476
+      },
+      {
+        "x": -106.61359,
+        "y": -16.528496,
+        "z": -162.04552,
+        "w": 5368.2036
+      },
+      {
+        "x": -87.496506,
+        "y": -16.840431,
+        "z": -156.35591,
+        "w": 5388.16
+      },
+      {
+        "x": -68.37943,
+        "y": -16.203613,
+        "z": -143.83878,
+        "w": 5408.116
+      },
+      {
+        "x": -47.669266,
+        "y": -15.006492,
+        "z": -134.963,
+        "w": 5428.0723
+      },
+      {
+        "x": -30.145277,
+        "y": -14.834074,
+        "z": -124.7217,
+        "w": 5448.0283
+      },
+      {
+        "x": -6.24893,
+        "y": -14.814652,
+        "z": -110.38389,
+        "w": 5467.9844
+      },
+      {
+        "x": -1.469661,
+        "y": -12.223253,
+        "z": -96.04608,
+        "w": 5487.941
+      },
+      {
+        "x": -8.524773,
+        "y": -10.634201,
+        "z": -84.894455,
+        "w": 5507.897
+      },
+      {
+        "x": -18.083311,
+        "y": -12.042821,
+        "z": -82.39103,
+        "w": 5527.853
+      },
+      {
+        "x": -37.20039,
+        "y": -10.779073,
+        "z": -81.708275,
+        "w": 5547.809
+      },
+      {
+        "x": -56.317467,
+        "y": -12.449796,
+        "z": -83.984116,
+        "w": 5567.765
+      },
+      {
+        "x": -76.415665,
+        "y": -12.503361,
+        "z": -82.66138,
+        "w": 5587.7217
+      },
+      {
+        "x": -93.787766,
+        "y": -13.957819,
+        "z": -82.66138,
+        "w": 5607.6777
+      },
+      {
+        "x": -116.24438,
+        "y": -14.315527,
+        "z": -83.9325,
+        "w": 5627.634
+      },
+      {
+        "x": -138.27728,
+        "y": -14.272523,
+        "z": -78.42428,
+        "w": 5647.59
+      },
+      {
+        "x": -139.97212,
+        "y": -13.918708,
+        "z": -61.899597,
+        "w": 5667.546
+      },
+      {
+        "x": -131.07422,
+        "y": -13.176688,
+        "z": -51.730564,
+        "w": 5687.5024
+      },
+      {
+        "x": -119.21035,
+        "y": -13.400912,
+        "z": -42.83266,
+        "w": 5707.4585
+      },
+      {
+        "x": -107.34647,
+        "y": -13.479427,
+        "z": -25.036848,
+        "w": 5727.4146
+      },
+      {
+        "x": -94.21147,
+        "y": -13.540539,
+        "z": -14.444104,
+        "w": 5747.3706
+      },
+      {
+        "x": -79.38163,
+        "y": -13.577802,
+        "z": -4.27507,
+        "w": 5767.3267
+      },
+      {
+        "x": -53.959045,
+        "y": -13.2526,
+        "z": -2.580231,
+        "w": 5787.283
+      },
+      {
+        "x": -34.892105,
+        "y": -13.46666,
+        "z": -12.749265,
+        "w": 5807.2393
+      },
+      {
+        "x": -11.164357,
+        "y": -13.423844,
+        "z": -15.715234,
+        "w": 5827.1953
+      },
+      {
+        "x": 12.56339,
+        "y": -12.829484,
+        "z": -2.580231,
+        "w": 5847.1514
+      },
+      {
+        "x": 21.461294,
+        "y": -12.345776,
+        "z": 16.48671,
+        "w": 5867.1074
+      },
+      {
+        "x": 12.9871,
+        "y": -13.172753,
+        "z": 34.28252,
+        "w": 5887.0635
+      },
+      {
+        "x": 5.360324,
+        "y": -13.612002,
+        "z": 40.214455,
+        "w": 5907.02
+      },
+      {
+        "x": -18.367422,
+        "y": -13.506367,
+        "z": 40.638165,
+        "w": 5926.976
+      },
+      {
+        "x": -31.502426,
+        "y": -13.454663,
+        "z": 28.774292,
+        "w": 5946.932
+      },
+      {
+        "x": -46.332268,
+        "y": -13.613286,
+        "z": 33.01139,
+        "w": 5966.888
+      },
+      {
+        "x": -53.959045,
+        "y": -13.815317,
+        "z": 47.841232,
+        "w": 5986.844
+      },
+      {
+        "x": -61.16211,
+        "y": -13.633819,
+        "z": 59.705105,
+        "w": 6006.801
+      },
+      {
+        "x": -75.99195,
+        "y": -13.216475,
+        "z": 62.671074,
+        "w": 6026.757
+      },
+      {
+        "x": -98.02486,
+        "y": -11.129707,
+        "z": 58.433975,
+        "w": 6046.713
+      },
+      {
+        "x": -111.10662,
+        "y": -10.114825,
+        "z": 54.37856,
+        "w": 6066.669
+      },
+      {
+        "x": -129.4564,
+        "y": -10.2308,
+        "z": 41.289524,
+        "w": 6086.625
+      },
+      {
+        "x": -150.14116,
+        "y": -10.740097,
+        "z": 31.74026,
+        "w": 6106.5815
+      },
+      {
+        "x": -166.24213,
+        "y": -10.209,
+        "z": 21.147516,
+        "w": 6126.5376
+      },
+      {
+        "x": -194.63069,
+        "y": -8.056357,
+        "z": 19.452677,
+        "w": 6146.4937
+      },
+      {
+        "x": -207.76569,
+        "y": -6.191267,
+        "z": 30.045422,
+        "w": 6166.4497
+      },
+      {
+        "x": -208.18939,
+        "y": -5.775738,
+        "z": 52.078327,
+        "w": 6186.406
+      },
+      {
+        "x": -197.59665,
+        "y": -4.345928,
+        "z": 62.671074,
+        "w": 6206.3623
+      },
+      {
+        "x": -181.49568,
+        "y": -1.754827,
+        "z": 58.433975,
+        "w": 6226.3184
+      },
+      {
+        "x": -170.90294,
+        "y": -1.155049,
+        "z": 46.570103,
+        "w": 6246.2744
+      },
+      {
+        "x": -162.02419,
+        "y": 2.672101,
+        "z": 30.008726,
+        "w": 6266.2305
+      },
+      {
+        "x": -160.7339,
+        "y": -3.313445,
+        "z": 25.444502,
+        "w": 6286.1865
+      },
+      {
+        "x": -159.03906,
+        "y": -2.675823,
+        "z": 2.080576,
+        "w": 6306.1426
+      },
+      {
+        "x": -173.86891,
+        "y": -3.173391,
+        "z": -8.512168,
+        "w": 6326.099
+      },
+      {
+        "x": -198.86778,
+        "y": -3.572863,
+        "z": -12.749265,
+        "w": 6346.055
+      },
+      {
+        "x": -233.31314,
+        "y": -1.557884,
+        "z": 10.118169,
+        "w": 6366.011
+      },
+      {
+        "x": -252.44536,
+        "y": 0.904581,
+        "z": 29.22676,
+        "w": 6385.9673
+      },
+      {
+        "x": -257.13785,
+        "y": 0.65945,
+        "z": 47.59329,
+        "w": 6405.9233
+      },
+      {
+        "x": -258.4897,
+        "y": 8.221268,
+        "z": 67.57396,
+        "w": 6425.88
+      },
+      {
+        "x": -246.74112,
+        "y": 11.65151,
+        "z": 78.28202,
+        "w": 6445.836
+      },
+      {
+        "x": -244.44095,
+        "y": 12.375428,
+        "z": 94.705765,
+        "w": 6465.792
+      },
+      {
+        "x": -234.661,
+        "y": 11.875768,
+        "z": 102.479546,
+        "w": 6485.748
+      },
+      {
+        "x": -220.54301,
+        "y": 11.521134,
+        "z": 93.70282,
+        "w": 6505.704
+      },
+      {
+        "x": -192.0482,
+        "y": 12.207386,
+        "z": 115.834595,
+        "w": 6525.6606
+      },
+      {
+        "x": -176.96744,
+        "y": 10.187003,
+        "z": 64.18614,
+        "w": 6545.6167
+      },
+      {
+        "x": -161.3281,
+        "y": 15.482885,
+        "z": 67.31441,
+        "w": 6565.5728
+      },
+      {
+        "x": -123.87468,
+        "y": -1.597962,
+        "z": 87.27313,
+        "w": 6585.529
+      },
+      {
+        "x": -97.81818,
+        "y": 4.028561,
+        "z": 93.981316,
+        "w": 6605.485
+      },
+      {
+        "x": -66.72806,
+        "y": 7.605014,
+        "z": 92.76439,
+        "w": 6625.4414
+      },
+      {
+        "x": -50.559547,
+        "y": 10.071158,
+        "z": 86.06215,
+        "w": 6645.3975
+      },
+      {
+        "x": -3.696746,
+        "y": -8.380557,
+        "z": 79.171745,
+        "w": 6665.3535
+      },
+      {
+        "x": 5.939798,
+        "y": -2.588689,
+        "z": 80.17966,
+        "w": 6685.3096
+      },
+      {
+        "x": 13.011584,
+        "y": -7.39966,
+        "z": 82.05605,
+        "w": 6705.2656
+      },
+      {
+        "x": 22.73446,
+        "y": -8.639112,
+        "z": 83.639534,
+        "w": 6725.222
+      },
+      {
+        "x": 29.684742,
+        "y": -10.391644,
+        "z": 90.00201,
+        "w": 6745.178
+      },
+      {
+        "x": 35.020008,
+        "y": -9.486254,
+        "z": 96.567856,
+        "w": 6765.1343
+      },
+      {
+        "x": 46.88388,
+        "y": -12.074173,
+        "z": 92.33076,
+        "w": 6785.0903
+      },
+      {
+        "x": 65.95082,
+        "y": -14.935825,
+        "z": 98.262695,
+        "w": 6805.0464
+      },
+      {
+        "x": 91.373405,
+        "y": -14.080191,
+        "z": 105.88947,
+        "w": 6825.0024
+      },
+      {
+        "x": 101.54244,
+        "y": -14.966303,
+        "z": 88.09366,
+        "w": 6844.959
+      },
+      {
+        "x": 79.39118,
+        "y": -13.526912,
+        "z": 67.409996,
+        "w": 6864.915
+      },
+      {
+        "x": 110.440346,
+        "y": -15.323412,
+        "z": 55.468006,
+        "w": 6884.871
+      },
+      {
+        "x": 121.03309,
+        "y": -12.997611,
+        "z": 39.367035,
+        "w": 6904.827
+      },
+      {
+        "x": 103.23728,
+        "y": -13.495559,
+        "z": 19.876387,
+        "w": 6924.783
+      },
+      {
+        "x": 79.50954,
+        "y": -12.965655,
+        "z": 9.707352,
+        "w": 6944.7397
+      },
+      {
+        "x": 73.5776,
+        "y": -13.45701,
+        "z": -3.85136,
+        "w": 6944.7397
+      },
+      {
+        "x": 82.38622,
+        "y": -12.731548,
+        "z": -68.93275,
+        "w": 6944.7397
+      },
+      {
+        "x": 131.27715,
+        "y": -12.715497,
+        "z": -33.60315,
+        "w": 6944.7397
+      }
+    ]
+  }
+}

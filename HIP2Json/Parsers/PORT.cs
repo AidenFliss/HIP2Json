@@ -1,4 +1,5 @@
 using System.IO;
+using System.Text;
 using System.Text.Json.Serialization;
 
 namespace HIP2Json;
@@ -26,7 +27,7 @@ public sealed class PORTParser : AssetParser
         WriteUInt32BE(bw, port.assetCameraID);
         WriteUInt32BE(bw, port.assetMarkerID);
         WriteFloatBE(bw, port.ang);
-        WriteString(bw, port.sceneID);
+        bw.Write(Encoding.ASCII.GetBytes(port.sceneID.PadRight(4, '\0').Substring(0, 4)));
 
         return ms.ToArray();
     }

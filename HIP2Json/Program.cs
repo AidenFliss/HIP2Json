@@ -659,7 +659,7 @@ class Program
             LogParseReport();
     }
 
-    static void ProcessSingleArchiveProject(string filePath, string projectDir, bool showProgress)
+    internal static void ProcessSingleArchiveProject(string filePath, string projectDir, bool showProgress)
     {
         try
         {
@@ -853,8 +853,7 @@ class Program
 
         if (obj is DYNA dyna && dyna.dynaSpecificData is JsonElement dynaElem)
         {
-            string className = dyna.typeNameInternal.Replace(':', '_');
-            Type payloadType = Type.GetType($"{ns}.{className}");
+            Type payloadType = ParserMaps.GetDYNAPayloadType(dyna.typeNameInternal, ns);
 
             if (payloadType != null)
                 dyna.dynaSpecificData = dynaElem.Deserialize(payloadType, serOpts)!;
@@ -1080,6 +1079,17 @@ class Program
         {
             Section_ATOC.noAHDR = false;
         }
+    }
+
+    internal static void __TestRunProjectSingle(string filePath, string projectDir)
+    {
+        Directory.CreateDirectory(projectDir);
+        ProcessSingleArchiveProject(filePath, projectDir, false);
+    }
+
+    internal static void __TestRunPackProject(string projectDir, string outputPath, bool overwriteFlag)
+    {
+        RunPackProject(projectDir, outputPath, overwriteFlag);
     }
 
     static byte[] ResolveAssetBytes(JsonElement elem)
@@ -1408,8 +1418,7 @@ class Program
                             {
                                 if (obj is DYNA dyna && dyna.dynaSpecificData is JsonElement dynaElem)
                                 {
-                                    string className = dyna.typeNameInternal.Replace(':', '_');
-                                    Type payloadType = Type.GetType($"{ns}.{className}");
+                                    Type payloadType = ParserMaps.GetDYNAPayloadType(dyna.typeNameInternal, ns);
 
                                     if (payloadType != null)
                                     {
@@ -1809,6 +1818,8 @@ class Program
                 ushort baseFlags = 0;
                 if (baseProp.TryGetProperty("baseFlags", out var bf) && bf.ValueKind == JsonValueKind.String)
                     baseFlags = (ushort)Enum.Parse<BaseFlags>(bf.GetString()!);
+                else if (baseProp.TryGetProperty("baseFlags", out bf) && bf.ValueKind == JsonValueKind.Number)
+                    baseFlags = bf.GetUInt16();
 
                 Util.WriteUInt32(bw, idVal);
                 bw.Write(baseTypeByte);
@@ -1841,10 +1852,9 @@ class Program
                     float ax = ang.TryGetProperty("x", out var axp) && axp.ValueKind == JsonValueKind.Number ? axp.GetSingle() : 0f;
                     float ay = ang.TryGetProperty("y", out var ayp) && ayp.ValueKind == JsonValueKind.Number ? ayp.GetSingle() : 0f;
                     float az = ang.TryGetProperty("z", out var azp) && azp.ValueKind == JsonValueKind.Number ? azp.GetSingle() : 0f;
-                    var rad = ToRadians(new xVec3(ax, ay, az));
-                    Util.WriteFloat(bw, rad.x);
-                    Util.WriteFloat(bw, rad.y);
-                    Util.WriteFloat(bw, rad.z);
+                    Util.WriteFloat(bw, ax);
+                    Util.WriteFloat(bw, ay);
+                    Util.WriteFloat(bw, az);
                 }
                 else
                 {
@@ -2359,7 +2369,7 @@ class Program
 
         uint surfaceID = Util.ReadUInt32(br.ReadBytes(4), 0);
 
-        xVec3 ang = ToDegrees(new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0)));
+        xVec3 ang = new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0));
 
         xVec3 pos = new xVec3(Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0), Util.ReadFloat(br.ReadBytes(4), 0));
 
@@ -2472,15 +2482,5 @@ class Program
         return Path.GetFileName(fileDir) ?? string.Empty;
     }
 
-    public static xVec3 ToDegrees(xVec3 radiansVec)
-    {
-        const double Rad2Deg = 180.0 / Math.PI;
-        return new xVec3((float)(radiansVec.x * Rad2Deg), (float)(radiansVec.y * Rad2Deg), (float)(radiansVec.z * Rad2Deg));
-    }
 
-    public static xVec3 ToRadians(xVec3 degreesVec)
-    {
-        const double Deg2Rad = Math.PI / 180.0;
-        return new xVec3((float)(degreesVec.x * Deg2Rad), (float)(degreesVec.y * Deg2Rad), (float)(degreesVec.z * Deg2Rad));
-    }
 }

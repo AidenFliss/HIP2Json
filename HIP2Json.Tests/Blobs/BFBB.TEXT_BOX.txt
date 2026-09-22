@@ -1,0 +1,61 @@
+# game=BFBB platform=GameCube archive=mnu5.HIP asset=0xD537CEC3 type=TEXT_BOX call=DYNA size=100 checksum=-1449825964 name=PROMPT_TEXTBOX
+BLOB:
+1TfOwwAAAB1ELhM3AAEAAAAAAAA/GZmaP1cKPT6ZmZo8I9cKAAAAAD0PXCk9aXjVAAAAAAAAAAAEOV//PCPXCjwj1wo8I9cKPCPXCgAAAAEAAAACPhmZmgAAAAH/////7gBpHQ==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xD537CEC3",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "PROMPT_TEXTBOX",
+  "FileName": "PROMPT_TEXTBOX",
+  "Type": "TEXT_BOX",
+  "AssetID": "0xD537CEC3",
+  "AssetName": "PROMPT_TEXTBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT_BOX",
+  "AssetChecksum": -1449825964,
+  "DYNA": {
+    "type": "0x442E1337",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:text_box",
+    "dynaSpecificData": {
+      "text": "0x00000000",
+      "pos_x": 0.6,
+      "pox_y": 0.84,
+      "bounds_w": 0.3,
+      "bounds_h": 0.01,
+      "font": "Default",
+      "text_width": 0.035,
+      "text_height": 0.057,
+      "char_spacing_x": 0,
+      "char_spacing_y": 0,
+      "color": {
+        "r": 4,
+        "g": 57,
+        "b": 95,
+        "a": 255
+      },
+      "inset_left": 0.01,
+      "inset_top": 0.01,
+      "inset_right": 0.01,
+      "inset_bottom": 0.01,
+      "xjustify": "Center",
+      "expand": "Down",
+      "max_height": 0.15,
+      "backdrop_type": "Texture",
+      "backdrop_color": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      },
+      "backdrop_texture": "0xEE00691D",
+      "trailing": ""
+    }
+  }
+}

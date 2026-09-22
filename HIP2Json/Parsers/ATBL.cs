@@ -165,10 +165,23 @@ public sealed class ATBLParser : AssetParser
             stateID = ReadUInt32BE(br),
             startTime = ReadFloatBE(br),
             endTime = ReadFloatBE(br),
-            flags = ReadUInt32BE(br),
-            effectType = ReadUInt32BE(br),
-            userDataSize = ReadUInt32BE(br),
         };
+
+        if (Program.CurrentGame == GameType.TSSM)
+        {
+            effect.userDataSize = ReadUInt32BE(br);
+            effect.flags = ReadByte(br);
+            effect.effectType = ReadByte(br);
+            effect.probability = ReadByte(br);
+            effect.pad = ReadByte(br);
+        }
+        else
+        {
+            effect.flags = ReadUInt32BE(br);
+            effect.effectType = ReadUInt32BE(br);
+            effect.userDataSize = ReadUInt32BE(br);
+        }
+
         effect.userData = br.ReadBytes((int)effect.userDataSize);
         return effect;
     }
@@ -178,9 +191,22 @@ public sealed class ATBLParser : AssetParser
         WriteUInt32BE(bw, effect.stateID);
         WriteFloatBE(bw, effect.startTime);
         WriteFloatBE(bw, effect.endTime);
-        WriteUInt32BE(bw, effect.flags);
-        WriteUInt32BE(bw, effect.effectType);
-        WriteUInt32BE(bw, effect.userDataSize);
+
+        if (Program.CurrentGame == GameType.TSSM)
+        {
+            WriteUInt32BE(bw, effect.userDataSize);
+            WriteByte(bw, (byte)effect.flags);
+            WriteByte(bw, (byte)effect.effectType);
+            WriteByte(bw, (byte)effect.probability);
+            WriteByte(bw, (byte)effect.pad);
+        }
+        else
+        {
+            WriteUInt32BE(bw, effect.flags);
+            WriteUInt32BE(bw, effect.effectType);
+            WriteUInt32BE(bw, effect.userDataSize);
+        }
+
         if (effect.userData != null)
             bw.Write(effect.userData);
     }

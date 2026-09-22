@@ -11,7 +11,7 @@ public sealed class SCRPParser : AssetParser
         float scriptStartTime = ReadFloatBE(br);
         int eventCount = ReadInt32BE(br);
 
-        byte loop;
+        byte loop = 0;
         if (Program.CurrentGame == GameType.TSSM)
         {
             loop = ReadByte(br);
@@ -44,6 +44,7 @@ public sealed class SCRPParser : AssetParser
         {
             scriptStartTime = scriptStartTime,
             eventCount = eventCount,
+            loop = loop,
             events = events,
         };
     }

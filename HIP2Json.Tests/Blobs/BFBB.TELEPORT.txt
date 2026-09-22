@@ -1,0 +1,34 @@
+# game=BFBB platform=GameCube archive=kf04.HIP asset=0x935AE935 type=TELEPORT call=DYNA size=36 checksum=1538213182 name=TELEPORTBOX_BOY
+BLOB:
+k1rpNQAAAB1wrbf5AAIAAJh2eQcAAAAAAAABDgAAAABpzHJz
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x935AE935",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TELEPORTBOX_BOY",
+  "FileName": "TELEPORTBOX_BOY",
+  "Type": "TELEPORT",
+  "AssetID": "0x935AE935",
+  "AssetName": "TELEPORTBOX_BOY",
+  "AssetFileName": "",
+  "AssetTypeName": "TELEPORT",
+  "AssetChecksum": 1538213182,
+  "DYNA": {
+    "type": "0x70ADB7F9",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:Teleport",
+    "dynaSpecificData": {
+      "marker": "0x98767907",
+      "opened": 0,
+      "launchAngle": 270,
+      "camAngle": 0,
+      "targetID": "0x69CC7273"
+    }
+  }
+}

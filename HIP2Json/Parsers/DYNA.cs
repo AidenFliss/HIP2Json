@@ -59,7 +59,7 @@ public sealed class DYNAParser : AssetParser //god save me..
 
         string typeHex = dyna.type.ToString("X8");
 
-        if (ParserMaps.DYNAToParser.TryGetValue(dyna.typeNameInternal, out AbstractDYNAParser parser))
+        if (ParserMaps.TryGetDYNAParser(dyna.typeNameInternal, out AbstractDYNAParser parser))
         {
             byte[] serializedBytes = parser.Serialize(dyna.dynaSpecificData, dyna.version, dyna.typeNameInternal);
             bw.Write(serializedBytes);

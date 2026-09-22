@@ -1,0 +1,56 @@
+# game=TSSM platform=GameCube archive=pt01.HIP asset=0x95BC3005 type=PKUP call=PKUP size=88 checksum=-1982048591 name=MANLINESS_RED_PICKUP_27
+BLOB:
+lbwwBQQAAB8BFwACAAAAAAAAAAAAAAAAAAAAAMIJ+glBdfITw1V9WT+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAABDfwAAlOJUYwAAAAB8E0UXAAIABA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x95BC3005",
+    "baseType": "0x04",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Persistent, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 23,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -34.494175,
+      "y": 15.3716,
+      "z": -213.48964
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x94E25463",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "MANLINESS_RED_PICKUP_27",
+  "FileName": "MANLINESS_RED_PICKUP_27",
+  "Type": "PKUP",
+  "AssetID": "0x95BC3005",
+  "AssetName": "MANLINESS_RED_PICKUP_27",
+  "AssetFileName": "",
+  "AssetTypeName": "PKUP",
+  "AssetChecksum": -1982048591,
+  "PKUP": {
+    "pickupType": "RedManlinessPoint",
+    "pickupHash": "0x7C134517",
+    "pickupFlags": "EnabledOnStart",
+    "pickupValue": 4
+  }
+}

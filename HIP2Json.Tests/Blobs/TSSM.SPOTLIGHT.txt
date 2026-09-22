@@ -1,0 +1,60 @@
+# game=TSSM platform=GameCube archive=b401.HIP asset=0x0D67CEA9 type=SPOTLIGHT call=DYNA size=72 checksum=-1701789887 name=TABLE_SPOTLIGHT_05
+BLOB:
+DWfOqQAAAB1qqL9nAAIAAAAAAARjwpcGDJNIXgAAAAA/gAAAPVZ3cEGgAAAjIyOWIyMjAAAAAAD///8AP4AAAD+AAAAA/wAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0D67CEA9",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TABLE_SPOTLIGHT_05",
+  "FileName": "TABLE_SPOTLIGHT_05",
+  "Type": "SPOTLIGHT",
+  "AssetID": "0x0D67CEA9",
+  "AssetName": "TABLE_SPOTLIGHT_05",
+  "AssetFileName": "",
+  "AssetTypeName": "SPOTLIGHT",
+  "AssetChecksum": -1701789887,
+  "DYNA": {
+    "type": "0x6AA8BF67",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "effect:spotlight",
+    "dynaSpecificData": {
+      "flags": 4,
+      "attach_to": "0x63C29706",
+      "target": "0x0C93485E",
+      "attach_bone": 0,
+      "target_bone": 0,
+      "radius": 1,
+      "view_angle": 0.05236,
+      "max_dist": 20,
+      "lightColor": {
+        "r": 35,
+        "g": 35,
+        "b": 35,
+        "a": 150
+      },
+      "auraColor": {
+        "r": 35,
+        "g": 35,
+        "b": 35,
+        "a": 0
+      },
+      "flareTexture": "0x00000000",
+      "flareColor": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 0
+      },
+      "size_min": 1,
+      "size_max": 1,
+      "glow_min": 0,
+      "glow_max": 255
+    }
+  }
+}

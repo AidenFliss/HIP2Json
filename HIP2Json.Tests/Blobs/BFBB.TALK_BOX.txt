@@ -1,0 +1,281 @@
+# game=BFBB platform=GameCube archive=db02.HIP asset=0xADF4066C type=TALK_BOX call=DYNA size=456 checksum=-668984679 name=SHINYGATE_1_TALKBOX
+BLOB:
+rfQGbAAMAB0JNLGWAAsAAG3WGHPVN87De/ssKgEAAQEAAAAAAAAAAAABAAAAAAAAAAAAAAO+3bUAAAAA0sSyIQAAAABk8ptSAcYBUK30BmwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxQACPrWklwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFASvc/+GZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcUAAb8mkgEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxQA1vXCX48UvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFABIpip0rAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAcUBa+SwcXMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABxQBWNgFW1QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFXAU+VNnOCAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVcBUZU2c4IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABUAFQh+cYsQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHFAVCt9AZsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xADF4066C",
+    "baseType": "0x00",
+    "linkCount": 12,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "OnAnswerNo",
+      "dstEvent": "EndConversation",
+      "dstAssetID": "0xADF4066C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "Disable",
+      "dstAssetID": "0x3EB5A497",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "Reverse",
+      "dstAssetID": "0xDCFFE199",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "Enable",
+      "dstAssetID": "0xBF269201",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "GiveShinyObjects",
+      "dstAssetID": "0xBD7097E3",
+      "paramU32": [
+        "0xC52F0000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        -2800,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "Run",
+      "dstAssetID": "0x298A9D2B",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "InitiateTask",
+      "dstAssetID": "0xE4B07173",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "CollisionVisibleOff",
+      "dstAssetID": "0x360156D5",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnSignal1",
+      "dstEvent": "StartConversation",
+      "dstAssetID": "0x95367382",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnSignal1",
+      "dstEvent": "Switch",
+      "dstAssetID": "0x95367382",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "EndConversation",
+      "dstEvent": "EndConversation",
+      "dstAssetID": "0x87E718B1",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "OnAnswerYes",
+      "dstEvent": "EndConversation",
+      "dstAssetID": "0xADF4066C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SHINYGATE_1_TALKBOX",
+  "FileName": "SHINYGATE_1_TALKBOX",
+  "Type": "TALK_BOX",
+  "AssetID": "0xADF4066C",
+  "AssetName": "SHINYGATE_1_TALKBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TALK_BOX",
+  "AssetChecksum": -668984679,
+  "DYNA": {
+    "type": "0x0934B196",
+    "version": 11,
+    "handle": 0,
+    "typeNameInternal": "game_object:talk_box",
+    "dynaSpecificData": {
+      "dialog_box": "0x6DD61873",
+      "prompt_box": "0xD537CEC3",
+      "quit_box": "0x7BFB2C2A",
+      "trap": 1,
+      "pause": 0,
+      "allow_quit": 1,
+      "trigger_pads": 1,
+      "page": 0,
+      "show": 0,
+      "hide": 0,
+      "audio_effect": 0,
+      "teleport": "0x00000000",
+      "auto_wait_type_time": 0,
+      "auto_wait_type_prompt": 1,
+      "auto_wait_type_sound": 0,
+      "auto_wait_type_event": 0,
+      "auto_wait_delay": 0,
+      "auto_wait_which_event": 0,
+      "prompt_skip": "0x03BEDDB5",
+      "prompt_noskip": "0x00000000",
+      "prompt_quit": "0xD2C4B221",
+      "prompt_noquit": "0x00000000",
+      "prompt_yesno": "0x64F29B52"
+    }
+  }
+}

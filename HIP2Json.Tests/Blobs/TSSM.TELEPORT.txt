@@ -1,0 +1,54 @@
+# game=TSSM platform=GameCube archive=bb02.HIP asset=0x22D2FB17 type=TELEPORT call=DYNA size=64 checksum=-376828937 name=SLIDE_TELEPORT_01
+BLOB:
+ItL7FwABAB1wrbf5AAIAACEF7LAAAAAAAAABDiLS+xgDGwJozMn5E0MqAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x22D2FB17",
+    "baseType": "0x00",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Player_Ejected",
+      "dstEvent": "Set_Follow_Camera_Orientation",
+      "dstAssetID": "0xCCC9F913",
+      "paramU32": [
+        "0x432A0000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        170,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SLIDE_TELEPORT_01",
+  "FileName": "SLIDE_TELEPORT_01",
+  "Type": "TELEPORT",
+  "AssetID": "0x22D2FB17",
+  "AssetName": "SLIDE_TELEPORT_01",
+  "AssetFileName": "",
+  "AssetTypeName": "TELEPORT",
+  "AssetChecksum": -376828937,
+  "DYNA": {
+    "type": "0x70ADB7F9",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:Teleport",
+    "dynaSpecificData": {
+      "marker": "0x2105ECB0",
+      "opened": 0,
+      "launchAngle": 270,
+      "camAngle": 0,
+      "targetID": "0x22D2FB18"
+    }
+  }
+}

@@ -1,0 +1,64 @@
+# game=BFBB platform=GameCube archive=hb01.HIP asset=0x5A20C935 type=CAM call=CAM size=136 checksum=-486250068 name=SB_KRABS_CLOSE_CAM_02
+BLOB:
+WiDJNQcAAB3CQY2FP45gNcHtkwk+kv1wvn6ypD9sz/E9lvzCP3f0az5zQJc/dH74AAAAAL6XwmAAAAAAAAAAAAAAAAAAHgAtQqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBwAAAAAAAAAAAAgAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x5A20C935",
+    "baseType": "0x07",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "SB_KRABS_CLOSE_CAM_02",
+  "FileName": "SB_KRABS_CLOSE_CAM_02",
+  "Type": "CAM",
+  "AssetID": "0x5A20C935",
+  "AssetName": "SB_KRABS_CLOSE_CAM_02",
+  "AssetFileName": "",
+  "AssetTypeName": "CAM",
+  "AssetChecksum": -486250068,
+  "CAM": {
+    "pos": {
+      "x": -48.388203,
+      "y": 1.112311,
+      "z": -29.696795
+    },
+    "forward": {
+      "x": 0.28708982,
+      "y": -0.24872833,
+      "z": 0.92504793
+    },
+    "up": {
+      "x": 0.073724285,
+      "y": 0.9685733,
+      "z": 0.23755108
+    },
+    "left": {
+      "x": 0.9550624,
+      "y": 0,
+      "z": -0.29640484
+    },
+    "viewOffset": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "offsetStartFrames": 30,
+    "offsetEndFrames": 45,
+    "fov": 85,
+    "transitionTime": 0,
+    "transitionType": "None",
+    "flags": 0,
+    "fadeUp": 0,
+    "fadeDown": 0,
+    "validFlags": 65984,
+    "marker1": "0x00000000",
+    "marker2": "0x00000000",
+    "camType": "Static",
+    "specific": {
+      "type": "Static",
+      "unused": 0
+    }
+  }
+}

@@ -1,0 +1,22 @@
+# game=TSSM platform=GameCube archive=jk01.HIP asset=0xE40407CB type=MRKR call=MRKR size=12 checksum=-446055551 name=FLYCAM_START
+BLOB:
+wkwAAEI8AADBl+uF
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "FLYCAM_START",
+  "FileName": "FLYCAM_START",
+  "Type": "MRKR",
+  "AssetID": "0xE40407CB",
+  "AssetName": "FLYCAM_START",
+  "AssetFileName": "",
+  "AssetTypeName": "MRKR",
+  "AssetChecksum": -446055551,
+  "MRKR": {
+    "pos": {
+      "x": -51,
+      "y": 47,
+      "z": -18.99
+    }
+  }
+}

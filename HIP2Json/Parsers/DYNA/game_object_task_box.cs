@@ -13,6 +13,7 @@ public sealed class game_object_task_boxParser : AbstractDYNAParser
             persistent = ReadBoolean(br),
             loop = ReadBoolean(br),
             enable = ReadBoolean(br),
+            retry = ReadBoolean(br),
             talk_box = ReadUInt32BE(br),
             next_task = ReadUInt32BE(br),
             stages = Enumerable.Range(0, 6).Select(_ => ReadUInt32BE(br)).ToArray(),

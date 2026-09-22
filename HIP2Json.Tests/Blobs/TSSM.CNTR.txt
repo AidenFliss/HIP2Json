@@ -1,0 +1,24 @@
+# game=TSSM platform=GameCube archive=mnui.HIP asset=0xA288603E type=CNTR call=CNTR size=12 checksum=1683637726 name=POWERUP_CONFIRM_COUNTER
+BLOB:
+oohgPhYAAB0AAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xA288603E",
+    "baseType": "0x16",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "POWERUP_CONFIRM_COUNTER",
+  "FileName": "POWERUP_CONFIRM_COUNTER",
+  "Type": "CNTR",
+  "AssetID": "0xA288603E",
+  "AssetName": "POWERUP_CONFIRM_COUNTER",
+  "AssetFileName": "",
+  "AssetTypeName": "CNTR",
+  "AssetChecksum": 1683637726,
+  "CNTR": {
+    "count": 0
+  }
+}

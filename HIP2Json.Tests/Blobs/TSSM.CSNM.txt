@@ -1,0 +1,193 @@
+# game=TSSM platform=GameCube archive=tt01.HIP asset=0x0DDC5137 type=CSNM call=CSNM size=396 checksum=-1578051225 name=SPINNER_INTRO_CUTMGR
+BLOB:
+DdxRNygGAB1ZFZDXAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgBKiN4wAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvwHYoUYtvAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/ABAm9+9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL8BKyN4wAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvwABknkrjgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAdmhRi28AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0DDC5137",
+    "baseType": "0x28",
+    "linkCount": 6,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Play",
+      "dstEvent": "Forward",
+      "dstAssetID": "0x2378C00C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "NPC_Set_Active_On",
+      "dstAssetID": "0xA1462DBC",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "Teleport_Player",
+      "dstAssetID": "0x26F7EF40",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "Reverse",
+      "dstAssetID": "0x2378C00C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x92792B8E",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "NPC_Set_Active_Off",
+      "dstAssetID": "0xA1462DBC",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SPINNER_INTRO_CUTMGR",
+  "FileName": "SPINNER_INTRO_CUTMGR",
+  "Type": "CSNM",
+  "AssetID": "0x0DDC5137",
+  "AssetName": "SPINNER_INTRO_CUTMGR",
+  "AssetFileName": "",
+  "AssetTypeName": "CSNM",
+  "AssetChecksum": -1578051225,
+  "CSNM": {
+    "cutsceneAssetID": "0x591590D7",
+    "flags": 28,
+    "interpSpeed": 0,
+    "uSubtitlesID": 0,
+    "startTime": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "endTime": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "emitID": [
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000"
+    ]
+  }
+}

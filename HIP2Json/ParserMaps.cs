@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace HIP2Json;
@@ -148,6 +149,18 @@ public static class ParserMaps
         { "Pointer", "pointer" },
         { "SceneProperties", "Scene Properties" },
     };
+
+    public static Type GetDYNAPayloadType(string typeName, string ns)
+    {
+        if (!TryGetDYNAParser(typeName, out AbstractDYNAParser parser))
+            return null!;
+
+        string parserName = parser.GetType().Name;
+        if (parserName.EndsWith("Parser", StringComparison.Ordinal))
+            parserName = parserName.Substring(0, parserName.Length - "Parser".Length);
+
+        return parser.GetType().Assembly.GetType($"{ns}.{parserName}", false, true);
+    }
 
     public static bool TryGetDYNAParser(string typeName, out AbstractDYNAParser parser)
     {

@@ -1,0 +1,73 @@
+# game=TSSM platform=GameCube archive=tt02.HIP asset=0x2DF43EFB type=BOUL call=BOUL size=144 checksum=504740254 name=OIL_BOULDER_04
+BLOB:
+LfQ++y8AAB0BAAAAAAAAAAAAAAAAAAAAAAAAAML3KwJBm3YrwxQ6PT+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAAAAAAAAAAAA7GSxrAAAAABBIAAAP4AAAAAAAAA+GZmaQsgAAEGWy+Q+GZmaAAAAAAAAAi5AIAAAAAAAAQAAAABAIAAAQPAAAD+AAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x2DF43EFB",
+    "baseType": "0x2F",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -123.584,
+      "y": 19.4327,
+      "z": -148.2275
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0xEC64B1AC",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "OIL_BOULDER_04",
+  "FileName": "OIL_BOULDER_04",
+  "Type": "BOUL",
+  "AssetID": "0x2DF43EFB",
+  "AssetName": "OIL_BOULDER_04",
+  "AssetFileName": "",
+  "AssetTypeName": "BOUL",
+  "AssetChecksum": 504740254,
+  "BOUL": {
+    "gravity": 10,
+    "mass": 1,
+    "bounce": 0,
+    "friction": 0.15,
+    "statFric": 0,
+    "maxVel": 100,
+    "maxAngVel": 18.849556,
+    "stickiness": 0.15,
+    "bounceDamp": 0,
+    "flags": "DamagePlayer, Unknown004, DamageNpcs, DieOnOobSurfaces, DieAfterKillTimer",
+    "killtimer": 2.5,
+    "hitpoints": 1,
+    "uSoundGroupHash": "0x00000000",
+    "soundID": "0x00000000",
+    "volume": 0,
+    "minSoundVel": 2.5,
+    "maxSoundVel": 7.5,
+    "innerRadius": 0,
+    "outerRadius": 0,
+    "fSphereRadius": 1,
+    "uBoneIndex": 0
+  }
+}

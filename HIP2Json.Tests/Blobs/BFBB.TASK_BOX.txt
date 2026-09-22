@@ -1,0 +1,43 @@
+# game=BFBB platform=GameCube archive=kf01.HIP asset=0xA8A4F8B9 type=TASK_BOX call=DYNA size=52 checksum=-61868430 name=MRSPUFF_PATRICK_TASKBOX
+BLOB:
+qKT4uQAAAB3p0sG7AAIAAAEAAQEhyUABAAAAAAAAAAC5aJDCuWiQwvuNWpYAAAAA+41alg==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xA8A4F8B9",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "MRSPUFF_PATRICK_TASKBOX",
+  "FileName": "MRSPUFF_PATRICK_TASKBOX",
+  "Type": "TASK_BOX",
+  "AssetID": "0xA8A4F8B9",
+  "AssetName": "MRSPUFF_PATRICK_TASKBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TASK_BOX",
+  "AssetChecksum": -61868430,
+  "DYNA": {
+    "type": "0xE9D2C1BB",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:task_box",
+    "dynaSpecificData": {
+      "persistent": true,
+      "loop": false,
+      "enable": true,
+      "retry": true,
+      "talk_box": "0x21C94001",
+      "next_task": "0x00000000",
+      "stages": [
+        "0x00000000",
+        "0xB96890C2",
+        "0xB96890C2",
+        "0xFB8D5A96",
+        "0x00000000",
+        "0xFB8D5A96"
+      ]
+    }
+  }
+}

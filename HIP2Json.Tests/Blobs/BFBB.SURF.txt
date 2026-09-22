@@ -1,0 +1,142 @@
+# game=BFBB platform=GameCube archive=sm02.HIP asset=0x805ABD05 type=SURF call=SURF size=300 checksum=1813653278 name=NO_STAND_SURF
+BLOB:
+gFq9BRoAAB0AAAAAABQKCD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAQfAAAAAAAAAAAAAAAAAAAEHwAAAAAAAAAAAAAEHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAL+AAAA/gAAAP4AAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x805ABD05",
+    "baseType": "0x1A",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "NO_STAND_SURF",
+  "FileName": "NO_STAND_SURF",
+  "Type": "SURF",
+  "AssetID": "0x805ABD05",
+  "AssetName": "NO_STAND_SURF",
+  "AssetFileName": "",
+  "AssetTypeName": "SURF",
+  "AssetChecksum": 1813653278,
+  "SURF": {
+    "game_damage_type": 0,
+    "game_sticky": 0,
+    "game_damage_flags": 0,
+    "surf_type": 0,
+    "sld_start": 20,
+    "sld_stop": 10,
+    "phys_flags": "OutOfBounds",
+    "friction": 1,
+    "matfx": {
+      "flags": 0,
+      "bumpmapID": 0,
+      "envmapID": 0,
+      "shininess": 0,
+      "bumpiness": 0,
+      "dualmapID": 0
+    },
+    "colorfx": {
+      "flags": 14,
+      "mode": 0,
+      "speed": 30
+    },
+    "texture_anim_flags": 0,
+    "texture_anm_0": {
+      "mode": 0,
+      "group": 0,
+      "speed": 30
+    },
+    "texture_anm_1": {
+      "mode": 0,
+      "group": 0,
+      "speed": 30
+    },
+    "uvfx_flags": 0,
+    "uvfx_0": {
+      "mode": 0,
+      "rot": 0,
+      "rot_spd": 0,
+      "trans": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "trans_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "scale_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "max": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "minmax_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "uvfx_1": {
+      "mode": 0,
+      "rot": 0,
+      "rot_spd": 0,
+      "trans": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "trans_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "scale_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "max": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "minmax_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "on": 1,
+    "oob_delay": -1,
+    "walljump_scale_xz": 1,
+    "walljump_scale_y": 1,
+    "damage_timer": 0,
+    "damage_bounce": 0
+  }
+}

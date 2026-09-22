@@ -1,0 +1,155 @@
+# game=BFBB platform=GameCube archive=db01.HIP asset=0x270B3106 type=PLAT call=PLAT size=320 checksum=-744341687 name=CUBE_MECH_53
+BLOB:
+JwsxBgYEAB0BBAACAAAAAIKZJFM+INl8AAAAAAAAAABCfq0pwewAAEI/5mY/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAANJBvUAAAAABAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAQrQAAD8MzM0+TMzNPkzMzQAAAABAGZmaAOMAEicLMQUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4gASwoN4dwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADiABLCg3h4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOIAGFeXRnoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x270B3106",
+    "baseType": "0x06",
+    "linkCount": 4,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "StopMoving",
+      "dstEvent": "Run",
+      "dstAssetID": "0x270B3105",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "StartMoving",
+      "dstEvent": "Run",
+      "dstAssetID": "0xC2837877",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "StartMoving",
+      "dstEvent": "Run",
+      "dstAssetID": "0xC2837878",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "StartMoving",
+      "dstEvent": "Play",
+      "dstAssetID": "0x5797467A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 4,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 2191074387,
+    "ang": {
+      "x": 0.15707964,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 63.6691,
+      "y": -29.5,
+      "z": 47.975
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x034906F5",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "CUBE_MECH_53",
+  "FileName": "CUBE_MECH_53",
+  "Type": "PLAT",
+  "AssetID": "0x270B3106",
+  "AssetName": "CUBE_MECH_53",
+  "AssetFileName": "",
+  "AssetTypeName": "PLAT",
+  "AssetChecksum": -744341687,
+  "PLAT": {
+    "type": "Mechanism",
+    "flags": 4,
+    "motion": {
+      "type": "Mechanism",
+      "useBanking": 0,
+      "flags": 4,
+      "specific": {
+        "mechanismType": "Rotate",
+        "flags": 0,
+        "slideAxis": "X",
+        "rotateAxis": "X",
+        "scaleAxis": 0,
+        "slideDistance": 0,
+        "slideTime": 0,
+        "slideAccelTime": 0,
+        "slideDecelTime": 0,
+        "rotateDistance": 90,
+        "rotateTime": 0.55,
+        "rotateAccelTime": 0.2,
+        "rotateDecelTime": 0.2,
+        "returnDelay": 0,
+        "postReturnDelay": 2.4,
+        "scaleAmount": 0,
+        "scaleDuration": 0
+      }
+    }
+  }
+}

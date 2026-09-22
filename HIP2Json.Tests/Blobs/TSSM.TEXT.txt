@@ -1,0 +1,19 @@
+# game=TSSM platform=GameCube archive=mnus_US.hip asset=0xD0EBF484 type=TEXT call=TEXT size=36 checksum=-1713266986 name=RETRY X TXT
+BLOB:
+AAAAHHtpOmJ1dHRvbl9waWN0dXJlXzAxfSAgUmV0cnkAAAAA
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "RETRY X TXT",
+  "FileName": "RETRY X TXT",
+  "Type": "TEXT",
+  "AssetID": "0xD0EBF484",
+  "AssetName": "RETRY X TXT",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT",
+  "AssetChecksum": -1713266986,
+  "TEXT": {
+    "charCount": 28,
+    "text": "{i:button_picture_01}  Retry"
+  }
+}

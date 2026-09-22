@@ -1,0 +1,55 @@
+# game=TSSM platform=GameCube archive=fb01.HIP asset=0xB1B66436 type=PARS call=PARS size=64 checksum=-1671385295 name=WARPPAD_PARTSYS_01
+BLOB:
+sbZkNicAAB0AAAAAAAAAANE9BA0AAAH0AAQBAgAAAByBAQAAAAAAAwEAAAAAAAACAQAAAAAAAAA/wAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xB1B66436",
+    "baseType": "0x27",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WARPPAD_PARTSYS_01",
+  "FileName": "WARPPAD_PARTSYS_01",
+  "Type": "PARS",
+  "AssetID": "0xB1B66436",
+  "AssetName": "WARPPAD_PARTSYS_01",
+  "AssetFileName": "",
+  "AssetTypeName": "PARS",
+  "AssetChecksum": -1671385295,
+  "PARS": {
+    "type": 0,
+    "parentParSysID": "0x00000000",
+    "textureID": "0xD13D040D",
+    "parFlags": 0,
+    "priority": 0,
+    "maxPar": 500,
+    "renderFunc": 0,
+    "renderSrcBlendMode": 4,
+    "renderDstBlendMode": 1,
+    "cmdCount": 2,
+    "cmdSize": 28,
+    "parFlags2": 2164326400,
+    "commands": [
+      {
+        "commandType": 3,
+        "enabled": 1,
+        "mode": 0
+      },
+      {
+        "commandType": 2,
+        "enabled": 1,
+        "mode": 0,
+        "specific": {
+          "type": "Vector",
+          "v": {
+            "x": 0,
+            "y": 1.5,
+            "z": 0
+          }
+        }
+      }
+    ]
+  }
+}

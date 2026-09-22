@@ -1,0 +1,20 @@
+# game=TSSM platform=GameCube archive=am01.HOP asset=0xA4D4654E type=MAPR call=MAPR size=8 checksum=2030462293 name=ENV Material Map
+BLOB:
+pNRlTgAAAAA=
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "ENV Material Map",
+  "FileName": "ENV Material Map",
+  "Type": "MAPR",
+  "AssetID": "0xA4D4654E",
+  "AssetName": "ENV Material Map",
+  "AssetFileName": "",
+  "AssetTypeName": "MAPR",
+  "AssetChecksum": 2030462293,
+  "MAPR": {
+    "id": "0xA4D4654E",
+    "count": 0,
+    "materialMapEntries": []
+  }
+}

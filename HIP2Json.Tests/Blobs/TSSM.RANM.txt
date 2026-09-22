@@ -1,0 +1,61 @@
+# game=TSSM platform=GameCube archive=am02.HIP asset=0x580DFDBA type=RANM call=RANM size=136 checksum=-626360073 name=REACTIVE ANIM LIST
+BLOB:
+WA39ugAAAB0AAAAFAAAAAmBfIOglga/8QiAAACZwfwcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQSAAAD6ZmZo/gAAAP8AAAEglRMSBdT/QQiAAAIJkDtsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQSAAAD6ZmZo/gAAAP8AAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x580DFDBA",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "REACTIVE ANIM LIST",
+  "FileName": "REACTIVE ANIM LIST",
+  "Type": "RANM",
+  "AssetID": "0x580DFDBA",
+  "AssetName": "REACTIVE ANIM LIST",
+  "AssetFileName": "",
+  "AssetTypeName": "RANM",
+  "AssetChecksum": -626360073,
+  "RANM": {
+    "version": 5,
+    "numRows": 2,
+    "entries": [
+      {
+        "model_static": "0x605F20E8",
+        "model_bound": "0x2581AFFC",
+        "lod_dist": 40,
+        "anim_idle": "0x26707F07",
+        "anim_move_through": "0x00000000",
+        "anim_hit": "0x00000000",
+        "sound_idle": "0x00000000",
+        "sound_move_through": "0x00000000",
+        "sound_hit": "0x00000000",
+        "model_burnt": "0x00000000",
+        "anim_burnt": "0x00000000",
+        "burn_fuel": 10,
+        "burn_flame_size": 0.3,
+        "burn_emit_scale": 1,
+        "move_through_radius": 1.5
+      },
+      {
+        "model_static": "0x482544C4",
+        "model_bound": "0x81753FD0",
+        "lod_dist": 40,
+        "anim_idle": "0x82640EDB",
+        "anim_move_through": "0x00000000",
+        "anim_hit": "0x00000000",
+        "sound_idle": "0x00000000",
+        "sound_move_through": "0x00000000",
+        "sound_hit": "0x00000000",
+        "model_burnt": "0x00000000",
+        "anim_burnt": "0x00000000",
+        "burn_fuel": 10,
+        "burn_flame_size": 0.3,
+        "burn_emit_scale": 1,
+        "move_through_radius": 1.5
+      }
+    ]
+  }
+}

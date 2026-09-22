@@ -1,0 +1,56 @@
+# game=TSSM platform=GameCube archive=bb02.HIP asset=0x72CE10A8 type=SIMP call=SIMP size=92 checksum=1568363553 name=WALLJUMP_SIMP_01
+BLOB:
+cs4QqAsAABUAAAACk28hk0ADuiIAAAAAAAAAAEMlZPq+99H2wfnkID/AAAA/wAAAP8AAAD+AAAA/gAAAP4AAAD+AAABDfwAAuIldFAAAAAA/gAAAAAAAAAIIAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x72CE10A8",
+    "baseType": "0x0B",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 2473533843,
+    "ang": {
+      "x": 2.0582356,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 165.39444,
+      "y": -0.48402375,
+      "z": -31.23639
+    },
+    "scale": {
+      "x": 1.5,
+      "y": 1.5,
+      "z": 1.5
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xB8895D14",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "WALLJUMP_SIMP_01",
+  "FileName": "WALLJUMP_SIMP_01",
+  "Type": "SIMP",
+  "AssetID": "0x72CE10A8",
+  "AssetName": "WALLJUMP_SIMP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "SIMP",
+  "AssetChecksum": 1568363553,
+  "SIMP": {
+    "animSpeed": 1,
+    "initAnimState": 0,
+    "collType": "Static",
+    "flags": 8
+  }
+}

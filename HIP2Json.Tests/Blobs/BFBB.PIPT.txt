@@ -1,0 +1,97 @@
+# game=BFBB platform=GameCube archive=kf05.HOP asset=0x0FCA24FC type=PIPT call=PIPT size=136 checksum=-821557699 name=KF05.pipe info table
+BLOB:
+AAAACx3Bw4f/////AJgAAD+3Y+v/////AJgAQpOrIYf/////AJklRuI5sS0AAAACAJklRgy1ZCj/////AJgAQlZ82Zr/////AJkAQsdK8Gr/////AJkAQoFOdd3/////AJkAQi5s3pD/////AJklRr+J0ij/////AJhlQivsyqD/////AJklRg==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "KF05.pipe info table",
+  "FileName": "KF05.pipe info table",
+  "Type": "PIPT",
+  "AssetID": "0x0FCA24FC",
+  "AssetName": "KF05.pipe info table",
+  "AssetFileName": "",
+  "AssetTypeName": "PIPT",
+  "AssetChecksum": -821557699,
+  "PIPT": {
+    "entryCount": 11,
+    "entries": [
+      {
+        "modelAssetID": "0x1DC1C387",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 9961472,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x3FB763EB",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 9961538,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x93AB2187",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10036550,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xE239B12D",
+        "subObjectBits": 2,
+        "pipeFlags": 10036550,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x0CB56428",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 9961538,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x567CD99A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10027074,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xC74AF06A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10027074,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x814E75DD",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10027074,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2E6CDE90",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10036550,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xBF89D228",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 9987394,
+        "layer": 0,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2BECCAA0",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 10036550,
+        "layer": 0,
+        "alphaDiscard": 0
+      }
+    ]
+  }
+}

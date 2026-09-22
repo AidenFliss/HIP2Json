@@ -1,0 +1,32 @@
+# game=TSSM platform=GameCube archive=pt01.HIP asset=0xBEC7ECEE type=BUNGEE_DROP call=DYNA size=28 checksum=622983065 name=BUNGEE_DROP_01
+BLOB:
+vsfs7gAAAB1XR0mkAAIAAGybmVMAAAABQtwAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xBEC7ECEE",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "BUNGEE_DROP_01",
+  "FileName": "BUNGEE_DROP_01",
+  "Type": "BUNGEE_DROP",
+  "AssetID": "0xBEC7ECEE",
+  "AssetName": "BUNGEE_DROP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BUNGEE_DROP",
+  "AssetChecksum": 622983065,
+  "DYNA": {
+    "type": "0x574749A4",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:bungee_drop",
+    "dynaSpecificData": {
+      "marker": "0x6C9B9953",
+      "set_view_angl": 1,
+      "view_angle": 110
+    }
+  }
+}

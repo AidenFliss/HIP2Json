@@ -285,7 +285,11 @@ public sealed class CRDTParser : AssetParser
         byte[] result = ms.ToArray();
 
         if (crdt.state == 3)
-            Util.DecryptCRDT(ref result);
+        {
+            byte[] body = result[0x18..];
+            Util.EncryptCRDT(ref body);
+            body.CopyTo(result, 0x18);
+        }
 
         return result;
     }
@@ -314,7 +318,7 @@ public sealed class CRDTParser : AssetParser
         float width = ReadFloatBE(br);
         float height = ReadFloatBE(br);
         uint texture = ReadUInt32BE(br);
-        br.ReadBytes(4);
+        uint pad = ReadUInt32BE(br);
 
         return new CRDTTexture
         {
@@ -325,6 +329,7 @@ public sealed class CRDTParser : AssetParser
             width = width,
             height = height,
             texture = texture,
+            pad = pad,
         };
     }
 
@@ -349,7 +354,7 @@ public sealed class CRDTParser : AssetParser
         WriteFloatBE(bw, tex.width);
         WriteFloatBE(bw, tex.height);
         WriteUInt32BE(bw, tex.texture);
-        bw.Write(new byte[4]);
+        WriteUInt32BE(bw, tex.pad);
     }
 }
 

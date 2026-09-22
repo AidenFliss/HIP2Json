@@ -1,0 +1,60 @@
+# game=TSSM platform=GameCube archive=tr01.HIP asset=0x8DD8F593 type=PLAT call=PLAT size=200 checksum=1745571310 name=MONSTER_PLAT_3_2
+BLOB:
+jdj1kwYAAA0AAAAAFVeCp0CGaUdAwJAvQJJy40NrdoHEPjzFQ4xw4j+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAABDfwAASOoiOAEYNGwNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x8DD8F593",
+    "baseType": "0x06",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 358056615,
+    "ang": {
+      "x": 4.200351,
+      "y": 6.0176005,
+      "z": 4.5765243
+    },
+    "pos": {
+      "x": 235.4629,
+      "y": -760.9495,
+      "z": 280.8819
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x48EA2238",
+    "animListID": "0x0118346C"
+  },
+  "AssetFriendlyName": "MONSTER_PLAT_3_2",
+  "FileName": "MONSTER_PLAT_3_2",
+  "Type": "PLAT",
+  "AssetID": "0x8DD8F593",
+  "AssetName": "MONSTER_PLAT_3_2",
+  "AssetFileName": "",
+  "AssetTypeName": "PLAT",
+  "AssetChecksum": 1745571310,
+  "PLAT": {
+    "type": "FullyManipulable",
+    "flags": 0,
+    "motion": {
+      "type": "None",
+      "useBanking": 0,
+      "flags": 4,
+      "specific": null
+    }
+  }
+}

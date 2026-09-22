@@ -28,6 +28,11 @@ jobs:
           dotnet run --project HIP2Json.Tests/HIP2Json.Tests.csproj
           -c Release -- --fuzz 8 --seed 0x5EEDF00D
 
+      - name: Blob gate (byte-identical repack of real production blobs)
+        run: >-
+          dotnet run --project HIP2Json.Tests/HIP2Json.Tests.csproj
+          -c Release -- --blobs HIP2Json.Tests/Blobs
+
   format:
     name: dotnet-format (no-changes)
     runs-on: ubuntu-latest

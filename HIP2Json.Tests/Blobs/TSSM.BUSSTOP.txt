@@ -1,0 +1,34 @@
+# game=TSSM platform=GameCube archive=jk01.HIP asset=0x2749A971 type=BUSSTOP call=DYNA size=36 checksum=-390582418 name=PORT_O_HEAD_BSTOP_01
+BLOB:
+J0mpcQAAAB2PASd4AAIAAK8JVHUAAAAAe/tBtpboe4o/gAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x2749A971",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "PORT_O_HEAD_BSTOP_01",
+  "FileName": "PORT_O_HEAD_BSTOP_01",
+  "Type": "BUSSTOP",
+  "AssetID": "0x2749A971",
+  "AssetName": "PORT_O_HEAD_BSTOP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BUSSTOP",
+  "AssetChecksum": -390582418,
+  "DYNA": {
+    "type": "0x8F012778",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:BusStop",
+    "dynaSpecificData": {
+      "marker": "0xAF095475",
+      "character": "Patrick",
+      "cameraID": "0x7BFB41B6",
+      "busID": "0x96E87B8A",
+      "delay": 1
+    }
+  }
+}

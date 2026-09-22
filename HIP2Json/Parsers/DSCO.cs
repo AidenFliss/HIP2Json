@@ -93,13 +93,20 @@ public sealed class DSCOParser : AssetParser
 
         int stateMaskBytes = (int)((asset.state_mask_size * 2 + 7) / 8);
 
-        asset.prefix_offset_off = 36;
-        asset.prefix_offset_transition = asset.prefix_offset_off + (uint)(dsco.prefix_off.Length + 1);
-        asset.prefix_offset_on = asset.prefix_offset_transition + (uint)(dsco.prefix_transition.Length + 1);
-        asset.states_offset = asset.prefix_offset_on + (uint)(dsco.prefix_on.Length + 1);
+        byte fill = Program.CurrentGame == GameType.BFBB ? (byte)0x00 : (byte)0xCD;
+
+        uint prefixOff = 36;
+        uint prefixTransition = Align4(prefixOff + (uint)dsco.prefix_off.Length + 1);
+        uint prefixOn = Align4(prefixTransition + (uint)dsco.prefix_transition.Length + 1);
+        uint statesOff = Align4(prefixOn + (uint)dsco.prefix_on.Length + 1);
+
+        asset.prefix_offset_off = prefixOff;
+        asset.prefix_offset_transition = prefixTransition;
+        asset.prefix_offset_on = prefixOn;
+        asset.states_offset = statesOff;
         asset.states_size = (uint)dsco.state_masks.Length;
 
-        uint nextStateOffset = asset.states_offset + asset.states_size * 4;
+        uint nextStateOffset = statesOff + asset.states_size * 4;
         dsco.state_offsets = new uint[asset.states_size];
 
         for (int i = 0; i < dsco.state_offsets.Length; i++)
@@ -118,9 +125,9 @@ public sealed class DSCOParser : AssetParser
         WriteUInt32BE(bw, asset.states_offset);
         WriteUInt32BE(bw, asset.states_size);
 
-        WriteString(bw, dsco.prefix_off);
-        WriteString(bw, dsco.prefix_transition);
-        WriteString(bw, dsco.prefix_on);
+        WriteRawString(bw, dsco.prefix_off, fill);
+        WriteRawString(bw, dsco.prefix_transition, fill);
+        WriteRawString(bw, dsco.prefix_on, fill);
 
         foreach (uint offset in dsco.state_offsets)
             WriteUInt32BE(bw, offset);
@@ -128,7 +135,24 @@ public sealed class DSCOParser : AssetParser
         foreach (byte[] mask in dsco.state_masks)
             bw.Write(mask);
 
+        while (ms.Length % 4 != 0)
+            bw.Write(fill);
+
         return ms.ToArray();
+    }
+
+    private static uint Align4(uint value)
+    {
+        return (value + 3) & ~3u;
+    }
+
+    private static void WriteRawString(BinaryWriter bw, string value, byte fill)
+    {
+        byte[] bytes = Encoding.ASCII.GetBytes(value);
+        bw.Write(bytes);
+        bw.Write((byte)0);
+        while (bw.BaseStream.Position % 4 != 0)
+            bw.Write(fill);
     }
 }
 

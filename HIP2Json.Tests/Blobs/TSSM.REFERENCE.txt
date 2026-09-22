@@ -1,0 +1,30 @@
+# game=TSSM platform=GameCube archive=mnui.HIP asset=0xF07FDB19 type=REFERENCE call=DYNA size=20 checksum=641455480 name=POWERUP_CONFIRM_REF
+BLOB:
+8H/bGQAAAB35hpj/AAEAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xF07FDB19",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "POWERUP_CONFIRM_REF",
+  "FileName": "POWERUP_CONFIRM_REF",
+  "Type": "REFERENCE",
+  "AssetID": "0xF07FDB19",
+  "AssetName": "POWERUP_CONFIRM_REF",
+  "AssetFileName": "",
+  "AssetTypeName": "REFERENCE",
+  "AssetChecksum": 641455480,
+  "DYNA": {
+    "type": "0xF98698FF",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "logic:reference",
+    "dynaSpecificData": {
+      "initial": "0x00000000"
+    }
+  }
+}

@@ -1,0 +1,192 @@
+# game=TSSM platform=GameCube archive=de02.HIP asset=0x4F1312B3 type=SURF call=SURF size=440 checksum=-822423806 name=NO_STAND_ON_SURF
+BLOB:
+TxMSsxoAAB0AAAAAABQKCD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADgAAQfAAAAAAAAAAAAAAAAAAAEHwAAAAAAAAAAAAAEHwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAL+AAAA/gAAAP4AAAAAAAAAAAAAAAAAAAP8AAABAoAAAP4AAAD1MzM0+mZmaAAAAAEHwAABBoAAAQcgAAEEgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x4F1312B3",
+    "baseType": "0x1A",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "NO_STAND_ON_SURF",
+  "FileName": "NO_STAND_ON_SURF",
+  "Type": "SURF",
+  "AssetID": "0x4F1312B3",
+  "AssetName": "NO_STAND_ON_SURF",
+  "AssetFileName": "",
+  "AssetTypeName": "SURF",
+  "AssetChecksum": -822423806,
+  "SURF": {
+    "game_damage_type": 0,
+    "game_sticky": 0,
+    "game_damage_flags": 0,
+    "surf_type": 0,
+    "sld_start": 20,
+    "sld_stop": 10,
+    "phys_flags": "OutOfBounds",
+    "friction": 1,
+    "matfx": {
+      "flags": 0,
+      "bumpmapID": 0,
+      "envmapID": 0,
+      "shininess": 0,
+      "bumpiness": 0,
+      "dualmapID": 0
+    },
+    "colorfx": {
+      "flags": 14,
+      "mode": 0,
+      "speed": 30
+    },
+    "texture_anim_flags": 0,
+    "texture_anm_0": {
+      "mode": 0,
+      "group": 0,
+      "speed": 30
+    },
+    "texture_anm_1": {
+      "mode": 0,
+      "group": 0,
+      "speed": 30
+    },
+    "uvfx_flags": 0,
+    "uvfx_0": {
+      "mode": 0,
+      "rot": 0,
+      "rot_spd": 0,
+      "trans": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "trans_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "scale_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "max": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "minmax_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "uvfx_1": {
+      "mode": 0,
+      "rot": 0,
+      "rot_spd": 0,
+      "trans": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "trans_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "scale_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "min": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "max": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "minmax_spd": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "on": 1,
+    "oob_delay": -1,
+    "walljump_scale_xz": 1,
+    "walljump_scale_y": 1,
+    "damage_timer": 0,
+    "damage_bounce": 0,
+    "dashFx": {
+      "impactSound": 0,
+      "dashImpactType": 255,
+      "dashImpactThrowBack": 5,
+      "dashSprayMagnitude": 1,
+      "dashCoolRate": 0.05,
+      "dashCoolAmount": 0.3,
+      "dashPass": 0,
+      "dashRampMaxDistance": 30,
+      "dashRampMinDistance": 20,
+      "dashRampKeySpeed": 25,
+      "dashRampMaxHeight": 10,
+      "dashRampTargetMovePoint": 0,
+      "damageAmount": 0,
+      "hitSource": 0,
+      "offSurfaceTime": 0,
+      "swimmableSurface": 0,
+      "dashFall": 0,
+      "needButtonPress": 0,
+      "dashAttack": 0,
+      "footstepDecals": 0,
+      "drivingSurfaceType": 0
+    },
+    "offSurface": {
+      "particleEmitterID": 0,
+      "soundID": 0,
+      "textureID": 0,
+      "duration": 0
+    },
+    "onSurface": {
+      "particleEmitterID": 0,
+      "soundID": 0,
+      "textureID": 0,
+      "duration": 0
+    },
+    "hitDecal0": {
+      "textureID": 0,
+      "sizeX": 0,
+      "sizeY": 0
+    },
+    "hitDecal1": {
+      "textureID": 0,
+      "sizeX": 0,
+      "sizeY": 0
+    },
+    "hitDecal2": {
+      "textureID": 0,
+      "sizeX": 0,
+      "sizeY": 0
+    }
+  }
+}

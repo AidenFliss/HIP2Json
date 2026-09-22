@@ -1,0 +1,55 @@
+# game=TSSM platform=GameCube archive=de02.HIP asset=0x4121D2AB type=RACETIMER call=DYNA size=72 checksum=-354101109 name=BESTTIME_TIMER
+BLOB:
+QSHSqwABAB2ES892AAIAAAAAAAAAAAAA/////0EQAABAwAAAQEAAAAAUABKuehZIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x4121D2AB",
+    "baseType": "0x00",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Run",
+      "dstAssetID": "0xAE7A1648",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "BESTTIME_TIMER",
+  "FileName": "BESTTIME_TIMER",
+  "Type": "RACETIMER",
+  "AssetID": "0x4121D2AB",
+  "AssetName": "BESTTIME_TIMER",
+  "AssetFileName": "",
+  "AssetTypeName": "RACETIMER",
+  "AssetChecksum": -354101109,
+  "DYNA": {
+    "type": "0x844BCF76",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:RaceTimer",
+    "dynaSpecificData": {
+      "countDown": 0,
+      "startTime": 0,
+      "victoryTime": -1,
+      "warnTime1": 9,
+      "warnTime2": 6,
+      "warnTime3": 3
+    }
+  }
+}

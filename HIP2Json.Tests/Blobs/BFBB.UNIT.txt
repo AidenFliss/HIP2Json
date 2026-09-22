@@ -1,0 +1,76 @@
+# game=BFBB platform=GameCube archive=mnu4.HIP asset=0x8FAC4B8D type=UNIT call=DYNA size=148 checksum=1552936345 name=HUD_UNIT_METER_HEALTH
+BLOB:
+j6xLjQAAAB2NQLmsAAMAAD24Uew+D1wpPSPXCj2PXCk9j1wpAAAAAEBAAAAAAAAAQKAAAD8AAAAAAAAA33LXuQAAAAAAAAAAAAAAANNuF6oAAAAAAAAAAAAAAAA/gAAAP4AAAAAAAAClmmhtAAAAAAAAAAAAAAAAP4AAAD+AAAAAAAAAPWFHrgAAAAA40bcXAAAAAQ==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x8FAC4B8D",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_UNIT_METER_HEALTH",
+  "FileName": "HUD_UNIT_METER_HEALTH",
+  "Type": "UNIT",
+  "AssetID": "0x8FAC4B8D",
+  "AssetName": "HUD_UNIT_METER_HEALTH",
+  "AssetFileName": "",
+  "AssetTypeName": "UNIT",
+  "AssetChecksum": 1552936345,
+  "DYNA": {
+    "type": "0x8D40B9AC",
+    "version": 3,
+    "handle": 0,
+    "typeNameInternal": "hud:meter:unit",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 0.09,
+        "y": 0.14,
+        "z": 0.04
+      },
+      "size": {
+        "x": 0.07,
+        "y": 0.07,
+        "z": 0
+      },
+      "start_value": 3,
+      "min_value": 0,
+      "max_value": 5,
+      "increment_time": 0.5,
+      "decrement_time": 0,
+      "sound_start_increment": "0xDF72D7B9",
+      "sound_increment": "0x00000000",
+      "sound_start_decrement": "0x00000000",
+      "sound_decrement": "0x00000000",
+      "model_0_id": 3547207594,
+      "model_0_loc": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "model_0_size": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "model_1_id": 2778359917,
+      "model_1_loc": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "model_1_size": {
+        "x": 1,
+        "y": 1,
+        "z": 0
+      },
+      "offset": {
+        "x": 0.055,
+        "y": 0,
+        "z": 0.0001
+      },
+      "fill_forward": "LeftToRight"
+    }
+  }
+}

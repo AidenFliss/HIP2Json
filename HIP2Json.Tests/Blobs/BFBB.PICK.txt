@@ -1,0 +1,192 @@
+# game=BFBB platform=GameCube archive=boot.HIP asset=0x78E38FCE type=PICK call=PICK size=388 checksum=829447102 name=PickupTable
+BLOB:
+S0NJUAAAABP6YHvLzc0AAAAAAAFWfNmaAAAAAG1KQYHNzQAAAAAAAWROIqwAAAAAB5oHNM3NAAAAAAABgU513QAAAACz1ig7zc0AAAAAAAHHSvBqAAAAAHyKxT7NzQAAAAAAAfa19agAAAAAi9/o3c3NAAAAAAABczFqhAAAAAAo9VYTzc0AAAAAAAFkFhAmAAAAAPZQ2i7NzQAAAAAAAbNIYucAAAAAdLRvJM3NAAAAAAABAfnqRgAAAAAdhIBTzc0AAAAAAAFzMWqEAAAAAGp3lFTNzQAAAAAAAXtOqp8AAAAA8JoUFc3NAAAAAAAB4lx2zAAAAAAICCaWzc0AAAAAAAERCUHoAAAAAExnyDLNzQAAAAAAAc+31BMAAAAAGPiros3NAAAAAAABEohAZgAAAAAYFAsQzc0AAAAAAAHaa10mAAAAAEm5hkHNzQAAAAAAARKIQGYAAAAA/nqJu83NAAAAAAAB4ir9sAAAAAABNg9kzc0AAAAAAAESiEBmAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "PickupTable",
+  "FileName": "PickupTable",
+  "Type": "PICK",
+  "AssetID": "0x78E38FCE",
+  "AssetName": "PickupTable",
+  "AssetFileName": "",
+  "AssetTypeName": "PICK",
+  "AssetChecksum": 829447102,
+  "PICK": {
+    "magic": "0x4B434950",
+    "count": 19,
+    "pickups": [
+      {
+        "pickupHash": "0xFA607BCB",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x567CD99A",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x6D4A4181",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x644E22AC",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x079A0734",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x814E75DD",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xB3D6283B",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xC74AF06A",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x7C8AC53E",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xF6B5F5A8",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x8BDFE8DD",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x73316A84",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x28F55613",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x64161026",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xF650DA2E",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xB34862E7",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x74B46F24",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x01F9EA46",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x1D848053",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x73316A84",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x6A779454",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x7B4EAA9F",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xF09A1415",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xE25C76CC",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x08082696",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x110941E8",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x4C67C832",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xCFB7D413",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x18F8ABA2",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x12884066",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x18140B10",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xDA6B5D26",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x49B98641",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x12884066",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xFE7A89BB",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xE22AFDB0",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x01360F64",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x12884066",
+        "animID": "0x00000000"
+      }
+    ]
+  }
+}

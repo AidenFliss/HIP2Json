@@ -1,0 +1,55 @@
+# game=TSSM platform=GameCube archive=tr03.HIP asset=0xAFD0D088 type=ATBL call=ATBL size=88 checksum=-1788666883 name=crate_shrink_bind.ATBL
+BLOB:
+TEJUQQAAAAEAAAABAAAAAWEm7VSrNZOIAAAA8AAAAAC/gAAAAAEAAQAAAFT///////////////8J2hbAAAAAAAAAAAAAAABUP4AAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "crate_shrink_bind.ATBL",
+  "FileName": "crate_shrink_bind.ATBL",
+  "Type": "ATBL",
+  "AssetID": "0xAFD0D088",
+  "AssetName": "crate_shrink_bind.ATBL",
+  "AssetFileName": "",
+  "AssetTypeName": "ATBL",
+  "AssetChecksum": -1788666883,
+  "ATBL": {
+    "magic": 1279415361,
+    "numRaw": 1,
+    "numFiles": 1,
+    "numStates": 1,
+    "constructFunc": "1629941076",
+    "raw": [
+      2872415112
+    ],
+    "files": [
+      {
+        "fileFlags": 240,
+        "duration": 0,
+        "timeOffset": -1,
+        "numAnims": [
+          1,
+          1
+        ],
+        "rawData": 84,
+        "physics": -1,
+        "startPose": -1,
+        "endPose": -1
+      }
+    ],
+    "states": [
+      {
+        "stateID": 165287616,
+        "fileIndex": 0,
+        "effectCount": 0,
+        "effectOffset": 84,
+        "speed": 1,
+        "subStateID": 0,
+        "subStateCount": 0
+      }
+    ],
+    "effects": [],
+    "listUnknown": [
+      0
+    ]
+  }
+}

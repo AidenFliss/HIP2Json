@@ -11,14 +11,16 @@ public sealed class game_object_RaceTimerParser : AbstractDYNAParser
         br.ReadBytes(3);
 
         int startTime = ReadInt32BE(br);
-        int warnTime1 = ReadInt32BE(br);
-        int warnTime2 = ReadInt32BE(br);
-        int warnTime3 = ReadInt32BE(br);
+        int victoryTime = ReadInt32BE(br);
+        float warnTime1 = ReadFloatBE(br);
+        float warnTime2 = ReadFloatBE(br);
+        float warnTime3 = ReadFloatBE(br);
 
         return new game_object_RaceTimer
         {
             countDown = countDown,
             startTime = startTime,
+            victoryTime = victoryTime,
             warnTime1 = warnTime1,
             warnTime2 = warnTime2,
             warnTime3 = warnTime3,

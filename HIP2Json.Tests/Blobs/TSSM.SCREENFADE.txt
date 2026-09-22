@@ -1,0 +1,38 @@
+# game=TSSM platform=GameCube archive=bb02.HIP asset=0xC835C9A1 type=SCREENFADE call=DYNA size=32 checksum=-1784195256 name=QUICK_SCREEN_FADE
+BLOB:
+yDXJoQAAAB2VNdudAAEAAAAAAP8/AAAAQAAAAL+AAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xC835C9A1",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "QUICK_SCREEN_FADE",
+  "FileName": "QUICK_SCREEN_FADE",
+  "Type": "SCREENFADE",
+  "AssetID": "0xC835C9A1",
+  "AssetName": "QUICK_SCREEN_FADE",
+  "AssetFileName": "",
+  "AssetTypeName": "SCREENFADE",
+  "AssetChecksum": -1784195256,
+  "DYNA": {
+    "type": "0x9535DB9D",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "effect:ScreenFade",
+    "dynaSpecificData": {
+      "dest": {
+        "r": 0,
+        "g": 0,
+        "b": 0,
+        "a": 255
+      },
+      "fadeDownTime": 0.5,
+      "waitTime": 2,
+      "fadeUpTime": -1
+    }
+  }
+}

@@ -1,0 +1,45 @@
+# game=TSSM platform=GameCube archive=tt01.HIP asset=0x9E071ADB type=TIMR call=TIMR size=48 checksum=527954552 name=TUTORIAL_SWING_TIMER
+BLOB:
+ngca2w4BAB1BIAAAAAAAAAAUAU/e1mtymehrNQAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x9E071ADB",
+    "baseType": "0x0E",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Start_Conversation",
+      "dstAssetID": "0xDED66B72",
+      "paramU32": [
+        "0x99E86B35",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        -2.4031538E-23,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "TUTORIAL_SWING_TIMER",
+  "FileName": "TUTORIAL_SWING_TIMER",
+  "Type": "TIMR",
+  "AssetID": "0x9E071ADB",
+  "AssetName": "TUTORIAL_SWING_TIMER",
+  "AssetFileName": "",
+  "AssetTypeName": "TIMR",
+  "AssetChecksum": 527954552,
+  "TIMR": {
+    "seconds": 10,
+    "randomRange": 0
+  }
+}

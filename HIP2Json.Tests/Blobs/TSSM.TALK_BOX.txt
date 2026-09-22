@@ -1,0 +1,452 @@
+# game=TSSM platform=GameCube archive=pt02.HIP asset=0x640E1A5B type=TALK_BOX call=DYNA size=744 checksum=-729379297 name=MINDY_2_TIMERACE_TALKBOX
+BLOB:
+ZA4aWwAVAB0JNLGWAAsAAG3WGHPVN87De/ssKgEAAQAAAAQBAAAAAAABAAAAAAAAAAAAAAO+3bUAAAAA0sSyIQAAAAAAAAAAAFcBM5rY/9kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVwEzxHHTSQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABXATPwEhd4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWEAAi8OQIsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYQABgczBBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFhAAPwEhd4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWEAA8Rx00kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYQFP1ofnpwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFXAVHWh+enAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVgBUfiopZQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABWQFRszhYHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFaAVH3d7aoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdEAEv0Hd5wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB0gAS/YL+QQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHSAmFbGHMoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWEBT5rY/9kAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABWwLbmtj/2QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHSAtya2P/ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWEAEsGejcEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB0gASWivxIQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFcAVGXgLK3AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x640E1A5B",
+    "baseType": "0x00",
+    "linkCount": 21,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0x9AD8FFD9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0xC471D349",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0xF0121778",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Disable",
+      "dstAssetID": "0x2F0E408B",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x81CCC104",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xF0121778",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xC471D349",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Start_Conversation",
+      "dstAssetID": "0xD687E7A7",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_1",
+      "dstEvent": "Switch",
+      "dstAssetID": "0xD687E7A7",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_2",
+      "dstEvent": "Switch",
+      "dstAssetID": "0xF8A8A594",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_3",
+      "dstEvent": "Switch",
+      "dstAssetID": "0xB338581C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_4",
+      "dstEvent": "Switch",
+      "dstAssetID": "0xF777B6A8",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal18",
+      "dstEvent": "Run",
+      "dstAssetID": "0xFD07779C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal19",
+      "dstEvent": "Run",
+      "dstAssetID": "0xFD82FE41",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal19",
+      "dstEvent": "Start_Fade",
+      "dstAssetID": "0x5B187328",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Start_Conversation",
+      "dstAssetID": "0x9AD8FFD9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_5",
+      "dstEvent": "Mindy_Start",
+      "dstAssetID": "0x9AD8FFD9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal19",
+      "dstEvent": "Mindy_End",
+      "dstAssetID": "0x9AD8FFD9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Conversation_Start",
+      "dstEvent": "Run",
+      "dstAssetID": "0xC19E8DC1",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal19",
+      "dstEvent": "Run",
+      "dstAssetID": "0x5A2BF121",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On_Signal_6",
+      "dstEvent": "Switch",
+      "dstAssetID": "0x9780B2B7",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "MINDY_2_TIMERACE_TALKBOX",
+  "FileName": "MINDY_2_TIMERACE_TALKBOX",
+  "Type": "TALK_BOX",
+  "AssetID": "0x640E1A5B",
+  "AssetName": "MINDY_2_TIMERACE_TALKBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TALK_BOX",
+  "AssetChecksum": -729379297,
+  "DYNA": {
+    "type": "0x0934B196",
+    "version": 11,
+    "handle": 0,
+    "typeNameInternal": "game_object:talk_box",
+    "dynaSpecificData": {
+      "dialog_box": "0x6DD61873",
+      "prompt_box": "0xD537CEC3",
+      "quit_box": "0x7BFB2C2A",
+      "trap": 1,
+      "pause": 0,
+      "allow_quit": 1,
+      "trigger_pads": 0,
+      "page": 0,
+      "show": 0,
+      "hide": 4,
+      "audio_effect": 1,
+      "teleport": "0x00000000",
+      "auto_wait_type_time": 0,
+      "auto_wait_type_prompt": 1,
+      "auto_wait_type_sound": 0,
+      "auto_wait_type_event": 0,
+      "auto_wait_delay": 0,
+      "auto_wait_which_event": 0,
+      "prompt_skip": "0x03BEDDB5",
+      "prompt_noskip": "0x00000000",
+      "prompt_quit": "0xD2C4B221",
+      "prompt_noquit": "0x00000000",
+      "prompt_yesno": "0x00000000"
+    }
+  }
+}

@@ -57,12 +57,28 @@ public sealed class JAWParser : AssetParser
             WriteInt32BE(bw, table.dataStart);
             WriteInt32BE(bw, table.dataLength);
         }
-        foreach (var data in jaw.jawData)
+
+        long directoryEnd = ms.Position;
+
+        uint nextDataStart = 0;
+        for (int i = 0; i < jaw.jawData.Length; i++)
         {
-            WriteInt32BE(bw, data.length);
-            foreach (var value in data.data)
+            long target = directoryEnd + nextDataStart;
+            while (ms.Position < target)
+                bw.Write((byte)0);
+
+            jaw.jawDataTables[i].dataStart = (int)(ms.Position - directoryEnd);
+            jaw.jawDataTables[i].dataLength = jaw.jawData[i].data.Length + 4;
+
+            WriteInt32LE(bw, jaw.jawData[i].length);
+            foreach (var value in jaw.jawData[i].data)
                 WriteByte(bw, (byte)value);
+
+            nextDataStart = (uint)((ms.Position - directoryEnd + 3) & ~3L);
         }
+
+        while (ms.Position % 4 != 0)
+            bw.Write((byte)0);
 
         return ms.ToArray();
     }

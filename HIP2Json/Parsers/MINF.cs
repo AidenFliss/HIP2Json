@@ -50,7 +50,6 @@ public sealed class MINFParser : AssetParser
             byte length = br.ReadByte();
 
             int dataLength = ((length + 1) * 4) - 1;
-
             byte[] data = br.ReadBytes(dataLength);
 
             int end = Array.IndexOf(data, (byte)0);
@@ -64,7 +63,7 @@ public sealed class MINFParser : AssetParser
                     new MinfParam
                     {
                         type = type,
-                        length = dataLength,
+                        length = length,
                         value = value,
                     }
                 )
@@ -112,15 +111,14 @@ public sealed class MINFParser : AssetParser
 
             byte[] valueBytes = Encoding.ASCII.GetBytes(param.value);
 
-            int totalLength = valueBytes.Length + 1;
-            int paddedLength = (totalLength + 3) & ~3;
-
-            byte length = (byte)((paddedLength / 4) - 1);
+            byte length = (byte)param.length;
             WriteByte(bw, length);
+
+            int dataLength = ((length + 1) * 4) - 1;
 
             bw.Write(valueBytes);
 
-            for (int i = valueBytes.Length; i < paddedLength - 1; i++)
+            for (int i = valueBytes.Length; i < dataLength; i++)
                 WriteByte(bw, 0);
         }
 

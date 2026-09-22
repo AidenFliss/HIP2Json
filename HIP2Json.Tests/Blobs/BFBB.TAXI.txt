@@ -1,0 +1,37 @@
+# game=BFBB platform=GameCube archive=gl01.HIP asset=0x084207F4 type=TAXI call=DYNA size=48 checksum=-1020605215 name=TAXI_1
+BLOB:
+CEIH9AAAAB1NxEn8AAEAAKUvzBUwvHWk+9s5ZpaM+wwer2Ao1y+MOD+AAABAIAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x084207F4",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TAXI_1",
+  "FileName": "TAXI_1",
+  "Type": "TAXI",
+  "AssetID": "0x084207F4",
+  "AssetName": "TAXI_1",
+  "AssetFileName": "",
+  "AssetTypeName": "TAXI",
+  "AssetChecksum": -1020605215,
+  "DYNA": {
+    "type": "0x4DC449FC",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Taxi",
+    "dynaSpecificData": {
+      "marker": "0xA52FCC15",
+      "cameraID": "0x30BC75A4",
+      "portalID": "0xFBDB3966",
+      "talkBoxID": "0x968CFB0C",
+      "textID": "0x1EAF6028",
+      "taxiID": "0xD72F8C38",
+      "invTimer": 1,
+      "portalDelay": 2.5
+    }
+  }
+}

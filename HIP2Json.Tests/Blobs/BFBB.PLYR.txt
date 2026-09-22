@@ -1,0 +1,53 @@
+# game=BFBB platform=GameCube archive=gl03.HIP asset=0xBD7097E3 type=PLYR call=PLYR size=88 checksum=1922299504 name=SPONGEBOB
+BLOB:
+vXCX4wMAAB0BAAAAAAAAAAAAAABArSL8AAAAAAAAAABByYx+QYjWOcLUrQ4/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAAAAAAAAAAAAAA/5NUAAAAAVJUP5w==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xBD7097E3",
+    "baseType": "0x03",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 5.4105206,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 25.1936,
+      "y": 17.1046,
+      "z": -106.338
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0x003FE4D5",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "SPONGEBOB",
+  "FileName": "SPONGEBOB",
+  "Type": "PLYR",
+  "AssetID": "0xBD7097E3",
+  "AssetName": "SPONGEBOB",
+  "AssetFileName": "",
+  "AssetTypeName": "PLYR",
+  "AssetChecksum": 1922299504,
+  "PLYR": {
+    "lightKitID": "0x54950FE7"
+  }
+}

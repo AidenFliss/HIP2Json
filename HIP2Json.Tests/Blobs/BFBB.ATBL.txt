@@ -1,0 +1,79 @@
+# game=BFBB platform=GameCube archive=bb01.HIP asset=0xAD01F4A6 type=ATBL call=ATBL size=156 checksum=589298557 name=LassoGuide_tartar.ATBL
+BLOB:
+TEJUQQAAAAIAAAACAAAAAgAAAAZmal7ya3Gz3QAAAPAAAAAAv4AAAAABAAEAAACU////////////////AAAA8AAAAAC/gAAAAAEAAQAAAJj///////////////+1U4B2AAAAAAAAAAAAAACUP4AAAAAAAAAAAAAAfaiEsQAAAAEAAAAAAAAAlD+AAAAAAAAAAAAAAAAAAAAAAAAB
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "LassoGuide_tartar.ATBL",
+  "FileName": "LassoGuide_tartar.ATBL",
+  "Type": "ATBL",
+  "AssetID": "0xAD01F4A6",
+  "AssetName": "LassoGuide_tartar.ATBL",
+  "AssetFileName": "",
+  "AssetTypeName": "ATBL",
+  "AssetChecksum": 589298557,
+  "ATBL": {
+    "magic": 1279415361,
+    "numRaw": 2,
+    "numFiles": 2,
+    "numStates": 2,
+    "constructFunc": "ZNPC_AnimTable_LassoGuide",
+    "raw": [
+      1718247154,
+      1802613725
+    ],
+    "files": [
+      {
+        "fileFlags": 240,
+        "duration": 0,
+        "timeOffset": -1,
+        "numAnims": [
+          1,
+          1
+        ],
+        "rawData": 148,
+        "physics": -1,
+        "startPose": -1,
+        "endPose": -1
+      },
+      {
+        "fileFlags": 240,
+        "duration": 0,
+        "timeOffset": -1,
+        "numAnims": [
+          1,
+          1
+        ],
+        "rawData": 152,
+        "physics": -1,
+        "startPose": -1,
+        "endPose": -1
+      }
+    ],
+    "states": [
+      {
+        "stateID": 3042148470,
+        "fileIndex": 0,
+        "effectCount": 0,
+        "effectOffset": 148,
+        "speed": 1,
+        "subStateID": 0,
+        "subStateCount": 0
+      },
+      {
+        "stateID": 2108196017,
+        "fileIndex": 1,
+        "effectCount": 0,
+        "effectOffset": 148,
+        "speed": 1,
+        "subStateID": 0,
+        "subStateCount": 0
+      }
+    ],
+    "effects": [],
+    "listUnknown": [
+      0,
+      1
+    ]
+  }
+}

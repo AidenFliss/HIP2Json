@@ -1,0 +1,29 @@
+# game=TSSM platform=GameCube archive=pt01.HIP asset=0xE3D7B5FA type=ALST call=ALST size=40 checksum=1287944064 name=CHECKPOINT_ANIMLIST
+BLOB:
+JOsxJa+Y7qjyI5yhAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "CHECKPOINT_ANIMLIST",
+  "FileName": "CHECKPOINT_ANIMLIST",
+  "Type": "ALST",
+  "AssetID": "0xE3D7B5FA",
+  "AssetName": "CHECKPOINT_ANIMLIST",
+  "AssetFileName": "",
+  "AssetTypeName": "ALST",
+  "AssetChecksum": 1287944064,
+  "ALST": {
+    "ids": [
+      619393317,
+      2946035368,
+      4062420129,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

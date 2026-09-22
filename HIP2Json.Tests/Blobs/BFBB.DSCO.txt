@@ -1,0 +1,57 @@
+# game=BFBB platform=GameCube archive=bc03.HIP asset=0xC49C3035 type=DSCO call=DSCO size=228 checksum=-2077799270 name=DISCO_SECTION_4
+BLOB:
+xJwwNQAAAB0AAAADP4AAAD8AAAAAAAAkAAAAOAAAAFQAAAAlAAAAbAAAAAhkaXNjb19mbG9vcl9BXzNtMTEwAGRpc2NvX2Zsb29yX0FfeWVsbG93XzNtMTEwAABkaXNjb19mbG9vcl9BX3JlZF8zbTExMAAAAACMAAAAlgAAAKAAAACqAAAAtAAAAL4AAADIAAAA0gBUVVVVVVVVVVVVAVBVVVVVVVVVVVUFQFVVVVVVVVVVVRUAVVVVVVVVVVVVVQBUVVVVVVVVVVVVAVBVVVVVVVVVVVUFQFVVVVVVVVVVVRVU
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xC49C3035",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "DISCO_SECTION_4",
+  "FileName": "DISCO_SECTION_4",
+  "Type": "DSCO",
+  "AssetID": "0xC49C3035",
+  "AssetName": "DISCO_SECTION_4",
+  "AssetFileName": "",
+  "AssetTypeName": "DSCO",
+  "AssetChecksum": -2077799270,
+  "DSCO": {
+    "discoFloorAsset": {
+      "flags": "Loop, Enabled",
+      "interval_transition": 1,
+      "interval_state": 0.5,
+      "prefix_offset_off": 36,
+      "prefix_offset_transition": 56,
+      "prefix_offset_on": 84,
+      "state_mask_size": 37,
+      "states_offset": 108,
+      "states_size": 8
+    },
+    "prefix_off": "disco_floor_A_3m110",
+    "prefix_transition": "disco_floor_A_yellow_3m110",
+    "prefix_on": "disco_floor_A_red_3m110",
+    "state_offsets": [
+      140,
+      150,
+      160,
+      170,
+      180,
+      190,
+      200,
+      210
+    ],
+    "state_masks": [
+      "AFRVVVVVVVVVVQ==",
+      "VQFQVVVVVVVVVQ==",
+      "VVUFQFVVVVVVVQ==",
+      "VVVVFQBVVVVVVQ==",
+      "VVVVVVUAVFVVVQ==",
+      "VVVVVVVVAVBVVQ==",
+      "VVVVVVVVVQVAVQ==",
+      "VVVVVVVVVVUVVA=="
+    ]
+  }
+}

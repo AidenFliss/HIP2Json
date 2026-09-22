@@ -1,0 +1,120 @@
+# game=TSSM platform=GameCube archive=bb03.HIP asset=0x94E088E7 type=TRIG call=TRIG size=208 checksum=-1048618211 name=JSP_B_TRIG_01
+BLOB:
+lOCI5wECAB0BAAAAAAAAAD6Gi5gAAAAAAAAAAMIkXyHBLitrwqTWej+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAAAAAAAAAAAA7vCMswAAAADDDRfIwT4ra8Msaz1Ca6DfQhx1JcIBrPTCJF8hwS4ra8Kk1nrCJF8hwS4ra8Kk1noAAAAAgAAAAD+AAAAAAAAAArcCtZ0c++cAAAAAAAAAAAAAAAAAAAAAUOewHQAAAAACuAK2nRz75wAAAAAAAAAAAAAAAAAAAABQ57AdAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x94E088E7",
+    "baseType": "0x01",
+    "linkCount": 2,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Enter_Camera",
+      "dstEvent": "JSP_Visibility_Increment",
+      "dstAssetID": "0x9D1CFBE7",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x50E7B01D",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Exit_Camera",
+      "dstEvent": "JSP_Visibility_Decrement",
+      "dstAssetID": "0x9D1CFBE7",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x50E7B01D",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0.26278377,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -41.0929,
+      "y": -10.8856,
+      "z": -82.4189
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0xEEF08CB3",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "JSP_B_TRIG_01",
+  "FileName": "JSP_B_TRIG_01",
+  "Type": "TRIG",
+  "AssetID": "0x94E088E7",
+  "AssetName": "JSP_B_TRIG_01",
+  "AssetFileName": "",
+  "AssetTypeName": "TRIG",
+  "AssetChecksum": -1048618211,
+  "TRIG": {
+    "Type": "Box",
+    "Positions": [
+      {
+        "x": -141.0929,
+        "y": -11.8856,
+        "z": -172.4189
+      },
+      {
+        "x": 58.9071,
+        "y": 39.1144,
+        "z": -32.4189
+      },
+      {
+        "x": -41.0929,
+        "y": -10.8856,
+        "z": -82.4189
+      },
+      {
+        "x": -41.0929,
+        "y": -10.8856,
+        "z": -82.4189
+      }
+    ],
+    "Direction": {
+      "x": 0,
+      "y": -0,
+      "z": 1
+    },
+    "Flags": 0
+  }
+}

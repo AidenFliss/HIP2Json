@@ -1,0 +1,50 @@
+# game=BFBB platform=GameCube archive=gy02.HOP asset=0x79880FF2 type=COLL call=COLL size=76 checksum=381341284 name=GY02.collision table
+BLOB:
+AAAABuI5sS2NrJTOAAAAAOI5sS0AAAAAAAAAAI05jQwAAAAAAAAAADhTFv0AAAAAAAAAADg/7TYAAAAAAAAAAKft1/0AAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "GY02.collision table",
+  "FileName": "GY02.collision table",
+  "Type": "COLL",
+  "AssetID": "0x79880FF2",
+  "AssetName": "GY02.collision table",
+  "AssetFileName": "",
+  "AssetTypeName": "COLL",
+  "AssetChecksum": 381341284,
+  "COLL": {
+    "sTableCount": 6,
+    "entries": [
+      {
+        "baseModel": "0xE239B12D",
+        "colModel": "0x8DAC94CE",
+        "camcolModel": "0x00000000"
+      },
+      {
+        "baseModel": "0xE239B12D",
+        "colModel": "0x00000000",
+        "camcolModel": "0x00000000"
+      },
+      {
+        "baseModel": "0x8D398D0C",
+        "colModel": "0x00000000",
+        "camcolModel": "0x00000000"
+      },
+      {
+        "baseModel": "0x385316FD",
+        "colModel": "0x00000000",
+        "camcolModel": "0x00000000"
+      },
+      {
+        "baseModel": "0x383FED36",
+        "colModel": "0x00000000",
+        "camcolModel": "0x00000000"
+      },
+      {
+        "baseModel": "0xA7EDD7FD",
+        "colModel": "0x00000000",
+        "camcolModel": "0x00000000"
+      }
+    ]
+  }
+}

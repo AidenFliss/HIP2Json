@@ -1,0 +1,68 @@
+# game=TSSM platform=GameCube archive=mnui.HIP asset=0x00D34AE6 type=FONT call=DYNA size=112 checksum=-975032314 name=DENNIS2_METER_HEALTH
+BLOB:
+ANNK5gAAAB2LPnMvAAIAAEOCAABCUAAAAAAAAEHAAABB4AAAAAAAAAAAAAAAAAAAQSAAAD3MzM0AAAAAAAAAAACGU8kAAAAAAIZTyQAAAAAAAAABPczMzT3MzM0AAAAAAAAAAAAAAAD/5gD/AEZQyA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x00D34AE6",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "DENNIS2_METER_HEALTH",
+  "FileName": "DENNIS2_METER_HEALTH",
+  "Type": "FONT",
+  "AssetID": "0x00D34AE6",
+  "AssetName": "DENNIS2_METER_HEALTH",
+  "AssetFileName": "",
+  "AssetTypeName": "FONT",
+  "AssetChecksum": -975032314,
+  "DYNA": {
+    "type": "0x8B3E732F",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "hud:meter:font",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 260,
+        "y": 52,
+        "z": 0
+      },
+      "size": {
+        "x": 24,
+        "y": 28,
+        "z": 0
+      },
+      "start_value": 0,
+      "min_value": 0,
+      "max_value": 10,
+      "increment_time": 0.1,
+      "decrement_time": 0,
+      "sound_start_increment": "0x00000000",
+      "sound_increment": "0x008653C9",
+      "sound_start_decrement": "0x00000000",
+      "sound_decrement": "0x008653C9",
+      "font_id": "Default",
+      "font_justify": 1,
+      "font_w": 0.1,
+      "font_h": 0.1,
+      "font_space": 0,
+      "font_drop_x": 0,
+      "font_drop_y": 0,
+      "font_c": {
+        "r": 255,
+        "g": 230,
+        "b": 0,
+        "a": 255
+      },
+      "font_drop_c": {
+        "r": 0,
+        "g": 70,
+        "b": 80,
+        "a": 200
+      },
+      "counter_mode": 0
+    }
+  }
+}

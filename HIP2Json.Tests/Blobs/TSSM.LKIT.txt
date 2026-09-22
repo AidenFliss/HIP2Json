@@ -1,0 +1,159 @@
+# game=TSSM platform=GameCube archive=tt01.HIP asset=0xB9F754EB type=LKIT call=LKIT size=400 checksum=-1081102694 name=jf01_light_kit
+BLOB:
+VElLTAAAAAAAAAAEAAAAAAAAAAI+veLgPs0Ayj7lzu0/gAAAQNtw30C5emrAjN37AAAAAMAqoZBA9BqoQLyBeQAAAABA2Lf2wDdsWUDY2HsAAAAAPZdgOUJWtvU9oeRxP4AAAAAAAAAAAAAAAAAAAAAAAAI+qgAjPpQePT6RJHM/gAAAwRVU4r87oJRAYPJjAAAAAD9KIi1BEhe1QIAFZgAAAADAYCjyQIBdnMEHbPIAAAAAPZdgOUJWtvU9oeRxP4AAAAAAAAAAAAAAAAAAAAAAAAI++HyMPw1KFz87DMs/gAAAwD5JOMEBrlNAoX2VAAAAAMEEQ1q+61eCwLN4XQAAAABAmOJ2wLrbDMDSBtsAAAAAPZdgOUJWtvU9oeRxP4AAAAAAAAAAAAAAAAAAAAAAAAI/e75fP1S+8D88y/E/gAAAQO0yI0AmwGpAxfTDAAAAAEAcu51A8P29wMNm7QAAAADAx/36QMFRVUCeNpcAAAAAPZdgOUJWtvU9oeRxP4AAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "jf01_light_kit",
+  "FileName": "jf01_light_kit",
+  "Type": "LKIT",
+  "AssetID": "0xB9F754EB",
+  "AssetName": "jf01_light_kit",
+  "AssetFileName": "\\\\job\\sb04\\cg\\env\\lighting_setups\\jf01_light_kit.lkt",
+  "AssetTypeName": "LKIT",
+  "AssetChecksum": -1081102694,
+  "LKIT": {
+    "tagID": "0x54494B4C",
+    "groupID": "0x00000000",
+    "lightCount": 4,
+    "lightList": 0,
+    "lights": [
+      {
+        "type": 2,
+        "colorR": 0.37087154,
+        "colorG": 0.40039665,
+        "colorB": 0.44884434,
+        "colorA": 1,
+        "unknown02": {
+          "x": 6.857528,
+          "y": 5.796193,
+          "z": -4.402097,
+          "w": 0
+        },
+        "unknown03": {
+          "x": -2.666111,
+          "y": 7.628254,
+          "z": 5.890805,
+          "w": 0
+        },
+        "direction": {
+          "x": 6.772456,
+          "y": -2.865988,
+          "z": 6.776426,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.073914,
+          "y": 53.67867,
+          "z": 0.079049,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.3320323,
+        "colorG": 0.2892932,
+        "colorB": 0.2834812,
+        "colorA": 1,
+        "unknown02": {
+          "x": -9.333223,
+          "y": -0.732919,
+          "z": 3.514794,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 0.789584,
+          "y": 9.130788,
+          "z": 4.000659,
+          "w": 0
+        },
+        "direction": {
+          "x": -3.502499,
+          "y": 4.011427,
+          "z": -8.464098,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.073914,
+          "y": 53.67867,
+          "z": 0.079049,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.48532522,
+        "colorG": 0.5519118,
+        "colorB": 0.73066396,
+        "colorA": 1,
+        "unknown02": {
+          "x": -2.973219,
+          "y": -8.10506,
+          "z": 5.04658,
+          "w": 0
+        },
+        "unknown03": {
+          "x": -8.266443,
+          "y": -0.459652,
+          "z": -5.608443,
+          "w": 0
+        },
+        "direction": {
+          "x": 4.777644,
+          "y": -5.839239,
+          "z": -6.563337,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.073914,
+          "y": 53.67867,
+          "z": 0.079049,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.9833736,
+        "colorG": 0.8310385,
+        "colorB": 0.7374869,
+        "colorA": 1,
+        "unknown02": {
+          "x": 7.41237,
+          "y": 2.605494,
+          "z": 6.186128,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 2.448951,
+          "y": 7.530974,
+          "z": -6.106314,
+          "w": 0
+        },
+        "direction": {
+          "x": -6.249753,
+          "y": 6.041178,
+          "z": 4.944164,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.073914,
+          "y": 53.67867,
+          "z": 0.079049,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      }
+    ]
+  }
+}

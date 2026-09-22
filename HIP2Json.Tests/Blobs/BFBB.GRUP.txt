@@ -1,0 +1,37 @@
+# game=BFBB platform=GameCube archive=mnu3.HIP asset=0x7225BCB3 type=GRUP call=GRUP size=52 checksum=-1468334676 name=MNU3 PAUSE CONTROLS PAL GROUP
+BLOB:
+ciW8sxEAAB0ACgAAz3NsF5TZlaaMncXUZNcfTRmZ83NKjhumX4bPfh+hJky/2S1vtD4xMQ==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x7225BCB3",
+    "baseType": "0x11",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "MNU3 PAUSE CONTROLS PAL GROUP",
+  "FileName": "MNU3 PAUSE CONTROLS PAL GROUP",
+  "Type": "GRUP",
+  "AssetID": "0x7225BCB3",
+  "AssetName": "MNU3 PAUSE CONTROLS PAL GROUP",
+  "AssetFileName": "",
+  "AssetTypeName": "GRUP",
+  "AssetChecksum": -1468334676,
+  "GRUP": {
+    "itemCount": 10,
+    "groupFlags": "SendToAll",
+    "assets": [
+      "0xCF736C17",
+      "0x94D995A6",
+      "0x8C9DC5D4",
+      "0x64D71F4D",
+      "0x1999F373",
+      "0x4A8E1BA6",
+      "0x5F86CF7E",
+      "0x1FA1264C",
+      "0xBFD92D6F",
+      "0xB43E3131"
+    ]
+  }
+}

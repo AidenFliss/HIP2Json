@@ -1,0 +1,47 @@
+# game=BFBB platform=GameCube archive=rb01.HIP asset=0xC6E88646 type=COND call=COND size=56 checksum=-789504975 name=SEEN_SLEEPYTIME_COND
+BLOB:
+xuiGRh8BAB0AAAACQynv/QAAAAA72KRRAD4BkjvYpFEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xC6E88646",
+    "baseType": "0x1F",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "False",
+      "dstEvent": "Count1",
+      "dstAssetID": "0x3BD8A451",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SEEN_SLEEPYTIME_COND",
+  "FileName": "SEEN_SLEEPYTIME_COND",
+  "Type": "COND",
+  "AssetID": "0xC6E88646",
+  "AssetName": "SEEN_SLEEPYTIME_COND",
+  "AssetFileName": "",
+  "AssetTypeName": "COND",
+  "AssetChecksum": -789504975,
+  "COND": {
+    "constNum": 2,
+    "exprl": "CounterValue",
+    "op": "EQUAL_TO",
+    "value_asset": "0x3BD8A451"
+  }
+}

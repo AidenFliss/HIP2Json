@@ -1,0 +1,3126 @@
+# game=BFBB platform=GameCube archive=mnu3.HIP asset=0xD5F26FED type=CRDT call=CRDT size=14468 checksum=-1907940955 name=menu_credits_p2_gc_xb
+BLOB:
+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
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "menu_credits_p2_gc_xb",
+  "FileName": "menu_credits_p2_gc_xb",
+  "Type": "CRDT",
+  "AssetID": "0xD5F26FED",
+  "AssetName": "menu_credits_p2_gc_xb",
+  "AssetFileName": "\\\\Job\\sb\\cg\\objects_all\\string_tables\\menu_credits_p2_gc_xb.crd",
+  "AssetTypeName": "CRDT",
+  "AssetChecksum": -1907940955,
+  "CRDT": {
+    "magic": "0xBEEEEEEF",
+    "version": 256,
+    "crdID": "0x00000000",
+    "state": 1,
+    "total_time": 148.48,
+    "total_size": 14468,
+    "sections": [
+      {
+        "credits_size": 356,
+        "len": 8,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.75,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.75,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.8,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.8,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 72,
+            "preset": 0,
+            "t0": 1,
+            "t1": 3,
+            "text1": "Spongebob Squarepants: Battle for Bikini Bottom"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 3.5,
+            "t1": 5.5,
+            "text1": "Developed by"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 6,
+            "t1": 8,
+            "text1": "Heavy Iron"
+          }
+        ]
+      },
+      {
+        "credits_size": 3260,
+        "len": 30.23,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 8.75,
+            "t1": 13.2300005,
+            "text1": "Project Director"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 9,
+            "t1": 13.4800005,
+            "text1": "Shiraz Akmal"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 9.5,
+            "t1": 13.9800005,
+            "text1": "Executive Producer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 9.75,
+            "t1": 14.2300005,
+            "text1": "Lyle J. Hall"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 10.25,
+            "t1": 14.7300005,
+            "text1": "Lead Programmer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 10.5,
+            "t1": 14.9800005,
+            "text1": "Jason Hoerner"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 11,
+            "t1": 15.4800005,
+            "text1": "Programmers"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 11.25,
+            "t1": 15.7300005,
+            "text1": "Dan Kollmorgen"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 11.5,
+            "t1": 15.9800005,
+            "text1": "Mark Pope"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 11.75,
+            "t1": 16.23,
+            "text1": "Amrit Dharwadkar"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 12,
+            "t1": 16.48,
+            "text1": "Neil Ka'apuni"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 12.25,
+            "t1": 16.73,
+            "text1": "Ryan A. Mapes"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 12.5,
+            "t1": 16.98,
+            "text1": "Philip Nowell"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 12.75,
+            "t1": 17.23,
+            "text1": "Justin Wilder"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 13.25,
+            "t1": 17.73,
+            "text1": "Lead Game Designer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 13.5,
+            "t1": 17.98,
+            "text1": "Joel Goodsell"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 14,
+            "t1": 18.48,
+            "text1": "Level Designers"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 14.25,
+            "t1": 18.73,
+            "text1": "Gary Sproul"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 14.5,
+            "t1": 18.98,
+            "text1": "Matt Coohill"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 14.75,
+            "t1": 19.23,
+            "text1": "Matt Ekins"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 15,
+            "t1": 19.48,
+            "text1": "Keith Nakamura"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 15.5,
+            "t1": 19.98,
+            "text1": "Art Director"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 15.75,
+            "t1": 20.23,
+            "text1": "Jeff Berting"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 16.25,
+            "t1": 20.73,
+            "text1": "Lead Artist"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 16.5,
+            "t1": 20.98,
+            "text1": "Scott Chiu"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 17,
+            "t1": 21.48,
+            "text1": "Principal Artist"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 17.25,
+            "t1": 21.73,
+            "text1": "St.John Colon"
+          },
+          {
+            "hunk_size": 32,
+            "preset": 0,
+            "t0": 17.75,
+            "t1": 22.23,
+            "text1": "Artists"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 18,
+            "t1": 22.48,
+            "text1": "Joffery Black"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 18.25,
+            "t1": 22.73,
+            "text1": "Thomas Breeden"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 18.5,
+            "t1": 22.98,
+            "text1": "Alex Carbonero"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 18.75,
+            "t1": 23.23,
+            "text1": "Alex Chavez"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 19,
+            "t1": 23.48,
+            "text1": "Dorothy Chen"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 19.25,
+            "t1": 23.73,
+            "text1": "Harbell Ilustre"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 19.5,
+            "t1": 23.98,
+            "text1": "Thomas Olson"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 19.75,
+            "t1": 24.23,
+            "text1": "Edvard Toth"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 20.25,
+            "t1": 24.73,
+            "text1": "Animation Director &"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 20.5,
+            "t1": 24.98,
+            "text1": "Lead Animator"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 20.75,
+            "t1": 25.23,
+            "text1": "Gregory Ecklund"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 21.25,
+            "t1": 25.73,
+            "text1": "Animators"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 21.5,
+            "t1": 25.98,
+            "text1": "Vivien Chang"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 21.75,
+            "t1": 26.23,
+            "text1": "Daniel Fiske"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 22,
+            "t1": 26.48,
+            "text1": "Kyle Kirby"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 22.25,
+            "t1": 26.73,
+            "text1": "Saurav Sarkar"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 22.75,
+            "t1": 27.23,
+            "text1": "Assistant Producer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 23,
+            "t1": 27.48,
+            "text1": "Kristian Davila"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 23.5,
+            "t1": 27.98,
+            "text1": "Lead Tester"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 23.75,
+            "t1": 28.23,
+            "text1": "AJ Hernandez"
+          },
+          {
+            "hunk_size": 32,
+            "preset": 0,
+            "t0": 24.25,
+            "t1": 28.73,
+            "text1": "Tester"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 24.5,
+            "t1": 28.98,
+            "text1": "Jess Glen"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 25,
+            "t1": 29.48,
+            "text1": "Support Programming"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 25.25,
+            "t1": 29.73,
+            "text1": "Travis McIntosh"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 25.5,
+            "t1": 29.98,
+            "text1": "Daniel Sass"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 25.75,
+            "t1": 30.23,
+            "text1": "Svetoslav Todorov"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 26.25,
+            "t1": 30.73,
+            "text1": "Additional Programming"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 26.5,
+            "t1": 30.98,
+            "text1": "Tim Doyle"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 26.75,
+            "t1": 31.23,
+            "text1": "David Harr"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 27.25,
+            "t1": 31.73,
+            "text1": "Additional Level Design"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 27.5,
+            "t1": 31.98,
+            "text1": "Justin Norr"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 27.75,
+            "t1": 32.23,
+            "text1": "Kirk Tome"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 28.25,
+            "t1": 32.73,
+            "text1": "Additional Artwork"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 28.5,
+            "t1": 32.98,
+            "text1": "Sina San"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 29,
+            "t1": 33.48,
+            "text1": "System Administrator"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 29.25,
+            "t1": 33.73,
+            "text1": "Joachim Thuau"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 29.75,
+            "t1": 34.23,
+            "text1": "Operations Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 30,
+            "t1": 34.48,
+            "text1": "Colin Walter"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 30.5,
+            "t1": 34.98,
+            "text1": "Director of Technology"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 30.75,
+            "t1": 35.23,
+            "text1": "Shiraz Akmal"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 31.25,
+            "t1": 35.73,
+            "text1": "General Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 31.5,
+            "t1": 35.98,
+            "text1": "Lyle J. Hall"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 32,
+            "t1": 36.48,
+            "text1": "Special Thanks:"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 1,
+            "t0": 32.25,
+            "t1": 36.73,
+            "text1": "To all our loved ones for their"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 1,
+            "t0": 32.5,
+            "t1": 36.98,
+            "text1": "patience and undying support"
+          },
+          {
+            "hunk_size": 64,
+            "preset": 1,
+            "t0": 33,
+            "t1": 37.48,
+            "text1": "and Christina Becktold's PowerMac G4"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 34.25,
+            "t1": 38.73,
+            "text1": "Thanks for playing!"
+          }
+        ]
+      },
+      {
+        "credits_size": 288,
+        "len": 4.5,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 38.5,
+            "t1": 40.5,
+            "text1": "Sound Design by"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 41,
+            "t1": 43,
+            "text1": "Hacienda Post"
+          }
+        ]
+      },
+      {
+        "credits_size": 896,
+        "len": 9.73,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 43.75,
+            "t1": 48.23,
+            "text1": "Sound Supervision"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 44,
+            "t1": 48.48,
+            "text1": "Timothy J. Borquez"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 44.25,
+            "t1": 48.73,
+            "text1": "Mark Howlett"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 44.75,
+            "t1": 49.23,
+            "text1": "Sound Designers/Editors"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 45,
+            "t1": 49.48,
+            "text1": "Jeff Hutchins"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 45.25,
+            "t1": 49.73,
+            "text1": "Tom Syslo"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 45.5,
+            "t1": 49.98,
+            "text1": "Bobby Crew"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 45.75,
+            "t1": 50.23,
+            "text1": "Matt Brown"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 46,
+            "t1": 50.48,
+            "text1": "Charlie King"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 46.5,
+            "t1": 50.98,
+            "text1": "Re-recording Mixers"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 46.75,
+            "t1": 51.23,
+            "text1": "Eric Freeman"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 47,
+            "t1": 51.48,
+            "text1": "Timothy J. Borquez"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 47.5,
+            "t1": 51.98,
+            "text1": "Recording Engineers"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 47.75,
+            "t1": 52.23,
+            "text1": "Dan Cubert"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 48,
+            "t1": 52.48,
+            "text1": "Morgan Gerhard"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 48.5,
+            "t1": 52.98,
+            "text1": "Sound Assistant"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 48.75,
+            "t1": 53.23,
+            "text1": "Tony Orozco"
+          }
+        ]
+      },
+      {
+        "credits_size": 284,
+        "len": 4.5,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 53,
+            "t1": 55,
+            "text1": "Music Design by"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 55.5,
+            "t1": 57.5,
+            "text1": "Sabre Music"
+          }
+        ]
+      },
+      {
+        "credits_size": 456,
+        "len": 6.2300034,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 58.25,
+            "t1": 62.73,
+            "text1": "Music Design & Supervision"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 58.5,
+            "t1": 62.98,
+            "text1": "Timothy J. Borquez"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 59,
+            "t1": 63.48,
+            "text1": "Composers"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 59.25,
+            "t1": 63.73,
+            "text1": "Jimmy Levine"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 59.5,
+            "t1": 63.98,
+            "text1": "Bobby Crew"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 59.75,
+            "t1": 64.23,
+            "text1": "Alex Wilkinson"
+          }
+        ]
+      },
+      {
+        "credits_size": 240,
+        "len": 2,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 32,
+            "preset": 0,
+            "t0": 64,
+            "t1": 66,
+            "text1": "Cast"
+          }
+        ]
+      },
+      {
+        "credits_size": 1340,
+        "len": 14.230003,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 66.75,
+            "t1": 71.23,
+            "text1": "Tom Kenny"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 1,
+            "t0": 67,
+            "t1": 71.48,
+            "text1": "SpongeBob Squarepants"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 67.25,
+            "t1": 71.73,
+            "text1": "French Narrator"
+          },
+          {
+            "hunk_size": 32,
+            "preset": 1,
+            "t0": 67.5,
+            "t1": 71.98,
+            "text1": "Gary"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 68,
+            "t1": 72.48,
+            "text1": "Bill Fagerbakke"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 68.25,
+            "t1": 72.73,
+            "text1": "Patrick Star"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 68.75,
+            "t1": 73.23,
+            "text1": "Carolyn Lawrence"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 69,
+            "t1": 73.48,
+            "text1": "Sandy Cheeks"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 69.25,
+            "t1": 73.73,
+            "text1": "Mermalair Computer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 69.75,
+            "t1": 74.23,
+            "text1": "Doug Lawrence"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 70,
+            "t1": 74.48,
+            "text1": "Plankton"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 70.25,
+            "t1": 74.73,
+            "text1": "Larry the Lobster"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 70.5,
+            "t1": 74.98,
+            "text1": "Fish Announcer"
+          },
+          {
+            "hunk_size": 32,
+            "preset": 1,
+            "t0": 70.75,
+            "t1": 75.23,
+            "text1": "Prawn"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 71.25,
+            "t1": 75.73,
+            "text1": "Roger Bumpass"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 71.5,
+            "t1": 75.98,
+            "text1": "Squidward"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 72,
+            "t1": 76.48,
+            "text1": "Mary Jo Catlett"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 72.25,
+            "t1": 76.73,
+            "text1": "Mrs. Puff"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 72.75,
+            "t1": 77.23,
+            "text1": "Joe Whyte"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 73,
+            "t1": 77.48,
+            "text1": "Mr. Krabs"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 73.25,
+            "t1": 77.73,
+            "text1": "Mermaid Man"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 73.75,
+            "t1": 78.23,
+            "text1": "Tim Conway"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 74,
+            "t1": 78.48,
+            "text1": "Barnacle Boy"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 74.5,
+            "t1": 78.98,
+            "text1": "Brian Doyle-Murray"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 74.75,
+            "t1": 79.23,
+            "text1": "Flying Dutchman"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 75.25,
+            "t1": 79.73,
+            "text1": "John O'Hurley"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 75.5,
+            "t1": 79.98,
+            "text1": "King Neptune"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 76,
+            "t1": 80.48,
+            "text1": "Brad Arbell"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 76.25,
+            "t1": 80.73,
+            "text1": "Bubble Buddy"
+          }
+        ]
+      },
+      {
+        "credits_size": 284,
+        "len": 4.5,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 80.5,
+            "t1": 82.5,
+            "text1": "Published by"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 83,
+            "t1": 85,
+            "text1": "THQ Inc."
+          }
+        ]
+      },
+      {
+        "credits_size": 4952,
+        "len": 39.480003,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 85.75,
+            "t1": 90.23,
+            "text1": "Project Manager"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 86,
+            "t1": 90.48,
+            "text1": "Keith Pope"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 86.5,
+            "t1": 90.98,
+            "text1": "Creative Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 86.75,
+            "t1": 91.23,
+            "text1": "Petro Piaseckyj"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 87.25,
+            "t1": 91.73,
+            "text1": "Technical Director"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 87.5,
+            "t1": 91.98,
+            "text1": "Marcel Samek"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 88,
+            "t1": 92.48,
+            "text1": "Production Services"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 88.25,
+            "t1": 92.73,
+            "text1": "Jenae Pash"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 88.5,
+            "t1": 92.98,
+            "text1": "Heather Leonard"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 0,
+            "t0": 89,
+            "t1": 93.48,
+            "text1": "Director, Project Management"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 89.25,
+            "t1": 93.73,
+            "text1": "Duncan Kershaw"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 89.75,
+            "t1": 94.23,
+            "text1": "VP, Product Development"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 90,
+            "t1": 94.48,
+            "text1": "Philip Holt"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 90.5,
+            "t1": 94.98,
+            "text1": "Test Leads"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 90.75,
+            "t1": 95.23,
+            "text1": "Ryan Camu"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 91,
+            "t1": 95.48,
+            "text1": "Jason de Heras"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 1,
+            "t0": 91.25,
+            "t1": 95.73,
+            "text1": "Alex 'Suncho' Howlett"
+          },
+          {
+            "hunk_size": 32,
+            "preset": 0,
+            "t0": 91.75,
+            "t1": 96.23,
+            "text1": "Testers"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 92,
+            "t1": 96.48,
+            "text1": "Rebecca Andrews"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 92.25,
+            "t1": 96.73,
+            "text1": "Jesse Austin"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 92.5,
+            "t1": 96.98,
+            "text1": "Enrique Castro"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 92.75,
+            "t1": 97.23,
+            "text1": "Dennis Cezar"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 93,
+            "t1": 97.48,
+            "text1": "Jerry Cortes"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 93.25,
+            "t1": 97.73,
+            "text1": "Sean Cunningham"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 93.5,
+            "t1": 97.98,
+            "text1": "Walter Doyenart"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 93.75,
+            "t1": 98.23,
+            "text1": "Nicole Gilbert"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 94,
+            "t1": 98.48,
+            "text1": "Arielle Jayme"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 94.25,
+            "t1": 98.73,
+            "text1": "Chris Joseph"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 94.5,
+            "t1": 98.98,
+            "text1": "Crystin Kuhnke"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 94.75,
+            "t1": 99.23,
+            "text1": "Marcus Lee"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 95,
+            "t1": 99.48,
+            "text1": "Arthur Leo"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 95.25,
+            "t1": 99.73,
+            "text1": "Victoria Lemar"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 95.5,
+            "t1": 99.98,
+            "text1": "Brad Linsk"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 95.75,
+            "t1": 100.23,
+            "text1": "Ben McClure"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 96,
+            "t1": 100.48,
+            "text1": "Shinal Patel"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 96.25,
+            "t1": 100.73,
+            "text1": "Jeffrey Pereira"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 96.5,
+            "t1": 100.98,
+            "text1": "Alejandro Pulido"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 96.75,
+            "t1": 101.23,
+            "text1": "Dioscoro Rochino"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 97,
+            "t1": 101.48,
+            "text1": "Greg Schwartz"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 97.25,
+            "t1": 101.73,
+            "text1": "Robert Shaw"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 97.5,
+            "t1": 101.98,
+            "text1": "Spencer Smilanick"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 97.75,
+            "t1": 102.23,
+            "text1": "Joel Smith"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 98,
+            "t1": 102.48,
+            "text1": "Tina Stevenson"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 98.25,
+            "t1": 102.73,
+            "text1": "Maurice Wilson"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 98.5,
+            "t1": 102.98,
+            "text1": "Lionel Varay"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 98.75,
+            "t1": 103.23,
+            "text1": "Lorena Villa"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 99,
+            "t1": 103.48,
+            "text1": "Bryan Williams"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 99.5,
+            "t1": 103.98,
+            "text1": "First Party Supervisors"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 99.75,
+            "t1": 104.23,
+            "text1": "Evan Icenbice"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 100,
+            "t1": 104.48,
+            "text1": "Keith Michaelis"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 100.25,
+            "t1": 104.73,
+            "text1": "Ian Sedensky"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 100.75,
+            "t1": 105.23,
+            "text1": "First Party Specialists"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 101,
+            "t1": 105.48,
+            "text1": "Adam Affrunti"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 101.25,
+            "t1": 105.73,
+            "text1": "Lori Arrowood"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 101.5,
+            "t1": 105.98,
+            "text1": "Mark Aviles"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 101.75,
+            "t1": 106.23,
+            "text1": "Joel Dagang"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 102,
+            "t1": 106.48,
+            "text1": "Marc Durrant"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 102.25,
+            "t1": 106.73,
+            "text1": "Antonio Herrera"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 102.5,
+            "t1": 106.98,
+            "text1": "Scott Ritchie"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 102.75,
+            "t1": 107.23,
+            "text1": "Robin Scofield"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 103,
+            "t1": 107.48,
+            "text1": "Jason Tani"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 103.5,
+            "t1": 107.98,
+            "text1": "QA Technical Supervisor"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 103.75,
+            "t1": 108.23,
+            "text1": "Mario Waibel"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 0,
+            "t0": 104.25,
+            "t1": 108.73,
+            "text1": "Database Applications Engineer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 104.5,
+            "t1": 108.98,
+            "text1": "Jason Roberts"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 0,
+            "t0": 105,
+            "t1": 109.48,
+            "text1": "Director of Quality Assurance"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 105.25,
+            "t1": 109.73,
+            "text1": "Monica Vallejo"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 105.75,
+            "t1": 110.23,
+            "text1": "Senior Vice President,"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 106,
+            "t1": 110.48,
+            "text1": "Worldwide Marketing"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 106.25,
+            "t1": 110.73,
+            "text1": "Peter Dille"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 106.75,
+            "t1": 111.23,
+            "text1": "Director,"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 107,
+            "t1": 111.48,
+            "text1": "Global Brand Management"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 107.25,
+            "t1": 111.73,
+            "text1": "John Ardell"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 107.75,
+            "t1": 112.23,
+            "text1": "Senior Product Marketing Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 108,
+            "t1": 112.48,
+            "text1": "Danielle Conte"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 108.5,
+            "t1": 112.98,
+            "text1": "Product Marketing Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 108.75,
+            "t1": 113.23,
+            "text1": "Paul Naftalis"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 0,
+            "t0": 109.25,
+            "t1": 113.73,
+            "text1": "Director of Creative Services"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 109.5,
+            "t1": 113.98,
+            "text1": "Howard Liebeskind"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 110,
+            "t1": 114.48,
+            "text1": "Senior Manager, Creative Services"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 110.25,
+            "t1": 114.73,
+            "text1": "Kathy Helgason"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 110.75,
+            "t1": 115.23,
+            "text1": "Associate Creative Services Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 111,
+            "t1": 115.48,
+            "text1": "Melissa Roth"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 111.5,
+            "t1": 115.98,
+            "text1": "Manual Writer"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 111.75,
+            "t1": 116.23,
+            "text1": "Bill Maxwell"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 112.25,
+            "t1": 116.73,
+            "text1": "Packaging Layout & Design"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 1,
+            "t0": 112.5,
+            "t1": 116.98,
+            "text1": "Chad Stroven - Beeline Group"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 113,
+            "t1": 117.48,
+            "text1": "Director, International"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 113.25,
+            "t1": 117.73,
+            "text1": "Brand Management"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 113.5,
+            "t1": 117.98,
+            "text1": "Michael Pattison"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 114,
+            "t1": 118.48,
+            "text1": "International Brand Manager"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 114.25,
+            "t1": 118.73,
+            "text1": "Sarah Bincliffe"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 114.75,
+            "t1": 119.23,
+            "text1": "Director of Localisation"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 115,
+            "t1": 119.48,
+            "text1": "Susanne Dieck"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 115.5,
+            "t1": 119.98,
+            "text1": "Localisation Engineer"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 115.75,
+            "t1": 120.23,
+            "text1": "Bernd Kurtz"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 0,
+            "t0": 116.25,
+            "t1": 120.73,
+            "text1": "Senior Project Manager Art"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 116.5,
+            "t1": 120.98,
+            "text1": "Till Enzmann"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 0,
+            "t0": 117,
+            "t1": 121.48,
+            "text1": "Special Thanks"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 117.25,
+            "t1": 121.73,
+            "text1": "Brian Farrell"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 117.5,
+            "t1": 121.98,
+            "text1": "Jack Sorensen"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 117.75,
+            "t1": 122.23,
+            "text1": "Tiffany Ternan"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 118,
+            "t1": 122.48,
+            "text1": "Germaine Gioia"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 118.25,
+            "t1": 122.73,
+            "text1": "Leslie Brown"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 118.5,
+            "t1": 122.98,
+            "text1": "Terri Schiek"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 118.75,
+            "t1": 123.23,
+            "text1": "Brandy A. Carrillo"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 119,
+            "t1": 123.48,
+            "text1": "Tami Averna"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 119.25,
+            "t1": 123.73,
+            "text1": "Emerson Escobar"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 119.5,
+            "t1": 123.98,
+            "text1": "Shinal Patel"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 119.75,
+            "t1": 124.23,
+            "text1": "Maurice Wilson"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 120,
+            "t1": 124.48,
+            "text1": "Joel Smith"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 120.25,
+            "t1": 124.73,
+            "text1": "Lionel Varay"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 120.5,
+            "t1": 124.98,
+            "text1": "Ben McClure"
+          }
+        ]
+      },
+      {
+        "credits_size": 244,
+        "len": 2,
+        "flags": 0,
+        "in_x": 0.5,
+        "in_y": 0.3,
+        "out_x": 0.5,
+        "out_y": 0.3,
+        "scroll_rate": 89.909996,
+        "lifetime": 2,
+        "fin_start": 0,
+        "fin_end": 0.1,
+        "fout_start": 0.9,
+        "fout_end": 1,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 34,
+              "charHeight": 40,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 2.5,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 36,
+            "preset": 0,
+            "t0": 124.75,
+            "t1": 126.75,
+            "text1": "Nickelodeon"
+          }
+        ]
+      },
+      {
+        "credits_size": 1844,
+        "len": 21.229996,
+        "flags": 1,
+        "in_x": 0,
+        "in_y": 1.1,
+        "out_x": 0,
+        "out_y": -0.1,
+        "scroll_rate": 60,
+        "lifetime": 4.4800005,
+        "fin_start": 0.2,
+        "fin_end": 0.3,
+        "fout_start": 0.8,
+        "fout_end": 0.9,
+        "presets": [
+          {
+            "num": 1,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 216,
+                "b": 0,
+                "a": 255
+              },
+              "charWidth": 28,
+              "charHeight": 34,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          },
+          {
+            "num": 2,
+            "align": 0,
+            "delay": 0.25,
+            "innerspace": 0.06,
+            "textStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            },
+            "backdropStyle": {
+              "font": "Default",
+              "color": {
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              },
+              "charWidth": 24,
+              "charHeight": 28,
+              "spacingX": 0,
+              "spacingY": 0,
+              "maxWidth": 0.9,
+              "maxHeight": 0.1
+            }
+          }
+        ],
+        "hunks": [
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 127.5,
+            "t1": 131.98,
+            "text1": "VP of Media Products Nickelodeon"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 127.75,
+            "t1": 132.23,
+            "text1": "Consumer Products"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 128,
+            "t1": 132.48,
+            "text1": "Steve Youngwood"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 128.5,
+            "t1": 132.98,
+            "text1": "Director of Licensing Interactive,"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 128.75,
+            "t1": 133.23,
+            "text1": "Home Video & Consumer Electronics"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 129,
+            "t1": 133.48,
+            "text1": "Stacey Lane"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 129.5,
+            "t1": 133.98,
+            "text1": "Marketing Coordinator"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 129.75,
+            "t1": 134.23,
+            "text1": "Erica David"
+          },
+          {
+            "hunk_size": 64,
+            "preset": 0,
+            "t0": 130.25,
+            "t1": 134.73,
+            "text1": "Director of Production & Development"
+          },
+          {
+            "hunk_size": 56,
+            "preset": 0,
+            "t0": 130.5,
+            "t1": 134.98,
+            "text1": "for Interactive and Home Video"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 130.75,
+            "t1": 135.23,
+            "text1": "Aly Sylvester"
+          },
+          {
+            "hunk_size": 60,
+            "preset": 0,
+            "t0": 131.25,
+            "t1": 135.73,
+            "text1": "Manager Development & Production"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 131.5,
+            "t1": 135.98,
+            "text1": "Erika 'E' Ortiz"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 0,
+            "t0": 132,
+            "t1": 136.48,
+            "text1": "Production Assistant"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 132.25,
+            "t1": 136.73,
+            "text1": "Jack Daley"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 132.75,
+            "t1": 137.23,
+            "text1": "Nickelodeon Thanks:"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 133,
+            "t1": 137.48,
+            "text1": "Leigh Anne Brodsky"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 133.25,
+            "t1": 137.73,
+            "text1": "Eric Coleman"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 133.5,
+            "t1": 137.98,
+            "text1": "Russell Hicks"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 133.75,
+            "t1": 138.23,
+            "text1": "Chris Horton"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 134,
+            "t1": 138.48,
+            "text1": "Deb Krassner"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 134.25,
+            "t1": 138.73,
+            "text1": "Rob Lemon"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 134.5,
+            "t1": 138.98,
+            "text1": "Caleb Meurer"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 134.75,
+            "t1": 139.23,
+            "text1": "Linnette Pastori"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 135,
+            "t1": 139.48,
+            "text1": "Joe Sandbrook"
+          },
+          {
+            "hunk_size": 36,
+            "preset": 1,
+            "t0": 135.25,
+            "t1": 139.73,
+            "text1": "Brian Smith"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 135.5,
+            "t1": 139.98,
+            "text1": "Lori Szuchman"
+          },
+          {
+            "hunk_size": 40,
+            "preset": 1,
+            "t0": 135.75,
+            "t1": 140.23,
+            "text1": "Stavit Young"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 0,
+            "t0": 138.25,
+            "t1": 142.73,
+            "text1": "Special thanks to:"
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 138.5,
+            "t1": 142.98,
+            "text1": "Steve Hillenburg"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 1,
+            "t0": 142.75,
+            "t1": 147.23,
+            "text1": "RenderWare is a registered"
+          },
+          {
+            "hunk_size": 48,
+            "preset": 1,
+            "t0": 143,
+            "t1": 147.48,
+            "text1": "trademark of Canon Inc."
+          },
+          {
+            "hunk_size": 52,
+            "preset": 1,
+            "t0": 143.25,
+            "t1": 147.73,
+            "text1": "Portions of this software"
+          },
+          {
+            "hunk_size": 52,
+            "preset": 1,
+            "t0": 143.5,
+            "t1": 147.98,
+            "text1": "are Copyright 1998-2002 "
+          },
+          {
+            "hunk_size": 48,
+            "preset": 1,
+            "t0": 143.75,
+            "t1": 148.23,
+            "text1": "Criterion Software Ltd."
+          },
+          {
+            "hunk_size": 44,
+            "preset": 1,
+            "t0": 144,
+            "t1": 148.48,
+            "text1": "and its Licensors"
+          }
+        ]
+      }
+    ]
+  }
+}

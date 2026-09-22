@@ -1,0 +1,55 @@
+# game=TSSM platform=GameCube archive=tr01.HIP asset=0x05B184FE type=VENT call=DYNA size=88 checksum=-1841264209 name=VENT_VENT_13
+BLOB:
+BbGE/gAAAB1OCexDAAEAAOhoQNVDHhsAw9PeZEM+e1Y/HGGmAAAAAAAAAAC/AAAAv4AAAL8AAAA/AAAAQMAAAD8AAAA/AAAAAAAAAD3MzM09zMzNQsgAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x05B184FE",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "VENT_VENT_13",
+  "FileName": "VENT_VENT_13",
+  "Type": "VENT",
+  "AssetID": "0x05B184FE",
+  "AssetName": "VENT_VENT_13",
+  "AssetFileName": "",
+  "AssetTypeName": "VENT",
+  "AssetChecksum": -1841264209,
+  "DYNA": {
+    "type": "0x4E09EC43",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Vent",
+    "dynaSpecificData": {
+      "ventType": "0xE86840D5",
+      "position": {
+        "x": 158.10547,
+        "y": -423.73743,
+        "z": 190.48178
+      },
+      "rotation": {
+        "x": 0.610865,
+        "y": 0,
+        "z": 0
+      },
+      "damageCorner1": {
+        "x": -0.5,
+        "y": -1,
+        "z": -0.5
+      },
+      "damageCorner2": {
+        "x": 0.5,
+        "y": 6,
+        "z": 0.5
+      },
+      "boulderInfluence": 0.5,
+      "flags": "None",
+      "idle_time": 0.1,
+      "warn_time": 0.1,
+      "damage_time": 100
+    }
+  }
+}

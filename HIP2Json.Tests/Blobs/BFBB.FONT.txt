@@ -1,0 +1,68 @@
+# game=BFBB platform=GameCube archive=mnu4.HIP asset=0x591BE42C type=FONT call=DYNA size=116 checksum=-996422555 name=HUD_INT_METER_SPATULA
+BLOB:
+WRvkLAAAAB2LPnMvAAMAAD8Cj1w9zMzNAAAAAD1MzM09j1wpAAAAAAAAAAAAAAAAv4AAAD3MzM09zMzNAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAPgAAAD4AAAAAAAAAPCPXCjwj1wr/5gD/AEZVyAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x591BE42C",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_INT_METER_SPATULA",
+  "FileName": "HUD_INT_METER_SPATULA",
+  "Type": "FONT",
+  "AssetID": "0x591BE42C",
+  "AssetName": "HUD_INT_METER_SPATULA",
+  "AssetFileName": "",
+  "AssetTypeName": "FONT",
+  "AssetChecksum": -996422555,
+  "DYNA": {
+    "type": "0x8B3E732F",
+    "version": 3,
+    "handle": 0,
+    "typeNameInternal": "hud:meter:font",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 0.51,
+        "y": 0.1,
+        "z": 0
+      },
+      "size": {
+        "x": 0.05,
+        "y": 0.07,
+        "z": 0
+      },
+      "start_value": 0,
+      "min_value": 0,
+      "max_value": -1,
+      "increment_time": 0.1,
+      "decrement_time": 0.1,
+      "sound_start_increment": "0x00000000",
+      "sound_increment": "0x00000000",
+      "sound_start_decrement": "0x00000000",
+      "sound_decrement": "0x00000000",
+      "font_id": "Numbers",
+      "font_justify": 0,
+      "font_w": 0.125,
+      "font_h": 0.125,
+      "font_space": 0,
+      "font_drop_x": 0.01,
+      "font_drop_y": 0.01,
+      "font_c": {
+        "r": 255,
+        "g": 230,
+        "b": 0,
+        "a": 255
+      },
+      "font_drop_c": {
+        "r": 0,
+        "g": 70,
+        "b": 85,
+        "a": 200
+      },
+      "counter_mode": 0
+    }
+  }
+}

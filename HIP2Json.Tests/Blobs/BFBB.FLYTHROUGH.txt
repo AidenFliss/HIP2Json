@@ -1,0 +1,183 @@
+# game=BFBB platform=GameCube archive=gy01.HIP asset=0x7E24AEF9 type=FLYTHROUGH call=DYNA size=276 checksum=-1199327107 name=GY01_FLYTHOUGH_WIDGET
+BLOB:
+fiSu+QAIAB2Fv980AAEAADR6z3oAVwASfiSu+QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAOS4iLFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAA0WFJKkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwAEkuIixQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAARFhSSpAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMAAn4krvkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEgAYIZ6sIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATABMhnqwgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x7E24AEF9",
+    "baseType": "0x00",
+    "linkCount": 8,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "Run",
+      "dstAssetID": "0x7E24AEF9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Visible",
+      "dstAssetID": "0x92E222C5",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Visible",
+      "dstAssetID": "0x458524A9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0x92E222C5",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0x458524A9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Disable",
+      "dstAssetID": "0x7E24AEF9",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Play",
+      "dstAssetID": "0x219EAC20",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Stop",
+      "dstAssetID": "0x219EAC20",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "GY01_FLYTHOUGH_WIDGET",
+  "FileName": "GY01_FLYTHOUGH_WIDGET",
+  "Type": "FLYTHROUGH",
+  "AssetID": "0x7E24AEF9",
+  "AssetName": "GY01_FLYTHOUGH_WIDGET",
+  "AssetFileName": "",
+  "AssetTypeName": "FLYTHROUGH",
+  "AssetChecksum": -1199327107,
+  "DYNA": {
+    "type": "0x85BFDF34",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Flythrough",
+    "dynaSpecificData": {
+      "flyID": "0x347ACF7A"
+    }
+  }
+}

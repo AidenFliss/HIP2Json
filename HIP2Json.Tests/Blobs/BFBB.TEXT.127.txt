@@ -1,0 +1,41 @@
+# game=BFBB platform=GameCube archive=mnu4.HIP asset=0x36692ADF type=TEXT call=DYNA size=48 checksum=642255486 name=HUD_TEXT_COMBOMESSAGE
+BLOB:
+Nmkq3wAAAB1oftCwAAEAAD3MzM0/WZmaAAAAAD9MzM09zMzNAAAAACxvDDY3VYuE
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x36692ADF",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_TEXT_COMBOMESSAGE",
+  "FileName": "HUD_TEXT_COMBOMESSAGE",
+  "Type": "TEXT",
+  "AssetID": "0x36692ADF",
+  "AssetName": "HUD_TEXT_COMBOMESSAGE",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT",
+  "AssetChecksum": 642255486,
+  "DYNA": {
+    "type": "0x687ED0B0",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "hud:text",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 0.1,
+        "y": 0.85,
+        "z": 0
+      },
+      "size": {
+        "x": 0.8,
+        "y": 0.1,
+        "z": 0
+      },
+      "text_box": "0x2C6F0C36",
+      "text": "0x37558B84"
+    }
+  }
+}

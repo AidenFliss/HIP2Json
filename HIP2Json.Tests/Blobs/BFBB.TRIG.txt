@@ -1,0 +1,120 @@
+# game=BFBB platform=GameCube archive=kf02.HIP asset=0xA050DB75 type=TRIG call=TRIG size=212 checksum=1545540424 name=GOO_FLOW_S_TRIG_14
+BLOB:
+oFDbdQECAB0BAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABCd8lsQLFyhsBhjFQ/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAAAAAAAAAAAAMXNPH0AAAAAQnfJbECxcobAYYxUQXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA/gAAAAAAAAAAFABjQUKISAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAE9BQohIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xA050DB75",
+    "baseType": "0x01",
+    "linkCount": 2,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "EnterPlayer",
+      "dstEvent": "Play",
+      "dstAssetID": "0xD050A212",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "ExitPlayer",
+      "dstEvent": "Stop",
+      "dstAssetID": "0xD050A212",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 1,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 61.9467,
+      "y": 5.54523,
+      "z": -3.52419
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0xC5CD3C7D",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "GOO_FLOW_S_TRIG_14",
+  "FileName": "GOO_FLOW_S_TRIG_14",
+  "Type": "TRIG",
+  "AssetID": "0xA050DB75",
+  "AssetName": "GOO_FLOW_S_TRIG_14",
+  "AssetFileName": "",
+  "AssetTypeName": "TRIG",
+  "AssetChecksum": 1545540424,
+  "TRIG": {
+    "Type": "Sphere",
+    "Positions": [
+      {
+        "x": 61.9467,
+        "y": 5.54523,
+        "z": -3.52419
+      },
+      {
+        "x": 15,
+        "y": 0,
+        "z": 0
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    ],
+    "Direction": {
+      "x": 0,
+      "y": -0,
+      "z": 1
+    },
+    "Flags": 0
+  }
+}

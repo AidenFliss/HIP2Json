@@ -1,0 +1,48 @@
+# game=TSSM platform=GameCube archive=tt01.HOP asset=0x6F428873 type=DEST call=DEST size=96 checksum=1229985858 name=bungee_target
+BLOB:
+G6QhWgAAAAEAAAABAAAAAgAAAAAAAAALAAAAAAAAAAAAAAAAAQAAAAAAAAF+HnXkThGGDwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD9/f39
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "bungee_target",
+  "FileName": "bungee_target",
+  "Type": "DEST",
+  "AssetID": "0x6F428873",
+  "AssetName": "bungee_target",
+  "AssetFileName": "",
+  "AssetTypeName": "DEST",
+  "AssetChecksum": 1229985858,
+  "DEST": {
+    "id": "0x1BA4215A",
+    "nstates": 1,
+    "hit_points": 1,
+    "hit_filter": 2,
+    "launch_flag": 0,
+    "behaviour": 11,
+    "flags": 0,
+    "soundgroupidleID": "0x00000000",
+    "respawn": 0,
+    "target_priority": 1,
+    "states": [
+      {
+        "percent": 1,
+        "modelID": "0x7E1E75E4",
+        "shrapnelID": "0x4E11860F",
+        "shrapnelhitID": "0x00000000",
+        "soundgroupidleID": "0x00000000",
+        "soundgroupfxID": "0x00000000",
+        "soundgrouphitID": "0x00000000",
+        "soundgroupfxIDswitch": "0x00000000",
+        "soundgrouphitIDswitch": "0x00000000",
+        "rumbleIDhit": "0x00000000",
+        "rumbleIDswitch": "0x00000000",
+        "fx_flags": 0,
+        "animlist": {
+          "nanimations": 0,
+          "animationIDs": []
+        }
+      }
+    ],
+    "trailing": "/f39/Q=="
+  }
+}

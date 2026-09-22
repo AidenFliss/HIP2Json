@@ -9,7 +9,7 @@ public sealed class TEXTParser : AssetParser
     public override object Parse(BinaryReader br, long assetStart, long dataStart)
     {
         int charCount = ReadInt32BE(br); //not gonna worry abt padding to 0x04 uness i implement writing to files...
-        return new TEXT { charCount = charCount, text = Encoding.UTF8.GetString(Enumerable.Range(0, charCount).Select(_ => ReadByte(br)).ToArray()) };
+        return new TEXT { charCount = charCount, text = Encoding.Latin1.GetString(Enumerable.Range(0, charCount).Select(_ => ReadByte(br)).ToArray()) };
     }
 
     public override object Serialize(object obj)
@@ -19,7 +19,7 @@ public sealed class TEXTParser : AssetParser
         using var ms = new MemoryStream();
         using var bw = new BinaryWriter(ms);
 
-        byte[] textBytes = Encoding.UTF8.GetBytes(text.text ?? string.Empty);
+        byte[] textBytes = Encoding.Latin1.GetBytes(text.text ?? string.Empty);
         WriteInt32BE(bw, textBytes.Length);
         bw.Write(textBytes);
         WriteByte(bw, 0);

@@ -1,0 +1,326 @@
+# game=BFBB platform=GameCube archive=jf04.HIP asset=0xBD99ADE0 type=CSNM call=CSNM size=616 checksum=1611710080 name=CUTSCENE_KJ_END
+BLOB:
+vZmt4CgNAB0q+uD3AAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAENQl7PAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAdkP7ovDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL8AENVSLkEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvwHCvXCX4z+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/ABJuHg8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL8AAVXl78MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAACv0l4mQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAALvHIOFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAL8AxPtSv/lAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvwEpp5yqXD+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAFX84tTDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAVnLUZdYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvgACVZMhigAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xBD99ADE0",
+    "baseType": "0x28",
+    "linkCount": 13,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Play",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0x35097B3C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "NPCSetActiveOff",
+      "dstAssetID": "0x0FEE8BC3",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "TeleportPlayer",
+      "dstAssetID": "0xD5522E41",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "GiveCollectables",
+      "dstAssetID": "0xBD7097E3",
+      "paramU32": [
+        "0x3F800000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "Run",
+      "dstAssetID": "0x6E1E0F00",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x55E5EFC3",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "Disable",
+      "dstAssetID": "0xBF497899",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "Disable",
+      "dstAssetID": "0xEF1C8385",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "AnimPlayLoop",
+      "dstAssetID": "0xFB52BFF9",
+      "paramU32": [
+        "0x40000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        2,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Done",
+      "dstEvent": "PlayMusic",
+      "dstAssetID": "0xA79CAA5C",
+      "paramU32": [
+        "0x3F800000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "CollisionVisibleOn",
+      "dstAssetID": "0xFCE2D4C3",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Play",
+      "dstEvent": "CollisionVisibleOff",
+      "dstAssetID": "0x72D465D6",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Preload",
+      "dstEvent": "Disable",
+      "dstAssetID": "0x5593218A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "CUTSCENE_KJ_END",
+  "FileName": "CUTSCENE_KJ_END",
+  "Type": "CSNM",
+  "AssetID": "0xBD99ADE0",
+  "AssetName": "CUTSCENE_KJ_END",
+  "AssetFileName": "",
+  "AssetTypeName": "CSNM",
+  "AssetChecksum": 1611710080,
+  "CSNM": {
+    "cutsceneAssetID": "0x2AFAE0F7",
+    "flags": 28,
+    "interpSpeed": 0,
+    "uSubtitlesID": 0,
+    "startTime": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "endTime": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "emitID": [
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000",
+      "0x00000000"
+    ]
+  }
+}

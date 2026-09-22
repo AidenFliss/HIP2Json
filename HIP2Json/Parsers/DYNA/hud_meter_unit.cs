@@ -26,6 +26,7 @@ public sealed class hud_meter_unitParser : AbstractDYNAParser
             model_1_id = ReadUInt32BE(br),
             model_1_loc = ReadVector3BE(br),
             model_1_size = ReadVector3BE(br),
+            offset = ReadVector3BE(br),
             fill_forward = (MeterFillDirection)ReadUInt32BE(br),
         };
     }
@@ -54,6 +55,7 @@ public sealed class hud_meter_unitParser : AbstractDYNAParser
         WriteUInt32BE(bw, hudMeterUnit.model_1_id);
         WriteVector3BE(bw, hudMeterUnit.model_1_loc);
         WriteVector3BE(bw, hudMeterUnit.model_1_size);
+        WriteVector3BE(bw, hudMeterUnit.offset);
         WriteUInt32BE(bw, (uint)hudMeterUnit.fill_forward);
 
         return ms.ToArray();
@@ -92,5 +94,6 @@ public class hud_meter_unit
     public uint model_1_id { get; set; }
     public xVec3 model_1_loc { get; set; }
     public xVec3 model_1_size { get; set; }
+    public xVec3 offset { get; set; }
     public MeterFillDirection fill_forward { get; set; }
 }

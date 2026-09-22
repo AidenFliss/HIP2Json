@@ -1,0 +1,297 @@
+# game=TSSM platform=GameCube archive=tr01.HIP asset=0x8B57157D type=FLYTHROUGH call=DYNA size=468 checksum=-1576782418 name=FLYTHOUGH_WIDGET
+BLOB:
+i1cVfQAOAB2Fv980AAEAAAccsxIAVwASTx/NrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABXABKLVxV9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFcCrqug7hYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVwAEq6DuFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAOroO4WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABMAAdAVkFgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwJhRJm6AgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAATAAKLVxV9AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAGNhwTZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwAT2HBNmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASArVKN0hFAAAAAAAAAAAAAAAAAAAAALnLIhAAAAAAABICtUo3SEUAAAAAAAAAAAAAAAAAAAAAucsiEQAAAAAAEwK2SjdIRQAAAAAAAAAAAAAAAAAAAAC5yyIQAAAAAAATArZKN0hFAAAAAAAAAAAAAAAAAAAAALnLIhEAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x8B57157D",
+    "baseType": "0x00",
+    "linkCount": 14,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Run",
+      "dstAssetID": "0x4F1FCDAC",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Run",
+      "dstAssetID": "0x8B57157D",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Freeze_Player",
+      "dstAssetID": "0xABA0EE16",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0xABA0EE16",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xABA0EE16",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Enable",
+      "dstAssetID": "0xD0159058",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Start_Fade",
+      "dstAssetID": "0x4499BA02",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Disable",
+      "dstAssetID": "0x8B57157D",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Play",
+      "dstAssetID": "0xD8704D98",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Stop",
+      "dstAssetID": "0xD8704D98",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "JSP_Visibility_Increment",
+      "dstAssetID": "0x4A374845",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0xB9CB2210",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "JSP_Visibility_Increment",
+      "dstAssetID": "0x4A374845",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0xB9CB2211",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "JSP_Visibility_Decrement",
+      "dstAssetID": "0x4A374845",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0xB9CB2210",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "JSP_Visibility_Decrement",
+      "dstAssetID": "0x4A374845",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0xB9CB2211",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "FLYTHOUGH_WIDGET",
+  "FileName": "FLYTHOUGH_WIDGET",
+  "Type": "FLYTHROUGH",
+  "AssetID": "0x8B57157D",
+  "AssetName": "FLYTHOUGH_WIDGET",
+  "AssetFileName": "",
+  "AssetTypeName": "FLYTHROUGH",
+  "AssetChecksum": -1576782418,
+  "DYNA": {
+    "type": "0x85BFDF34",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Flythrough",
+    "dynaSpecificData": {
+      "flyID": "0x071CB312"
+    }
+  }
+}

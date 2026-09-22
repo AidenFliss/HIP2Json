@@ -1,0 +1,138 @@
+# game=TSSM platform=GameCube archive=pt01.HIP asset=0x3D50F059 type=EGEN call=EGEN size=232 checksum=-2128106069 name=BUNGEE_ELEC_ARC_GEN_06
+BLOB:
+PVDwWSkEAB0BAAAGyKG1NUCnjTY/yQ/bAAAAAMIN5DXBxAAAwVyipT+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAABDfwAA5YzkGAAAAAAAAAAAAAAAAAAAAAAGAAAAAAAAAM5/gTEAVwDAcISKMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABXANidc0D/P4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYAGPG7g5IAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwAT8buDkgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x3D50F059",
+    "baseType": "0x29",
+    "linkCount": 4,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Arcto",
+      "dstAssetID": "0x70848A30",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Drivenby",
+      "dstAssetID": "0x9D7340FF",
+      "paramU32": [
+        "0x3F800000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On",
+      "dstEvent": "Play",
+      "dstAssetID": "0xF1BB8392",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Off",
+      "dstEvent": "Stop",
+      "dstAssetID": "0xF1BB8392",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision, Unknown04",
+    "surfaceID": 3366040885,
+    "ang": {
+      "x": 5.2359877,
+      "y": 1.5707964,
+      "z": 0
+    },
+    "pos": {
+      "x": -35.47286,
+      "y": -24.5,
+      "z": -13.789708
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xE58CE418",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "BUNGEE_ELEC_ARC_GEN_06",
+  "FileName": "BUNGEE_ELEC_ARC_GEN_06",
+  "Type": "EGEN",
+  "AssetID": "0x3D50F059",
+  "AssetName": "BUNGEE_ELEC_ARC_GEN_06",
+  "AssetFileName": "",
+  "AssetTypeName": "EGEN",
+  "AssetChecksum": -2128106069,
+  "EGEN": {
+    "src_dpos": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "damage_type": 6,
+    "flags": 0,
+    "ontime": 0,
+    "onAnimID": "0xCE7F8131"
+  }
+}

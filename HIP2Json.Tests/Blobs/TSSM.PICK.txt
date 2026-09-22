@@ -1,0 +1,102 @@
+# game=TSSM platform=GameCube archive=boot.HIP asset=0x78E38FCE type=PICK call=PICK size=188 checksum=55782134 name=PickupTable
+BLOB:
+S0NJUAAAAAljC9cazc0AAAAAAAHsWaJoc52px2D4CLfNzQAAAAAAAWYCBEYAAAAArMT70c3NAAAAAAABDl+oewAAAACmE+SKzc0AAAAAAAH5FEW5BQGEp3wTRRfNzQAAAAAAAXwTRRcAAAAA+kVMWs3NAAAAAAAB+kVMWgAAAACoafTZzc0AAAAAAAGoafTZAAAAAHu5X0zNzQAAAAAAAXu5X0wAAAAAPEjmis3NAAAAAAABPEjmigAAAAA=
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "PickupTable",
+  "FileName": "PickupTable",
+  "Type": "PICK",
+  "AssetID": "0x78E38FCE",
+  "AssetName": "PickupTable",
+  "AssetFileName": "",
+  "AssetTypeName": "PICK",
+  "AssetChecksum": 55782134,
+  "PICK": {
+    "magic": "0x4B434950",
+    "count": 9,
+    "pickups": [
+      {
+        "pickupHash": "0x630BD71A",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xEC59A268",
+        "animID": "0x739DA9C7"
+      },
+      {
+        "pickupHash": "0x60F808B7",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x66020446",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xACC4FBD1",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x0E5FA87B",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xA613E48A",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xF91445B9",
+        "animID": "0x050184A7"
+      },
+      {
+        "pickupHash": "0x7C134517",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x7C134517",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xFA454C5A",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xFA454C5A",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0xA869F4D9",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0xA869F4D9",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x7BB95F4C",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x7BB95F4C",
+        "animID": "0x00000000"
+      },
+      {
+        "pickupHash": "0x3C48E68A",
+        "pickupType": 205,
+        "pickupIndex": 205,
+        "pickupFlags": 0,
+        "quantity": 1,
+        "modelID": "0x3C48E68A",
+        "animID": "0x00000000"
+      }
+    ]
+  }
+}

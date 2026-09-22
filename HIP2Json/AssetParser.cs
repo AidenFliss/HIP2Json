@@ -151,7 +151,12 @@ public abstract class AssetParser
                 {
                     if (Program.CurrentGame == GameType.BFBB)
                     {
-                        motion.specific = new SplineMotion { unknown = ReadInt32BE(br) };
+                        motion.specific = new SplineMotion
+                        {
+                            unknown = ReadInt32BE(br),
+                            speed = ReadFloatBE(br),
+                            leanModifier = ReadFloatBE(br),
+                        };
                     }
                     else
                     {
@@ -393,6 +398,8 @@ public abstract class AssetParser
                     if (Program.CurrentGame == GameType.BFBB)
                     {
                         WriteInt32BE(bw, m.unknown);
+                        WriteFloatBE(bw, m.speed);
+                        WriteFloatBE(bw, m.leanModifier);
                     }
                     else
                     {
@@ -423,7 +430,7 @@ public abstract class AssetParser
                     if (Program.CurrentGame == GameType.TSSM)
                     {
                         WriteByte(bw, m.scaleAxis);
-                        bw.Write(new byte[2]);
+                        bw.Write(new byte[3]);
                     }
 
                     WriteFloatBE(bw, m.slideDistance);

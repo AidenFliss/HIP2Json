@@ -1,0 +1,22 @@
+# game=BFBB platform=GameCube archive=sm04.HIP asset=0x05D30767 type=MRKR call=MRKR size=12 checksum=1566459445 name=CHECKPOINT_MK_05
+BLOB:
+QvRyFsM2pU5CFiZq
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "CHECKPOINT_MK_05",
+  "FileName": "CHECKPOINT_MK_05",
+  "Type": "MRKR",
+  "AssetID": "0x05D30767",
+  "AssetName": "CHECKPOINT_MK_05",
+  "AssetFileName": "",
+  "AssetTypeName": "MRKR",
+  "AssetChecksum": 1566459445,
+  "MRKR": {
+    "pos": {
+      "x": 122.222824,
+      "y": -182.64572,
+      "z": 37.537514
+    }
+  }
+}

@@ -1,0 +1,58 @@
+# game=BFBB platform=GameCube archive=sm02.HIP asset=0x920D0071 type=VIL call=VIL size=108 checksum=1127354507 name=TIKI_SHHHH103
+BLOB:
+kg0AcSsAAB0BAAACAAAAAAAAAAAAAAAAAAAAAAAAAADDWADOQUMyysCKZno/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAOBqEYEAAAAAAAAAALN4uWEAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x920D0071",
+    "baseType": "0x2B",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -216.00314,
+      "y": 12.1999,
+      "z": -4.3250093
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xE06A1181",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "TIKI_SHHHH103",
+  "FileName": "TIKI_SHHHH103",
+  "Type": "VIL",
+  "AssetID": "0x920D0071",
+  "AssetName": "TIKI_SHHHH103",
+  "AssetFileName": "",
+  "AssetTypeName": "VIL",
+  "AssetChecksum": 1127354507,
+  "VIL": {
+    "npcFlags": 0,
+    "npcModel": "0xB378B961",
+    "npcProps": "0x00000000",
+    "movePoint": "0x00000000",
+    "taskWidgetPrime": "0x00000000",
+    "taskWidgetSecond": "0x00000000"
+  }
+}

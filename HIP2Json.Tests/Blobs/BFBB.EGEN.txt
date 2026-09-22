@@ -1,0 +1,176 @@
+# game=BFBB platform=GameCube archive=rb02.HIP asset=0x2471FC20 type=EGEN call=EGEN size=300 checksum=395416501 name=ARC_GEN12
+BLOB:
+JHH8ICkGAB0AAAACAAAAAAAAAAAAAAAAAAAAAAAAAABBQAAAQQu2QEH8AAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AALeAmxYAAAAAAAAAAAAAAAAAAAAABgEAAAAAAADOf4ExAFcAwDeNQaMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJgAD8fra2wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmACYUjpSuAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACcABPH62tsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJwAnFI6UrgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABXANhB4UC7AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x2471FC20",
+    "baseType": "0x29",
+    "linkCount": 6,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "Arcto",
+      "dstAssetID": "0x378D41A3",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xF1FADADB",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "On",
+      "dstEvent": "On",
+      "dstAssetID": "0x148E94AE",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Off",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0xF1FADADB",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Off",
+      "dstEvent": "Off",
+      "dstAssetID": "0x148E94AE",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "Drivenby",
+      "dstAssetID": "0x41E140BB",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 12,
+      "y": 8.731995,
+      "z": 31.5
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xB7809B16",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "ARC_GEN12",
+  "FileName": "ARC_GEN12",
+  "Type": "EGEN",
+  "AssetID": "0x2471FC20",
+  "AssetName": "ARC_GEN12",
+  "AssetFileName": "",
+  "AssetTypeName": "EGEN",
+  "AssetChecksum": 395416501,
+  "EGEN": {
+    "src_dpos": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "damage_type": 6,
+    "flags": 1,
+    "ontime": 0,
+    "onAnimID": "0xCE7F8131"
+  }
+}

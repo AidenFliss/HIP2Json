@@ -87,4 +87,17 @@ public static class Util
             data[i] = last;
         }
     }
+
+    public static void EncryptCRDT(ref byte[] data)
+    {
+        byte prev = 0;
+        const string key = "xCMChunkHand";
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            byte p = data[i];
+            data[i] = (byte)(p ^ prev ^ key[(i + 0x18) % key.Length]);
+            prev = p;
+        }
+    }
 }

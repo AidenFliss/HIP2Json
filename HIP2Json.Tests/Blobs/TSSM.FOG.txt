@@ -1,0 +1,60 @@
+# game=TSSM platform=GameCube archive=tt02.HIP asset=0x3A846386 type=FOG call=FOG size=68 checksum=22794749 name=FOG_01
+BLOB:
+OoRjhiQBAB2AgID/gICA/z8AAABCSAAARHoAAAAAAAAAAAAAAFcAJjqEY4YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x3A846386",
+    "baseType": "0x24",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "On",
+      "dstAssetID": "0x3A846386",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "FOG_01",
+  "FileName": "FOG_01",
+  "Type": "FOG",
+  "AssetID": "0x3A846386",
+  "AssetName": "FOG_01",
+  "AssetFileName": "",
+  "AssetTypeName": "FOG",
+  "AssetChecksum": 22794749,
+  "FOG": {
+    "bkgndColor": {
+      "r": 128,
+      "g": 128,
+      "b": 128,
+      "a": 255
+    },
+    "fogColor": {
+      "r": 128,
+      "g": 128,
+      "b": 128,
+      "a": 255
+    },
+    "fogDensity": 0.5,
+    "fogStart": 50,
+    "fogStop": 1000,
+    "transitionTime": 0,
+    "fogType": 0
+  }
+}

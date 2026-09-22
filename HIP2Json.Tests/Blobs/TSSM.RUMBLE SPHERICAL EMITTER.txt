@@ -1,0 +1,40 @@
+# game=TSSM platform=GameCube archive=pt02.HIP asset=0x41D7E659 type=RUMBLE SPHERICAL EMITTER call=DYNA size=40 checksum=-1705863035 name=SUNKENROAD_RUMBLEEMIT_09
+BLOB:
+QdfmWQAAAB0TN+ZBAAEAAIAVQJBBoAAAw5xB2EAu/SLDIGNHAAEAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x41D7E659",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "SUNKENROAD_RUMBLEEMIT_09",
+  "FileName": "SUNKENROAD_RUMBLEEMIT_09",
+  "Type": "RUMBLE SPHERICAL EMITTER",
+  "AssetID": "0x41D7E659",
+  "AssetName": "SUNKENROAD_RUMBLEEMIT_09",
+  "AssetFileName": "",
+  "AssetTypeName": "RUMBLE SPHERICAL EMITTER",
+  "AssetChecksum": -1705863035,
+  "DYNA": {
+    "type": "0x1337E641",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "effect:Rumble Spherical Emitter",
+    "dynaSpecificData": {
+      "effectID": "0x80154090",
+      "radius": 20,
+      "position": {
+        "x": -312.5144,
+        "y": 2.7342,
+        "z": -160.3878
+      },
+      "onlyRumbleOnY": 0,
+      "fallOff": 1,
+      "onlyOnFloor": 0,
+      "unknown": 0
+    }
+  }
+}

@@ -1,0 +1,40 @@
+# game=TSSM platform=GameCube archive=mnui.HIP asset=0xB7E7E434 type=MODEL call=DYNA size=44 checksum=-1029880305 name=HUD_MODEL_MANILESS_POINTS
+BLOB:
+t+fkNAAAAB3/VpHSAAEAAEO5AABCIAAAPKPXCkMAAABCQAAAAAAAAGret3w=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xB7E7E434",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_MODEL_MANILESS_POINTS",
+  "FileName": "HUD_MODEL_MANILESS_POINTS",
+  "Type": "MODEL",
+  "AssetID": "0xB7E7E434",
+  "AssetName": "HUD_MODEL_MANILESS_POINTS",
+  "AssetFileName": "",
+  "AssetTypeName": "MODEL",
+  "AssetChecksum": -1029880305,
+  "DYNA": {
+    "type": "0xFF5691D2",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "hud:model",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 370,
+        "y": 40,
+        "z": 0.02
+      },
+      "size": {
+        "x": 128,
+        "y": 48,
+        "z": 0
+      },
+      "model": "0x6ADEB77C"
+    }
+  }
+}

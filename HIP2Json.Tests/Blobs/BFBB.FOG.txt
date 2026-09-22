@@ -1,0 +1,60 @@
+# game=BFBB platform=GameCube archive=bc04.HIP asset=0x8F95CD9D type=FOG call=FOG size=68 checksum=-332412304 name=BCFOG
+BLOB:
+j5XNnSQBAB0lNzf/JTdM/z+AAAA/gAAAQ8gAAAAAAAAAAAAAAFcAJo+VzZ0/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x8F95CD9D",
+    "baseType": "0x24",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "On",
+      "dstAssetID": "0x8F95CD9D",
+      "paramU32": [
+        "0x3F800000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        1,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "BCFOG",
+  "FileName": "BCFOG",
+  "Type": "FOG",
+  "AssetID": "0x8F95CD9D",
+  "AssetName": "BCFOG",
+  "AssetFileName": "",
+  "AssetTypeName": "FOG",
+  "AssetChecksum": -332412304,
+  "FOG": {
+    "bkgndColor": {
+      "r": 37,
+      "g": 55,
+      "b": 55,
+      "a": 255
+    },
+    "fogColor": {
+      "r": 37,
+      "g": 55,
+      "b": 76,
+      "a": 255
+    },
+    "fogDensity": 1,
+    "fogStart": 1,
+    "fogStop": 400,
+    "transitionTime": 0,
+    "fogType": 0
+  }
+}

@@ -1,0 +1,69 @@
+# game=BFBB platform=GameCube archive=sm04.HIP asset=0x342B7C30 type=BOULDERGENERATOR call=DYNA size=104 checksum=1234868999 name=SLOPE_BLDR_GEN_B
+BLOB:
+NCt8MAABAB27SGTYAAEAAFFQlvUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP4AAAAAAAAAAAAAAAFcBM2LAxBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x342B7C30",
+    "baseType": "0x00",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0x62C0C41C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SLOPE_BLDR_GEN_B",
+  "FileName": "SLOPE_BLDR_GEN_B",
+  "Type": "BOULDERGENERATOR",
+  "AssetID": "0x342B7C30",
+  "AssetName": "SLOPE_BLDR_GEN_B",
+  "AssetFileName": "",
+  "AssetTypeName": "BOULDERGENERATOR",
+  "AssetChecksum": 1234868999,
+  "DYNA": {
+    "type": "0xBB4864D8",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:BoulderGenerator",
+    "dynaSpecificData": {
+      "objct": "0x515096F5",
+      "offset": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "offsetRand": 0,
+      "initvel": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "velAngleRand": 0,
+      "velMagRand": 0,
+      "initaxis": {
+        "x": 0,
+        "y": 1,
+        "z": 0
+      },
+      "angvel": 0
+    }
+  }
+}

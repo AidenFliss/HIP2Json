@@ -1,0 +1,193 @@
+# game=BFBB platform=GameCube archive=hb05.HIP asset=0x4E24E022 type=LKIT call=LKIT size=496 checksum=-951676213 name=JF_SB_lights
+BLOB:
+VElLTAAAAAAAAAAFAAAAAAAAAAI+grmhPpu89T7ij1w/gAAAP+ATNMD+1btAuUJuAAAAAMD5QNPAlu/bwIRAygAAAABAwLQpwHJMmMDg6vkAAAAAPdXuE0JWtvU+DIS2P4AAAAAAAAAAAAAAAAAAAAAAAAI+Cnk2PjU/fT4tDn8/gAAAwPY/wMCiydRAdxLkAAAAAD+XIsnA4mECwN79rAAAAABAyNUuwJ0C3EDBbRwAAAAAPdXuE0JWtvU+DIS2P4AAAAAAAAAAAAAAAAAAAAAAAAI/GZmaPxKQWz8K2ro/gAAAQO9Zp78D1L9A08EgAAAAAECIJTxBAGNLwIXnyQAAAADAowVsQL4/vkDHEkUAAAAAPdXuE0JWtvU+DIS2P4AAAAAAAAAAAAAAAAAAAAAAAAI+zMzNPr9Ooz64Ues/gAAAwMGiPj/pTORA+AATAAAAAECpOYJBAyZqQAzg1gAAAADAvnG0QK3Fu8C9kCoAAAAAPdXuE0JWtvU+DIS2P4AAAAAAAAAAAAAAAAAAAAAAAAE+GZmaPhmZmj4ZmZo/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "JF_SB_lights",
+  "FileName": "JF_SB_lights",
+  "Type": "LKIT",
+  "AssetID": "0x4E24E022",
+  "AssetName": "JF_SB_lights",
+  "AssetFileName": "\\\\Job\\sb\\cg\\env\\Lighting Setups\\JF_SB_lights.lkt",
+  "AssetTypeName": "LKIT",
+  "AssetChecksum": -951676213,
+  "LKIT": {
+    "tagID": "0x54494B4C",
+    "groupID": "0x00000000",
+    "lightCount": 5,
+    "lightList": 0,
+    "lights": [
+      {
+        "type": 2,
+        "colorR": 0.2553225,
+        "colorG": 0.304176,
+        "colorB": 0.4425,
+        "colorA": 1,
+        "unknown02": {
+          "x": 1.750586,
+          "y": -7.96359,
+          "z": 5.789359,
+          "w": 0
+        },
+        "unknown03": {
+          "x": -7.789163,
+          "y": -4.716779,
+          "z": -4.132909,
+          "w": 0
+        },
+        "direction": {
+          "x": 6.021992,
+          "y": -3.785925,
+          "z": -7.028683,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.104458,
+          "y": 53.67867,
+          "z": 0.137225,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.13522801,
+        "colorG": 0.177,
+        "colorB": 0.16900061,
+        "colorA": 1,
+        "unknown02": {
+          "x": -7.695282,
+          "y": -5.087137,
+          "z": 3.860528,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 1.180749,
+          "y": -7.074342,
+          "z": -6.968466,
+          "w": 0
+        },
+        "direction": {
+          "x": 6.276023,
+          "y": -4.906599,
+          "z": 6.044569,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.104458,
+          "y": 53.67867,
+          "z": 0.137225,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.6,
+        "colorG": 0.5725152,
+        "colorB": 0.5424,
+        "colorA": 1,
+        "unknown02": {
+          "x": 7.479694,
+          "y": -0.514965,
+          "z": 6.617325,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 4.254545,
+          "y": 8.024241,
+          "z": -4.184544,
+          "w": 0
+        },
+        "direction": {
+          "x": -5.094412,
+          "y": 5.945281,
+          "z": 6.22098,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.104458,
+          "y": 53.67867,
+          "z": 0.137225,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 2,
+        "colorR": 0.4,
+        "colorG": 0.37364683,
+        "colorB": 0.35999998,
+        "colorA": 1,
+        "unknown02": {
+          "x": -6.051055,
+          "y": 1.822659,
+          "z": 7.750009,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 5.28827,
+          "y": 8.196878,
+          "z": 2.201223,
+          "w": 0
+        },
+        "direction": {
+          "x": -5.95138,
+          "y": 5.430387,
+          "z": -5.923848,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0.104458,
+          "y": 53.67867,
+          "z": 0.137225,
+          "w": 1
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      },
+      {
+        "type": 1,
+        "colorR": 0.15,
+        "colorG": 0.15,
+        "colorB": 0.15,
+        "colorA": 1,
+        "unknown02": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 0
+        },
+        "unknown03": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 0
+        },
+        "direction": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 0
+        },
+        "unknown05": {
+          "x": 0,
+          "y": 0,
+          "z": 0,
+          "w": 0
+        },
+        "radius": 0,
+        "angle": 0,
+        "platLight": 0
+      }
+    ]
+  }
+}

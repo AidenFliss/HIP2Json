@@ -1,0 +1,39 @@
+# game=BFBB platform=GameCube archive=hb03.HIP asset=0x6BEA10D6 type=POINTER call=DYNA size=40 checksum=885863354 name=SW_POINTER_01
+BLOB:
+a+oQ1gAAAB0hlsE1AAEAAMIARNC8D1gCQOipaUJwAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x6BEA10D6",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "SW_POINTER_01",
+  "FileName": "SW_POINTER_01",
+  "Type": "POINTER",
+  "AssetID": "0x6BEA10D6",
+  "AssetName": "SW_POINTER_01",
+  "AssetFileName": "",
+  "AssetTypeName": "POINTER",
+  "AssetChecksum": 885863354,
+  "DYNA": {
+    "type": "0x2196C135",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "pointer",
+    "dynaSpecificData": {
+      "loc": {
+        "x": -32.0672,
+        "y": -0.00874901,
+        "z": 7.27068
+      },
+      "rotation": {
+        "x": 60,
+        "y": 0,
+        "z": 0
+      }
+    }
+  }
+}

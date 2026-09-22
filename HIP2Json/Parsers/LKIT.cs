@@ -17,25 +17,32 @@ public sealed class LKITParser : AssetParser
         for (uint i = 0; i < lightCount; i++)
         {
             uint type = ReadUInt32BE(br);
-            xColor color = ReadColorBE(br);
-            xVec4 matrixRow0 = ReadVector4BE(br);
-            xVec4 matrixRow1 = ReadVector4BE(br);
-            xVec4 matrixRow2 = ReadVector4BE(br);
-            xVec4 matrixRow3 = ReadVector4BE(br);
+            float colorR = ReadFloatBE(br);
+            float colorG = ReadFloatBE(br);
+            float colorB = ReadFloatBE(br);
+            float colorA = ReadFloatBE(br);
+            xVec4 unknown02 = ReadVector4BE(br);
+            xVec4 unknown03 = ReadVector4BE(br);
+            xVec4 direction = ReadVector4BE(br);
+            xVec4 unknown05 = ReadVector4BE(br);
             float radius = ReadFloatBE(br);
             float angle = ReadFloatBE(br);
-            br.ReadBytes(4);
+            float platLight = ReadFloatBE(br);
 
             lights[i] = new xLightKitLight()
             {
                 type = type,
-                color = color,
-                matrixRow0 = matrixRow0,
-                matrixRow1 = matrixRow1,
-                matrixRow2 = matrixRow2,
-                matrixRow3 = matrixRow3,
+                colorR = colorR,
+                colorG = colorG,
+                colorB = colorB,
+                colorA = colorA,
+                unknown02 = unknown02,
+                unknown03 = unknown03,
+                direction = direction,
+                unknown05 = unknown05,
                 radius = radius,
                 angle = angle,
+                platLight = platLight,
             };
         }
 
@@ -64,16 +71,19 @@ public sealed class LKITParser : AssetParser
         foreach (var light in lkit.lights)
         {
             WriteUInt32BE(bw, light.type);
-            WriteColorBE(bw, light.color);
+            WriteFloatBE(bw, light.colorR);
+            WriteFloatBE(bw, light.colorG);
+            WriteFloatBE(bw, light.colorB);
+            WriteFloatBE(bw, light.colorA);
 
-            WriteVector4BE(bw, light.matrixRow0);
-            WriteVector4BE(bw, light.matrixRow1);
-            WriteVector4BE(bw, light.matrixRow2);
-            WriteVector4BE(bw, light.matrixRow3);
+            WriteVector4BE(bw, light.unknown02);
+            WriteVector4BE(bw, light.unknown03);
+            WriteVector4BE(bw, light.direction);
+            WriteVector4BE(bw, light.unknown05);
 
             WriteFloatBE(bw, light.radius);
             WriteFloatBE(bw, light.angle);
-            bw.Write(new byte[4]);
+            WriteFloatBE(bw, light.platLight);
         }
 
         return ms.ToArray();
@@ -95,11 +105,15 @@ public class LKIT
 public class xLightKitLight
 {
     public uint type { get; set; }
-    public xColor color { get; set; }
-    public xVec4 matrixRow0 { get; set; }
-    public xVec4 matrixRow1 { get; set; }
-    public xVec4 matrixRow2 { get; set; }
-    public xVec4 matrixRow3 { get; set; }
+    public float colorR { get; set; }
+    public float colorG { get; set; }
+    public float colorB { get; set; }
+    public float colorA { get; set; }
+    public xVec4 unknown02 { get; set; }
+    public xVec4 unknown03 { get; set; }
+    public xVec4 direction { get; set; }
+    public xVec4 unknown05 { get; set; }
     public float radius { get; set; }
-    public float angle { get; set; } //4 bytes of 00 right here assigned at runtime
+    public float angle { get; set; }
+    public float platLight { get; set; }
 }

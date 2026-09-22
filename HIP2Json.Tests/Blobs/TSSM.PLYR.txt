@@ -1,0 +1,53 @@
+# game=TSSM platform=GameCube archive=am02.HIP asset=0x09B80F4A type=PLYR call=PLYR size=84 checksum=-1824939728 name=HERO
+BLOB:
+CbgPSgMAAB0BAAAAAAAAAEBJD9sAAAAAAAAAAMACWu4+Ix+KwdOIZj+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAAAAAAAAAAAAAAAAAAAAAABFIWKL
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x09B80F4A",
+    "baseType": "0x03",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 3.1415927,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -2.0368,
+      "y": 0.1593,
+      "z": -26.4416
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0x00000000",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "HERO",
+  "FileName": "HERO",
+  "Type": "PLYR",
+  "AssetID": "0x09B80F4A",
+  "AssetName": "HERO",
+  "AssetFileName": "",
+  "AssetTypeName": "PLYR",
+  "AssetChecksum": -1824939728,
+  "PLYR": {
+    "lightKitID": "0x4521628B"
+  }
+}

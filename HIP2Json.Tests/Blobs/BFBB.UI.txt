@@ -1,0 +1,72 @@
+# game=BFBB platform=GameCube archive=hb10.HIP asset=0x1A23E0E2 type=UI call=UI size=128 checksum=-38543638 name=SLIDE UI 09
+BLOB:
+GiPg4iAAAB0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCtgAAQlQAAEAAAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAAAAAAAAAAAAAAAANAHKATRu+0h6AAAAAAAAAAA/gAAAAAAAAD+AAAA/gAAAAAAAAD+AAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x1A23E0E2",
+    "baseType": "0x20",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 91,
+      "y": 53,
+      "z": 2
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x00000000",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "SLIDE UI 09",
+  "FileName": "SLIDE UI 09",
+  "Type": "UI",
+  "AssetID": "0x1A23E0E2",
+  "AssetName": "SLIDE UI 09",
+  "AssetFileName": "",
+  "AssetTypeName": "UI",
+  "AssetChecksum": -38543638,
+  "UI": {
+    "uiFlags": 52,
+    "width": 458,
+    "height": 308,
+    "texture": "0x6EFB487A",
+    "uva": {
+      "x": 0,
+      "y": 0
+    },
+    "uvb": {
+      "x": 1,
+      "y": 0
+    },
+    "uvc": {
+      "x": 1,
+      "y": 1
+    },
+    "uvd": {
+      "x": 0,
+      "y": 1
+    }
+  }
+}

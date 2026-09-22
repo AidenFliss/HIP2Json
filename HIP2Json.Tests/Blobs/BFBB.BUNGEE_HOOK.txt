@@ -1,0 +1,64 @@
+# game=BFBB platform=GameCube archive=jf01.HIP asset=0x9E59F5F2 type=BUNGEE_HOOK call=DYNA size=140 checksum=949416329 name=BUNGEE_HOOK_01
+BLOB:
+nln18gAAAB1Xz7bwAA0AAFzWtGYAAAAAAAAAAAAAAAA/wAAAPkzMzUEgAAA/gAAAQAAAAEHIAAA/czMzQAAAAEEczM1AgAAAQAAAAEIUAAA9zMzNQMAAAEDAAAAAAAAAPwAAAAAAAAA9TMzNAAAAAD1MzM0+TMzNPoAAAD5MzM09zMzNPxmZmj5MzM0=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x9E59F5F2",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "BUNGEE_HOOK_01",
+  "FileName": "BUNGEE_HOOK_01",
+  "Type": "BUNGEE_HOOK",
+  "AssetID": "0x9E59F5F2",
+  "AssetName": "BUNGEE_HOOK_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BUNGEE_HOOK",
+  "AssetChecksum": 949416329,
+  "DYNA": {
+    "type": "0x57CFB6F0",
+    "version": 13,
+    "handle": 0,
+    "typeNameInternal": "game_object:bungee_hook",
+    "dynaSpecificData": {
+      "entity": "0x5CD6B466",
+      "enter": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "attach_dist": 1.5,
+      "attach_travel_time": 0.2,
+      "detach_dist": 10,
+      "detach_free_fall_time": 1,
+      "detach_accel": 2,
+      "turn_unused0": 25,
+      "turn_unused1": 0.95,
+      "vertical_frequency": 2,
+      "vertical_gravity": 9.8,
+      "vertical_dive": 4,
+      "vertical_min_dist": 2,
+      "vertical_max_dist": 37,
+      "vertical_damp": 0.1,
+      "horizontal_max_dist": 6,
+      "camera_rest_dist": 6,
+      "camera_view_angle": 0,
+      "camera_offset": 0.5,
+      "camera_offset_dir": 0,
+      "camera_turn_speed": 0.05,
+      "camera_vel_scale": 0,
+      "camera_roll_speed": 0.05,
+      "camera_unused0": {
+        "x": 0.2,
+        "y": 0.25,
+        "z": 0.2
+      },
+      "collision_hit_loss": 0.1,
+      "collision_damage_velocity": 0.6,
+      "collision_hit_velocity": 0.2
+    }
+  }
+}

@@ -52,6 +52,9 @@ public sealed class SNDIParser : AssetParser
             };
         }
 
+        int consumed = HeaderSize + entryCount * EntrySize;
+        sndi.trailing = consumed < data.Length ? Convert.ToBase64String(data, consumed, data.Length - consumed) : string.Empty;
+
         sndi.entries = entries;
         return sndi;
     }
@@ -93,6 +96,9 @@ public sealed class SNDIParser : AssetParser
             ms.Write(raw, 0, raw.Length);
         }
 
+        if (!string.IsNullOrEmpty(sndi.trailing))
+            ms.Write(Convert.FromBase64String(sndi.trailing));
+
         return ms.ToArray();
     }
 
@@ -126,6 +132,7 @@ public class SNDI
     public string header { get; set; }
     public uint sndCount { get; set; }
     public uint sndsCount { get; set; }
+    public string trailing { get; set; }
     public SNDIEntry[] entries { get; set; }
 }
 

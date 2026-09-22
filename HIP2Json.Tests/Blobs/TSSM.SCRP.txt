@@ -1,0 +1,76 @@
+# game=TSSM platform=GameCube archive=tr02.HIP asset=0xE37531F6 type=SCRP call=SCRP size=148 checksum=-1540287706 name=BUNGEE_SUCCESS_SCRIPT_01
+BLOB:
+43Ux9ioAAB0/gAAAAAAABAAAAAAAAAAAm8SRVAAAAAMosDUkAAAAAAAAAAAAAAAAAAAAAAAAAAAXnVIpAAAAVQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAE7BCHgAAAAYAAAAAAAAAAAAAAAAAAAAAAAAAABAQAAAm8SRVAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xE37531F6",
+    "baseType": "0x2A",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "BUNGEE_SUCCESS_SCRIPT_01",
+  "FileName": "BUNGEE_SUCCESS_SCRIPT_01",
+  "Type": "SCRP",
+  "AssetID": "0xE37531F6",
+  "AssetName": "BUNGEE_SUCCESS_SCRIPT_01",
+  "AssetFileName": "",
+  "AssetTypeName": "SCRP",
+  "AssetChecksum": -1540287706,
+  "SCRP": {
+    "scriptStartTime": 1,
+    "eventCount": 4,
+    "loop": 0,
+    "events": [
+      {
+        "time": 0,
+        "widget": "0x9BC49154",
+        "paramEvent": "Visible",
+        "param": [
+          "0x28B03524",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "paramWidget": "0x00000000"
+      },
+      {
+        "time": 0,
+        "widget": "0x179D5229",
+        "paramEvent": "Collision_Visible_On",
+        "param": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "paramWidget": "0x00000000"
+      },
+      {
+        "time": 0,
+        "widget": "0x4EC10878",
+        "paramEvent": "Play",
+        "param": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "paramWidget": "0x00000000"
+      },
+      {
+        "time": 3,
+        "widget": "0x9BC49154",
+        "paramEvent": "Invisible",
+        "param": [
+          "0x00000000",
+          "0x00000000",
+          "0x00000000",
+          "0x00000000"
+        ],
+        "paramWidget": "0x00000000"
+      }
+    ]
+  }
+}

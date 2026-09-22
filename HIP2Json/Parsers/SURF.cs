@@ -114,8 +114,89 @@ public sealed class SURFParser : AssetParser
         float walljump_scale_xz = ReadFloatBE(br);
         float walljump_scale_y = ReadFloatBE(br);
         bool shortForm = br.BaseStream.Position + 8 > br.BaseStream.Length;
-        float damage_timer = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatLE(br) : 0f;
-        float damage_bounce = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatLE(br) : 0f;
+        float damage_timer = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatBE(br) : 0f;
+        float damage_bounce = br.BaseStream.Position + 4 <= br.BaseStream.Length ? ReadFloatBE(br) : 0f;
+
+        zSurfDashFX dashFx = null;
+        zHitDecalData hitDecal0 = null;
+        zHitDecalData hitDecal1 = null;
+        zHitDecalData hitDecal2 = null;
+        zFootstepsData offSurface = null;
+        zFootstepsData onSurface = null;
+
+        if (Program.CurrentGame != GameType.BFBB && !shortForm)
+        {
+            uint impactSound = ReadUInt32BE(br);
+            byte dashImpactType = ReadByte(br);
+            br.ReadBytes(3);
+            float dashImpactThrowBack = ReadFloatBE(br);
+            float dashSprayMagnitude = ReadFloatBE(br);
+            float dashCoolRate = ReadFloatBE(br);
+            float dashCoolAmount = ReadFloatBE(br);
+            float dashPass = ReadFloatBE(br);
+            float dashRampMaxDistance = ReadFloatBE(br);
+            float dashRampMinDistance = ReadFloatBE(br);
+            float dashRampKeySpeed = ReadFloatBE(br);
+            float dashRampMaxHeight = ReadFloatBE(br);
+            uint dashRampTargetMovePoint = ReadUInt32BE(br);
+            int damageAmount = ReadInt32BE(br);
+            uint hitSource = ReadUInt32BE(br);
+
+            offSurface = new zFootstepsData
+            {
+                particleEmitterID = ReadUInt32BE(br),
+                soundID = ReadUInt32BE(br),
+                textureID = ReadUInt32BE(br),
+                duration = ReadFloatBE(br),
+            };
+
+            onSurface = new zFootstepsData
+            {
+                particleEmitterID = ReadUInt32BE(br),
+                soundID = ReadUInt32BE(br),
+                textureID = ReadUInt32BE(br),
+                duration = ReadFloatBE(br),
+            };
+
+            hitDecal0 = new zHitDecalData { textureID = ReadUInt32BE(br), sizeX = ReadFloatBE(br), sizeY = ReadFloatBE(br) };
+            hitDecal1 = new zHitDecalData { textureID = ReadUInt32BE(br), sizeX = ReadFloatBE(br), sizeY = ReadFloatBE(br) };
+            hitDecal2 = new zHitDecalData { textureID = ReadUInt32BE(br), sizeX = ReadFloatBE(br), sizeY = ReadFloatBE(br) };
+
+            float offSurfaceTime = ReadFloatBE(br);
+            byte swimmableSurface = ReadByte(br);
+            byte dashFall = ReadByte(br);
+            byte needButtonPress = ReadByte(br);
+            byte dashAttack = ReadByte(br);
+            byte footstepDecals = ReadByte(br);
+            br.ReadBytes(4);
+            byte drivingSurfaceType = ReadByte(br);
+            br.ReadBytes(2);
+
+            dashFx = new zSurfDashFX
+            {
+                impactSound = impactSound,
+                dashImpactType = dashImpactType,
+                dashImpactThrowBack = dashImpactThrowBack,
+                dashSprayMagnitude = dashSprayMagnitude,
+                dashCoolRate = dashCoolRate,
+                dashCoolAmount = dashCoolAmount,
+                dashPass = dashPass,
+                dashRampMaxDistance = dashRampMaxDistance,
+                dashRampMinDistance = dashRampMinDistance,
+                dashRampKeySpeed = dashRampKeySpeed,
+                dashRampMaxHeight = dashRampMaxHeight,
+                dashRampTargetMovePoint = dashRampTargetMovePoint,
+                damageAmount = damageAmount,
+                hitSource = hitSource,
+                offSurfaceTime = offSurfaceTime,
+                swimmableSurface = swimmableSurface,
+                dashFall = dashFall,
+                needButtonPress = needButtonPress,
+                dashAttack = dashAttack,
+                footstepDecals = footstepDecals,
+                drivingSurfaceType = drivingSurfaceType,
+            };
+        }
 
         return new SURF
         {
@@ -160,6 +241,12 @@ public sealed class SURFParser : AssetParser
             walljump_scale_y = walljump_scale_y,
             damage_timer = damage_timer,
             damage_bounce = damage_bounce,
+            dashFx = dashFx,
+            offSurface = offSurface,
+            onSurface = onSurface,
+            hitDecal0 = hitDecal0,
+            hitDecal1 = hitDecal1,
+            hitDecal2 = hitDecal2,
             ShortForm = shortForm,
         };
     }
@@ -234,8 +321,74 @@ public sealed class SURFParser : AssetParser
         WriteFloatBE(bw, surf.oob_delay);
         WriteFloatBE(bw, surf.walljump_scale_xz);
         WriteFloatBE(bw, surf.walljump_scale_y);
-        WriteFloatLE(bw, surf.damage_timer);
-        WriteFloatLE(bw, surf.damage_bounce);
+        WriteFloatBE(bw, surf.damage_timer);
+        WriteFloatBE(bw, surf.damage_bounce);
+
+        if (surf.dashFx is not null)
+        {
+            WriteUInt32BE(bw, surf.dashFx.impactSound);
+            WriteByte(bw, surf.dashFx.dashImpactType);
+            bw.Write(new byte[3]);
+            WriteFloatBE(bw, surf.dashFx.dashImpactThrowBack);
+            WriteFloatBE(bw, surf.dashFx.dashSprayMagnitude);
+            WriteFloatBE(bw, surf.dashFx.dashCoolRate);
+            WriteFloatBE(bw, surf.dashFx.dashCoolAmount);
+            WriteFloatBE(bw, surf.dashFx.dashPass);
+            WriteFloatBE(bw, surf.dashFx.dashRampMaxDistance);
+            WriteFloatBE(bw, surf.dashFx.dashRampMinDistance);
+            WriteFloatBE(bw, surf.dashFx.dashRampKeySpeed);
+            WriteFloatBE(bw, surf.dashFx.dashRampMaxHeight);
+            WriteUInt32BE(bw, surf.dashFx.dashRampTargetMovePoint);
+            WriteInt32BE(bw, surf.dashFx.damageAmount);
+            WriteUInt32BE(bw, surf.dashFx.hitSource);
+
+            if (surf.offSurface is not null)
+            {
+                WriteUInt32BE(bw, surf.offSurface.particleEmitterID);
+                WriteUInt32BE(bw, surf.offSurface.soundID);
+                WriteUInt32BE(bw, surf.offSurface.textureID);
+                WriteFloatBE(bw, surf.offSurface.duration);
+            }
+
+            if (surf.onSurface is not null)
+            {
+                WriteUInt32BE(bw, surf.onSurface.particleEmitterID);
+                WriteUInt32BE(bw, surf.onSurface.soundID);
+                WriteUInt32BE(bw, surf.onSurface.textureID);
+                WriteFloatBE(bw, surf.onSurface.duration);
+            }
+
+            if (surf.hitDecal0 is not null)
+            {
+                WriteUInt32BE(bw, surf.hitDecal0.textureID);
+                WriteFloatBE(bw, surf.hitDecal0.sizeX);
+                WriteFloatBE(bw, surf.hitDecal0.sizeY);
+            }
+
+            if (surf.hitDecal1 is not null)
+            {
+                WriteUInt32BE(bw, surf.hitDecal1.textureID);
+                WriteFloatBE(bw, surf.hitDecal1.sizeX);
+                WriteFloatBE(bw, surf.hitDecal1.sizeY);
+            }
+
+            if (surf.hitDecal2 is not null)
+            {
+                WriteUInt32BE(bw, surf.hitDecal2.textureID);
+                WriteFloatBE(bw, surf.hitDecal2.sizeX);
+                WriteFloatBE(bw, surf.hitDecal2.sizeY);
+            }
+
+            WriteFloatBE(bw, surf.dashFx.offSurfaceTime);
+            WriteByte(bw, surf.dashFx.swimmableSurface);
+            WriteByte(bw, surf.dashFx.dashFall);
+            WriteByte(bw, surf.dashFx.needButtonPress);
+            WriteByte(bw, surf.dashFx.dashAttack);
+            WriteByte(bw, surf.dashFx.footstepDecals);
+            bw.Write(new byte[4]);
+            WriteByte(bw, surf.dashFx.drivingSurfaceType);
+            bw.Write(new byte[2]);
+        }
 
         return ms.ToArray();
     }
@@ -268,4 +421,51 @@ public class SURF
 
     [JsonIgnore]
     public bool ShortForm { get; set; }
+
+    public zSurfDashFX dashFx { get; set; }
+    public zFootstepsData offSurface { get; set; }
+    public zFootstepsData onSurface { get; set; }
+    public zHitDecalData hitDecal0 { get; set; }
+    public zHitDecalData hitDecal1 { get; set; }
+    public zHitDecalData hitDecal2 { get; set; }
+}
+
+public class zSurfDashFX
+{
+    public uint impactSound { get; set; }
+    public byte dashImpactType { get; set; }
+    public float dashImpactThrowBack { get; set; }
+    public float dashSprayMagnitude { get; set; }
+    public float dashCoolRate { get; set; }
+    public float dashCoolAmount { get; set; }
+    public float dashPass { get; set; }
+    public float dashRampMaxDistance { get; set; }
+    public float dashRampMinDistance { get; set; }
+    public float dashRampKeySpeed { get; set; }
+    public float dashRampMaxHeight { get; set; }
+    public uint dashRampTargetMovePoint { get; set; }
+    public int damageAmount { get; set; }
+    public uint hitSource { get; set; }
+    public float offSurfaceTime { get; set; }
+    public byte swimmableSurface { get; set; }
+    public byte dashFall { get; set; }
+    public byte needButtonPress { get; set; }
+    public byte dashAttack { get; set; }
+    public byte footstepDecals { get; set; }
+    public byte drivingSurfaceType { get; set; }
+}
+
+public class zFootstepsData
+{
+    public uint particleEmitterID { get; set; }
+    public uint soundID { get; set; }
+    public uint textureID { get; set; }
+    public float duration { get; set; }
+}
+
+public class zHitDecalData
+{
+    public uint textureID { get; set; }
+    public float sizeX { get; set; }
+    public float sizeY { get; set; }
 }

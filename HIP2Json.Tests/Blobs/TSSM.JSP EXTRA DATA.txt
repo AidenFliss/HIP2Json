@@ -1,0 +1,31 @@
+# game=TSSM platform=GameCube archive=bb03.HIP asset=0x4E97A889 type=JSP EXTRA DATA call=DYNA size=24 checksum=1086604044 name=JSP_C_EXTRA_DATA
+BLOB:
+TpeoiQAAAB0gTWrbAAEAAFDnsB5NEjqC
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x4E97A889",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "JSP_C_EXTRA_DATA",
+  "FileName": "JSP_C_EXTRA_DATA",
+  "Type": "JSP EXTRA DATA",
+  "AssetID": "0x4E97A889",
+  "AssetName": "JSP_C_EXTRA_DATA",
+  "AssetFileName": "",
+  "AssetTypeName": "JSP EXTRA DATA",
+  "AssetChecksum": 1086604044,
+  "DYNA": {
+    "type": "0x204D6ADB",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "JSP Extra Data",
+    "dynaSpecificData": {
+      "jspID": "0x50E7B01E",
+      "groupID": "0x4D123A82"
+    }
+  }
+}

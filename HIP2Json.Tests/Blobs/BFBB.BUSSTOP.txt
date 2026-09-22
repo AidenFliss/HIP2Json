@@ -1,0 +1,34 @@
+# game=BFBB platform=GameCube archive=sm01.HIP asset=0x61AB3C33 type=BUSSTOP call=DYNA size=36 checksum=891604954 name=BUSSTOP_BUSSTOP_01
+BLOB:
+Yas8MwAAAB2PASd4AAIAAJk7dBYAAAABa+LrmumBHcQ/wAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x61AB3C33",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "BUSSTOP_BUSSTOP_01",
+  "FileName": "BUSSTOP_BUSSTOP_01",
+  "Type": "BUSSTOP",
+  "AssetID": "0x61AB3C33",
+  "AssetName": "BUSSTOP_BUSSTOP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BUSSTOP",
+  "AssetChecksum": 891604954,
+  "DYNA": {
+    "type": "0x8F012778",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:BusStop",
+    "dynaSpecificData": {
+      "marker": "0x993B7416",
+      "character": "Sandy",
+      "cameraID": "0x6BE2EB9A",
+      "busID": "0xE9811DC4",
+      "delay": 1.5
+    }
+  }
+}

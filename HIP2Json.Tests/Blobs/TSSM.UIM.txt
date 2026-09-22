@@ -1,0 +1,91 @@
+# game=TSSM platform=GameCube archive=mnus.HIP asset=0xE052EC8A type=UIM call=UIM size=208 checksum=455994438 name=UIM WOOSH LEFT
+BLOB:
+4FLsilMAAB0GAQAAAAAAuD8AAAAAAAAAAAAAAwAAAAA8I9cKAAAAAAAAAAABAAAAAAAAAAAAAAA+TMzNPwAAAAAAAAAAAAAAAQAAAAAAAADCyAAAAAAAAD5MzM0/AAAAAAAAAAAAAAABAAAAQaAAAAAAAAAAAAACPkzMzT8AAAAAAAAAAAAAAAEAAADB8AAAgAAAAIAAAAAAAAADPpmZmj7MzM0AAAAAAAAAAAEAAAAAZAAAAAAAAz7MzM0/AAAAAAAAAAAAAAABAAAAZAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xE052EC8A",
+    "baseType": "0x53",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "UIM WOOSH LEFT",
+  "FileName": "UIM WOOSH LEFT",
+  "Type": "UIM",
+  "AssetID": "0xE052EC8A",
+  "AssetName": "UIM WOOSH LEFT",
+  "AssetFileName": "",
+  "AssetTypeName": "UIM",
+  "AssetChecksum": 455994438,
+  "UIM": {
+    "cmdCount": 6,
+    "inn": 1,
+    "cmdSize": 184,
+    "totalTime": 0.5,
+    "loopTime": 0,
+    "commands": [
+      {
+        "type": "Opacity",
+        "startOpacity": 0,
+        "endOpacity": 0,
+        "startTime": 0,
+        "endTime": 0.01,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      },
+      {
+        "type": "Move",
+        "distX": 0,
+        "distY": -100,
+        "startTime": 0.2,
+        "endTime": 0.5,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      },
+      {
+        "type": "Move",
+        "distX": 20,
+        "distY": 0,
+        "startTime": 0.2,
+        "endTime": 0.5,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      },
+      {
+        "type": "Rotate",
+        "rotation": -30,
+        "centerOffsetX": -0,
+        "centerOffsetY": -0,
+        "startTime": 0.2,
+        "endTime": 0.5,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      },
+      {
+        "type": "Opacity",
+        "startOpacity": 0,
+        "endOpacity": 100,
+        "startTime": 0.3,
+        "endTime": 0.4,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      },
+      {
+        "type": "Opacity",
+        "startOpacity": 100,
+        "endOpacity": 0,
+        "startTime": 0.4,
+        "endTime": 0.5,
+        "accelTime": 0,
+        "decelTime": 0,
+        "enabled": 1
+      }
+    ]
+  }
+}

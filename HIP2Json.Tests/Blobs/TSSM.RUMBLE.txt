@@ -1,0 +1,41 @@
+# game=TSSM platform=GameCube archive=bb01.HIP asset=0x0E7AA79F type=RUMBLE call=DYNA size=56 checksum=806686784 name=WALL_02_RUMBLE_01
+BLOB:
+DnqnnwAAAB0qWUQ6AAMAAEAAAAA/AAAAAAAAAAAAAAA/gAAAP4AAAD3MzM09zMzNPwAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0E7AA79F",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WALL_02_RUMBLE_01",
+  "FileName": "WALL_02_RUMBLE_01",
+  "Type": "RUMBLE",
+  "AssetID": "0x0E7AA79F",
+  "AssetName": "WALL_02_RUMBLE_01",
+  "AssetFileName": "",
+  "AssetTypeName": "RUMBLE",
+  "AssetChecksum": 806686784,
+  "DYNA": {
+    "type": "0x2A59443A",
+    "version": 3,
+    "handle": 0,
+    "typeNameInternal": "effect:Rumble",
+    "dynaSpecificData": {
+      "time": 2,
+      "intensity": 0.5,
+      "id": "0x00000000",
+      "priority": 0,
+      "type": 0,
+      "rumbleInPause": 0,
+      "param1": 1,
+      "param2": 1,
+      "shakeMagnitude": 0.1,
+      "shakeCycleMax": 0.1,
+      "shakeRotationMagnitude": 0.5,
+      "shakeY": 0
+    }
+  }
+}

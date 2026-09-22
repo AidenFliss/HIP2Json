@@ -1,0 +1,29 @@
+# game=BFBB platform=GameCube archive=hb09.HIP asset=0xCB5C0777 type=ALST call=ALST size=40 checksum=-639947843 name=FISH_F_ANIMLIST
+BLOB:
+dBm7T4WncaCXNSfxAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "FISH_F_ANIMLIST",
+  "FileName": "FISH_F_ANIMLIST",
+  "Type": "ALST",
+  "AssetID": "0xCB5C0777",
+  "AssetName": "FISH_F_ANIMLIST",
+  "AssetFileName": "",
+  "AssetTypeName": "ALST",
+  "AssetChecksum": -639947843,
+  "ALST": {
+    "ids": [
+      1947843407,
+      2242343328,
+      2536843249,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  }
+}

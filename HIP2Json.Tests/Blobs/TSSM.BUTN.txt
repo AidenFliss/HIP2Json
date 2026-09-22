@@ -1,0 +1,106 @@
+# game=TSSM platform=GameCube archive=jk01.HIP asset=0xA469B44A type=BUTN call=BUTN size=196 checksum=1731233402 name=TV_BUTTON_02
+BLOB:
+pGm0ShgBAB0AAAACAAAAAECygcE/yQ/bAAAAAMGrmMhBdVc/wqjPG0AAAABAAAAAQAAAAD+AAAA/gAAAP4AAAD+AAABDfwAAq3x6RgAAAACrfHpGAAAAAAAAAAAAAAAAQSAAAAAAANAEAAAEAgEBAAAAAAC+TMzNPhmZmgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANwAST2ympgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xA469B44A",
+    "baseType": "0x18",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ButtonPress",
+      "dstEvent": "Run",
+      "dstAssetID": "0x4F6CA6A6",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 5.578339,
+      "y": 1.5707964,
+      "z": 0
+    },
+    "pos": {
+      "x": -21.4496,
+      "y": 15.3338,
+      "z": -84.4045
+    },
+    "scale": {
+      "x": 2,
+      "y": 2,
+      "z": 2
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xAB7C7A46",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "TV_BUTTON_02",
+  "FileName": "TV_BUTTON_02",
+  "Type": "BUTN",
+  "AssetID": "0xA469B44A",
+  "AssetName": "TV_BUTTON_02",
+  "AssetFileName": "",
+  "AssetTypeName": "BUTN",
+  "AssetChecksum": 1731233402,
+  "BUTN": {
+    "modelPressedInfoID": "0xAB7C7A46",
+    "actMethod": "Button",
+    "initButtonState": 0,
+    "isReset": 0,
+    "resetDelay": 10,
+    "buttonActFlags": [
+      "CruiseBubble",
+      "ThrownEnemyTiki",
+      "ThrowFruit"
+    ],
+    "motion": {
+      "type": "Mechanism",
+      "useBanking": 0,
+      "flags": 4,
+      "specific": {
+        "mechanismType": "SlideAndRotate",
+        "flags": 1,
+        "slideAxis": "Y",
+        "rotateAxis": "X",
+        "scaleAxis": 0,
+        "slideDistance": -0.2,
+        "slideTime": 0.15,
+        "slideAccelTime": 0,
+        "slideDecelTime": 0,
+        "rotateDistance": 0,
+        "rotateTime": 0,
+        "rotateAccelTime": 0,
+        "rotateDecelTime": 0,
+        "returnDelay": 0,
+        "postReturnDelay": 0,
+        "scaleAmount": 0,
+        "scaleDuration": 0
+      }
+    }
+  }
+}

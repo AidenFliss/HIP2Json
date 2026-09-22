@@ -1,0 +1,93 @@
+# game=BFBB platform=GameCube archive=bb01.HIP asset=0xED924FFC type=BOUL call=BOUL size=188 checksum=-2107560033 name=CANON_01_BOULDER_08
+BLOB:
+7ZJP/C8BAB0BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADCYfHeQlhBBkJSwBo/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAAAAAAAAAAAABVUXDQAAAAAQSAAAD+AAAA+TMzNPhmZmgAAAABCIAAAQZbL5D4ZmZoAAAAAAAACvkCAAAAAAAABsWxINEFwAABAAAAAQPAAAECgAABBoAAAACUB1e2ST/wAAAAAAAAAAAAAAAAAAAAAIt6RpAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xED924FFC",
+    "baseType": "0x2F",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Kill",
+      "dstEvent": "LaunchShrapnel",
+      "dstAssetID": "0xED924FFC",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x22DE91A4",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": -56.4862,
+      "y": 54.0635,
+      "z": 52.6876
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 0,
+    "seeThruSpeed": 0,
+    "modelInfoID": "0x15545C34",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "CANON_01_BOULDER_08",
+  "FileName": "CANON_01_BOULDER_08",
+  "Type": "BOUL",
+  "AssetID": "0xED924FFC",
+  "AssetName": "CANON_01_BOULDER_08",
+  "AssetFileName": "",
+  "AssetTypeName": "BOUL",
+  "AssetChecksum": -2107560033,
+  "BOUL": {
+    "gravity": 10,
+    "mass": 1,
+    "bounce": 0.2,
+    "friction": 0.15,
+    "statFric": 0,
+    "maxVel": 40,
+    "maxAngVel": 18.849556,
+    "stickiness": 0.15,
+    "bounceDamp": 0,
+    "flags": "DamagePlayer, Unknown004, DamageNpcs, Unknown010, DieOnOobSurfaces, Unknown080, DieAfterKillTimer",
+    "killtimer": 4,
+    "hitpoints": 1,
+    "uSoundGroupHash": "0x00000000",
+    "soundID": "0xB16C4834",
+    "volume": 15,
+    "minSoundVel": 2,
+    "maxSoundVel": 7.5,
+    "innerRadius": 5,
+    "outerRadius": 20,
+    "fSphereRadius": 0,
+    "uBoneIndex": 0
+  }
+}

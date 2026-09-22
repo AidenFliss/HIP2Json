@@ -1,0 +1,30 @@
+# game=TSSM platform=GameCube archive=am03.HIP asset=0x01AF5586 type=GRUP call=GRUP size=24 checksum=-927769604 name=WAVEDONE_COUNTER_GRP_01
+BLOB:
+Aa9VhhEAAB0AAwAAzq9loZMBlOJXU8Qj
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x01AF5586",
+    "baseType": "0x11",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WAVEDONE_COUNTER_GRP_01",
+  "FileName": "WAVEDONE_COUNTER_GRP_01",
+  "Type": "GRUP",
+  "AssetID": "0x01AF5586",
+  "AssetName": "WAVEDONE_COUNTER_GRP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "GRUP",
+  "AssetChecksum": -927769604,
+  "GRUP": {
+    "itemCount": 3,
+    "groupFlags": "SendToAll",
+    "assets": [
+      "0xCEAF65A1",
+      "0x930194E2",
+      "0x5753C423"
+    ]
+  }
+}

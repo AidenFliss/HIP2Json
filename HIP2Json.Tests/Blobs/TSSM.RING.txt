@@ -1,0 +1,56 @@
+# game=TSSM platform=GameCube archive=tt02.HIP asset=0x52E9F8E2 type=RING call=DYNA size=92 checksum=-1114003279 name=RING_005
+BLOB:
+Uun44gAAAB1NgcHuAAIAAEMN9jxBSNA6w12MPj69AeIAAAAAAAAAAAAAAAAAAAAAAAAAAD/AAAA/wAAAP8AAAAAAAAFAgAAAQIAAAECAAABAoAAAv4AAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x52E9F8E2",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "RING_005",
+  "FileName": "RING_005",
+  "Type": "RING",
+  "AssetID": "0x52E9F8E2",
+  "AssetName": "RING_005",
+  "AssetFileName": "",
+  "AssetTypeName": "RING",
+  "AssetChecksum": -1114003279,
+  "DYNA": {
+    "type": "0x4D81C1EE",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:Ring",
+    "dynaSpecificData": {
+      "location": {
+        "x": 141.96185,
+        "y": 12.550837,
+        "z": -221.54782
+      },
+      "direction": {
+        "x": 0.369155,
+        "y": 0,
+        "z": 0
+      },
+      "offset": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1.5,
+        "y": 1.5,
+        "z": 1.5
+      },
+      "triggerBoundsType": "FullSizeShadow",
+      "radius": 4,
+      "width": 4,
+      "height": 4,
+      "timeOut": 5,
+      "warningTime": -1,
+      "drivenById": "0x00000000"
+    }
+  }
+}

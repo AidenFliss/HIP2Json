@@ -1,0 +1,41 @@
+# game=TSSM platform=GameCube archive=mnui.HIP asset=0x721CEAEA type=TEXT call=DYNA size=48 checksum=-632995517 name=HUD_TEXT_COMBO_POINTS
+BLOB:
+chzq6gAAAB1oftCwAAEAAEOgAABCkgAAAAAAAEKQAABCQAAAAAAAAGy5dbwAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x721CEAEA",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_TEXT_COMBO_POINTS",
+  "FileName": "HUD_TEXT_COMBO_POINTS",
+  "Type": "TEXT",
+  "AssetID": "0x721CEAEA",
+  "AssetName": "HUD_TEXT_COMBO_POINTS",
+  "AssetFileName": "",
+  "AssetTypeName": "TEXT",
+  "AssetChecksum": -632995517,
+  "DYNA": {
+    "type": "0x687ED0B0",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "hud:text",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 320,
+        "y": 73,
+        "z": 0
+      },
+      "size": {
+        "x": 72,
+        "y": 48,
+        "z": 0
+      },
+      "text_box": "0x6CB975BC",
+      "text": "0x00000000"
+    }
+  }
+}

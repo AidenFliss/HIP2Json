@@ -1,0 +1,42 @@
+# game=BFBB platform=GameCube archive=hb01.HIP asset=0x0AE204EA type=NPCSETTINGS call=DYNA size=44 checksum=-226354254 name=VILLAGER_NPC_09_SETTINGS
+BLOB:
+CuIE6gAAAB2HaDNKAAIAAAAAAAABAAEAAQAAAAEBAAAAAAAAv4AAAP////8=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0AE204EA",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "VILLAGER_NPC_09_SETTINGS",
+  "FileName": "VILLAGER_NPC_09_SETTINGS",
+  "Type": "NPCSETTINGS",
+  "AssetID": "0x0AE204EA",
+  "AssetName": "VILLAGER_NPC_09_SETTINGS",
+  "AssetFileName": "",
+  "AssetTypeName": "NPCSETTINGS",
+  "AssetChecksum": -226354254,
+  "DYNA": {
+    "type": "0x8768334A",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:NPCSettings",
+    "dynaSpecificData": {
+      "basisType": "None",
+      "allowDetect": 1,
+      "allowPatrol": 0,
+      "allowWander": 1,
+      "reduceCollide": 0,
+      "useNavSplines": 1,
+      "allowChase": 1,
+      "allowAttack": 1,
+      "assumeLOS": 0,
+      "assumeFOV": 0,
+      "duploWaveMode": "Continuous",
+      "duploSpawnDelay": -1,
+      "duploSpawnLifeMax": -1
+    }
+  }
+}

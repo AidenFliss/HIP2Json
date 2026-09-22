@@ -1,0 +1,38 @@
+# game=BFBB platform=GameCube archive=rb03.HIP asset=0xBA4AFB0A type=SFX call=SFX size=48 checksum=224189373 name=WIND_BLOW_SFX_02
+BLOB:
+ukr7ChMAAB0BwgAAP4AAAKjE/icAAAAAAIA3AEKdw9c/fCtzQxAQYkEgAABBoAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xBA4AFB0A",
+    "baseType": "0x13",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WIND_BLOW_SFX_02",
+  "FileName": "WIND_BLOW_SFX_02",
+  "Type": "SFX",
+  "AssetID": "0xBA4AFB0A",
+  "AssetName": "WIND_BLOW_SFX_02",
+  "AssetFileName": "",
+  "AssetTypeName": "SFX",
+  "AssetChecksum": 224189373,
+  "SFX": {
+    "flagsSFX": 450,
+    "freq": 0,
+    "freqm": 1,
+    "soundAssetID": "0xA8C4FE27",
+    "attachID": "0x00000000",
+    "loopCount": 0,
+    "priority": 128,
+    "volume": 55,
+    "pos": {
+      "x": 78.8825,
+      "y": 0.985038,
+      "z": 144.064
+    },
+    "innerRadius": 10,
+    "outerRadius": 20
+  }
+}

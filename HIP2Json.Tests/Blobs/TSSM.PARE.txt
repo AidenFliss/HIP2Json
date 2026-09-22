@@ -1,0 +1,50 @@
+# game=TSSM platform=GameCube archive=tr01.HIP asset=0x1022018D type=PARE call=PARE size=84 checksum=-68001297 name=SIGN_PART_EMIT
+BLOB:
+ECIBjSYAAB0AAQAAEZypcT+AAABA8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw0ZnbT+v9itDsbodAAAAAD+AAAAAAAAAQMiA4AAAAANCyAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x1022018D",
+    "baseType": "0x26",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "SIGN_PART_EMIT",
+  "FileName": "SIGN_PART_EMIT",
+  "Type": "PARE",
+  "AssetID": "0x1022018D",
+  "AssetName": "SIGN_PART_EMIT",
+  "AssetFileName": "",
+  "AssetTypeName": "PARE",
+  "AssetChecksum": -68001297,
+  "PARE": {
+    "emitFlags": 0,
+    "emitType": "CircleEdge",
+    "propID": "0x119CA971",
+    "specific": {
+      "type": "Circle",
+      "radius": 1,
+      "deflection": 7.5,
+      "dir": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "attachToID": "0x00000000",
+    "pos": {
+      "x": -198.404,
+      "y": 1.3747,
+      "z": 355.454
+    },
+    "vel": {
+      "x": 0,
+      "y": 1,
+      "z": 0
+    },
+    "velAngleVariation": 6.265732,
+    "cullMode": 3,
+    "cullDistSqr": 100
+  }
+}

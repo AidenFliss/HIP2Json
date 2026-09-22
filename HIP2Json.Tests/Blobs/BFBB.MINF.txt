@@ -1,0 +1,272 @@
+# game=BFBB platform=GameCube archive=bc03.HIP asset=0x8899B1C3 type=MINF call=MINF size=1188 checksum=-686338125 name=duplicatotron1000_bind.MINF
+BLOB:
+Rk5JTQAAAAGHAOnEAAAAAAAAAADWCokdzc0AAD+AAAAAAAAAAAAAAAAAAAA/gAAAAAAAAAAAAAAAAAAAP4AAAAAAAAAAAAAAAAAAAHFqC84AMQAAwXCGJQE4LjAAAAAANSdkOgE2LjAAAAAAJu9kwgEtMi4wAAAAd+G2wQEyMC4wAAAA+fz9bAZ7IDAuOTg5LCAxLjc3MywgMC4wMjYgfQAAAACRBGzQBnsgMS4yNjYsIDEuNzIwLCAwLjAzNCB9AAAAAMPklysGeyAtMC42NTEsIDEuODYzLCAwLjMwNyB9AAAAw+SXLAZ7IC0wLjM1OCwgMS45MjgsIDAuMzA1IH0AAADD5JctBnsgLTAuMDk0LCAxLjk1MSwgMC4zMDMgfQAAAMPkly4GeyAgMC4xOTgsIDEuOTM0LCAwLjMwMSB9AAAAw+SXLwZ7ICAwLjQ3NSwgMS44NjcsIDAuNDQ0IH0AAAAoVxiOBnsgLS42NDgsICAxLjgxMCwgIC4zODcgICB9AChXGI8GeyAtLjYwNywgIDEuODI3LCAgLjM4NiAgIH0AKFcYkAZ7IC0uNjA3LCAgMS44MjcsICAuMzg2ICAgfQAoeWYpBnsgLS4zNjQsICAxLjg3MCwgIC4zODUgICB9ACh5ZioGeyAtLjMyMiwgIDEuODc1LCAgLjM4NSAgIH0AKHlmKwZ7IC0uMzIyLCAgMS44NzUsICAuMzg1ICAgfQAom7PEBnsgLS4xMDksICAxLjg4OSwgIC4zODMgICB9ACibs8UGeyAtLjA2NiwgIDEuODg4LCAgLjM4MyAgIH0AKJuzxgZ7IC0uMDY2LCAgMS44ODgsICAuMzgzICAgfQAovgFfBnsgIC4xNzUsICAxLjg2OCwgIC4zODEgICB9ACi+AWAGeyAgLjIxNywgIDEuODYyLCAgLjM4MSAgIH0AKL4BYQZ7ICAuMjE3LCAgMS44NjIsICAuMzgxICAgfQAo4E76BnsgIC40NDcsICAxLjc5NywgIC4zODAgICB9ACjgTvsGeyAgLjQ4OSwgIDEuNzg5LCAgLjM4MCAgIH0AKOBO/AZ7ICAuNDg5LCAgMS43ODksICAuMzgwICAgfQB0006+BnsgLTAuMjE1LCAgMC4wMDYsIC0wLjU0OSB9AHTTTr8GeyAtMC43ODYsICAwLjAwNiwgLTAuMzA4IH0AdNNOwAZ7ICAwLjYxNywgIDAuMDA2LCAgMC4xNDAgfQCbrgsuBnsgLTAuMDg3LCAgMS4zODYsICAwLjM4NiB9AJuuCy8GeyAgMC4zNzIsICAwLjg4MywgLTAuMTIwIH0Am64LMAZ7IC0wLjUxMiwgIDEuNTkyLCAtMC4zMjIgfQAI3TYHA3sgLTEuMDAsIDUuMCB9AAjdNggDeyAtMS4wMCwgNS4wIH0ACN02CQR7ICAxLjAwLCAxLjc1IH0AAAAA5B750AAxMADkHvnRADEwAOQe+dIAMTAA5B750wAxMADkHvnUADEwAIl5KfoAMQAAf8Om2AR7IDAuMCwgMS40LCAwLjAgfQAAxRqueQR7IDEuMiwgMi44LCAyLjMgfQAA
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "duplicatotron1000_bind.MINF",
+  "FileName": "duplicatotron1000_bind.MINF",
+  "Type": "MINF",
+  "AssetID": "0x8899B1C3",
+  "AssetName": "duplicatotron1000_bind.MINF",
+  "AssetFileName": "",
+  "AssetTypeName": "MINF",
+  "AssetChecksum": -686338125,
+  "MINF": {
+    "magic": "0x464E494D",
+    "numModelInst": 1,
+    "animTableID": "0x8700E9C4",
+    "combatID": "0x00000000",
+    "brainID": "0x00000000",
+    "modelInstances": [
+      {
+        "modelID": "0xD60A891D",
+        "flags": 52685,
+        "parent": 0,
+        "bone": 0,
+        "right": {
+          "x": 1,
+          "y": 0,
+          "z": 0
+        },
+        "up": {
+          "x": 0,
+          "y": 1,
+          "z": 0
+        },
+        "at": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "pos": {
+          "x": 0,
+          "y": 0,
+          "z": 0
+        }
+      }
+    ],
+    "parameters": [
+      {
+        "type": "0x716A0BCE",
+        "length": 0,
+        "value": "1"
+      },
+      {
+        "type": "0xC1708625",
+        "length": 1,
+        "value": "8.0"
+      },
+      {
+        "type": "0x3527643A",
+        "length": 1,
+        "value": "6.0"
+      },
+      {
+        "type": "0x26EF64C2",
+        "length": 1,
+        "value": "-2.0"
+      },
+      {
+        "type": "0x77E1B6C1",
+        "length": 1,
+        "value": "20.0"
+      },
+      {
+        "type": "0xF9FCFD6C",
+        "length": 6,
+        "value": "{ 0.989, 1.773, 0.026 }"
+      },
+      {
+        "type": "0x91046CD0",
+        "length": 6,
+        "value": "{ 1.266, 1.720, 0.034 }"
+      },
+      {
+        "type": "0xC3E4972B",
+        "length": 6,
+        "value": "{ -0.651, 1.863, 0.307 }"
+      },
+      {
+        "type": "0xC3E4972C",
+        "length": 6,
+        "value": "{ -0.358, 1.928, 0.305 }"
+      },
+      {
+        "type": "0xC3E4972D",
+        "length": 6,
+        "value": "{ -0.094, 1.951, 0.303 }"
+      },
+      {
+        "type": "0xC3E4972E",
+        "length": 6,
+        "value": "{  0.198, 1.934, 0.301 }"
+      },
+      {
+        "type": "0xC3E4972F",
+        "length": 6,
+        "value": "{  0.475, 1.867, 0.444 }"
+      },
+      {
+        "type": "0x2857188E",
+        "length": 6,
+        "value": "{ -.648,  1.810,  .387   }"
+      },
+      {
+        "type": "0x2857188F",
+        "length": 6,
+        "value": "{ -.607,  1.827,  .386   }"
+      },
+      {
+        "type": "0x28571890",
+        "length": 6,
+        "value": "{ -.607,  1.827,  .386   }"
+      },
+      {
+        "type": "0x28796629",
+        "length": 6,
+        "value": "{ -.364,  1.870,  .385   }"
+      },
+      {
+        "type": "0x2879662A",
+        "length": 6,
+        "value": "{ -.322,  1.875,  .385   }"
+      },
+      {
+        "type": "0x2879662B",
+        "length": 6,
+        "value": "{ -.322,  1.875,  .385   }"
+      },
+      {
+        "type": "0x289BB3C4",
+        "length": 6,
+        "value": "{ -.109,  1.889,  .383   }"
+      },
+      {
+        "type": "0x289BB3C5",
+        "length": 6,
+        "value": "{ -.066,  1.888,  .383   }"
+      },
+      {
+        "type": "0x289BB3C6",
+        "length": 6,
+        "value": "{ -.066,  1.888,  .383   }"
+      },
+      {
+        "type": "0x28BE015F",
+        "length": 6,
+        "value": "{  .175,  1.868,  .381   }"
+      },
+      {
+        "type": "0x28BE0160",
+        "length": 6,
+        "value": "{  .217,  1.862,  .381   }"
+      },
+      {
+        "type": "0x28BE0161",
+        "length": 6,
+        "value": "{  .217,  1.862,  .381   }"
+      },
+      {
+        "type": "0x28E04EFA",
+        "length": 6,
+        "value": "{  .447,  1.797,  .380   }"
+      },
+      {
+        "type": "0x28E04EFB",
+        "length": 6,
+        "value": "{  .489,  1.789,  .380   }"
+      },
+      {
+        "type": "0x28E04EFC",
+        "length": 6,
+        "value": "{  .489,  1.789,  .380   }"
+      },
+      {
+        "type": "0x74D34EBE",
+        "length": 6,
+        "value": "{ -0.215,  0.006, -0.549 }"
+      },
+      {
+        "type": "0x74D34EBF",
+        "length": 6,
+        "value": "{ -0.786,  0.006, -0.308 }"
+      },
+      {
+        "type": "0x74D34EC0",
+        "length": 6,
+        "value": "{  0.617,  0.006,  0.140 }"
+      },
+      {
+        "type": "0x9BAE0B2E",
+        "length": 6,
+        "value": "{ -0.087,  1.386,  0.386 }"
+      },
+      {
+        "type": "0x9BAE0B2F",
+        "length": 6,
+        "value": "{  0.372,  0.883, -0.120 }"
+      },
+      {
+        "type": "0x9BAE0B30",
+        "length": 6,
+        "value": "{ -0.512,  1.592, -0.322 }"
+      },
+      {
+        "type": "0x08DD3607",
+        "length": 3,
+        "value": "{ -1.00, 5.0 }"
+      },
+      {
+        "type": "0x08DD3608",
+        "length": 3,
+        "value": "{ -1.00, 5.0 }"
+      },
+      {
+        "type": "0x08DD3609",
+        "length": 4,
+        "value": "{  1.00, 1.75 }"
+      },
+      {
+        "type": "0xE41EF9D0",
+        "length": 0,
+        "value": "10"
+      },
+      {
+        "type": "0xE41EF9D1",
+        "length": 0,
+        "value": "10"
+      },
+      {
+        "type": "0xE41EF9D2",
+        "length": 0,
+        "value": "10"
+      },
+      {
+        "type": "0xE41EF9D3",
+        "length": 0,
+        "value": "10"
+      },
+      {
+        "type": "0xE41EF9D4",
+        "length": 0,
+        "value": "10"
+      },
+      {
+        "type": "0x897929FA",
+        "length": 0,
+        "value": "1"
+      },
+      {
+        "type": "0x7FC3A6D8",
+        "length": 4,
+        "value": "{ 0.0, 1.4, 0.0 }"
+      },
+      {
+        "type": "0xC51AAE79",
+        "length": 4,
+        "value": "{ 1.2, 2.8, 2.3 }"
+      }
+    ]
+  }
+}

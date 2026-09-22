@@ -1,0 +1,37 @@
+# game=TSSM platform=GameCube archive=tr03.HIP asset=0x4C1EE4D8 type=MVPT call=MVPT size=40 checksum=742892417 name=BOTRON_12E_NME_MP_01
+BLOB:
+TB7k2A0AAB1CiKUZwJYyr0K7GFcnEAEAAAAAAAAAAAC/gAAAv4AAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x4C1EE4D8",
+    "baseType": "0x0D",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "BOTRON_12E_NME_MP_01",
+  "FileName": "BOTRON_12E_NME_MP_01",
+  "Type": "MVPT",
+  "AssetID": "0x4C1EE4D8",
+  "AssetName": "BOTRON_12E_NME_MP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "MVPT",
+  "AssetChecksum": 742892417,
+  "MVPT": {
+    "pos": {
+      "x": 68.32246,
+      "y": -4.693687,
+      "z": 93.54754
+    },
+    "wt": 10000,
+    "on": "Zone",
+    "bezIndex": 0,
+    "flg_props": 0,
+    "numPoints": 0,
+    "delay": 0,
+    "zoneRadius": -1,
+    "arenaRadius": -1,
+    "points": []
+  }
+}

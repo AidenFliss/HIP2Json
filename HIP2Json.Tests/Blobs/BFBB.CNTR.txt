@@ -1,0 +1,24 @@
+# game=BFBB platform=GameCube archive=db02.HIP asset=0x5CAAD1AF type=CNTR call=CNTR size=12 checksum=-698874039 name=JF_TASK_COUNTER_01
+BLOB:
+XKrRrxYAAB0AAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x5CAAD1AF",
+    "baseType": "0x16",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "JF_TASK_COUNTER_01",
+  "FileName": "JF_TASK_COUNTER_01",
+  "Type": "CNTR",
+  "AssetID": "0x5CAAD1AF",
+  "AssetName": "JF_TASK_COUNTER_01",
+  "AssetFileName": "",
+  "AssetTypeName": "CNTR",
+  "AssetChecksum": -698874039,
+  "CNTR": {
+    "count": 0
+  }
+}

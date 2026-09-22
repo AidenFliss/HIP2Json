@@ -1,0 +1,43 @@
+# game=TSSM platform=GameCube archive=bb01.HIP asset=0x68F60EEF type=TASK_BOX call=DYNA size=52 checksum=1828854721 name=MINDY_4_MANTIME_TASKBOX
+BLOB:
+aPYO7wAAAB3p0sG7AAIAAAEAAQHuFhK4zLF6HgAAAACgisSLSBpIE3oaybwAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x68F60EEF",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "MINDY_4_MANTIME_TASKBOX",
+  "FileName": "MINDY_4_MANTIME_TASKBOX",
+  "Type": "TASK_BOX",
+  "AssetID": "0x68F60EEF",
+  "AssetName": "MINDY_4_MANTIME_TASKBOX",
+  "AssetFileName": "",
+  "AssetTypeName": "TASK_BOX",
+  "AssetChecksum": 1828854721,
+  "DYNA": {
+    "type": "0xE9D2C1BB",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "game_object:task_box",
+    "dynaSpecificData": {
+      "persistent": true,
+      "loop": false,
+      "enable": true,
+      "retry": true,
+      "talk_box": "0xEE1612B8",
+      "next_task": "0xCCB17A1E",
+      "stages": [
+        "0x00000000",
+        "0xA08AC48B",
+        "0x481A4813",
+        "0x7A1AC9BC",
+        "0x00000000",
+        "0x00000000"
+      ]
+    }
+  }
+}

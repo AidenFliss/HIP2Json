@@ -1,0 +1,110 @@
+# game=BFBB platform=GameCube archive=rb03.HOP asset=0xCAD1BCB1 type=SHDW call=SHDW size=220 checksum=-366221170 name=RB03.simple shadow table
+BLOB:
+AAAAEmS68qEslKCCAAAAADlx3b0aKgQTAAAAALxFl7UaKgQTAAAAABponSIaKgQTAAAAAPZdfOcaKgQTAAAAAAbe+1IaKgQTAAAAAAOkliQaKgQTAAAAAPa19aiCARYsAAAAAVZ82ZqCARYsAAAAAWROIqyCARYsAAAAAcdK8GqCARYsAAAAAYFOdd2CARYsAAAAAWQWECbcMeHJAAAAAbNIYufcMeHJAAAAAXtOqp8aKgQTAAAAATqP+lA8gjMDAAAAAXMxaoQ8gjMDAAAAAUanJa4aKgQTAAAAAQ==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "RB03.simple shadow table",
+  "FileName": "RB03.simple shadow table",
+  "Type": "SHDW",
+  "AssetID": "0xCAD1BCB1",
+  "AssetName": "RB03.simple shadow table",
+  "AssetFileName": "",
+  "AssetTypeName": "SHDW",
+  "AssetChecksum": -366221170,
+  "SHDW": {
+    "entryCount": 18,
+    "entries": [
+      {
+        "modelAssetID": "0x64BAF2A1",
+        "shadowAssetID": "0x2C94A082",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0x3971DDBD",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0xBC4597B5",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0x1A689D22",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0xF65D7CE7",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0x06DEFB52",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0x03A49624",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 0
+      },
+      {
+        "modelAssetID": "0xF6B5F5A8",
+        "shadowAssetID": "0x8201162C",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x567CD99A",
+        "shadowAssetID": "0x8201162C",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x644E22AC",
+        "shadowAssetID": "0x8201162C",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0xC74AF06A",
+        "shadowAssetID": "0x8201162C",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x814E75DD",
+        "shadowAssetID": "0x8201162C",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x64161026",
+        "shadowAssetID": "0xDC31E1C9",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0xB34862E7",
+        "shadowAssetID": "0xDC31E1C9",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x7B4EAA9F",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x3A8FFA50",
+        "shadowAssetID": "0x3C823303",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x73316A84",
+        "shadowAssetID": "0x3C823303",
+        "unknown": 1
+      },
+      {
+        "modelAssetID": "0x46A725AE",
+        "shadowAssetID": "0x1A2A0413",
+        "unknown": 1
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+# game=TSSM platform=GameCube archive=mnuc.HIP asset=0x63B34F73 type=COND call=COND size=88 checksum=-849867134 name=MUSIC VOL COND 9
+BLOB:
+Y7NPcx8CAA0AAAAJhNSibQAAAAAAAAAAAD0AA1r26XoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPgAEWvbpegAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x63B34F73",
+    "baseType": "0x1F",
+    "linkCount": 2,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes"
+  },
+  "Links": [
+    {
+      "srcEvent": "True",
+      "dstEvent": "Visible",
+      "dstAssetID": "0x5AF6E97A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "False",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0x5AF6E97A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "MUSIC VOL COND 9",
+  "FileName": "MUSIC VOL COND 9",
+  "Type": "COND",
+  "AssetID": "0x63B34F73",
+  "AssetName": "MUSIC VOL COND 9",
+  "AssetFileName": "",
+  "AssetTypeName": "COND",
+  "AssetChecksum": -849867134,
+  "COND": {
+    "constNum": 9,
+    "exprl": "MusicVolume",
+    "op": "EQUAL_TO",
+    "value_asset": "0x00000000"
+  }
+}

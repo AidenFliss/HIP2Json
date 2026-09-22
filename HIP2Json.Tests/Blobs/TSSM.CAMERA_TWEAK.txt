@@ -1,0 +1,33 @@
+# game=TSSM platform=GameCube archive=sc02.HIP asset=0xC6D0471A type=CAMERA_TWEAK call=DYNA size=32 checksum=-792435416 name=TOPTRACK_CAMTWEAK
+BLOB:
+xtBHGgAAAB2QkvsUAAEAAAAAAAFAAAAAAAAAAD/AAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xC6D0471A",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TOPTRACK_CAMTWEAK",
+  "FileName": "TOPTRACK_CAMTWEAK",
+  "Type": "CAMERA_TWEAK",
+  "AssetID": "0xC6D0471A",
+  "AssetName": "TOPTRACK_CAMTWEAK",
+  "AssetFileName": "",
+  "AssetTypeName": "CAMERA_TWEAK",
+  "AssetChecksum": -792435416,
+  "DYNA": {
+    "type": "0x9092FB14",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Camera_Tweak",
+    "dynaSpecificData": {
+      "priority": 1,
+      "time": 2,
+      "pitch_adjust": 0,
+      "dist_adjust": 1.5
+    }
+  }
+}

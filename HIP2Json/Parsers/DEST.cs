@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -53,6 +54,10 @@ public sealed class DESTParser : AssetParser
             }
         }
 
+        dest.trailing = br.BaseStream.Position < br.BaseStream.Length
+            ? Convert.ToBase64String(br.ReadBytes((int)(br.BaseStream.Length - br.BaseStream.Position)))
+            : string.Empty;
+
         return dest;
     }
 
@@ -97,6 +102,9 @@ public sealed class DESTParser : AssetParser
                 WriteUInt32BE(bw, anim);
         }
 
+        if (!string.IsNullOrEmpty(dest.trailing))
+            bw.Write(Convert.FromBase64String(dest.trailing));
+
         return ms.ToArray();
     }
 }
@@ -117,6 +125,7 @@ public class DEST
     public float respawn { get; set; }
     public byte target_priority { get; set; }
     public DESTState[] states { get; set; }
+    public string trailing { get; set; }
 }
 
 public class DESTState

@@ -1,0 +1,39 @@
+# game=TSSM platform=GameCube archive=jk01.HIP asset=0xDF451254 type=POINTER call=DYNA size=40 checksum=-871371651 name=POINTER_11_04_JK01
+BLOB:
+30USVAAAAB0hlsE1AAEAAELNbytBlWC+wu05gUNN3IEAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xDF451254",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "POINTER_11_04_JK01",
+  "FileName": "POINTER_11_04_JK01",
+  "Type": "POINTER",
+  "AssetID": "0xDF451254",
+  "AssetName": "POINTER_11_04_JK01",
+  "AssetFileName": "",
+  "AssetTypeName": "POINTER",
+  "AssetChecksum": -871371651,
+  "DYNA": {
+    "type": "0x2196C135",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "pointer",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 102.717125,
+        "y": 18.672237,
+        "z": -118.61231
+      },
+      "rotation": {
+        "x": 205.86134,
+        "y": 0,
+        "z": 0
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+# game=TSSM platform=GameCube archive=tr03.HOP asset=0x90EFA2D3 type=COLL call=COLL size=16 checksum=-1126497481 name=TR03.collision table
+BLOB:
+AAAAAbiJXRQAAAAAuIldFA==
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "TR03.collision table",
+  "FileName": "TR03.collision table",
+  "Type": "COLL",
+  "AssetID": "0x90EFA2D3",
+  "AssetName": "TR03.collision table",
+  "AssetFileName": "",
+  "AssetTypeName": "COLL",
+  "AssetChecksum": -1126497481,
+  "COLL": {
+    "sTableCount": 1,
+    "entries": [
+      {
+        "baseModel": "0xB8895D14",
+        "colModel": "0x00000000",
+        "camcolModel": "0xB8895D14"
+      }
+    ]
+  }
+}

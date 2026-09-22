@@ -1,0 +1,35 @@
+# game=TSSM platform=Xbox archive=sc02.HIP asset=0x5F43C5DB type=WATER_BODY call=DYNA size=40 checksum=1207030571 name=WATER_BODY_02
+BLOB:
+28VDXwAAHQBbutSQAQAAAAMAAADMASMaRzAUBMqvW+iWdOvfAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x5F43C5DB",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WATER_BODY_02",
+  "FileName": "WATER_BODY_02",
+  "Type": "WATER_BODY",
+  "AssetID": "0x5F43C5DB",
+  "AssetName": "WATER_BODY_02",
+  "AssetFileName": "",
+  "AssetTypeName": "WATER_BODY",
+  "AssetChecksum": 1207030571,
+  "DYNA": {
+    "type": "0x90D4BA5B",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "effect:water_body",
+    "dynaSpecificData": {
+      "flags": 3,
+      "motion_type": "0x1A2301CC",
+      "body": "0x04143047",
+      "facade_refract": "0xE85BAFCA",
+      "facade_reflect": "0xDFEB7496",
+      "light_dir": "0x00000000"
+    }
+  }
+}

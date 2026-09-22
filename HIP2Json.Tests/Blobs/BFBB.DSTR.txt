@@ -1,0 +1,67 @@
+# game=BFBB platform=GameCube archive=sm04.HIP asset=0x9BF3E631 type=DSTR call=DSTR size=140 checksum=1505435268 name=ARROWS_DSTR_031
+BLOB:
+m/PmMRsAAB0BAAACAAAAAAAAAABAnMFRAAAAAD4SGAxCXZx4wvBcKcLe5uk/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAPNxJHEAAAAAAAAAAAAAAAAAAAABAAAAAAAB/8gCAAAAQIAAAD+AAADL7F47AAAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x9BF3E631",
+    "baseType": "0x1B",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 4.898598,
+      "y": 0,
+      "z": 0.14266986
+    },
+    "pos": {
+      "x": 55.4028,
+      "y": -120.18,
+      "z": -111.451
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0xF3712471",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "ARROWS_DSTR_031",
+  "FileName": "ARROWS_DSTR_031",
+  "Type": "DSTR",
+  "AssetID": "0x9BF3E631",
+  "AssetName": "ARROWS_DSTR_031",
+  "AssetFileName": "",
+  "AssetTypeName": "DSTR",
+  "AssetChecksum": 1505435268,
+  "DSTR": {
+    "animSpeed": 0,
+    "initAnimState": 0,
+    "health": 1,
+    "spawnItemID": "0x00000000",
+    "dflags": 131016,
+    "collType": 2,
+    "fxType": 0,
+    "blast_radius": 4,
+    "blast_strength": 1,
+    "shrapnelID_destroy": "0xCBEC5E3B",
+    "shrapnelID_hit": "0x00000000",
+    "sfx_destroy": "0x00000000",
+    "sfx_hit": "0x00000000",
+    "hitModel": "0x00000000",
+    "destroyModel": "0x00000000"
+  }
+}

@@ -1,0 +1,27 @@
+# game=TSSM platform=GameCube archive=tr02.HIP asset=0xA67BA08F type=PORT call=PORT size=24 checksum=-672852210 name=POPPER_PORTAL
+BLOB:
+pnugjxAAAB2H5xixS0qB1gAAAABUUjAy
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xA67BA08F",
+    "baseType": "0x10",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "POPPER_PORTAL",
+  "FileName": "POPPER_PORTAL",
+  "Type": "PORT",
+  "AssetID": "0xA67BA08F",
+  "AssetName": "POPPER_PORTAL",
+  "AssetFileName": "",
+  "AssetTypeName": "PORT",
+  "AssetChecksum": -672852210,
+  "PORT": {
+    "assetCameraID": "0x87E718B1",
+    "assetMarkerID": "0x4B4A81D6",
+    "ang": 0,
+    "sceneID": "TR02"
+  }
+}

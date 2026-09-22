@@ -1,0 +1,76 @@
+# game=TSSM platform=GameCube archive=boot.HIP asset=0x0E0896ED type=SMOKE_EMITTER call=DYNA size=128 checksum=-1652128779 name=FIRE_SMOKE_EMITTER
+BLOB:
+DgiW7QAAAB0JA/u5AAEAAAAAAAAAAAAAQoCQmkHvBaFCgJCaAAAAAAAAAAAAAAAAP4AAAD+AAAA/gAAARTwHQAABAAFBIAAAP8AAAEAAAAA/gAAAQAAAAD+AAABAAAAAAAAAAAAAAAC/yQ/YAAAAAAAAAAA+TMzNm5ubN/////8=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0E0896ED",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "FIRE_SMOKE_EMITTER",
+  "FileName": "FIRE_SMOKE_EMITTER",
+  "Type": "SMOKE_EMITTER",
+  "AssetID": "0x0E0896ED",
+  "AssetName": "FIRE_SMOKE_EMITTER",
+  "AssetFileName": "",
+  "AssetTypeName": "SMOKE_EMITTER",
+  "AssetChecksum": -1652128779,
+  "DYNA": {
+    "type": "0x0903FBB9",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "effect:smoke_emitter",
+    "dynaSpecificData": {
+      "flags": 0,
+      "attach_to": "0x00000000",
+      "loc": {
+        "x": 64.282425,
+        "y": 29.877748,
+        "z": 64.282425
+      },
+      "dir": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "scale": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "texture": "0x453C0740",
+      "texture_rows": 1,
+      "texture_columns": 1,
+      "rate": 10,
+      "life_min": 1.5,
+      "life_max": 2,
+      "size_min": 1,
+      "size_max": 2,
+      "vel_min": 1,
+      "vel_max": 2,
+      "growth": 0,
+      "vel_dir": {
+        "x": 0,
+        "y": -1.570796,
+        "z": 0
+      },
+      "vel_dir_vary": 0,
+      "wind": 0.2,
+      "color_birth": {
+        "r": 155,
+        "g": 155,
+        "b": 155,
+        "a": 55
+      },
+      "color_death": {
+        "r": 255,
+        "g": 255,
+        "b": 255,
+        "a": 255
+      }
+    }
+  }
+}

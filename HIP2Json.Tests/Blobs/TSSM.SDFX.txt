@@ -1,0 +1,31 @@
+# game=TSSM platform=GameCube archive=bl03.HIP asset=0xFF861A34 type=SDFX call=SDFX size=32 checksum=-895896687 name=FLIPPLAT_CLICK_SFX_08
+BLOB:
+/4YaNEsAAB3BpXwJAqlCN8KYBRJCBElSQaqM5wAAAAQ=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xFF861A34",
+    "baseType": "0x4B",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "FLIPPLAT_CLICK_SFX_08",
+  "FileName": "FLIPPLAT_CLICK_SFX_08",
+  "Type": "SDFX",
+  "AssetID": "0xFF861A34",
+  "AssetName": "FLIPPLAT_CLICK_SFX_08",
+  "AssetFileName": "",
+  "AssetTypeName": "SDFX",
+  "AssetChecksum": -895896687,
+  "SDFX": {
+    "soundGroupAssetID": "0xC1A57C09",
+    "attachID": "0x02A94237",
+    "pos": {
+      "x": -76.0099,
+      "y": 33.0716,
+      "z": 21.3188
+    },
+    "flags": "PlayFromEntity"
+  }
+}

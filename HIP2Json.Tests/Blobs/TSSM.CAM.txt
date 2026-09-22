@@ -1,0 +1,64 @@
+# game=TSSM platform=GameCube archive=de01.HIP asset=0x2C9C41D9 type=CAM call=CAM size=136 checksum=-2083942511 name=MINDY_CAM_01
+BLOB:
+LJxB2QcAAB1CcHH4QFtDFELW3li+7M8xvnSEP79aldq96Oy7P3iYMb5W/+2/YRjOMoAAAD7z3R8AAAAAAAAAAAAAAAAAHgAtQqoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEBwAAAAAAAAAAAAgAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x2C9C41D9",
+    "baseType": "0x07",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "MINDY_CAM_01",
+  "FileName": "MINDY_CAM_01",
+  "Type": "CAM",
+  "AssetID": "0x2C9C41D9",
+  "AssetName": "MINDY_CAM_01",
+  "AssetFileName": "",
+  "AssetTypeName": "CAM",
+  "AssetChecksum": -2083942511,
+  "CAM": {
+    "pos": {
+      "x": 60.111298,
+      "y": 3.4259691,
+      "z": 107.434265
+    },
+    "forward": {
+      "x": -0.46251824,
+      "y": -0.23878573,
+      "z": -0.85384905
+    },
+    "up": {
+      "x": -0.11373278,
+      "y": 0.97107226,
+      "z": -0.20996065
+    },
+    "left": {
+      "x": -0.87928474,
+      "y": 1.4901161E-08,
+      "z": 0.4762964
+    },
+    "viewOffset": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "offsetStartFrames": 30,
+    "offsetEndFrames": 45,
+    "fov": 85,
+    "transitionTime": 0,
+    "transitionType": "None",
+    "flags": 0,
+    "fadeUp": 0,
+    "fadeDown": 0,
+    "validFlags": 65984,
+    "marker1": "0x00000000",
+    "marker2": "0x00000000",
+    "camType": "Static",
+    "specific": {
+      "type": "Static",
+      "unused": 0
+    }
+  }
+}

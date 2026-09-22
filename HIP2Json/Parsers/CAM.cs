@@ -71,13 +71,16 @@ public sealed class CAMParser : AssetParser
         if (cam.specific != null)
             WriteCamSpecific(bw, cam.specific);
 
-        while (ms.Length < 0x78)
+        while (ms.Length < 0x70)
             bw.Write((byte)0);
 
         WriteUInt32BE(bw, cam.validFlags);
         WriteUInt32BE(bw, cam.marker1);
         WriteUInt32BE(bw, cam.marker2);
         WriteByte(bw, (byte)cam.camType);
+
+        while (ms.Length < 0x80)
+            bw.Write((byte)0);
 
         return ms.ToArray();
     }

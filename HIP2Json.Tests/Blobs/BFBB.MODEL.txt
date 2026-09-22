@@ -1,0 +1,40 @@
+# game=BFBB platform=GameCube archive=mnu4.HIP asset=0xD16A4503 type=MODEL call=DYNA size=44 checksum=1772059000 name=HUD_MODEL_PATSSOCK PER LEVEL
+BLOB:
+0WpFAwAAAB3/VpHSAAEAAD5MzM0/HCj2O0Sbpj11wo89dcKPAAAAAKsDfj0=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xD16A4503",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HUD_MODEL_PATSSOCK PER LEVEL",
+  "FileName": "HUD_MODEL_PATSSOCK PER LEVEL",
+  "Type": "MODEL",
+  "AssetID": "0xD16A4503",
+  "AssetName": "HUD_MODEL_PATSSOCK PER LEVEL",
+  "AssetFileName": "",
+  "AssetTypeName": "MODEL",
+  "AssetChecksum": 1772059000,
+  "DYNA": {
+    "type": "0xFF5691D2",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "hud:model",
+    "dynaSpecificData": {
+      "loc": {
+        "x": 0.2,
+        "y": 0.61,
+        "z": 0.003
+      },
+      "size": {
+        "x": 0.06,
+        "y": 0.06,
+        "z": 0
+      },
+      "model": "0xAB037E3D"
+    }
+  }
+}

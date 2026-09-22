@@ -1,0 +1,88 @@
+# game=TSSM platform=GameCube archive=de02.HIP asset=0x0EDF14C5 type=BOULDERGENERATOR call=DYNA size=136 checksum=-60209545 name=ROLLER_BLDRGEN_01
+BLOB:
+Dt8UxQACAB27SGTYAAEAAHSpIhcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQrQAAAAAAAAAAAABAFcBMzcxxb4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAVwEzNzHFvwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x0EDF14C5",
+    "baseType": "0x00",
+    "linkCount": 2,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0x3731C5BE",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Scene_Prepare",
+      "dstEvent": "Connect_IOwnYou",
+      "dstAssetID": "0x3731C5BF",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "ROLLER_BLDRGEN_01",
+  "FileName": "ROLLER_BLDRGEN_01",
+  "Type": "BOULDERGENERATOR",
+  "AssetID": "0x0EDF14C5",
+  "AssetName": "ROLLER_BLDRGEN_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BOULDERGENERATOR",
+  "AssetChecksum": -60209545,
+  "DYNA": {
+    "type": "0xBB4864D8",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:BoulderGenerator",
+    "dynaSpecificData": {
+      "objct": "0x74A92217",
+      "offset": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "offsetRand": 0,
+      "initvel": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "velAngleRand": 0,
+      "velMagRand": 0,
+      "initaxis": {
+        "x": 0,
+        "y": 90,
+        "z": 0
+      },
+      "angvel": 1E-45
+    }
+  }
+}

@@ -1,0 +1,197 @@
+# game=BFBB platform=GameCube archive=kf05.HIP asset=0x3794E442 type=TIMR call=TIMR size=304 checksum=-1938891905 name=KF05_RACE_TIMER
+BLOB:
+N5TkQg4JAB1CyAAAAAAAAAAUAAKtFqQKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAAW1b2x8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAEox0zsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAOjHTOwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABIAGJ6kW3sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwATnqRbewAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUABjYTDKiAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABQAE56kW3sAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFAAKN5TkQgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x3794E442",
+    "baseType": "0x0E",
+    "linkCount": 9,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Disable",
+      "dstAssetID": "0xAD16A40A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x6D5BDB1F",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0xA31D33B0",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xA31D33B0",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Run",
+      "dstEvent": "Play",
+      "dstAssetID": "0x9EA45B7B",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Stop",
+      "dstEvent": "Stop",
+      "dstAssetID": "0x9EA45B7B",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Play",
+      "dstAssetID": "0xD84C32A2",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Stop",
+      "dstAssetID": "0x9EA45B7B",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Expired",
+      "dstEvent": "Reset",
+      "dstAssetID": "0x3794E442",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "KF05_RACE_TIMER",
+  "FileName": "KF05_RACE_TIMER",
+  "Type": "TIMR",
+  "AssetID": "0x3794E442",
+  "AssetName": "KF05_RACE_TIMER",
+  "AssetFileName": "",
+  "AssetTypeName": "TIMR",
+  "AssetChecksum": -1938891905,
+  "TIMR": {
+    "seconds": 100,
+    "randomRange": 0
+  }
+}

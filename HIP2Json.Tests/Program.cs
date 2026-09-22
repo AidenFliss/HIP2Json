@@ -37,16 +37,30 @@ static class Program
                     only = args[i + 1].ToUpperInvariant(); i++; break;
                 case "--bench" when i + 1 < args.Length && int.TryParse(args[i + 1], out int b):
                     benchMs = Math.Max(1, b); i++; break;
+                case "--harvest" when i + 1 < args.Length:
+                    return Harvester.Harvest(args[i + 1], args.Length > i + 2 ? args[i + 2] : "", args.Length > i + 3 ? args[i + 3] : "", DateTime.UtcNow.Ticks);
+                case "--blobs" when i + 1 < args.Length:
+                    string blobDir = args[i + 1];
+                    string? onlyBlob = null;
+                    if (i + 2 < args.Length && !args[i + 2].StartsWith("--"))
+                        onlyBlob = args[i + 2];
+                    return BlobRunner.Run(blobDir, onlyBlob);
+                case "--archives" when i + 1 < args.Length:
+                    return ArchiveGate.Run(args[i + 1], args.Length > i + 2 ? args[i + 2] : "", args.Length > i + 3 ? args[i + 3] : "/tmp/opencode/archgate", args.Length > i + 4 ? args[i + 4] : "");
                 case "--list":
                     listOnly = true; break;
                 case "--help":
                 case "-h":
                     Console.WriteLine("HIP2Json.Tests: fuzz + byte-accuracy idempotence per parser");
-                    Console.WriteLine("  --fuzz  <n>     fuzz buffers per parser (default 25; CI: 15 for fast gate)");
+                    Console.WriteLine("  --fuzz  <n>     fuzz buffers per parser (default 25; CI: 8 for fast gate)");
                     Console.WriteLine("  --seed  <n>     RNG seed (default 0x5EEDF00D)");
                     Console.WriteLine("  --only  <TYPE>  run a single parser type (e.g. RWTV, SND, MODL)");
                     Console.WriteLine("  --bench <ms>    bench: repeat ~<ms> per parser, print ops/s");
                     Console.WriteLine("  --list          list registered parser types only");
+                    Console.WriteLine("  --archives <bfbbRoot> <tssmRoot> [workDir]  full-archive roundtrip gate (boot.HIP + most-uniq-types per game)");
+                    Console.WriteLine("  --harvest <bfbbRoot> <tssmRoot> <outDir> [seed]  harvest real production blobs into outDir");
+                    Console.WriteLine("  --blobs <dir>   run harvested production blobs: VALUES roundtrip + byte-identical repack");
+                    Console.WriteLine("                  (fixtures always it; registered types without a real fixture print a warning, not a failure)");
                     Console.WriteLine("  exit 0  iff  crashes==0 AND idempotence-miss==0");
                     return 0;
             }

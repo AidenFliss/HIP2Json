@@ -19,6 +19,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         xColor lightColor = ReadColor(br);
         xColor auraColor = ReadColor(br);
         uint flareTexture = ReadUInt32BE(br);
+        xColor flareColor = ReadColor(br);
         float size_min = ReadFloatBE(br);
         float size_max = ReadFloatBE(br);
         byte glow_min = ReadByte(br);
@@ -38,6 +39,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
             lightColor = lightColor,
             auraColor = auraColor,
             flareTexture = flareTexture,
+            flareColor = flareColor,
             size_min = size_min,
             size_max = size_max,
             glow_min = glow_min,
@@ -64,6 +66,7 @@ public sealed class effect_spotlightParser : AbstractDYNAParser
         WriteColorBE(bw, spotlight.lightColor);
         WriteColorBE(bw, spotlight.auraColor);
         WriteUInt32BE(bw, spotlight.flareTexture);
+        WriteColorBE(bw, spotlight.flareColor);
         WriteFloatBE(bw, spotlight.size_min);
         WriteFloatBE(bw, spotlight.size_max);
         WriteByte(bw, spotlight.glow_min);
@@ -98,6 +101,7 @@ public class effect_spotlight
 
     [JsonConverter(typeof(AssetIDConverter))]
     public uint flareTexture { get; set; }
+    public xColor flareColor { get; set; }
     public float size_min { get; set; }
     public float size_max { get; set; }
     public byte glow_min { get; set; }

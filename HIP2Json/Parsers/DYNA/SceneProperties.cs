@@ -19,7 +19,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         uint flags = ReadUInt32BE(br);
         float waterTileWidth = ReadFloatBE(br);
         float lodFadeDistance = ReadFloatBE(br);
-        br.ReadBytes(4);
+        br.ReadBytes(16);
 
         return new SceneProperties
         {
@@ -57,7 +57,7 @@ public sealed class ScenePropertiesParser : AbstractDYNAParser
         WriteUInt32BE(bw, sceneProperties.flags);
         WriteFloatBE(bw, sceneProperties.waterTileWidth);
         WriteFloatBE(bw, sceneProperties.lodFadeDistance);
-        bw.Write(new byte[4]);
+        bw.Write(new byte[16]);
 
         return ms.ToArray();
     }

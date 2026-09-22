@@ -1,0 +1,56 @@
+# game=BFBB platform=GameCube archive=rb01.HIP asset=0xCC1E0D1D type=PKUP call=PKUP size=92 checksum=1841178153 name=RED_SHINY_61
+BLOB:
+zB4NHQQAAB8BPgACAAAAAAAAAAC/gHTMAAAAAAAAAABCSepMQYU1osK3j8w/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAJTiVGMAAAAAfIrFPgACAAQ=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xCC1E0D1D",
+    "baseType": "0x04",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Persistent, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 62,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": -1.0035644,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 50.478806,
+      "y": 16.651188,
+      "z": -91.78085
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x94E25463",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "RED_SHINY_61",
+  "FileName": "RED_SHINY_61",
+  "Type": "PKUP",
+  "AssetID": "0xCC1E0D1D",
+  "AssetName": "RED_SHINY_61",
+  "AssetFileName": "",
+  "AssetTypeName": "PKUP",
+  "AssetChecksum": 1841178153,
+  "PKUP": {
+    "pickupType": "RedShinyObject",
+    "pickupHash": "0x7C8AC53E",
+    "pickupFlags": "EnabledOnStart",
+    "pickupValue": 4
+  }
+}

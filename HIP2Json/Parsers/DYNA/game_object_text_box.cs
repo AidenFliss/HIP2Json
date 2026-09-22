@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text.Json.Serialization;
 
@@ -24,21 +25,10 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
         float inset_bottom = ReadFloatBE(br);
 
         int xjustifyValue = ReadInt32BE(br);
-        TextJustify xjustify = xjustifyValue switch
-        {
-            0 => TextJustify.Left,
-            1 => TextJustify.Center,
-            _ => TextJustify.Right,
-        };
+        TextJustify xjustify = (TextJustify)xjustifyValue;
 
         int expandValue = ReadInt32BE(br);
-        TextExpandMode expand = expandValue switch
-        {
-            0 => TextExpandMode.Up,
-            1 => TextExpandMode.Center,
-            2 => TextExpandMode.Down,
-            _ => TextExpandMode.Clip,
-        };
+        TextExpandMode expand = (TextExpandMode)expandValue;
 
         float max_height = ReadFloatBE(br);
         BackdropType backdrop_type = (BackdropType)ReadUInt32BE(br);
@@ -58,6 +48,10 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
             backdrop_color = new xColor();
             backdrop_texture = 0;
         }
+
+        string trailing = br.BaseStream.Position < br.BaseStream.Length
+            ? Convert.ToBase64String(br.ReadBytes((int)(br.BaseStream.Length - br.BaseStream.Position)))
+            : string.Empty;
 
         return new game_object_text_box
         {
@@ -82,6 +76,7 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
             backdrop_type = backdrop_type,
             backdrop_color = backdrop_color,
             backdrop_texture = backdrop_texture,
+            trailing = trailing,
         };
     }
 
@@ -113,6 +108,9 @@ public sealed class game_object_text_boxParser : AbstractDYNAParser
         WriteUInt32BE(bw, (uint)textBox.backdrop_type);
         WriteColorBE(bw, textBox.backdrop_color);
         WriteUInt32BE(bw, textBox.backdrop_texture);
+
+        if (!string.IsNullOrEmpty(textBox.trailing))
+            bw.Write(Convert.FromBase64String(textBox.trailing));
 
         return ms.ToArray();
     }
@@ -149,4 +147,5 @@ public class game_object_text_box
 
     [JsonConverter(typeof(AssetIDConverter))]
     public uint backdrop_texture { get; set; }
+    public string trailing { get; set; }
 }

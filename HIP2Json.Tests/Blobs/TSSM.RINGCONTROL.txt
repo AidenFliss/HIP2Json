@@ -1,0 +1,169 @@
+# game=TSSM platform=GameCube archive=bb01.HIP asset=0x49E705EA type=RINGCONTROL call=DYNA size=424 checksum=1460128900 name=RING_CONTROL
+BLOB:
+SecF6gADAB0YAoynAAMAAAAAAAAUD65ZQAAAAAAAAEQAAAAoNoq5/gAAAAAAAAAAAAAAAAAAAAFS6fjeUun431Lp+OBS6fjhUun44lLp+ONS6fjkUun45VLp+OZS6flgUun5YVLp+WJS6fljUun5ZFLp+WVS6flmUun5Z1Lp+WhS6flpUun541Lp+eRS6fnlUun55lLp+edS6fnoUun56VLp+epS6fnrUun57FLp+mZS6fpnUun6aFLp+mlS6fpqUun6a1Lp+mxS6fptUun6blLp+m9S6frpUun66lLp+utS6frsUun67VLp+u5S6frvUun68FLp+vFS6fryUun7bFLp+21S6ftuUun7b1Lp+3BS6ftxUun7clLp+3NS6ft0Uun7dVLp++9S6fvwUun78VLp+/JS6fv0Uun79VLp+/ZS6fv3Uun7+AEVABIWPGMcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARUBE0nnBeoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFAABTTlkVQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x49E705EA",
+    "baseType": "0x00",
+    "linkCount": 3,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "RingChallengeFailed",
+      "dstEvent": "Run",
+      "dstAssetID": "0x163C631C",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "RingChallengeFailed",
+      "dstEvent": "RingChallengeReset",
+      "dstAssetID": "0x49E705EA",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "RingChallengeSuccess",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x4D396455",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "RING_CONTROL",
+  "FileName": "RING_CONTROL",
+  "Type": "RINGCONTROL",
+  "AssetID": "0x49E705EA",
+  "AssetName": "RING_CONTROL",
+  "AssetFileName": "",
+  "AssetTypeName": "RINGCONTROL",
+  "AssetChecksum": 1460128900,
+  "DYNA": {
+    "type": "0x18028CA7",
+    "version": 3,
+    "handle": 0,
+    "typeNameInternal": "game_object:RingControl",
+    "dynaSpecificData": {
+      "player": 0,
+      "modelForRings": "0x140FAE59",
+      "defaultWarningTime": 2,
+      "ringCount": 68,
+      "notUsedOffset": 40,
+      "sounds": [
+        "0x368AB9FE",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "numNextRingsToShow": 1,
+      "ringList": [
+        "0x52E9F8DE",
+        "0x52E9F8DF",
+        "0x52E9F8E0",
+        "0x52E9F8E1",
+        "0x52E9F8E2",
+        "0x52E9F8E3",
+        "0x52E9F8E4",
+        "0x52E9F8E5",
+        "0x52E9F8E6",
+        "0x52E9F960",
+        "0x52E9F961",
+        "0x52E9F962",
+        "0x52E9F963",
+        "0x52E9F964",
+        "0x52E9F965",
+        "0x52E9F966",
+        "0x52E9F967",
+        "0x52E9F968",
+        "0x52E9F969",
+        "0x52E9F9E3",
+        "0x52E9F9E4",
+        "0x52E9F9E5",
+        "0x52E9F9E6",
+        "0x52E9F9E7",
+        "0x52E9F9E8",
+        "0x52E9F9E9",
+        "0x52E9F9EA",
+        "0x52E9F9EB",
+        "0x52E9F9EC",
+        "0x52E9FA66",
+        "0x52E9FA67",
+        "0x52E9FA68",
+        "0x52E9FA69",
+        "0x52E9FA6A",
+        "0x52E9FA6B",
+        "0x52E9FA6C",
+        "0x52E9FA6D",
+        "0x52E9FA6E",
+        "0x52E9FA6F",
+        "0x52E9FAE9",
+        "0x52E9FAEA",
+        "0x52E9FAEB",
+        "0x52E9FAEC",
+        "0x52E9FAED",
+        "0x52E9FAEE",
+        "0x52E9FAEF",
+        "0x52E9FAF0",
+        "0x52E9FAF1",
+        "0x52E9FAF2",
+        "0x52E9FB6C",
+        "0x52E9FB6D",
+        "0x52E9FB6E",
+        "0x52E9FB6F",
+        "0x52E9FB70",
+        "0x52E9FB71",
+        "0x52E9FB72",
+        "0x52E9FB73",
+        "0x52E9FB74",
+        "0x52E9FB75",
+        "0x52E9FBEF",
+        "0x52E9FBF0",
+        "0x52E9FBF1",
+        "0x52E9FBF2",
+        "0x52E9FBF4",
+        "0x52E9FBF5",
+        "0x52E9FBF6",
+        "0x52E9FBF7",
+        "0x52E9FBF8"
+      ]
+    }
+  }
+}

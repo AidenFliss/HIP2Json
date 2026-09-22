@@ -1,0 +1,27 @@
+# game=BFBB platform=GameCube archive=db01.HIP asset=0xFB5202FE type=PORT call=PORT size=24 checksum=1915938301 name=TODB05
+BLOB:
++1IC/hAAAB2H5xixdamLnUM0AAA1MEJE
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xFB5202FE",
+    "baseType": "0x10",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TODB05",
+  "FileName": "TODB05",
+  "Type": "PORT",
+  "AssetID": "0xFB5202FE",
+  "AssetName": "TODB05",
+  "AssetFileName": "",
+  "AssetTypeName": "PORT",
+  "AssetChecksum": 1915938301,
+  "PORT": {
+    "assetCameraID": "0x87E718B1",
+    "assetMarkerID": "0x75A98B9D",
+    "ang": 180,
+    "sceneID": "50BD"
+  }
+}

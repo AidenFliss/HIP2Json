@@ -1,0 +1,33 @@
+# game=BFBB platform=GameCube archive=db02.HIP asset=0x80F635A0 type=CAMERA_TWEAK call=DYNA size=32 checksum=2029186911 name=HIGH_FALL_CAMTWEAK
+BLOB:
+gPY1oAAAAB2QkvsUAAEAAAAAAAE/AAAAQfAAAD8qfvo=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x80F635A0",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HIGH_FALL_CAMTWEAK",
+  "FileName": "HIGH_FALL_CAMTWEAK",
+  "Type": "CAMERA_TWEAK",
+  "AssetID": "0x80F635A0",
+  "AssetName": "HIGH_FALL_CAMTWEAK",
+  "AssetFileName": "",
+  "AssetTypeName": "CAMERA_TWEAK",
+  "AssetChecksum": 2029186911,
+  "DYNA": {
+    "type": "0x9092FB14",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:Camera_Tweak",
+    "dynaSpecificData": {
+      "priority": 1,
+      "time": 0.5,
+      "pitch_adjust": 30,
+      "dist_adjust": 0.666
+    }
+  }
+}

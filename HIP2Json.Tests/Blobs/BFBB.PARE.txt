@@ -1,0 +1,50 @@
+# game=BFBB platform=GameCube archive=gl01.HIP asset=0xCFFB3FCB type=PARE call=PARE size=84 checksum=1947099563 name=GUYSER_CONSTANT_EMIT_04
+BLOB:
+z/s/yyYAAB0DAgAA5gZ61z8mZmY/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAcLlfQhyaUT+TnGPCM1x4AAAAAD+AAAAAAAAAQEfx5gAAAANEyAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xCFFB3FCB",
+    "baseType": "0x26",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "GUYSER_CONSTANT_EMIT_04",
+  "FileName": "GUYSER_CONSTANT_EMIT_04",
+  "Type": "PARE",
+  "AssetID": "0xCFFB3FCB",
+  "AssetName": "GUYSER_CONSTANT_EMIT_04",
+  "AssetFileName": "",
+  "AssetTypeName": "PARE",
+  "AssetChecksum": 1947099563,
+  "PARE": {
+    "emitFlags": 3,
+    "emitType": "Circle",
+    "propID": "0xE6067AD7",
+    "specific": {
+      "type": "Circle",
+      "radius": 0.65,
+      "deflection": 1,
+      "dir": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "attachToID": "0x4070B95F",
+    "pos": {
+      "x": 39.1507,
+      "y": 1.15321,
+      "z": -44.8403
+    },
+    "vel": {
+      "x": 0,
+      "y": 1,
+      "z": 0
+    },
+    "velAngleVariation": 3.1241393,
+    "cullMode": 3,
+    "cullDistSqr": 1600
+  }
+}

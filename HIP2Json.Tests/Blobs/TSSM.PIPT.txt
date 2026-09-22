@@ -1,0 +1,979 @@
+# game=TSSM platform=GameCube archive=tr01.HOP asset=0xAF09EF97 type=PIPT call=PIPT size=2196 checksum=2021929855 name=TR01.pipe info table
+BLOB:
+AAAAid2ltCv/////AABlARyAAABDbt88/////wAAZQEcgAAAMPnoiv////8AAGUBHIAAAFt8jH//////AAAABBgAAABbfIyA/////wAAAAQYAAAAW3yMgf////8AAAAEGAAAAFt8jIL/////AAAABBgAAABbfIyD/////wAAAAQYAAAALFgNIP////8AAAAEGAAAACxYDSH/////AAAABBgAAAAsWA0i/////wAAAAQYAAAALFgNI/////8AAAAEGAAAACxYDST/////AAAABBgAAACsayVz/////wAAAAQYAAAArGsldP////8AAAAEGAAAAKxrJXX/////AAAABBgAAACsayV2/////wAAAAQYAAAArGsld/////8AAAAEGAAAAFt8jH//////AAAABBgAAABbfIyA/////wAAAAQYAAAAW3yMgf////8AAAAEGAAAAFt8jIL/////AAAABBgAAABbfIyD/////wAAAAQYAAAALFgNIP////8AAAAEGAAAACxYDSH/////AAAABBgAAAAsWA0i/////wAAAAQYAAAALFgNI/////8AAAAEGAAAACxYDST/////AAAABBgAAACsayVz/////wAAAAQYAAAArGsldP////8AAAAEGAAAAKxrJXX/////AAAABBgAAACsayV2/////wAAAAQYAAAArGsld/////8AAAAEGAAAAH7JYvv/////AAAABBgAAAB+yWL8/////wAAAAQYAAAAfsli/f////8AAAAEGAAAAH7JYv7/////AAAABBgAAAA1b/9t/////wAAAAQYAAAAnj/kQP////8AAAAEGAAAALiJXRT/////AAAABBgAAAB9JMWC/////wAAAAQYAAAAiVYNdv////8AAAAEGAAAAFMFwcf/////AAAABBgAAAD9arlZ/////wAAAAQYAAAAcZeemf////8AAAAEGAAAAG8OXFj/////AAAABBgAAACnV71e/////wAAAAQYAAAAP7IQ2f////8AAAAEGAAAAEjejoX/////AAAABBgAAABzxKwk/////wAAAAQYAAAAonF2DP////8AAAAEGAAAAIss4MD/////AAAABBgAAAB3MPXs/////wAAAAQYAAAAloAdlf////8AAAAEGAAAAJaAHZT/////AAAABBgAAACWgB2T/////wAAAAQYAAAAloAdkv////8AAAAEGAAAAE7lUGP/////AAAAAxgAAACRxF6i/////wAAZQQYgAAAVdkblv////8AAGUEGIAAAN2ltCv/////AABlAQqAAABDbt88/////wAAZQEKgAAAMPnoiv////8AAGUBCoAAAGBfIOj/////AABlBBmAAAAUD65ZAAAAAQCCZToYAQAAFA+uWQAAAAYAgSUKGAEAAJLddab/////AIElShQAAAA1uIzO/////wCBJUoYAAAAZb9rKP////8CABJEGAAAAM6Dyrz/////AkASQhgAAAA1DD8W/////wJAEkIYAQAAbUxHSAAAAAIAQCVCGAAAAG1MR0j/////AAAAARgAAACkhSxR/////wAAAAEYAAAASOoiOP////8AAAABGAAAALyS1Xr/////AAAAARgAAACPeUkp/////wAAAAEYAAAAcCmlr/////8AAGUBGAAAAFBLVIj/////AAElShgAAABKMfAp/////wLAEkIYAQAAg9FdOP////8AgCVCDgEAAL6Nk3X/////AMASQgwBAAC+jZN2/////wDAEkIMAQAAvo2Td/////8AwBJCDAEAAL6Nk3j/////AMASQgwBAAC+jZN5/////wDAEkIMAQAAvo2Tev////8AwBJCDAEAAL6Nk3v/////AMASQgwBAAC+jZN8/////wDAEkIMAQAAvo2Tff////8AwBJCDAEAAL6Nk37/////AMASQgwBAAC+jZN//////wDAEkIMAQAAvo2TgP////8AwBJCDAEAAL6Nk4H/////AMASQgwBAABAjjPm/////wDAEkILAQAA/geIv/////8AwBJCCwEAAP4HiMb/////AMASQgsBAAD+B4jF/////wDAEkILAQAA/geIxP////8AwBJCCwEAAP4HiMP/////AMASQgsBAAD+B4jC/////wDAEkILAQAA/geIwf////8AwBJCCwEAAP4HiMD/////AMASQgsBAAD+B4jH/////wDAEkILAQAA/geIvv////8AwBJCCwEAAFUQqGf/////AAAAQhgAAAAyu2OS/////wAAAEIYAAAAeWTLzf////8AAAACGAAAAOx4cfT/////AAAAAhgAAAANzYao/////wAAAAIYAAAAuzYC0v////8AAAACGAAAADZ8Hbj/////AAAAAhgAAAB6jA2m/////wAAAAIYAAAAhunbmv////8AAAACGAAAAIIEHL3/////AMASQhgAAADuhImY/////wAAAAEYAAAA+UlQWP////8AAAABGAAAAO8h+4b/////AAAAARgAAADzbZtz/////wAAAAEYAAAAXzajBv////8AAAABGAAAAIpU8U//////AEASAhgAAADcImYx/////wBAEgIYAAAAu7Rizv////8AQBICGAAAAPpJcN//////AEASAhgAAAD6SXDg/////wBAEgIYAAAA+klw4f////8AQBICGAAAAB9Sf3X/////AEASAhgAAABdE9KkAAAAAQBCEgIYAAAAXRPSpAAAAAYAAgACGQEAALUuzFf/////AAJlCRgAAADLwevj/////wACZQkYAAAAiY0bsP////8AAmUJGAAAANzFncr/////AAJlCRgAAACNOY0M/////wAAAAEYAAAA7oSJmP////8AAAABGAAAAJHEXqL/////AAAAARgAAADVvlPR/////wCAAAIYAAAA
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "TR01.pipe info table",
+  "FileName": "TR01.pipe info table",
+  "Type": "PIPT",
+  "AssetID": "0xAF09EF97",
+  "AssetName": "TR01.pipe info table",
+  "AssetFileName": "",
+  "AssetTypeName": "PIPT",
+  "AssetChecksum": 2021929855,
+  "PIPT": {
+    "entryCount": 137,
+    "entries": [
+      {
+        "modelAssetID": "0xDDA5B42B",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 28,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x436EDF3C",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 28,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x30F9E88A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 28,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x5B7C8C7F",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C80",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C81",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C82",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C83",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D20",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D21",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D22",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D23",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D24",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2573",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2574",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2575",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2576",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2577",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C7F",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C80",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C81",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C82",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5B7C8C83",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D20",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D21",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D22",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D23",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x2C580D24",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2573",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2574",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2575",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2576",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xAC6B2577",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7EC962FB",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7EC962FC",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7EC962FD",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7EC962FE",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x356FFF6D",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x9E3FE440",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xB8895D14",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7D24C582",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x89560D76",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5305C1C7",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xFD6AB959",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x71979E99",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x6F0E5C58",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xA757BD5E",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x3FB210D9",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x48DE8E85",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x73C4AC24",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xA271760C",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x8B2CE0C0",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7730F5EC",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x96801D95",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x96801D94",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x96801D93",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x96801D92",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x4EE55063",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 3,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x91C45EA2",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25860,
+        "layer": 24,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x55D91B96",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25860,
+        "layer": 24,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0xDDA5B42B",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 10,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x436EDF3C",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 10,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x30F9E88A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 10,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x605F20E8",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25860,
+        "layer": 25,
+        "alphaDiscard": 128
+      },
+      {
+        "modelAssetID": "0x140FAE59",
+        "subObjectBits": 1,
+        "pipeFlags": 8545594,
+        "layer": 24,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x140FAE59",
+        "subObjectBits": 6,
+        "pipeFlags": 8463626,
+        "layer": 24,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x92DD75A6",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 8463690,
+        "layer": 20,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x35B88CCE",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 8463690,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x65BF6B28",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 33559108,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xCE83CABC",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 37753410,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x350C3F16",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 37753410,
+        "layer": 24,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x6D4C4748",
+        "subObjectBits": 2,
+        "pipeFlags": 4203842,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x6D4C4748",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xA4852C51",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x48EA2238",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xBC92D57A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x8F794929",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7029A5AF",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 25857,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x504B5488",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 75082,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x4A31F029",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 46142018,
+        "layer": 24,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x83D15D38",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 8398146,
+        "layer": 14,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9375",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9376",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9377",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9378",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9379",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937B",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937C",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937D",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937E",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D937F",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9380",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xBE8D9381",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 12,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x408E33E6",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788BF",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C6",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C5",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C4",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C3",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C2",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C1",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C0",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788C7",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xFE0788BE",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 11,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0x5510A867",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 66,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x32BB6392",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 66,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7964CBCD",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xEC7871F4",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x0DCD86A8",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xBB3602D2",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x367C1DB8",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x7A8C0DA6",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x86E9DB9A",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 2,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x82041CBD",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 12587586,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xEE848998",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xF9495058",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xEF21FB86",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xF36D9B73",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5F36A306",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x8A54F14F",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xDC226631",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xBBB462CE",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xFA4970DF",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xFA4970E0",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xFA4970E1",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x1F527F75",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 4198914,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5D13D2A4",
+        "subObjectBits": 1,
+        "pipeFlags": 4329986,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x5D13D2A4",
+        "subObjectBits": 6,
+        "pipeFlags": 131074,
+        "layer": 25,
+        "alphaDiscard": 1
+      },
+      {
+        "modelAssetID": "0xB52ECC57",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 156937,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xCBC1EBE3",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 156937,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x898D1BB0",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 156937,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xDCC59DCA",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 156937,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x8D398D0C",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xEE848998",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0x91C45EA2",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 1,
+        "layer": 24,
+        "alphaDiscard": 0
+      },
+      {
+        "modelAssetID": "0xD5BE53D1",
+        "subObjectBits": 4294967295,
+        "pipeFlags": 8388610,
+        "layer": 24,
+        "alphaDiscard": 0
+      }
+    ]
+  }
+}

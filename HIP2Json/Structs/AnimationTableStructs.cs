@@ -28,8 +28,10 @@ public class AnimEffect
     public uint stateID { get; set; }
     public float startTime { get; set; }
     public float endTime { get; set; }
+    public uint userDataSize { get; set; }
     public uint flags { get; set; }
     public uint effectType { get; set; }
-    public uint userDataSize { get; set; }
+    public uint probability { get; set; }
+    public uint pad { get; set; }
     public byte[] userData { get; set; }
 }

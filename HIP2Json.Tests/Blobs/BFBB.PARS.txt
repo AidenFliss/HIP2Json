@@ -1,0 +1,42 @@
+# game=BFBB platform=GameCube archive=b201.HIP asset=0xFF07041A type=PARS call=PARS size=40 checksum=-1382723613 name=STEAM PAR SYS
+BLOB:
+/wcEGicAAB0AAAAAAAAAAGgtkIgBAAAAAAIFAQAAAAgAAAADAQAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xFF07041A",
+    "baseType": "0x27",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "STEAM PAR SYS",
+  "FileName": "STEAM PAR SYS",
+  "Type": "PARS",
+  "AssetID": "0xFF07041A",
+  "AssetName": "STEAM PAR SYS",
+  "AssetFileName": "",
+  "AssetTypeName": "PARS",
+  "AssetChecksum": -1382723613,
+  "PARS": {
+    "type": 0,
+    "parentParSysID": "0x00000000",
+    "textureID": "0x682D9088",
+    "parFlags": 1,
+    "priority": 0,
+    "maxPar": 0,
+    "renderFunc": 0,
+    "renderSrcBlendMode": 2,
+    "renderDstBlendMode": 5,
+    "cmdCount": 1,
+    "cmdSize": 8,
+    "parFlags2": 0,
+    "commands": [
+      {
+        "commandType": 3,
+        "enabled": 1,
+        "mode": 0
+      }
+    ]
+  }
+}

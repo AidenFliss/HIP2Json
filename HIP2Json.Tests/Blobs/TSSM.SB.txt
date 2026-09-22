@@ -1,0 +1,68 @@
+# game=TSSM platform=GameCube archive=tr01.HIP asset=0xB9BA2D16 type=SB call=DYNA size=100 checksum=-1460944837 name=WOOD_CRATE_099
+BLOB:
+ubotFgAAAB1JW/+bAAIAAAAAAAAAAAANAQAABAAAAABABmhVAAAAAAAAAABBteEew/lH4UKJoaQ/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAAAAAAHGofnsAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xB9BA2D16",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "WOOD_CRATE_099",
+  "FileName": "WOOD_CRATE_099",
+  "Type": "SB",
+  "AssetID": "0xB9BA2D16",
+  "AssetName": "WOOD_CRATE_099",
+  "AssetFileName": "",
+  "AssetTypeName": "SB",
+  "AssetChecksum": -1460944837,
+  "DYNA": {
+    "type": "0x495BFF9B",
+    "version": 2,
+    "handle": 0,
+    "typeNameInternal": "Enemy:SB:SupplyCrate",
+    "dynaSpecificData": {
+      "baseAsset": {
+        "id": "0x00000000",
+        "baseType": "00000000",
+        "linkCount": 0,
+        "baseFlags": "Enabled, Valid, VisibleDuringCutscenes"
+      },
+      "entityAsset": {
+        "flags": "Visible",
+        "subtype": 0,
+        "pflags": 0,
+        "moreFlags": "Unknown04",
+        "surfaceID": 0,
+        "ang": {
+          "x": 2.100118,
+          "y": 0,
+          "z": 0
+        },
+        "pos": {
+          "x": 22.73492,
+          "y": -498.56155,
+          "z": 68.815704
+        },
+        "scale": {
+          "x": 1,
+          "y": 1,
+          "z": 1
+        },
+        "redMult": 1,
+        "greenMult": 1,
+        "blueMult": 1,
+        "seeThru": 1,
+        "seeThruSpeed": 0,
+        "modelInfoID": "0x71A87E7B",
+        "animListID": "0x00000000"
+      },
+      "enemyData": {
+        "type": "Enemy:SB:SupplyCrate",
+        "mvptID": "0x00000000"
+      }
+    }
+  }
+}

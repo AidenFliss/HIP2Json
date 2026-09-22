@@ -1,0 +1,103 @@
+# game=BFBB platform=GameCube archive=mnu3.HIP asset=0x22FF7A11 type=UIFT call=UIFT size=164 checksum=255784169 name=MNU3 SCREEN ACCEPT UIF
+BLOB:
+Iv96ESEAAA0AAAACAAAAAAAAAAAAAAAAAAAAAAAAAABDoAAAQ5sAAAAAAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAAA/gAAAQ38AAAAAAAAAAAAAAAAAPADmACgAAAAAAAAAAAAAAAA/gAAAAAAAAD+AAAA/gAAAAAAAAD+AAAACdAAA/s378YCAgIAARlX/AAIAAgACAAIAGAAYABgAGAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x22FF7A11",
+    "baseType": "0x21",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "None",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "pos": {
+      "x": 320,
+      "y": 310,
+      "z": 0
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x00000000",
+    "animListID": "0x00000000"
+  },
+  "AssetFriendlyName": "MNU3 SCREEN ACCEPT UIF",
+  "FileName": "MNU3 SCREEN ACCEPT UIF",
+  "Type": "UIFT",
+  "AssetID": "0x22FF7A11",
+  "AssetName": "MNU3 SCREEN ACCEPT UIF",
+  "AssetFileName": "",
+  "AssetTypeName": "UIFT",
+  "AssetChecksum": 255784169,
+  "UIFT": {
+    "uiFlags": 60,
+    "width": 230,
+    "height": 40,
+    "texture": "0x00000000",
+    "uva": {
+      "x": 0,
+      "y": 0
+    },
+    "uvb": {
+      "x": 1,
+      "y": 0
+    },
+    "uvc": {
+      "x": 1,
+      "y": 1
+    },
+    "uvd": {
+      "x": 0,
+      "y": 1
+    },
+    "uiFontFlags": 628,
+    "mode": 0,
+    "fontID": 0,
+    "textAssetID": 4274912241,
+    "bcolor": {
+      "r": 128,
+      "g": 128,
+      "b": 128,
+      "a": 128
+    },
+    "color": {
+      "r": 0,
+      "g": 70,
+      "b": 85,
+      "a": 255
+    },
+    "inset": [
+      2,
+      2,
+      2,
+      2
+    ],
+    "space": [
+      24,
+      24
+    ],
+    "cdim": [
+      24,
+      24
+    ],
+    "max_height": 0
+  }
+}

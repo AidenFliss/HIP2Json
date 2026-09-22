@@ -1,0 +1,56 @@
+# game=BFBB platform=GameCube archive=kf02.HIP asset=0x73B1FF26 type=SIMP call=SIMP size=96 checksum=-1715169910 name=kf04_cavevine03
+BLOB:
+c7H/JgsAAB0BAAACAAAAAAAAAABACZ9WPcodij2ekVzAbYXGQCGISEEAliU/f//7P3//+z9///s/gAAAP4AAAD+AAAA/gAAAQ38AAF4fHQumyCHVP4AAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x73B1FF26",
+    "baseType": "0x0B",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "PreciseCollision",
+    "surfaceID": 0,
+    "ang": {
+      "x": 2.15035,
+      "y": 0.098689154,
+      "z": 0.07742569
+    },
+    "pos": {
+      "x": -3.71129,
+      "y": 2.523943,
+      "z": 8.036656
+    },
+    "scale": {
+      "x": 0.9999997,
+      "y": 0.9999997,
+      "z": 0.9999997
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 1,
+    "seeThruSpeed": 255,
+    "modelInfoID": "0x5E1F1D0B",
+    "animListID": "0xA6C821D5"
+  },
+  "AssetFriendlyName": "kf04_cavevine03",
+  "FileName": "kf04_cavevine03",
+  "Type": "SIMP",
+  "AssetID": "0x73B1FF26",
+  "AssetName": "kf04_cavevine03",
+  "AssetFileName": "",
+  "AssetTypeName": "SIMP",
+  "AssetChecksum": -1715169910,
+  "SIMP": {
+    "animSpeed": 1,
+    "initAnimState": 0,
+    "collType": "None",
+    "flags": 0
+  }
+}

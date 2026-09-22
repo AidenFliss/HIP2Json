@@ -1,0 +1,24 @@
+# game=TSSM platform=GameCube archive=am01.HIP asset=0x117F6AB8 type=MINF call=MINF size=20 checksum=1764107219 name=\\job\sb04\INIObjects\Enemies\e
+BLOB:
+Rk5JTQAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Links": [],
+  "AssetFriendlyName": "\\\\job\\sb04\\INIObjects\\Enemies\\e",
+  "FileName": "\\\\job\\sb04\\INIObjects\\Enemies\\e",
+  "Type": "MINF",
+  "AssetID": "0x117F6AB8",
+  "AssetName": "\\\\job\\sb04\\INIObjects\\Enemies\\e",
+  "AssetFileName": "",
+  "AssetTypeName": "MINF",
+  "AssetChecksum": 1764107219,
+  "MINF": {
+    "magic": "0x464E494D",
+    "numModelInst": 0,
+    "animTableID": "0x00000000",
+    "combatID": "0x00000000",
+    "brainID": "0x00000000",
+    "modelInstances": [],
+    "parameters": []
+  }
+}

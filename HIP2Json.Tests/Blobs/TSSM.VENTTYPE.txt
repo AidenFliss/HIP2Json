@@ -1,0 +1,35 @@
+# game=TSSM platform=GameCube archive=sc02.HIP asset=0x2BD2ABF5 type=VENTTYPE call=DYNA size=40 checksum=1387077003 name=HOSE_VENTTYPE
+BLOB:
+K9Kr9QAAAB1eW1FlAAEAAA+VynQAAAAA4jU0fwAAAACw7yRoeDjDgA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x2BD2ABF5",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "HOSE_VENTTYPE",
+  "FileName": "HOSE_VENTTYPE",
+  "Type": "VENTTYPE",
+  "AssetID": "0x2BD2ABF5",
+  "AssetName": "HOSE_VENTTYPE",
+  "AssetFileName": "",
+  "AssetTypeName": "VENTTYPE",
+  "AssetChecksum": 1387077003,
+  "DYNA": {
+    "type": "0x5E5B5165",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "game_object:VentType",
+    "dynaSpecificData": {
+      "idle_particle_type": "0x0F95CA74",
+      "idle_sound_group": "0x00000000",
+      "warn_particle_type": "0xE235347F",
+      "warn_sound_group": "0x00000000",
+      "damage_particle_type": "0xB0EF2468",
+      "damage_sound_group": "0x7838C380"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+# game=BFBB platform=GameCube archive=kf01.HIP asset=0xEC0E298A type=DPAT call=DPAT size=40 checksum=1565452039 name=TUBELET_DISP_01
+BLOB:
+7A4pih4BAB4AVwHZrTdifQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xEC0E298A",
+    "baseType": "0x1E",
+    "linkCount": 1,
+    "baseFlags": "Persistent, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ScenePrepare",
+      "dstEvent": "NPCSetActiveOff",
+      "dstAssetID": "0xAD37627D",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "TUBELET_DISP_01",
+  "FileName": "TUBELET_DISP_01",
+  "Type": "DPAT",
+  "AssetID": "0xEC0E298A",
+  "AssetName": "TUBELET_DISP_01",
+  "AssetFileName": "",
+  "AssetTypeName": "DPAT",
+  "AssetChecksum": 1565452039,
+  "DPAT": {}
+}

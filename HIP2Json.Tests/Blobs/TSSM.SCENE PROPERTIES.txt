@@ -1,0 +1,41 @@
+# game=TSSM platform=GameCube archive=b201.HIP asset=0xD846CC52 type=SCENE PROPERTIES call=DYNA size=68 checksum=-970602258 name=DEFAULT_GLOW_SCENE_PROP
+BLOB:
+2EbMUgAAAB36vbOzAAEAAAAAAAAAAAA0AAAAAAAAADQUBQMezGStiwAAAAAAAAAAQIAAAAAAAAAAAAAAAAAAAAAAAAA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xD846CC52",
+    "baseType": "0x00",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "DEFAULT_GLOW_SCENE_PROP",
+  "FileName": "DEFAULT_GLOW_SCENE_PROP",
+  "Type": "SCENE PROPERTIES",
+  "AssetID": "0xD846CC52",
+  "AssetName": "DEFAULT_GLOW_SCENE_PROP",
+  "AssetFileName": "",
+  "AssetTypeName": "SCENE PROPERTIES",
+  "AssetChecksum": -970602258,
+  "DYNA": {
+    "type": "0xFABDB3B3",
+    "version": 1,
+    "handle": 0,
+    "typeNameInternal": "Scene Properties",
+    "dynaSpecificData": {
+      "idle03ExtraCount": 0,
+      "idle03Extras": "0x00000034",
+      "idle04ExtraCount": 0,
+      "idle04Extras": "0x00000034",
+      "bombCount": 20,
+      "extraIdleDelay": 5,
+      "hdrGlow": 3,
+      "hdrDarken": 30,
+      "musicID": "0xCC64AD8B",
+      "flags": 0,
+      "waterTileWidth": 0,
+      "lodFadeDistance": 4
+    }
+  }
+}

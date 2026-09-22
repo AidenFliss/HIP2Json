@@ -1,5 +1,5 @@
 using System;
-﻿using System.IO;
+using System.IO;
 using System.Linq;
 
 namespace HIP2Json;
@@ -12,12 +12,6 @@ public sealed class FLYParser : AssetParser
         long entries = sizeOfAsset / 64;
         long remainder = sizeOfAsset - (entries * 64);
         string rawTail = null;
-        if (remainder > 0)
-        {
-            rawTail = Convert.ToBase64String(br.ReadBytes((int)remainder));
-            entries -= 0;
-        }
-
         zFlyKey[] keys = new zFlyKey[entries];
         for (uint i = 0; i < entries; i++)
         {
@@ -28,6 +22,11 @@ public sealed class FLYParser : AssetParser
                 aperture = Enumerable.Range(0, 2).Select(_ => ReadFloatLE(br)).ToArray(),
                 focal = ReadFloatLE(br),
             };
+        }
+
+        if (remainder > 0)
+        {
+            rawTail = Convert.ToBase64String(br.ReadBytes((int)remainder));
         }
 
         return new FLY { keys = keys, tail = rawTail };

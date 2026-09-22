@@ -16,9 +16,9 @@ public sealed class CSNMParser : AssetParser
         if (Program.CurrentGame != GameType.BFBB)
             uSubtitlesID = ReadUInt32BE(br);
 
-        float[] startTime = Enumerable.Range(0, 14).Select(_ => ReadFloatBE(br)).ToArray();
-        float[] endTime = Enumerable.Range(0, 14).Select(_ => ReadFloatBE(br)).ToArray();
-        uint[] emitID = Enumerable.Range(0, 14).Select(_ => ReadUInt32BE(br)).ToArray();
+        float[] startTime = Enumerable.Range(0, 15).Select(_ => ReadFloatBE(br)).ToArray();
+        float[] endTime = Enumerable.Range(0, 15).Select(_ => ReadFloatBE(br)).ToArray();
+        uint[] emitID = Enumerable.Range(0, 15).Select(_ => ReadUInt32BE(br)).ToArray();
 
         return new CSNM
         {

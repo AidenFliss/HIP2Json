@@ -1,0 +1,161 @@
+# game=BFBB platform=GameCube archive=bb01.HIP asset=0xCF1FBAD9 type=PARP call=PARP size=312 checksum=420951495 name=FIRE PROP
+BLOB:
+zx+62S4AAB18st+3QIAAAEEgAABI5I56P4AAAD+AAAA/gAAAP4AAAEjkjno/gAAAP4AAAD8AAAA/AAAASOSOej+AAAA/gAAAP5mZmj+ZmZpI5I56P4AAAD+AAABDagAAQ10AAEjkjno/gAAAP4AAAEMqAABDJQAASOSOej+AAAA/gAAAQagAAEIIAABI5I56P4AAAD+AAABDAAAAQwAAAEjkjno/gAAAP4AAAEIkAABCJAAASOSOej+AAAA/gAAAQmQAAEJkAABI5I56P4AAAD+AAABCZAAAQmQAAEjkjno/gAAAP4AAAAAAAAAAAAAASOSOej+AAAA/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////8AAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xCF1FBAD9",
+    "baseType": "0x2E",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "FIRE PROP",
+  "FileName": "FIRE PROP",
+  "Type": "PARP",
+  "AssetID": "0xCF1FBAD9",
+  "AssetName": "FIRE PROP",
+  "AssetFileName": "",
+  "AssetTypeName": "PARP",
+  "AssetChecksum": 420951495,
+  "PARP": {
+    "parSysID": "0x7CB2DFB7",
+    "rate": {
+      "val": [
+        4,
+        10
+      ],
+      "interp": 1222938234,
+      "freq": 1,
+      "oofreq": 1
+    },
+    "life": {
+      "val": [
+        1,
+        1
+      ],
+      "interp": 1222938234,
+      "freq": 1,
+      "oofreq": 1
+    },
+    "size_birth": {
+      "val": [
+        0.5,
+        0.5
+      ],
+      "interp": 1222938234,
+      "freq": 1,
+      "oofreq": 1
+    },
+    "size_death": {
+      "val": [
+        1.2,
+        1.2
+      ],
+      "interp": 1222938234,
+      "freq": 1,
+      "oofreq": 1
+    },
+    "color_birth": [
+      {
+        "val": [
+          234,
+          221
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          170,
+          165
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          21,
+          34
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          128,
+          128
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      }
+    ],
+    "color_death": [
+      {
+        "val": [
+          41,
+          41
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          57,
+          57
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          57,
+          57
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      },
+      {
+        "val": [
+          0,
+          0
+        ],
+        "interp": 1222938234,
+        "freq": 1,
+        "oofreq": 1
+      }
+    ],
+    "vel_scale": {
+      "val": [
+        0,
+        0
+      ],
+      "interp": 0,
+      "freq": 0,
+      "oofreq": 0
+    },
+    "vel_angle": {
+      "val": [
+        0,
+        0
+      ],
+      "interp": 0,
+      "freq": 0,
+      "oofreq": 0
+    },
+    "vel": {
+      "x": 0,
+      "y": 0,
+      "z": 0
+    },
+    "emit_limit": 4294967295,
+    "emit_limit_reset_time": 0
+  }
+}

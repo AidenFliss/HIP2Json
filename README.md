@@ -137,3 +137,21 @@ A `*_proj` project folder is packed back into its original spot, next to the sou
 
 > [!NOTE]
 > Note: Some asset types do not have an implemented parser so they will be ignored when editing json.
+
+---
+
+## Testing (HIP2Json.Tests)
+
+`HIP2Json.Tests` ships three gates that must pass before CI is green:
+
+| Gate | Command | Fails on |
+| --- | --- | --- |
+| Fuzz | `dotnet run --project HIP2Json.Tests -- -c Release --fuzz 8` | any parser crash or non-idempotent round-trip on randomized bytes |
+| Blob | `dotnet run --project HIP2Json.Tests -- -c Release --blobs HIP2Json.Tests/Blobs` | a production blob that fails the values round-trip or repacks byte-differently |
+| Archives | `--archives <bfbbRoot> <tssmRoot>` | a full-archive repack that is not byte-identical |
+
+The **blob gate** replays real production assets (harvested from game files) and requires binary→values→binary to round-trip **byte-identically**. Running it with no failures is the release door.
+
+- Fixtures live in `HIP2Json.Tests/Blobs/` (one `.txt` per `GAME.TYPE`, header + `BLOB:` base64 + `EXPECTED_JSON:`). Refresh them from a stock game-files folder with `dotnet run --project HIP2Json.Tests -- -c Release --harvest <bfbbRoot> <tssmRoot> <outDir>`.
+- Registered parser types that have **no real production asset** in the harvested games (e.g. `LITE`, bare `DYNA`) print a **warning, not a failure** — the handful of exotic types with no in-game instance are documented by that warning rather than faked.
+- `--seed` pins the fuzz RNG; CI uses `--fuzz 8 --seed 0x5EEDF00D`. The blob gate does not depend on any seed.

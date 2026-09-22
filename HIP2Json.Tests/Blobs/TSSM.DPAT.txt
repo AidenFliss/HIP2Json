@@ -1,0 +1,42 @@
+# game=TSSM platform=GameCube archive=mnuc.HIP asset=0x1C2E75A2 type=DPAT call=DPAT size=40 checksum=-351282832 name=SAVE/LOAD DISP
+BLOB:
+HC51oh4BAB0AgAAEG6oIHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x1C2E75A2",
+    "baseType": "0x1E",
+    "linkCount": 1,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "PauseState_Pause",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0x1BAA081E",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "SAVE/LOAD DISP",
+  "FileName": "SAVE/LOAD DISP",
+  "Type": "DPAT",
+  "AssetID": "0x1C2E75A2",
+  "AssetName": "SAVE/LOAD DISP",
+  "AssetFileName": "",
+  "AssetTypeName": "DPAT",
+  "AssetChecksum": -351282832,
+  "DPAT": {}
+}

@@ -1,0 +1,111 @@
+# game=BFBB platform=GameCube archive=gl01.HIP asset=0xC167443C type=BUTN call=BUTN size=216 checksum=-610281413 name=TOWER_B_RIGHT_BUTTON
+BLOB:
+wWdEPBgCAB8BAAAAAAAAAAAAAABASQ/bAAAAAEMjIctArDlDQuDQ5T+AAAA/gAAAP4AAAD+AAAA/gAAAP4AAAD+AAABDfwAAt4CbFgAAAABr3kQ+AAAAAAAAAAAAAAAAP8AAAAAAAAQEAAAEAgEBAL5MzM0+GZmaAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAANwA4Rmr+fwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3ABJlUaBFAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0xC167443C",
+    "baseType": "0x18",
+    "linkCount": 2,
+    "baseFlags": "Enabled, Persistent, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "ButtonPress",
+      "dstEvent": "ButtonUnpress",
+      "dstAssetID": "0x466AFE7F",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "ButtonPress",
+      "dstEvent": "Run",
+      "dstAssetID": "0x6551A045",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "Entity": {
+    "flags": "Visible",
+    "subtype": 0,
+    "pflags": 0,
+    "moreFlags": "None",
+    "surfaceID": 0,
+    "ang": {
+      "x": 3.1415927,
+      "y": 0,
+      "z": 163.132
+    },
+    "pos": {
+      "x": 5.38199,
+      "y": 112.408,
+      "z": 1
+    },
+    "scale": {
+      "x": 1,
+      "y": 1,
+      "z": 1
+    },
+    "redMult": 1,
+    "greenMult": 1,
+    "blueMult": 1,
+    "seeThru": 255,
+    "seeThruSpeed": -1.5331007E-05,
+    "modelInfoID": "0x00000000",
+    "animListID": "0x6BDE443E"
+  },
+  "AssetFriendlyName": "TOWER_B_RIGHT_BUTTON",
+  "FileName": "TOWER_B_RIGHT_BUTTON",
+  "Type": "BUTN",
+  "AssetID": "0xC167443C",
+  "AssetName": "TOWER_B_RIGHT_BUTTON",
+  "AssetFileName": "",
+  "AssetTypeName": "BUTN",
+  "AssetChecksum": -610281413,
+  "BUTN": {
+    "modelPressedInfoID": "0x00000000",
+    "actMethod": "Button",
+    "initButtonState": 0,
+    "isReset": 1069547520,
+    "resetDelay": 6E-45,
+    "buttonActFlags": [
+      "BubbleBash",
+      "0x04000000"
+    ],
+    "motion": {
+      "type": "Spline",
+      "useBanking": 1,
+      "flags": 256,
+      "specific": {
+        "unknown": -1102263091,
+        "splineID": "0x00000000",
+        "speed": 0.15,
+        "leanModifier": 0
+      }
+    }
+  }
+}

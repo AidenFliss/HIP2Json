@@ -42,4 +42,5 @@ public class CRDTTexture
     public float width { get; set; }
     public float height { get; set; }
     public uint texture { get; set; }
+    public uint pad { get; set; }
 }

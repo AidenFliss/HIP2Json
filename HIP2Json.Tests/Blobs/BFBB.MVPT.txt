@@ -1,0 +1,39 @@
+# game=BFBB platform=GameCube archive=jf03.HIP asset=0x760E8ECF type=MVPT call=MVPT size=44 checksum=-884036717 name=TIKI_LOVEY_001_MP_001
+BLOB:
+dg6Ozw0AAB3CTAAAQKAAAEG+AAAnEAEAAAAAAUAAAAC/gAAAv4AAAHYOjtA=
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x760E8ECF",
+    "baseType": "0x0D",
+    "linkCount": 0,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [],
+  "AssetFriendlyName": "TIKI_LOVEY_001_MP_001",
+  "FileName": "TIKI_LOVEY_001_MP_001",
+  "Type": "MVPT",
+  "AssetID": "0x760E8ECF",
+  "AssetName": "TIKI_LOVEY_001_MP_001",
+  "AssetFileName": "",
+  "AssetTypeName": "MVPT",
+  "AssetChecksum": -884036717,
+  "MVPT": {
+    "pos": {
+      "x": -51,
+      "y": 5,
+      "z": 23.75
+    },
+    "wt": 10000,
+    "on": "Zone",
+    "bezIndex": 0,
+    "flg_props": 0,
+    "numPoints": 1,
+    "delay": 2,
+    "zoneRadius": -1,
+    "arenaRadius": -1,
+    "points": [
+      "0x760E8ED0"
+    ]
+  }
+}

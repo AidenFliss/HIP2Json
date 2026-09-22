@@ -24,9 +24,9 @@ public sealed class UIFTParser : AssetParser
             textAssetID = ReadUInt32BE(br),
             bcolor = ReadColorBE(br),
             color = ReadColorBE(br),
-            inset = Enumerable.Range(0, 3).Select(_ => ReadInt16BE(br)).ToArray(),
-            space = Enumerable.Range(0, 1).Select(_ => ReadInt16BE(br)).ToArray(),
-            cdim = Enumerable.Range(0, 1).Select(_ => ReadInt16BE(br)).ToArray(),
+            inset = Enumerable.Range(0, 4).Select(_ => ReadInt16BE(br)).ToArray(),
+            space = Enumerable.Range(0, 2).Select(_ => ReadInt16BE(br)).ToArray(),
+            cdim = Enumerable.Range(0, 2).Select(_ => ReadInt16BE(br)).ToArray(),
             max_height = ReadInt32BE(br),
         };
     }

@@ -1,0 +1,255 @@
+# game=TSSM platform=GameCube archive=de01.HIP asset=0x9E59F5F2 type=BUNGEE_HOOK call=DYNA size=460 checksum=1846260332 name=BUNGEE_HOOK_01
+BLOB:
+nln18gAKAB1Xz7bwAA0AAFzWtGYAAAAAAAAAAAAAAABAAAAAPkzMzUEgAAA/gAAAQAAAAEHIAAA/czMzQAAAAEEczM1AgAAAQAAAAEIIAAA9zMzNQJAAAEDAAABDNAAAPwAAAEM0AABAIAAAAAAAAD1MzM0+TMzNPoAAAD5MzM09zMzNPxmZmj5MzM0AIAASApG07gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAQYPt0KrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAArRe9ZoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAEtNXW9QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAq7lFHNAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAA8qXO21oz69fAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAABPNxysgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAhAATKlzttAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACEBBjzccrIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAA8BF8VJwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==
+EXPECTED_JSON:
+{
+  "Base": {
+    "id": "0x9E59F5F2",
+    "baseType": "0x00",
+    "linkCount": 10,
+    "baseFlags": "Enabled, Valid, VisibleDuringCutscenes, ReceiveShadows"
+  },
+  "Links": [
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Run",
+      "dstAssetID": "0x0291B4EE",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Disable_Group_Contents",
+      "dstAssetID": "0x0FB742AB",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Disable",
+      "dstAssetID": "0xB45EF59A",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0xB4D5D6F5",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Reset",
+      "dstAssetID": "0xBB9451CD",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Visible",
+      "dstAssetID": "0xCA973B6D",
+      "paramU32": [
+        "0x68CFAF5F",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        7.846119E+24,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Enable",
+      "dstAssetID": "0x3CDC72B2",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Dismount",
+      "dstEvent": "Invisible",
+      "dstAssetID": "0xCA973B6D",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Dismount",
+      "dstEvent": "Disable_Group_Contents",
+      "dstAssetID": "0x3CDC72B2",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    },
+    {
+      "srcEvent": "Mount",
+      "dstEvent": "Evaluate",
+      "dstAssetID": "0x045F1527",
+      "paramU32": [
+        "0x00000000",
+        "0x00000000",
+        "0x00000000",
+        "0x00000000"
+      ],
+      "paramF32": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "paramWidgetAssetID": "0x00000000",
+      "chkAssetID": "0x00000000"
+    }
+  ],
+  "AssetFriendlyName": "BUNGEE_HOOK_01",
+  "FileName": "BUNGEE_HOOK_01",
+  "Type": "BUNGEE_HOOK",
+  "AssetID": "0x9E59F5F2",
+  "AssetName": "BUNGEE_HOOK_01",
+  "AssetFileName": "",
+  "AssetTypeName": "BUNGEE_HOOK",
+  "AssetChecksum": 1846260332,
+  "DYNA": {
+    "type": "0x57CFB6F0",
+    "version": 13,
+    "handle": 0,
+    "typeNameInternal": "game_object:bungee_hook",
+    "dynaSpecificData": {
+      "entity": "0x5CD6B466",
+      "enter": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "attach_dist": 2,
+      "attach_travel_time": 0.2,
+      "detach_dist": 10,
+      "detach_free_fall_time": 1,
+      "detach_accel": 2,
+      "turn_unused0": 25,
+      "turn_unused1": 0.95,
+      "vertical_frequency": 2,
+      "vertical_gravity": 9.8,
+      "vertical_dive": 4,
+      "vertical_min_dist": 2,
+      "vertical_max_dist": 34,
+      "vertical_damp": 0.1,
+      "horizontal_max_dist": 4.5,
+      "camera_rest_dist": 6,
+      "camera_view_angle": 180,
+      "camera_offset": 0.5,
+      "camera_offset_dir": 180,
+      "camera_turn_speed": 2.5,
+      "camera_vel_scale": 0,
+      "camera_roll_speed": 0.05,
+      "camera_unused0": {
+        "x": 0.2,
+        "y": 0.25,
+        "z": 0.2
+      },
+      "collision_hit_loss": 0.1,
+      "collision_damage_velocity": 0.6,
+      "collision_hit_velocity": 0.2
+    }
+  }
+}
