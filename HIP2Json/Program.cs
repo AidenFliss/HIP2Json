@@ -212,6 +212,8 @@ class Program
                 assets.Add(entry);
             }
 
+            ApplySoundRatesFromSndi(assets);
+
             bool isHip = Path.GetExtension(filePath).ToLower() == ".hip";
             string archiveName = Path.GetFileNameWithoutExtension(filePath) + (isHip ? "_HIP" : "_HOP");
             string archiveExt = isHip ? "hip" : "hop";
@@ -288,6 +290,50 @@ class Program
         finally
         {
             Section_ATOC.noAHDR = false;
+        }
+    }
+
+    private static void ApplySoundRatesFromSndi(List<ParsedAsset> assets)
+    {
+        Dictionary<string, uint> rates = new Dictionary<string, uint>();
+
+        foreach (ParsedAsset asset in assets)
+        {
+            if (asset.AssetData.TryGetValue("SNDI", out object sndiObj) && sndiObj is SNDI sndi)
+            {
+                foreach (SNDIEntry entry in sndi.entries ?? Array.Empty<SNDIEntry>())
+                {
+                    string key = "0x" + entry.assetID.ToString("X8");
+                    if (!rates.ContainsKey(key))
+                        rates[key] = entry.sampleRate;
+                }
+            }
+        }
+
+        if (rates.Count == 0)
+            return;
+
+        foreach (ParsedAsset asset in assets)
+        {
+            if (!asset.AssetData.TryGetValue("SND", out object sndObj) && !asset.AssetData.TryGetValue("SNDS", out sndObj))
+                continue;
+
+            if (sndObj is not SoundAssetBase snd)
+                continue;
+
+            if (!rates.TryGetValue(asset.AssetID, out uint rate))
+                continue;
+
+            if (snd.sampleRate == (int)rate)
+                continue;
+
+            snd.sampleRate = (int)rate;
+
+            if (!string.IsNullOrEmpty(snd.wavBase64))
+            {
+                short[] samples = WavCodec.Decode(Convert.FromBase64String(snd.wavBase64), out _);
+                snd.wavBase64 = Convert.ToBase64String(WavCodec.Encode(samples, (int)rate));
+            }
         }
     }
 

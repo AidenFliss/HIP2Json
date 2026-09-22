@@ -7,6 +7,15 @@ public static class SoundCodec
 {
     private static readonly short[,] Coeffs = BuildCoeffs();
 
+    private static readonly short[,] VagCoeffs =
+    {
+        { 0, 0 },
+        { 60, 0 },
+        { 115, -52 },
+        { 98, -55 },
+        { 122, -60 },
+    };
+
     private static short[,] BuildCoeffs()
     {
         int[] gc =
@@ -70,6 +79,185 @@ public static class SoundCodec
         }
 
         return samples;
+    }
+
+    public static short[] DecodeVAG(byte[] data)
+    {
+        if (data.Length <= 16)
+            return Array.Empty<short>();
+
+        int body = data.Length - 16;
+        int frames = body / 16;
+        short[] samples = new short[frames * 28];
+
+        int h1 = 0;
+        int h2 = 0;
+        int outIndex = 0;
+
+        for (int f = 0; f < frames; f++)
+        {
+            int frameOff = 16 + f * 16;
+            byte hdr = data[frameOff];
+            int shift = hdr & 0x0F;
+            int idx = (hdr >> 4) & 0x0F;
+            if (idx >= 5)
+                return Array.Empty<short>();
+
+            short c1 = VagCoeffs[idx, 0];
+            short c2 = VagCoeffs[idx, 1];
+
+            byte flag = data[frameOff + 1];
+
+            for (int n = 0; n < 28; n++)
+            {
+                byte b = (n % 2 == 0)
+                    ? data[frameOff + 2 + n / 2]
+                    : data[frameOff + 2 + (n - 1) / 2];
+
+                int nib = (n % 2 == 0) ? b & 0x0F : (b >> 4) & 0x0F;
+                int sn = nib >= 8 ? nib - 16 : nib;
+
+                int s;
+                if ((flag & 0x07) < 0x07)
+                {
+                    s = (sn << 12 >> shift) + (h1 * c1 + h2 * c2) / 64;
+                    if (s > 32767)
+                        s = 32767;
+                    if (s < -32768)
+                        s = -32768;
+                }
+                else
+                {
+                    s = 0;
+                }
+
+                samples[outIndex++] = (short)s;
+                h2 = h1;
+                h1 = s;
+            }
+        }
+
+        return samples;
+    }
+
+    public static byte[] EncodeVAG(short[] samples)
+    {
+        int count = samples.Length;
+        int padded = (count + 27) / 28 * 28;
+        int frames = padded / 28;
+        byte[] data = new byte[16 + frames * 16];
+
+        int h1 = 0;
+        int h2 = 0;
+
+        for (int f = 0; f < frames; f++)
+        {
+            int start = f * 28;
+            short[] seg = new short[28];
+            for (int i = 0; i < 28; i++)
+                seg[i] = start + i < count ? samples[start + i] : (short)0;
+
+            int bestP = 0;
+            int bestShift = 0;
+            long bestErr = long.MaxValue;
+            byte[] bestNibs = new byte[28];
+
+            for (int p = 0; p < 5; p++)
+            {
+                short c1 = VagCoeffs[p, 0];
+                short c2 = VagCoeffs[p, 1];
+                int carry1 = h1;
+                int carry2 = h2;
+
+                for (int sh = 0; sh <= 12; sh++)
+                {
+                    int ch1 = carry1;
+                    int ch2 = carry2;
+                    byte[] nibs = new byte[28];
+
+                    for (int i = 0; i < 28; i++)
+                    {
+                        int predict = (c1 * ch1 + c2 * ch2) / 64;
+                        int target = seg[i] - predict;
+                        int step;
+                        int shiftAmt = 12 - sh;
+                        if (target >= 0)
+                            step = (target + (1 << (shiftAmt - 1))) >> shiftAmt;
+                        else
+                            step = (target - (1 << (shiftAmt - 1))) >> shiftAmt;
+                        if (step > 7)
+                            step = 7;
+                        if (step < -8)
+                            step = -8;
+                        nibs[i] = (byte)(step & 0x0F);
+                        int sn = step >= 8 ? step - 16 : step;
+                        int s = (sn << 12 >> sh) + predict;
+                        if (s > 32767)
+                            s = 32767;
+                        if (s < -32768)
+                            s = -32768;
+                        ch2 = ch1;
+                        ch1 = s;
+                    }
+
+                    long err = 0;
+                    ch1 = carry1;
+                    ch2 = carry2;
+                    for (int i = 0; i < 28; i++)
+                    {
+                        int sn = nibs[i] >= 8 ? nibs[i] - 16 : nibs[i];
+                        int predict = (c1 * ch1 + c2 * ch2) / 64;
+                        int s = (sn << 12 >> sh) + predict;
+                        if (s > 32767)
+                            s = 32767;
+                        if (s < -32768)
+                            s = -32768;
+                        long d = s - seg[i];
+                        err += d * d;
+                        ch2 = ch1;
+                        ch1 = s;
+                    }
+
+                    if (err < bestErr)
+                    {
+                        bestErr = err;
+                        bestP = p;
+                        bestShift = sh;
+                        nibs.CopyTo(bestNibs, 0);
+                    }
+                }
+            }
+
+            int frameOff = 16 + f * 16;
+            data[frameOff] = (byte)((bestP << 4) | bestShift);
+            data[frameOff + 1] = 0x00;
+
+            for (int i = 0; i < 14; i++)
+                data[frameOff + 2 + i] = (byte)(bestNibs[i * 2] | (bestNibs[i * 2 + 1] << 4));
+
+            int hh1 = h1;
+            int hh2 = h2;
+            short bc1 = VagCoeffs[bestP, 0];
+            short bc2 = VagCoeffs[bestP, 1];
+            int useShift = bestShift;
+            for (int i = 0; i < 28; i++)
+            {
+                int sn = bestNibs[i] >= 8 ? bestNibs[i] - 16 : bestNibs[i];
+                int predict = (bc1 * hh1 + bc2 * hh2) / 64;
+                int s = (sn << 12 >> useShift) + predict;
+                if (s > 32767)
+                    s = 32767;
+                if (s < -32768)
+                    s = -32768;
+                hh2 = hh1;
+                hh1 = s;
+            }
+
+            h2 = hh2;
+            h1 = hh1;
+        }
+
+        return data;
     }
 
     private static short NextSample(int nibble, int scale, int c1, int c2, ref int h1, ref int h2)
