@@ -154,4 +154,4 @@ The **blob gate** replays real production assets (harvested from game files) and
 
 - Fixtures live in `HIP2Json.Tests/Blobs/` (one `.txt` per `GAME.TYPE`, header + `BLOB:` base64 + `EXPECTED_JSON:`). Refresh them from a stock game-files folder with `dotnet run --project HIP2Json.Tests -- -c Release --harvest <bfbbRoot> <tssmRoot> <outDir>`.
 - Registered parser types that have **no real production asset** in the harvested games (e.g. `LITE`, bare `DYNA`) print a **warning, not a failure** — the handful of exotic types with no in-game instance are documented by that warning rather than faked.
-- `--seed` pins the fuzz RNG; CI uses `--fuzz 8 --seed 0x5EEDF00D`. The blob gate does not depend on any seed.x
+- `--seed` pins the fuzz RNG; CI uses `--fuzz 8 --seed 0x5EEDF00D`. The blob gate does not depend on any seed.
