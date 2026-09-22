@@ -46,7 +46,7 @@ internal sealed class TRIGParser : AssetParser
     }
 }
 
-class TRIG
+public class TRIG
 {
     public TriggerType Type { get; set; }
     public xVec3[] Positions { get; set; }

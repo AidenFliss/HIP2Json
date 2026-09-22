@@ -1,12 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using HIP2Json;
 using HIPProg = HIP2Json.Program;
 
 namespace HIP2Json.Tests;
@@ -231,6 +226,26 @@ public static class BlobRunner
             table.Failures.Add($"  values->binary differs at byte {diffAt}  blob={blob.Length}B pack={repacked.Length}B  (expected byte-identical repack of a real asset)");
             table.Failures.Add($"      blob: {HexDump(blob, Math.Max(0, diffAt - 4), 36)}");
             table.Failures.Add($"      pack: {HexDump(repacked, Math.Max(0, diffAt - 4), 36)}");
+        }
+
+        byte[] typedPack;
+        try
+        {
+            typedPack = HIPProg.SerializeParsedAsset(a);
+        }
+        catch (Exception ex)
+        {
+            table.Failures.Add($"typed->binary serialize CRASH: {ex.GetType().Name}: {ex.Message}");
+            table.FailKinds.Add(FailKind.Crash);
+            table.Failed++;
+            return;
+        }
+
+        bool typedEq = blob.AsSpan().SequenceEqual(typedPack);
+        table.Assert(typedEq, "typed->binary byte-IDENTICAL to original production blob", FailKind.BinaryPack);
+        if (!typedEq)
+        {
+            table.Failures.Add($"  typed->binary differs from blob  blob={blob.Length}B typed={typedPack.Length}B (JSON-free SerializeParsedAsset must match the verified JSON path)");
         }
     }
 
