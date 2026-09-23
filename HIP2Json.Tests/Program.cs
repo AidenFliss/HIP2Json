@@ -208,11 +208,20 @@ static class Program
             ParsedAsset? a = HIP2Json.Program.ParseAssetBytes(raw, type, "rt_A");
             if (a == null) return false;
 
+            if (type is "SND" or "SNDS")
+            {
+                a.AssetID = "0x1000000";
+                HIP2Json.Program.SoundSourceBytes = new Dictionary<uint, byte[]> { [0x1000000] = raw };
+            }
+
             JsonElement elA = JsonSerializer.SerializeToElement(a, RoundTripOpts);
             byte[] bytesA = HIP2Json.Program.SerializeModdedAsset(elA, out _, out _);
 
             ParsedAsset? b = HIP2Json.Program.ParseAssetBytes(bytesA, type, "rt_B");
             if (b == null) return false;
+
+            if (type is "SND" or "SNDS")
+                b.AssetID = "0x1000000";
 
             JsonElement elB = JsonSerializer.SerializeToElement(b, RoundTripOpts);
             byte[] bytesB = HIP2Json.Program.SerializeModdedAsset(elB, out _, out _);
