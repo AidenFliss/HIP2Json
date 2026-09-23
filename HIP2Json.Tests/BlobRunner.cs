@@ -295,7 +295,7 @@ public static class BlobRunner
 
         if (gc)
         {
-            GxFormat gx = RwtxGx.Detect(rwtx.bitDepth, rwtx.rasterFormatFlags);
+            GxFormat gx = RwtxGx.Detect(rwtx.bitDepth, rwtx.rasterFormatFlags, rwtx.rasterType);
             if (gx == GxFormat.None)
                 return;
             int paletteSize = RwtxGx.PaletteSize(gx);

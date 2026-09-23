@@ -125,7 +125,9 @@ public sealed class RWTXParser : AssetParser
         string paletteBase64 = null;
         string gcTailBase64 = null;
 
-        GxFormat gx = RwtxGx.Detect(bitDepth, fmt);
+        byte rasterType = data[RasterTypeOffset];
+
+        GxFormat gx = RwtxGx.Detect(bitDepth, fmt, rasterType);
         if (gx != GxFormat.None && width > 0 && height > 0 && TryDecodeMip0(payload, gx, fmt, width, height, out byte[] rgba, out byte[] _))
         {
             byte[] png = PngCodec.Encode(width, height, rgba);
@@ -196,7 +198,7 @@ public sealed class RWTXParser : AssetParser
 
     private static byte[] SerializeGameCubePayload(RWTX rwtx)
     {
-        GxFormat gx = RwtxGx.Detect(rwtx.bitDepth, rwtx.rasterFormatFlags);
+        GxFormat gx = RwtxGx.Detect(rwtx.bitDepth, rwtx.rasterFormatFlags, rwtx.rasterType);
         int paletteSize = RwtxGx.PaletteSize(gx);
         int mip0Bytes = gx != GxFormat.None && rwtx.width > 0 && rwtx.height > 0 ? RwtxGx.MipBytes(gx, rwtx.width, rwtx.height) : 0;
 
@@ -499,8 +501,32 @@ public static class RwtxGx
                      0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xFF, 0xFF, 0x03, 0x10 },
     };
 
-    public static GxFormat Detect(byte bitDepth, uint fmt)
+    public static GxFormat Detect(byte bitDepth, uint fmt, byte rasterType = 0xFF)
     {
+        switch (rasterType)
+        {
+            case 0x00:
+                return GxFormat.I4;
+            case 0x01:
+                return GxFormat.I8;
+            case 0x02:
+                return GxFormat.IA4;
+            case 0x03:
+                return GxFormat.IA8;
+            case 0x04:
+                return GxFormat.Rgb565;
+            case 0x05:
+                return GxFormat.Rgb5A3;
+            case 0x06:
+                return GxFormat.Rgba8;
+            case 0x08:
+                return GxFormat.CI4;
+            case 0x09:
+                return GxFormat.CI8;
+            case 0x0E:
+                return GxFormat.Cmpr;
+        }
+
         uint pf = fmt & 0x0F00;
         bool pal8 = (fmt & RasterFormatPal8) != 0;
 
@@ -666,14 +692,14 @@ public static class RwtxGx
         {
             case GxFormat.I4:
             case GxFormat.CI4:
-                bw = 16;
-                bh = 16;
-                blockBytes = 128;
+                bw = 8;
+                bh = 8;
+                blockBytes = 32;
                 break;
             case GxFormat.Cmpr:
                 bw = 8;
                 bh = 8;
-                blockBytes = 64;
+                blockBytes = 32;
                 break;
             case GxFormat.I8:
                 bw = 8;
@@ -1095,7 +1121,7 @@ public static class RwtxGx
 
     private static void DecodeCmpr(byte[] src, int blockOffset, byte[] rgba, int width, int height, int bx, int by)
     {
-        int[] subOffsets = new[] { 0, 8, 32, 40 };
+        int[] subOffsets = new[] { 0, 8, 16, 24 };
         for (int sy = 0; sy < 2; sy++)
         {
             for (int sx = 0; sx < 2; sx++)
