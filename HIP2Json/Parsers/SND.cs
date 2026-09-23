@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace HIP2Json;
 
@@ -17,10 +18,17 @@ public abstract class SoundAssetParser : AssetParser
     {
         byte[] data = br.ReadBytes((int)(br.BaseStream.Length - br.BaseStream.Position));
 
-        bool isVag = Program.CurrentPlatform == GamePlatform.PS2;
+        bool isVag = SoundCodec.HasVagMagic(data) || Program.CurrentPlatform == GamePlatform.PS2;
 
         string codec = isVag ? "VAG" : "DSPADPCM";
         int sampleRate = 22050;
+        if (isVag)
+        {
+            int vagRate = SoundCodec.VagSampleRate(data);
+            if (vagRate > 0 && vagRate <= 96000)
+                sampleRate = vagRate;
+        }
+
         string wavBase64 = null;
 
         if (data.Length > 0)
@@ -44,9 +52,13 @@ public abstract class SoundAssetParser : AssetParser
     {
         SoundAssetBase snd = (SoundAssetBase)obj;
 
-        bool isVag = Program.CurrentPlatform == GamePlatform.PS2;
-
         byte[] original = string.IsNullOrEmpty(snd.dataBase64) ? Array.Empty<byte>() : Convert.FromBase64String(snd.dataBase64);
+
+        bool isVag;
+        if (string.IsNullOrEmpty(snd.codec))
+            isVag = SoundCodec.HasVagMagic(original);
+        else
+            isVag = snd.codec == "VAG";
 
         if (string.IsNullOrEmpty(snd.wavBase64))
         {
@@ -55,7 +67,7 @@ public abstract class SoundAssetParser : AssetParser
             return original;
         }
 
-        short[] wavSamples = WavCodec.Decode(Convert.FromBase64String(snd.wavBase64), out int wavRate);
+        short[] wavSamples = WavCodec.Decode(Convert.FromBase64String(snd.wavBase64), out _);
 
         if (original.Length > 0)
         {
@@ -82,5 +94,6 @@ public abstract class SoundAssetBase
     public int sampleRate { get; set; }
     public int channels { get; set; }
     public string wavBase64 { get; set; }
+    [JsonIgnore]
     public string dataBase64 { get; set; }
 }

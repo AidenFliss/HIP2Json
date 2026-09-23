@@ -15,6 +15,8 @@ class Program
     public static GamePlatform CurrentPlatform;
     public static bool BigEndian = true;
 
+    internal static Dictionary<uint, byte[]> SoundSourceBytes;
+
     internal static readonly HashSet<string> BLACKLIST_ASSETS = new HashSet<string> { "BSP", "JSP", "MODL", "TEXS", "ANIM", "SHRP" };
     static readonly HashSet<string> BASE_ASSETS = new HashSet<string>
     {
@@ -380,6 +382,17 @@ class Program
         var serOpts = new JsonSerializerOptions { PropertyNameCaseInsensitive = true, IncludeFields = true, NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals };
         obj = JsonSerializer.Deserialize(modElem.GetProperty(detectedAssetType).GetRawText(), targetType, serOpts);
 
+        if (obj is SoundAssetBase snd && string.IsNullOrEmpty(snd.dataBase64) && SoundSourceBytes != null && modElem.TryGetProperty("AssetID", out var idProp))
+        {
+            string idStr = idProp.GetString();
+            if (!string.IsNullOrEmpty(idStr) && idStr.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            {
+                uint assetID = Convert.ToUInt32(idStr.Substring(2), 16);
+                if (SoundSourceBytes.TryGetValue(assetID, out byte[] raw))
+                    snd.dataBase64 = Convert.ToBase64String(raw);
+            }
+        }
+
         if (obj is DYNA dyna && dyna.dynaSpecificData is JsonElement dynaElem)
         {
             Type payloadType = ParserMaps.GetDYNAPayloadType(dyna.typeNameInternal, ns);
@@ -506,6 +519,7 @@ class Program
             }
 
             Dictionary<uint, byte[]> jspSourceBytes = null;
+            Dictionary<uint, byte[]> soundSourceBytes = null;
             if (File.Exists(sourceFile))
             {
                 try
@@ -514,12 +528,17 @@ class Program
                     jspSourceBytes = srcHip.DICT.ATOC.AHDRList
                         .Where(h => h.assetType.GetCode() == "JSP" && h.data != null)
                         .ToDictionary(h => h.assetID, h => h.data);
+                    soundSourceBytes = srcHip.DICT.ATOC.AHDRList
+                        .Where(h => (h.assetType.GetCode() == "SND" || h.assetType.GetCode() == "SNDS") && h.data != null)
+                        .ToDictionary(h => h.assetID, h => h.data);
                 }
                 catch (Exception jspEx)
                 {
-                    Logger.LogWarning("Could not load JSP raw bytes from source archive: " + jspEx.Message);
+                    Logger.LogWarning("Could not load JSP/SND raw bytes from source archive: " + jspEx.Message);
                 }
             }
+
+            SoundSourceBytes = soundSourceBytes;
 
             Dictionary<uint, byte[]> assetDataDictionary = root.EnumerateArray()
                 .Select(elem =>

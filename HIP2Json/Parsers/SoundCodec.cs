@@ -81,12 +81,25 @@ public static class SoundCodec
         return samples;
     }
 
+    public static bool HasVagMagic(byte[] data)
+    {
+        return data != null && data.Length >= 4 && data[0] == 0x56 && data[1] == 0x41 && data[2] == 0x47 && data[3] == 0x70;
+    }
+
+    public static int VagSampleRate(byte[] data)
+    {
+        if (!HasVagMagic(data) || data.Length < 0x14)
+            return 0;
+        return (data[0x10] << 24) | (data[0x11] << 16) | (data[0x12] << 8) | data[0x13];
+    }
+
     public static short[] DecodeVAG(byte[] data)
     {
-        if (data.Length <= 16)
+        int header = HasVagMagic(data) ? 0x30 : 0;
+        if (data.Length <= header)
             return Array.Empty<short>();
 
-        int body = data.Length - 16;
+        int body = data.Length - header;
         int frames = body / 16;
         short[] samples = new short[frames * 28];
 
@@ -96,7 +109,7 @@ public static class SoundCodec
 
         for (int f = 0; f < frames; f++)
         {
-            int frameOff = 16 + f * 16;
+            int frameOff = header + f * 16;
             byte hdr = data[frameOff];
             int shift = hdr & 0x0F;
             int idx = (hdr >> 4) & 0x0F;
@@ -145,7 +158,21 @@ public static class SoundCodec
         int count = samples.Length;
         int padded = (count + 27) / 28 * 28;
         int frames = padded / 28;
-        byte[] data = new byte[16 + frames * 16];
+        byte[] data = new byte[0x30 + frames * 16];
+
+        data[0] = (byte)'V';
+        data[1] = (byte)'A';
+        data[2] = (byte)'G';
+        data[3] = (byte)'p';
+        data[4] = 0x00;
+        data[5] = 0x00;
+        data[6] = 0x00;
+        data[7] = 0x20;
+        int bodySize = frames * 16;
+        data[0x0C] = (byte)(bodySize >> 24);
+        data[0x0D] = (byte)(bodySize >> 16);
+        data[0x0E] = (byte)(bodySize >> 8);
+        data[0x0F] = (byte)bodySize;
 
         int h1 = 0;
         int h2 = 0;
@@ -228,7 +255,7 @@ public static class SoundCodec
                 }
             }
 
-            int frameOff = 16 + f * 16;
+            int frameOff = 0x30 + f * 16;
             data[frameOff] = (byte)((bestP << 4) | bestShift);
             data[frameOff + 1] = 0x00;
 

@@ -175,6 +175,17 @@ public static class BlobRunner
             return;
         }
 
+        if (type == "SND" || type == "SNDS")
+        {
+            string assetIdStr = headerValue(header, "asset=");
+            if (assetIdStr.StartsWith("0x", StringComparison.OrdinalIgnoreCase))
+            {
+                uint assetID = Convert.ToUInt32(assetIdStr.Substring(2), 16);
+                a.AssetID = assetIdStr;
+                HIPProg.SoundSourceBytes = new Dictionary<uint, byte[]> { [assetID] = blob };
+            }
+        }
+
         JsonElement elV = JsonSerializer.SerializeToElement(a, CompareOpts);
         string valuesJson = stripEnvelope(elV).GetRawText();
 
