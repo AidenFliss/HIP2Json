@@ -45,6 +45,8 @@ static class Program
                     if (i + 2 < args.Length && !args[i + 2].StartsWith("--"))
                         onlyBlob = args[i + 2];
                     return BlobRunner.Run(blobDir, onlyBlob);
+                case "--regen-blobs" when i + 1 < args.Length:
+                    return BlobRunner.Regen(args[i + 1], args.Length > i + 2 ? args[i + 2] : "");
                 case "--archives" when i + 1 < args.Length:
                     return ArchiveGate.Run(args[i + 1], args.Length > i + 2 ? args[i + 2] : "", args.Length > i + 3 ? args[i + 3] : "/tmp/opencode/archgate", args.Length > i + 4 ? args[i + 4] : "");
                 case "--list":
@@ -61,6 +63,7 @@ static class Program
                     Console.WriteLine("  --harvest <bfbbRoot> <tssmRoot> <outDir> [seed]  harvest real production blobs into outDir");
                     Console.WriteLine("  --blobs <dir>   run harvested production blobs: VALUES roundtrip + byte-identical repack");
                     Console.WriteLine("                  (fixtures always it; registered types without a real fixture print a warning, not a failure)");
+                    Console.WriteLine("  --regen-blobs <dir> [only]  rewrite EXPECTED_JSON sections from the BLOB+parser (fixture refresh)");
                     Console.WriteLine("  exit 0  iff  crashes==0 AND idempotence-miss==0");
                     return 0;
             }

@@ -13,11 +13,6 @@ class Program
 {
     static readonly HashSet<string> SKIP_FILES = new HashSet<string> { "font2", "db05", "b301" };
 
-    static int _totalAssets;
-    static int _parsedBase;
-    static int _parsedEntity;
-    static int _parsedDyna;
-    static int _parsedBinary;
     static void Main(string[] args)
     {
         try
@@ -28,21 +23,18 @@ class Program
                 return;
             }
 
-            bool extractMode = args.Contains("--extract") || args.Contains("-e");
             bool packMode = args.Contains("--pack") || args.Contains("-k");
-            bool unpackMode = args.Contains("--unpack") || args.Contains("-u");
-            bool projectMode = args.Contains("--project") || args.Contains("-j");
+            bool rawMode = args.Contains("--save-assets") || args.Contains("--debug");
+            bool legacyDump = args.Contains("--unpack") || args.Contains("-u") || args.Contains("--extract") || args.Contains("-e");
             bool showProgress = args.Contains("--progress") || args.Contains("-c");
             bool overwriteFlag = args.Contains("--overwrite") || args.Contains("-o");
 
-            int modeCount = ((extractMode || projectMode) ? 1 : 0) + (packMode ? 1 : 0) + (unpackMode ? 1 : 0);
-
-            if (modeCount != 1)
+            if (legacyDump && !rawMode)
             {
-                Logger.LogError("Error: Specify exactly one mode. --extract and --project are the same in-memory project flow (use either, or both); --unpack dumps raw assets; --pack repacks.");
-                ShowUsage();
-                return;
+                Logger.LogWarning("--unpack/--extract are deprecated: a project is always built now; raw asset files are ONLY written with --save-assets.");
             }
+
+            bool saveAssets = rawMode || legacyDump;
 
             string gameStr = GetFlagValue(args, "--game", "-g");
             string platformStr = GetFlagValue(args, "--platform", "-p");
@@ -91,29 +83,17 @@ class Program
 
             string inputPath = pathArgs[0];
 
-            if (extractMode)
-            {
-                string outputDir = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultExtractPath(inputPath);
-
-                RunExtract(inputPath, outputDir, showProgress);
-            }
-            else if (unpackMode)
-            {
-                string outputDir = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultUnpackPath(inputPath);
-
-                RunUnpack(inputPath, outputDir);
-            }
-            else if (projectMode)
-            {
-                string outputDir = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultProjectPath(inputPath);
-
-                RunProject(inputPath, outputDir, showProgress);
-            }
-            else
+            if (packMode)
             {
                 string outputPath = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultPackPath(inputPath);
 
                 RunPack(inputPath, outputPath, overwriteFlag);
+            }
+            else
+            {
+                string outputDir = pathArgs.Length > 1 ? pathArgs[1] : GetDefaultProjectPath(inputPath);
+
+                RunProject(inputPath, outputDir, showProgress, saveAssets);
             }
         }
         catch (Exception ex)
@@ -159,30 +139,6 @@ class Program
         return positional.ToArray();
     }
 
-    static string GetDefaultExtractPath(string inputPath)
-    {
-        string folderName = Path.GetFileNameWithoutExtension(inputPath);
-        if (File.Exists(inputPath))
-        {
-            return Path.Combine(Directory.GetCurrentDirectory(), folderName + "_unpacked");
-        }
-
-        string cleanInput = inputPath.TrimEnd('/', '\\');
-        return Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileName(cleanInput) + "_project");
-    }
-
-    static string GetDefaultUnpackPath(string inputPath)
-    {
-        string folderName = Path.GetFileNameWithoutExtension(inputPath);
-        if (File.Exists(inputPath))
-        {
-            return Path.Combine(Directory.GetCurrentDirectory(), folderName + "_raw");
-        }
-
-        string cleanInput = inputPath.TrimEnd('/', '\\');
-        return Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileName(cleanInput) + "_raw");
-    }
-
     static string GetDefaultProjectPath(string inputPath)
     {
         string folderName = Path.GetFileNameWithoutExtension(inputPath);
@@ -191,7 +147,8 @@ class Program
             return Path.Combine(Path.GetDirectoryName(inputPath) ?? Directory.GetCurrentDirectory(), folderName + "_proj");
         }
 
-        return Path.Combine(Directory.GetCurrentDirectory(), Path.GetFileName(inputPath.TrimEnd('/', '\\')) + "_proj");
+        string fullDir = Path.GetFullPath(inputPath.TrimEnd('/', '\\'));
+        return fullDir + "_project";
     }
 
     static void ShowUsage()
@@ -199,23 +156,25 @@ class Program
         string ns = typeof(HIP2Json.Program).Namespace;
 
         Logger.LogInfo("Usage:");
-        Logger.LogInfo($"  {ns} --unpack  <input_path> [output_path] [options]");
-        Logger.LogInfo($"  {ns} --extract <input_path> [output_path] [options]");
-        Logger.LogInfo($"  {ns} --project <input_path> [output_path] [options]");
-        Logger.LogInfo($"  {ns} --pack    <input_path> [output_path] [options]");
+        Logger.LogInfo($"  {ns} <input_path> [output_path] [flags]   build a JSON project (default; ALWAYS makes a project)");
+        Logger.LogInfo($"  {ns} --pack <project_path> [-o out.hip]  repack a project folder back into a binary archive");
         Logger.LogInfo("");
-        Logger.LogInfo("Modes:");
-        Logger.LogInfo("  --unpack, -u   Unpack .hip/.hop archive(s) to raw asset files + Settings.ini only (no JSON/repack).");
-        Logger.LogInfo("  --extract, -e  Extract a single .hip/.hop archive OR an entire game files directory.");
-        Logger.LogInfo("  --project, -j  Build in-memory project from .hip/.hop (project.json + assets.json + mod_assets.json, raw bytes as base64).");
-        Logger.LogInfo("  --pack, -k      Pack a project folder (*_unpacked or *_proj) back into binary archive(s).");
+        Logger.LogInfo("Input can be a single .hip/.hop archive OR an entire game files directory. A project");
+        Logger.LogInfo("(project.json + assets.json + mod_assets.json) is always built in memory; nothing is written");
+        Logger.LogInfo("unless you ask: only JSON goes to disk by default, so no raw bytes = 0 MB of dumps.");
+        Logger.LogInfo("  single archive -> <archive-name>_proj/   (next to the archive)");
+        Logger.LogInfo("  game directory -> <folder>_project/<archive>_proj/   (next to the game folder)");
         Logger.LogInfo("");
-        Logger.LogInfo("Options:");
-        Logger.LogInfo("  --game, -g      Specify target game format (BFBB or TSSM). [optional; auto-detected from archive when omitted]");
-        Logger.LogInfo("  --platform, -p  Specify target platform format (GC, PS2, or XBOX). [optional; auto-detected from archive when omitted]");
+        Logger.LogInfo("Flags:");
+        Logger.LogInfo("  --save-assets   ALSO write raw per-asset files + Settings.ini to disk under <project>/unpacked/.");
+        Logger.LogInfo("                  Opt-in on purpose -- this is the only thing that dumps big game bytes. (alias: --debug)");
+        Logger.LogInfo("  --game, -g      Override target game format (BFBB or TSSM). [auto-detected from archive when omitted]");
+        Logger.LogInfo("  --platform, -p  Override target platform format (GC, PS2, or XBOX). [auto-detected from archive when omitted]");
         Logger.LogInfo("  --overwrite, -o When packing a *_proj folder, overwrite the original source archive in its own spot (sha-256 verified).");
         Logger.LogInfo("  --progress, -c  Show parsing coverage stats.");
         Logger.LogInfo("  --help, -h      Show this help message.");
+        Logger.LogInfo("");
+        Logger.LogInfo("Deprecated aliases: --unpack/-u and --extract/-e (now: project + --save-assets), --project/-j (now: the default).");
     }
 
     static string GetElementKey(JsonElement elem)
@@ -229,269 +188,7 @@ class Program
         return string.Empty;
     }
 
-    static void RunExtract(string targetPath, string projectDir, bool showProgress)
-    {
-        if (File.Exists(targetPath))
-        {
-            string baseDir = Path.GetDirectoryName(targetPath) ?? targetPath;
-
-            string ext = Path.GetExtension(targetPath).ToLower();
-            if (ext != ".hip" && ext != ".hop")
-            {
-                Logger.LogError($"Error: Target file '{targetPath}' is not a .hip or .hop file.");
-                return;
-            }
-
-            Logger.LogInfo($"Extracting single archive: {targetPath} -> {projectDir}");
-            Directory.CreateDirectory(projectDir);
-
-            ProcessSingleArchiveExtract(targetPath, baseDir, projectDir, showProgress);
-        }
-        else if (Directory.Exists(targetPath))
-        {
-            Logger.LogInfo($"Extracting full directory: {targetPath} -> {projectDir}");
-            Directory.CreateDirectory(Path.Combine(projectDir, "parsed", "og"));
-            Directory.CreateDirectory(Path.Combine(projectDir, "parsed", "mod"));
-            Directory.CreateDirectory(Path.Combine(projectDir, "unpacked"));
-
-            foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
-            {
-                string fileExt = Path.GetExtension(file).ToLower();
-                if (fileExt != ".hip" && fileExt != ".hop")
-                    continue;
-
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                if (SKIP_FILES.Contains(fileName))
-                    continue;
-
-                string parentFolder = Path.GetFileName(Path.GetDirectoryName(file)!);
-                if (parentFolder is "Working" or "New Folder" or "backup")
-                    continue;
-
-                ProcessSingleArchiveExtract(file, targetPath, projectDir, showProgress);
-            }
-        }
-        else
-        {
-            Logger.LogError($"Error: Target path '{targetPath}' does not exist.");
-        }
-
-        if (showProgress)
-            LogParseReport();
-    }
-
-    static void ProcessSingleArchiveExtract(string filePath, string baseDir, string projectDir, bool showProgress)
-    {
-        string unpackedDir = Path.Combine(projectDir, "unpacked");
-
-        bool isHipFile = Path.GetExtension(filePath).ToLower() == ".hip";
-        bool isHopFile = Path.GetExtension(filePath).ToLower() == ".hop";
-
-        string type =
-            isHipFile ? "HIP"
-            : isHopFile ? "HOP"
-            : "Unknown";
-
-        if (type == "Unknown")
-            return;
-
-        string parentFolder = Path.GetFileName(Path.GetDirectoryName(filePath)!);
-
-        if (parentFolder is "Working" or "New Folder" or "backup")
-            return;
-
-        Logger.LogInfo($"Processing {filePath}...");
-
-        (HipFile hipfile, Game game, Platform platform) = HipFile.FromPath(filePath);
-
-        ResolveGamePlatform(game, platform);
-
-        string relativeSubFolder = GetJsonOutputFolder(baseDir, filePath);
-        string archiveName = Path.GetFileNameWithoutExtension(filePath) + "_" + type;
-
-        string extractDir = Path.Combine(unpackedDir, archiveName);
-
-        Directory.CreateDirectory(extractDir);
-
-        hipfile.ToIni(game, extractDir, true, true);
-
-        var files = Directory.GetFiles(extractDir, "*.*", SearchOption.AllDirectories);
-        var assets = new List<ParsedAsset>();
-
-        foreach (var assetFile in files)
-        {
-            if (string.Equals(Path.GetFileName(assetFile), "Settings.ini", StringComparison.OrdinalIgnoreCase))
-                continue;
-
-            var parsed = ParseAsset(assetFile);
-            if (parsed == null)
-                continue;
-
-            parsed.AssetFriendlyName = GetFriendlyName(Path.GetFileName(assetFile)) ?? "Unknown";
-            parsed.FileName = Path.GetFileName(assetFile) ?? "Unknown";
-            string assetIdStr = GetAssetId(Path.GetFileName(assetFile));
-
-            bool shortForm = (parsed.AssetData.TryGetValue("TIMR", out var timrObj) && timrObj is TIMR { ShortForm: true })
-                          || (parsed.AssetData.TryGetValue("SURF", out var surfObj) && surfObj is SURF { ShortForm: true });
-
-            if (shortForm)
-            {
-                try
-                {
-                    var expandOpts = new JsonSerializerOptions
-                    {
-                        WriteIndented = false,
-                        IncludeFields = true,
-                        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-                        NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
-                        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                    };
-                    JsonElement elem = JsonSerializer.SerializeToElement(parsed, expandOpts);
-                    byte[] fullBytes = SerializeModdedAsset(elem, out _, out _);
-                    long rawLen = new FileInfo(assetFile).Length;
-                    if (fullBytes.Length > rawLen)
-                    {
-                        File.WriteAllBytes(assetFile, fullBytes);
-                        Logger.LogWarning($"Short-form base asset {Path.GetFileName(assetFile)} expanded from {rawLen} to {fullBytes.Length} bytes (full struct)");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logger.LogWarning($"Could not expand short-form asset {Path.GetFileName(assetFile)}: {ex.Message}");
-                }
-            }
-
-            Logger.LogInfo("Asset ID: " + (assetIdStr ?? "Unknown"));
-
-            if (parsed.Base != null)
-            {
-                if (Dictionaries.BASETYPE_TO_FRIENDLY_NAME.TryGetValue(parsed.Base?.baseType, out var friendlyType))
-                    Logger.LogInfo("Asset Type: " + friendlyType);
-                else
-                    Logger.LogWarning("Asset Type: Unknown for " + parsed.Base?.baseType);
-            }
-
-            assets.Add(parsed);
-        }
-
-        var options = new JsonSerializerOptions
-        {
-            WriteIndented = true,
-            IncludeFields = true,
-            DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            NumberHandling = JsonNumberHandling.AllowNamedFloatingPointLiterals,
-            Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-        };
-
-        string json = JsonSerializer.Serialize(assets, options);
-
-        bool isBulkExtract = Directory.Exists(baseDir) && baseDir != Path.GetDirectoryName(filePath);
-
-        string jsonOutputFolderOgPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder) ? Path.Combine(projectDir, "parsed", "og", relativeSubFolder) : Path.Combine(projectDir, "og");
-
-        string jsonOutputFolderModPath = isBulkExtract || !string.IsNullOrEmpty(relativeSubFolder) ? Path.Combine(projectDir, "parsed", "mod", relativeSubFolder) : Path.Combine(projectDir, "mod");
-
-        Directory.CreateDirectory(jsonOutputFolderOgPath);
-        Directory.CreateDirectory(jsonOutputFolderModPath);
-
-        string jsonFileName = archiveName + "_assets.json";
-
-        File.WriteAllText(Path.Combine(jsonOutputFolderOgPath, jsonFileName), json);
-        File.WriteAllText(Path.Combine(jsonOutputFolderModPath, jsonFileName), json);
-    }
-
-    static void RunUnpack(string targetPath, string outputDir)
-    {
-        if (File.Exists(targetPath))
-        {
-            string ext = Path.GetExtension(targetPath).ToLower();
-            if (ext != ".hip" && ext != ".hop")
-            {
-                Logger.LogError($"Error: Target file '{targetPath}' is not a .hip or .hop file.");
-                return;
-            }
-
-            Logger.LogInfo($"Unpacking single archive: {targetPath} -> {outputDir}");
-            Directory.CreateDirectory(outputDir);
-
-            ProcessSingleArchiveUnpack(targetPath, outputDir);
-        }
-        else if (Directory.Exists(targetPath))
-        {
-            Logger.LogInfo($"Unpacking full directory: {targetPath} -> {outputDir}");
-            Directory.CreateDirectory(outputDir);
-
-            foreach (string file in Directory.GetFiles(targetPath, "*.*", SearchOption.AllDirectories))
-            {
-                string fileExt = Path.GetExtension(file).ToLower();
-                if (fileExt != ".hip" && fileExt != ".hop")
-                    continue;
-
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                if (SKIP_FILES.Contains(fileName))
-                    continue;
-
-                string parentFolder = Path.GetFileName(Path.GetDirectoryName(file)!);
-                if (parentFolder is "Working" or "New Folder" or "backup")
-                    continue;
-
-                ProcessSingleArchiveUnpack(file, outputDir);
-            }
-        }
-        else
-        {
-            Logger.LogError($"Error: Target path '{targetPath}' does not exist.");
-        }
-    }
-
-    static void ProcessSingleArchiveUnpack(string filePath, string outputDir)
-    {
-        try
-        {
-            (HipFile hipfile, Game game, Platform platform) = HipFile.FromPath(filePath);
-
-            ResolveGamePlatform(game, platform);
-
-            if (game == Game.Unknown)
-            {
-                game = GetGameFromCli();
-
-                if (game == Game.Unknown)
-                {
-                    Logger.LogWarning($"Skipping {filePath}: could not determine game. Pass --game <BFBB|TSSM> to override.");
-                    return;
-                }
-            }
-
-            bool isHipFile = Path.GetExtension(filePath).ToLower() == ".hip";
-            bool isHopFile = Path.GetExtension(filePath).ToLower() == ".hop";
-
-            string type =
-                isHipFile ? "HIP"
-                : isHopFile ? "HOP"
-                : "Unknown";
-
-            if (type == "Unknown")
-                return;
-
-            string archiveName = Path.GetFileNameWithoutExtension(filePath) + "_" + type;
-            string extractDir = Path.Combine(outputDir, archiveName);
-
-            hipfile.ToIni(game, extractDir, true, true);
-
-            Logger.LogInfo($"Unpacked {Path.GetFileName(filePath)} -> {extractDir}");
-        }
-        catch (Exception ex)
-        {
-            Logger.LogError($"Failed to unpack {filePath}: {ex.Message}");
-        }
-        finally
-        {
-            Section_ATOC.noAHDR = false;
-        }
-    }
-
-    static void RunProject(string targetPath, string outputDir, bool showProgress)
+    static void RunProject(string targetPath, string outputDir, bool showProgress, bool saveAssets)
     {
         if (File.Exists(targetPath))
         {
@@ -504,7 +201,7 @@ class Program
 
             Directory.CreateDirectory(outputDir);
             Logger.LogInfo($"Building in-memory project for: {targetPath}");
-            ProcessSingleArchiveProject(targetPath, outputDir, showProgress);
+            ProcessSingleArchiveProject(targetPath, outputDir, showProgress, saveAssets);
         }
         else if (Directory.Exists(targetPath))
         {
@@ -528,7 +225,7 @@ class Program
                 Directory.CreateDirectory(projectDir);
 
                 Logger.LogInfo($"Building in-memory project for: {file}");
-                ProcessSingleArchiveProject(file, projectDir, showProgress);
+                ProcessSingleArchiveProject(file, projectDir, showProgress, saveAssets);
             }
         }
         else
@@ -1216,192 +913,13 @@ class Program
         return set;
     }
 
-    static ParsedAsset ParseAsset(string filePath)
-    {
-        string folderName = Path.GetFileName(Path.GetDirectoryName(filePath)!);
-        if (folderName == null)
-        {
-            Logger.LogWarning($"Skipping (no folder) {filePath}");
-            return null;
-        }
-
-        if (!Dictionaries.FolderMap.TryGetValue(folderName, out AssetDescriptor assetDescriptor))
-        {
-            if (!ParserMaps.DYNAFolderToInternalName.TryGetValue(folderName, out string _))
-            {
-                Logger.LogWarning($"Skipping unknown folder '{folderName}' for file {Path.GetFileName(filePath)}");
-                return null;
-            }
-
-            assetDescriptor = new AssetDescriptor() { AssetType = "DYNA", AssetStorage = AssetStorage.Base };
-        }
-
-        if (BLACKLIST_ASSETS.Contains(assetDescriptor.AssetType))
-        {
-            Logger.LogInfo($"Skipping blacklisted assets in '{folderName}'");
-            return null;
-        }
-
-        using var fs = File.OpenRead(filePath);
-        using var br = new BinaryReader(fs);
-
-        if (br.BaseStream.Length == 0)
-        {
-            Logger.LogInfo("Skipping asset with 0 bytes!");
-            return null;
-        }
-
-        long assetStart = br.BaseStream.Position;
-
-        byte linkCount = 0;
-
-        xBaseAsset? baseAsset = null;
-
-        if (assetDescriptor.AssetStorage != AssetStorage.Binary)
-        {
-            byte[] header = br.ReadBytes(8);
-            if (header.Length < 8)
-                return null;
-
-            uint id = Util.ReadUInt32(header, 0);
-            byte baseTypeByte = header[4];
-            linkCount = header[5];
-            ushort baseFlags = Util.ReadUInt16(header, 6);
-
-            string baseTypeStr = $"0x{baseTypeByte:X2}";
-
-            baseAsset = new xBaseAsset
-            {
-                id = id,
-                baseType = baseTypeStr,
-                linkCount = linkCount,
-                baseFlags = (BaseFlags)baseFlags,
-            };
-        }
-
-        string assetType = assetDescriptor.AssetType;
-
-        string category = GetCategory(assetType);
-        bool implemented = ParserMaps.AssetToParser.ContainsKey(assetType);
-        _totalAssets++;
-
-        Logger.LogInfo($"Parsing {Path.GetFileName(filePath)} as {assetType}");
-
-        Dictionary<string, object> additionalData = new();
-
-        xLinkAsset[] links = Array.Empty<xLinkAsset>();
-        xEntAsset? ent = null;
-
-        if (assetDescriptor.AssetStorage == AssetStorage.Entity)
-        {
-            ent = ParseEntityChunk(br);
-        }
-
-        long dataStart = br.BaseStream.Position;
-
-        if (ParserMaps.AssetToParser.TryGetValue(assetType, out AssetParser parser))
-        {
-            object parsed;
-            try
-            {
-                parsed = parser.Parse(br, assetStart, dataStart);
-            }
-            catch (Exception ex)
-            {
-                Logger.LogWarning($"Could not parse {Path.GetFileName(filePath)} as {assetType}: {ex.Message}. Keeping raw bytes.");
-                return null;
-            }
-
-            additionalData[assetType] = parsed;
-
-            if (assetDescriptor.AssetStorage != AssetStorage.Binary)
-            {
-                long linksOffset = parser.GetLinksOffset(br, linkCount);
-
-                br.BaseStream.Seek(linksOffset, SeekOrigin.Begin);
-
-                links = new xLinkAsset[linkCount];
-
-                for (int i = 0; i < linkCount; i++)
-                    links[i] = ReadLinkAsset(br);
-            }
-
-            if (category == "binary")
-                _parsedBinary++;
-            if (category == "dyna")
-                _parsedDyna++;
-            if (category == "base")
-                _parsedBase++;
-            if (category == "entity")
-                _parsedEntity++;
-        }
-        else
-        {
-            string type = Dictionaries.FolderMap[folderName].AssetType;
-
-            if (!_unimplByType.TryGetValue(type, out int count))
-                _unimplByType[type] = 1;
-            else
-                _unimplByType[type] = count + 1;
-
-            _unimplemented++;
-
-            Logger.LogWarning($"Unimplemented parser for {type} ({assetType})");
-        }
-
-        return new ParsedAsset
-        {
-            Base = baseAsset,
-            Links = links,
-            Entity = ent,
-            AssetData = additionalData,
-        };
-    }
-
     static void LogParseReport()
     {
-        int implemented = _parsedBase + _parsedEntity + _parsedDyna + _parsedBinary;
-        int total = _totalAssets;
-
-        float percent = total == 0 ? 0f : implemented / (float)total * 100f;
-
         Logger.LogInfo("====================================");
         Logger.LogInfo(" PARSE FINAL REPORT");
         Logger.LogInfo("====================================");
-
-        Logger.LogInfo($"Total assets:        {total}");
-        Logger.LogInfo($"Implemented:         {implemented}");
-        Logger.LogInfo($"Unimplemented:       {_unimplemented}");
-        Logger.LogInfo("");
-
-        Logger.LogInfo($"Base parsed:         {_parsedBase}");
-        Logger.LogInfo($"Entity parsed:       {_parsedEntity}");
-        Logger.LogInfo($"DYNA parsed:         {_parsedDyna}");
-        Logger.LogInfo($"Binary parsed:         {_parsedBinary}");
-        Logger.LogInfo("");
-
-        Logger.LogInfo("");
-        Logger.LogInfo(" UNIMPLEMENTED:");
-        Logger.LogInfo("------------------------------------");
-
-        foreach (var kvp in _unimplByType.OrderByDescending(x => x.Value))
-        {
-            Logger.LogInfo($"{kvp.Key}: {kvp.Value}");
-        }
-
-        Logger.LogInfo($"Progress:            {percent:0.00}%");
+        Logger.LogInfo("Project mode builds full projects in memory; no per-asset parse stats are tracked here.");
         Logger.LogInfo("====================================");
-    }
-
-    static string GetFriendlyName(string fileName)
-    {
-        int endBracket = fileName.IndexOf(']');
-        if (endBracket >= 0 && endBracket < fileName.Length - 1)
-        {
-            string namePart = fileName.Substring(endBracket + 1).Trim();
-            return namePart;
-        }
-        return fileName;
     }
 
     static string GetAssetId(string fileName)
@@ -1411,17 +929,6 @@ class Program
         if (start >= 0 && end > start)
             return "0x" + fileName.Substring(start + 1, end - start - 1);
         return null;
-    }
-
-    static string GetJsonOutputFolder(string gameDir, string filePath)
-    {
-        string fileDir = Path.GetDirectoryName(filePath) ?? gameDir;
-        string relativeDir = Path.GetRelativePath(gameDir, fileDir);
-
-        if (string.IsNullOrEmpty(relativeDir) || relativeDir == ".")
-            return string.Empty;
-
-        return Path.GetFileName(fileDir) ?? string.Empty;
     }
 
 }

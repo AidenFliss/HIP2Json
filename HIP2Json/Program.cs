@@ -127,7 +127,7 @@ class Program
         return Convert.ToHexString(hash).ToLowerInvariant();
     }
 
-    internal static void ProcessSingleArchiveProject(string filePath, string projectDir, bool showProgress)
+    internal static void ProcessSingleArchiveProject(string filePath, string projectDir, bool showProgress, bool saveAssets = false)
     {
         try
         {
@@ -280,6 +280,20 @@ class Program
             var assetsJson = JsonSerializer.Serialize(assets, jsonOptions);
             File.WriteAllText(Path.Combine(projectDir, "assets.json"), assetsJson);
             File.WriteAllText(Path.Combine(projectDir, "mod_assets.json"), assetsJson);
+
+            if (saveAssets)
+            {
+                try
+                {
+                    string rawDir = Path.Combine(projectDir, "unpacked", archiveName);
+                    hipfile.ToIni(game, rawDir, true, true);
+                    Logger.LogWarning($"--save-assets: wrote raw per-asset files to {rawDir}");
+                }
+                catch (Exception rawEx)
+                {
+                    Logger.LogWarning($"--save-assets raw dump failed: {rawEx.Message}");
+                }
+            }
 
             Logger.LogInfo($"Wrote project to {projectDir} ({assets.Count} assets)");
         }
