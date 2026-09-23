@@ -11,7 +11,7 @@ A tool that allows you to extract .HIP and .HOP files to a set of json files, ed
 # Projects
 
 - `HIP2Json` — the **library**. Asset parsers, dictionaries, conversion, serialization, the embedded HIP/HOP container, and the typed `HipArchive` API (`HipArchive.Open` → mutate `Assets` / `AddAsset` / `RemoveAssets` → `Save` / `Overwrite`).
-- `HIP2Json.CLI` — the **command-line app** built on the library (`--unpack`/`-e`, `--extract`/`-e`, `--project`/`-j`, `--pack`/`-k`).
+- `HIP2Json.CLI` — the **command-line app** built on the library (builds JSON projects by default; `--save-assets` for raw dumps; `--pack`/`-k` to repack).
 - `HIP2Json.Tests` — the gates (see [Testing](#testing-hiplargejson2jsonapptests) below).
 
 # Features
@@ -45,84 +45,53 @@ The CLI binary is `HIP2Json.CLI` (run it via `dotnet run` in `HIP2Json.CLI/` dur
 
 ```text
 Usage:
-  HIP2Json.CLI --unpack  <input_path> [output_path] [options]
-  HIP2Json.CLI --extract <input_path> [output_path] [options]
-  HIP2Json.CLI --project <input_path> [output_path] [options]
-  HIP2Json.CLI --pack    <input_path> [output_path] [options]
+  HIP2Json.CLI <input_path> [output_path] [flags]   build a JSON project (default; ALWAYS makes a project)
+  HIP2Json.CLI --pack <project_path> [-o out.hip]  repack a project folder back into a binary archive
 
-Modes:
-  --unpack, -u   Unpack .hip/.hop archive(s) to raw asset files + Settings.ini only (no JSON/repack).
-  --extract, -e  Extract a single .hip/.hop archive OR an entire game files directory.
-  --project, -j  Build an in-memory project from .hip/.hop (project.json + assets.json + mod_assets.json, raw bytes as base64).
-  --pack, -k     Pack a project folder (*_unpacked or *_project) back into binary archive(s).
+A project (project.json + assets.json + mod_assets.json) is always built, whether the input is a single
+.hip/.hop file or an entire game files directory. Only JSON goes to disk by default (no raw bytes = 0 MB).
+  single archive -> <archive-name>_proj/          (next to the archive)
+  game directory -> <folder>_project/<archive>_proj/   (next to the game folder)
 
-Options:
+Flags:
+  --save-assets   ALSO write raw per-asset files + Settings.ini to disk under <project>/unpacked/.
+                  Opt-in on purpose -- this is the only thing that dumps big game bytes. (alias: --debug)
   --game, -g       Specify target game format (BFBB or TSSM). [optional; auto-detected from the archive when omitted]
   --platform, -p   Specify target platform format (GC, PS2, or XBOX). [optional; auto-detected from the archive when omitted]
-  --overwrite, -o  When packing a *_project folder, overwrite the original source archive in its own spot (sha-256 verified).
+  --overwrite, -o  When packing a *_proj folder, overwrite the original source archive in its own spot (sha-256 verified).
   --progress, -c   Show parsing coverage stats.
   --help, -h       Show this help message.
+
+Deprecated aliases: --unpack/-u and --extract/-e (now: project + --save-assets), --project/-j (now: the default).
 ```
 
-### Unpacking:
+### Building a Project (default):
 
-Run `HIP2Json.CLI` with `--unpack` (`-u`) to dump the raw contents of `.hip`/`.hop` archives into per-asset binary files and a `Settings.ini` — the game and platform are auto-detected from the archive contents, so `-g`/`-p` are not required.
-
-* **Single File Example:**
-  ```bash
-  HIP2Json.CLI -u path/to/jf01.HIP
-  ```
-  Creates a `jf01_raw/` folder containing `jf01_HIP/` with the raw asset files (`[id] name`) and `Settings.ini`.
-
-* **Full Directory Example:**
-  ```bash
-  HIP2Json.CLI -u path/to/game/files/
-  ```
-  Unpacks every `.hip`/`.hop` in the tree into `<output_path>/<archive>_<HIP|HOP>/...`. Pass `-g`/`-p` to force a game/platform override on archives whose container doesn't say.
-
-### Extracting:
-
-Run `HIP2Json.CLI` with `--extract` (`-e`), passing either a single `.hip`/`.hop` file or an entire `files` folder. The game and platform are auto-detected from the archive contents; pass `-g`/`-p` only to force an override.
+Just point the CLI at a `.hip`/`.hop` file or an entire `files` folder. No mode flag is needed — a JSON project is ALWAYS built. The game and platform are auto-detected from the archive contents, so `-g`/`-p` are required only to force an override.
 
 * **Single File Example:**
   ```bash
-  HIP2Json.CLI -e path/to/jf01.HIP
-  ```
-  Creates a `jf01_unpacked/` project folder containing `og/`, `mod/`, and `unpacked/` directly inside the folder.
-
-* **Full Directory Example:**
-  ```bash
-  HIP2Json.CLI -e path/to/game/files/
-  ```
-  Creates a `files_project/` folder containing `parsed/` (with the `og/` and `mod/` folder structure) and `unpacked/`.
-
-If there is an error during extraction, you might have a corrupted/beta file or an issue that needs to be reported.
-
-### Project Building:
-
-Run `HIP2Json.CLI` with `--project` (`-j`) on a `.hip`/`.hop` file or a whole `files` folder to build a lightweight in-memory project. Unlike `--extract`, this reads assets straight from the archive — no raw file dump (and no `Settings.ini`) is written. Unsupported payload types (models, textures, animation, sound stacks, BSP/JSP) are stored inline as base64 in `mod_assets.json`, so they transplant byte-for-byte.
-
-* **Single File Example:**
-  ```bash
-  HIP2Json.CLI -j path/to/jf01.HIP
+  HIP2Json.CLI path/to/jf01.HIP
   ```
   Creates `<source_dir>/jf01_proj/` with `project.json` (source path + sha-256, game/platform, layers) and `assets.json` + `mod_assets.json`.
 
 * **Full Directory Example:**
   ```bash
-  HIP2Json.CLI -j path/to/game/files/
+  HIP2Json.CLI path/to/game/files/
   ```
-  Builds a `<name>_proj/` project folder for every archive in the tree.
+  Creates `path/to/files_project/` containing a `<archive>_proj/` project folder for every `.hip`/`.hop` in the tree.
+
+Unsupported payload types (models, textures, animation, sound stacks, BSP/JSP) are stored inline as base64 in `mod_assets.json`, so they transplant byte-for-byte. No raw asset files are written unless you ask for them.
+
+* **Including Raw Asset Files:**
+  ```bash
+  HIP2Json.CLI path/to/jf01.HIP --save-assets
+  ```
+  Same as above, plus raw per-asset files and a `Settings.ini` under `<project>/unpacked/`. This is the ONLY way to dump raw game bytes, and it is opt-in on purpose.
 
 ### Packing:
 
 Run `HIP2Json.CLI` with `--pack` (`-k`) on the generated project directory to reimport your changes back into `.hip` and `.hop` binary files.
-
-* **Single File Project:**
-  ```bash
-  HIP2Json.CLI -k jf01_unpacked/ -g BFBB -p GC
-  ```
-  Packs your modifications directly into `jf01_unpacked/jf01.hip`.
 
 * **Full Game Project:**
   ```bash

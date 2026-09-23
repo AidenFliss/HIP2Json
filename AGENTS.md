@@ -36,23 +36,23 @@ Rules that matter:
 - `AssetParser.GetAssetIDConverter` produces the string/int forms of asset ids, and `Util` maps JHG in/out for id handling. Never assume little-endian on GC.
 - Linked (sub) headers use id (`AssetID`) forms that swap on little-endian platforms.
 
-## How unpacking works
+## How raw dumping works (`--save-assets`)
 
-`Main --unpack` → `RunUnpack` → per .hip/.hop file `ProcessSingleArchiveUnpack`:
+Raw per-asset files are NOT written by default. `--save-assets` (alias `--debug`) is the only way to dump them, and it runs inside the project flow: `Main` (no mode flag) → `RunProject(inputPath, outputDir, showProgress, saveAssets)` → per archive `ProcessSingleArchiveProject(filePath, projectDir, showProgress, saveAssets)`:
 
 1. Game/platform are auto-detected from the container (`PVER/PFLG/PCRT.date/PLAT`) via `HipFile.FromPath`; the CLI `-g`/`-p` flags are optional and only used as an override when detection yields `Unknown`.
-2. `hipfile.ToIni(game, extractDir, true, true)` writes the raw per-asset files and a `Settings.ini` (same step as `--extract`), then stops — **no parsed JSON, no og/mod writing, no repack**.
-3. Each archive is wrapped in try/catch so one bad file doesn't kill the batch, and `Section_ATOC.noAHDR` is reset between files (its static state must not leak across archives in one process).
+2. `hipfile.ToIni(game, Path.Combine(projectDir, "unpacked", archiveName), true, true)` writes the raw per-asset files into `<project>/unpacked/<Archive>_<HIP|HOP>/<assetType>/[<id>] <name>` plus a `Settings.ini` (and a `HLSAVE*` placeholder if present). This is its own try/catch: a raw write failure logs a warning and the JSON project still completes.
+3. That's the only disk write of raw bytes the project flow ever does. `--unpack`/`-u` and `--extract`/`-e` are deprecated aliases for `--save-assets` and log a deprecation warning (they no longer change behavior). `--project`/`-j` is ignored (it's the default).
 
-## How extraction works
+## How building works (default flow)
 
-`Main --extract` → `RunExtract` → per .hip/.hop file `ProcessSingleArchiveExtract`:
+Every invocation that is not `--pack` builds a project. `RunProject` handles both a single `.hip`/`.hop` and an entire game-files directory:
 
-1. `HipFile.FromPath(file)` — detects `Game` + `Platform` from container bytes, builds the section tree, slices each asset payload (by AHDR offset/size) into `asset.data`, and fills `asset.FileName`.
-2. `hipfile.ToIni(...)` — writes raw per-asset files into `unpacked/<Archive>_<HIP|HOP>/<assetType>/[<id>] <name>` plus a `Settings.ini` describing archive name/game/platform, and a `HLSAVE*` placeholder if present.
-3. HIP2Json re-reads those raw files, runs the per-type `AssetParser`, and writes a parsed JSON array to BOTH `parsed/og/<Archive>_assets.json` and `parsed/mod/<Archive>_assets.json`.
+1. `HipFile.FromPath(file)` — detects `Game` + `Platform` from container bytes, builds the section tree, slices each asset payload (by AHDR offset/size) into `asset.data`, and fills `asset.FileName`; throws on unrecognized top-level section and can NRE on a JSP asset with no `LTOC` layer.
+2. `ProcessSingleArchiveProject` — `ResolveGamePlatform(game, platform)` sets the per-archive globals, then every `AHDR` becomes one `ParsedAsset` (Base/Links/Entity/typed JSON) with any unparsered, blacklisted, DYNA-without-subparser, or throwing asset stored as `RawBase64` so it transplants byte-for-byte. Writes `project.json` + `assets.json` + `mod_assets.json` (identical on export; `mod_` is the editable one). With `saveAssets`, step 2 of the previous section runs first.
+3. Single archive → `<dir>/<name>_proj/`; directory → sibling `<dir>_project/<archive>_proj/` (default output path; a positional `output_path` overrides).
 
-Blacklisted payload types are stored in `ParserMaps`/`Program.BLACKLIST_ASSETS` and never parsed into JSON (BSP/JSP/MODL/RWTX/TEXS/ANIM/SND stack). `BASE_ASSETS`/`ENTITY_ASSETS` decide the `AssetType` (Base vs Entity). Remaining/passthrough types parse as Binary.
+Blacklisted payload types are stored in `Program.BLACKLIST_ASSETS` and never parsed into JSON (BSP/JSP/MODL/TEXS/ANIM/SHRP). Note RWTX IS parsed (PS2 PSMT4/PSMT8/PSMCT32, see `Parsers/RWTX.cs`). `BASE_ASSETS`/`ENTITY_ASSETS` decide the `AssetType` (Base vs Entity). Remaining/passthrough types parse as Binary.
 
 ## Adding/missing a parser
 
@@ -66,7 +66,7 @@ Blacklisted payload types are stored in `ParserMaps`/`Program.BLACKLIST_ASSETS` 
 
 ## How packing works
 
-`Main --pack` → `RunPack(inputPath, outputPath, overwriteFlag)`. If a `project.json` exists in inputPath it is a `*_proj` folder → `RunPackProject` (below); otherwise it is an `*_unpacked` folder:
+`Main --pack` → `RunPack(inputPath, outputPath, overwriteFlag)`. If a `project.json` exists in inputPath it is a `*_proj` folder → `RunPackProject` (below); otherwise it is a legacy `*_unpacked` folder (pre-`--save-assets` dumps still pack):
 1. (optional) `ScanJsonKeyDifferences(og, unpacked)` — diffs `parsed/og/*.json` vs `parsed/mod/*.json`, and for each changed property path writes a `mod_<asset>_overrides.json` (the custom JSON edit format tracks edits by path). Those override JSONs are then re-merged into each archive.
 2. `HipFile.FromINI(unpacked/Settings.ini)` assembles a new `HipFile` from the Settings + per-asset binary files, with a `HIPB` placed automatically by `HipFileHelpers.ReadHipBin`.
 3. `hipFile.ToBytes(game, platform)` serializes container (always BE). Final output written as `<archive>.hip`.
@@ -75,7 +75,7 @@ Repacking a BFBB archive with `--platform PS2` produces a valid but *changed* co
 
 ## How project mode works
 
-`Main --project`/`-j` → `RunProject` → per archive `ProcessSingleArchiveProject`. This is the in-memory flow (no raw dump, no Settings.ini):
+Project building IS the default flow (no mode flag). `Main` (non-`--pack`) → `RunProject(targetPath, outputDir, showProgress, saveAssets)` → per archive `ProcessSingleArchiveProject`. This is the in-memory flow; raw files are only written when `saveAssets` is set:
 
 1. `HipFile.FromPath(file)` builds the section tree; `ResolveGamePlatform(game, platform)` applies the detected game/platform to `Program` globals unless `-g`/`-p` override.
 2. Every `AHDR` gets one `ParsedAsset` entry in `assets.json` + `mod_assets.json` (identical on export, `mod_` is the editable one). `ParseAssetBytes(data, type, name)` parses entity/base/binary payloads into Base/Links/typed JSON; anything blacklisted, unparsered, DYNA-without-subparser, or throwing is stored as `RawBase64` (models/textures/animation/sound transplant byte-for-byte).
@@ -110,8 +110,7 @@ Round-trip fidelity: raw/base64 assets repack byte-identically (verified). Parse
 - Repack padding: `Section_DPAK` writes padding via `0x33` zero-pad header + `paddingAmount`. Only matching platform alignment (GC 0x20, PS2/XBOX 0x800) reproduces a faithful archive; library writes GC padding by default regardless of platform.
 ## In-memory philosophy (MUST follow — this is the core contract)
 
-- **Never write unpacked/raw asset files to disk by default.** The whole point of this tool is NOT depending on any `Settings.ini`/extractor-intermediate folder. Everything — archive parse, asset parse, JSON, mod_assets, repack — is built **in memory** as a project (same flow as `--unpack` with zero intermediate writing).
-- The ONLY things written to disk are: (a) the user's explicit output (`project.json` + `assets.json` + `mod_assets.json` + optionally repacked `.hip`), and (b) bytes the user explicitly asked to be dumped with `--unpack`/`-u`.
-- **`--unpack`/`-u` is the single, deliberate exception** that writes raw per-asset files. Nothing else may write raw assets by default. No mode may silently write intermediate extraction folders.
+- **Never write unpacked/raw asset files to disk by default.** The whole point of this tool is NOT depending on any `Settings.ini`/extractor-intermediate folder. Everything — archive parse, asset parse, JSON, mod_assets, repack — is built **in memory** as a project (default flow).
+- The ONLY things written to disk are: (a) the user's explicit output (`project.json` + `assets.json` + `mod_assets.json` + optionally repacked `.hip`), and (b) bytes the user explicitly asked to be dumped with `--save-assets`/`--debug` (or the deprecated `-u`/`-e` aliases).
+- **`--save-assets` is the single, deliberate exception** that writes raw per-asset files (under `<project>/unpacked/`). Nothing else may write raw assets by default. No mode may silently write intermediate extraction folders. Deprecated `--unpack`/`-u` and `--extract`/`-e` behave exactly like `--save-assets` and log a deprecation warning; `--project`/`-j` is a no-op (it's the default) — none of them turn into separate modes.
 - **`--overwrite`/`-o` targets the original-source file in its own spot** (sha-256 verified before overwriting). To overwrite in place, the tool uses the source path the user pointed at — it must know the FIRST file / files-folder location so repack can write bytes back to the original artefact. This is the one flag that touches the source tree, and it is byte-accuracy checked: refuse if the file already changed (sha mismatch).
-- **UX rule:** If a user gives `-j`/`--project` together with `-e`/`--extract`, that's NOT an error — it's the same in-memory project flow (project IS the default; extract = project build). Only each *distinct* mode naming one flag pair; never require two mode switches for the default flow)Skip a `--pack`/`-k` exclusive; `-s`/`--single` stays the one special single-file mode exceptionSkip the single-file path; otherwise default all modes to the same in-memory project seam.
