@@ -201,8 +201,9 @@ class Program
                         AssetChecksum = checksum,
                         AssetFriendlyName = assetName,
                         FileName = assetFileName ?? assetName,
-                        RawBase64 = Convert.ToBase64String(AHDR.data),
                     };
+                    if (typeCode != "JSP")
+                        entry.RawBase64 = Convert.ToBase64String(AHDR.data);
                 }
                 else
                 {
@@ -504,12 +505,32 @@ class Program
                 hipFile.DICT.LTOC.LHDRList.Add(LHDR);
             }
 
-            Dictionary<uint, byte[]> assetDataDictionary = root.EnumerateArray()
-                .Select(elem => new
+            Dictionary<uint, byte[]> jspSourceBytes = null;
+            if (File.Exists(sourceFile))
+            {
+                try
                 {
-                    id = Convert.ToUInt32(elem.GetProperty("AssetID").GetString().Substring(2), 16),
-                    bytes = ResolveAssetBytes(elem),
+                    var (srcHip, _, _) = HipFile.FromPath(sourceFile);
+                    jspSourceBytes = srcHip.DICT.ATOC.AHDRList
+                        .Where(h => h.assetType.GetCode() == "JSP" && h.data != null)
+                        .ToDictionary(h => h.assetID, h => h.data);
+                }
+                catch (Exception jspEx)
+                {
+                    Logger.LogWarning("Could not load JSP raw bytes from source archive: " + jspEx.Message);
+                }
+            }
+
+            Dictionary<uint, byte[]> assetDataDictionary = root.EnumerateArray()
+                .Select(elem =>
+                {
+                    uint id = Convert.ToUInt32(elem.GetProperty("AssetID").GetString().Substring(2), 16);
+                    byte[] bytes = ResolveAssetBytes(elem);
+                    if (bytes == null && jspSourceBytes != null && jspSourceBytes.TryGetValue(id, out byte[] jspBytes))
+                        bytes = jspBytes;
+                    return (id, bytes);
                 })
+                .Where(x => x.bytes != null)
                 .ToDictionary(x => x.id, x => x.bytes);
 
             foreach (var elem in root.EnumerateArray())
@@ -624,6 +645,9 @@ class Program
     {
         if (elem.TryGetProperty("RawBase64", out var raw) && raw.ValueKind == JsonValueKind.String)
             return Convert.FromBase64String(raw.GetString());
+
+        if (elem.TryGetProperty("Type", out var typeProp) && typeProp.ValueKind == JsonValueKind.String && typeProp.GetString() == "JSP")
+            return null;
 
         return SerializeModdedAsset(elem, out _, out _);
     }
