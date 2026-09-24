@@ -11,6 +11,8 @@ public sealed class RWTXParser : AssetParser
     private const int PixelOffset = 0xA0;
     private const int BlobPrefixedSpan = 0x70;
     private const uint RWTXGcPlatform = 6;
+    private const uint RWTXXboxPlatform = 5;
+    private const int XboxPixelOffset = 0x90;
     private const int PlatformTypeOffset = HeaderOffset + 0x00;
     private const int FilterAddressOffset = HeaderOffset + 0x04;
     private const int TextureNameOffset = HeaderOffset + 0x18;
@@ -42,12 +44,16 @@ public sealed class RWTXParser : AssetParser
         ushort textureCount = ReadLe16(data, 0x18);
         ushort dictUnknown = ReadLe16(data, 0x1A);
 
-        bool gcLayout = Util.ReadUInt32(data, PlatformTypeOffset) == 6;
+        uint platformType = Util.ReadUInt32(data, PlatformTypeOffset);
+        bool gcLayout = platformType == RWTXGcPlatform;
+
+        if (platformType == RWTXXboxPlatform)
+        {
+            return ParseXbox(data, rwVersion, textureCount, dictUnknown);
+        }
 
         if (!gcLayout)
         {
-            uint platformType = RwtxPs2.ReadLe32(data, PlatformTypeOffset);
-
             ushort ps2Width = 0;
             ushort ps2Height = 0;
             byte ps2BitDepth = 0;
@@ -180,13 +186,93 @@ public sealed class RWTXParser : AssetParser
         };
     }
 
+    private static RWTX ParseXbox(byte[] data, uint rwVersion, ushort textureCount, ushort dictUnknown)
+    {
+        uint rasterFormatFlags = ReadLe32(data, 0x7C);
+        ushort width = ReadLe16(data, 0x84);
+        ushort height = ReadLe16(data, 0x86);
+        byte bitDepth = data[0x88];
+        byte mipCount = data[0x89];
+        byte rasterType = data[0x8A];
+        byte compression = data[0x8B];
+        uint totalSize = ReadLe32(data, 0x8C);
+
+        string format = null;
+        string pngBase64 = null;
+        byte[] payload = data.Length > XboxPixelOffset ? data.AsSpan(XboxPixelOffset).ToArray() : Array.Empty<byte>();
+
+        if (width > 0 && height > 0 && TryDecodeXboxMip0(payload, width, height, bitDepth, rasterFormatFlags, compression, out byte[] xbRgba, out byte[] _))
+        {
+            byte[] png = PngCodec.Encode(width, height, xbRgba);
+            if (png != null)
+                pngBase64 = Convert.ToBase64String(png);
+
+            format = RwtxXbox.FormatName(rasterFormatFlags, compression);
+        }
+
+        int span = RwtxXbox.Mip0Bytes(width, height, bitDepth, compression);
+        string preMipBase64 = null;
+        string xbTailBase64 = null;
+        if (span > 0 && payload.Length >= span)
+        {
+            preMipBase64 = Convert.ToBase64String(payload, 0, span);
+            if (payload.Length > span)
+            {
+                byte[] tail = new byte[payload.Length - span];
+                Array.Copy(payload, span, tail, 0, tail.Length);
+                xbTailBase64 = Convert.ToBase64String(tail);
+            }
+        }
+
+        return new RWTX
+        {
+            platformType = RWTXXboxPlatform,
+            rwVersion = rwVersion,
+            filterAndAddress = ReadLe32(data, FilterAddressOffset),
+            textureName = ReadName(data, 0x3C),
+            alphaName = ReadName(data, 0x5C),
+            rasterFormatFlags = rasterFormatFlags,
+            width = width,
+            height = height,
+            bitDepth = bitDepth,
+            mipMapCount = mipCount,
+            rasterType = rasterType,
+            compression = compression,
+            transparency = 0,
+            textureCount = textureCount,
+            dictUnknown = dictUnknown,
+            totalSize = totalSize,
+            preMipBase64 = preMipBase64,
+            tailBase64 = xbTailBase64,
+            format = format,
+            pngBase64 = pngBase64,
+        };
+    }
+
+    private static bool TryDecodeXboxMip0(byte[] payload, int width, int height, byte bitDepth, uint rasterFormatFlags, byte compression, out byte[] rgba, out byte[] mip0)
+    {
+        rgba = null;
+        mip0 = null;
+        try
+        {
+            if (!RwtxXbox.TryDecodeMip0(payload, width, height, bitDepth, rasterFormatFlags, compression, out rgba, out mip0))
+                return false;
+            return rgba != null && mip0 != null;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public override object Serialize(object obj)
     {
         RWTX rwtx = (RWTX)obj;
 
         bool gc = rwtx.platformType == 6;
+        bool xbox = rwtx.platformType == RWTXXboxPlatform;
 
-        byte[] payload = gc ? SerializeGameCubePayload(rwtx) : SerializePs2Payload(rwtx);
+        byte[] payload = gc ? SerializeGameCubePayload(rwtx) : xbox ? SerializeXboxPayload(rwtx) : SerializePs2Payload(rwtx);
 
         byte[] prefix = BuildPrefix(rwtx, gc, payload.Length);
 
@@ -264,10 +350,45 @@ public sealed class RWTXParser : AssetParser
         return payload;
     }
 
+    private static byte[] SerializeXboxPayload(RWTX rwtx)
+    {
+        int span = RwtxXbox.Mip0Bytes(rwtx.width, rwtx.height, rwtx.bitDepth, rwtx.compression);
+
+        byte[] pre = !string.IsNullOrEmpty(rwtx.preMipBase64) ? Convert.FromBase64String(rwtx.preMipBase64) : Array.Empty<byte>();
+        byte[] tail = !string.IsNullOrEmpty(rwtx.tailBase64) ? Convert.FromBase64String(rwtx.tailBase64) : Array.Empty<byte>();
+
+        byte[] payload = new byte[pre.Length + tail.Length];
+        Array.Copy(pre, 0, payload, 0, pre.Length);
+        if (tail.Length > 0)
+            Array.Copy(tail, 0, payload, pre.Length, tail.Length);
+
+        if (rwtx.compression == 0 && span > 0 && pre.Length == span && !string.IsNullOrEmpty(rwtx.pngBase64))
+        {
+            try
+            {
+                PngImage png = PngCodec.Decode(Convert.FromBase64String(rwtx.pngBase64));
+                if (png.Width == rwtx.width && png.Height == rwtx.height)
+                {
+                    byte[] reencoded = RwtxXbox.EncodeMip0(payload, span, rwtx.width, rwtx.height, rwtx.bitDepth, rwtx.rasterFormatFlags, png.Rgba);
+                    if (reencoded != null && reencoded.Length == payload.Length)
+                        payload = reencoded;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.LogWarning("RWTX png re-encode skipped: " + ex.Message);
+            }
+        }
+
+        return payload;
+    }
+
     private static byte[] BuildPrefix(RWTX rwtx, bool gc, int payloadLength)
     {
-        long total = PixelOffset + (long)payloadLength;
-        byte[] p = new byte[PixelOffset];
+        bool xbox = rwtx.platformType == RWTXXboxPlatform;
+        int offset = xbox ? XboxPixelOffset : PixelOffset;
+        long total = offset + (long)payloadLength;
+        byte[] p = new byte[offset];
 
         uint ver = rwtx.rwVersion != 0 ? rwtx.rwVersion : gc ? 0x1C02000Au : 0x1400FFFFu;
 
@@ -283,7 +404,7 @@ public sealed class RWTXParser : AssetParser
         WriteLe32(p, 0x20, (uint)(total - 52));
         WriteLe32(p, 0x24, ver);
         WriteLe32(p, 0x28, 0x01);
-        WriteLe32(p, 0x2C, gc ? (uint)(total - 76) : 8u);
+        WriteLe32(p, 0x2C, gc ? (uint)(total - 76) : xbox ? (uint)(total - 76) : 8u);
         WriteLe32(p, 0x30, ver);
 
         if (gc)
@@ -306,6 +427,23 @@ public sealed class RWTXParser : AssetParser
             p[0x9A] = 0;
             p[0x9B] = rwtx.transparency;
             WriteUInt32(p, 0x9C, rwtx.gcnReserved ?? 0u);
+        }
+        else if (xbox)
+        {
+            WriteLe32(p, 0x34, RWTXXboxPlatform);
+            WriteLe32(p, 0x38, rwtx.filterAndAddress);
+            WriteString32(p, 0x3C, rwtx.textureName);
+            WriteString32(p, 0x5C, rwtx.alphaName);
+            WriteLe32(p, 0x7C, rwtx.rasterFormatFlags);
+            WriteLe16(p, 0x80, (ushort)(RwtxXbox.HasAlpha(rwtx.rasterFormatFlags) ? 1 : 0));
+            WriteLe16(p, 0x82, 0);
+            WriteLe16(p, 0x84, rwtx.width);
+            WriteLe16(p, 0x86, rwtx.height);
+            p[0x88] = rwtx.bitDepth;
+            p[0x89] = rwtx.mipMapCount;
+            p[0x8A] = rwtx.rasterType;
+            p[0x8B] = rwtx.compression;
+            WriteLe32(p, 0x8C, rwtx.totalSize != 0 ? rwtx.totalSize : (uint)payloadLength);
         }
         else
         {
@@ -452,6 +590,7 @@ public class RWTX
     public byte rasterType { get; set; }
     public byte compression { get; set; }
     public byte transparency { get; set; }
+    public uint totalSize { get; set; }
     public ushort textureCount { get; set; }
     public ushort dictUnknown { get; set; }
     public uint[] gcnUnknown { get; set; }
@@ -1746,6 +1885,494 @@ public static class PngCodec
         stream.WriteByte((byte)(value >> 16));
         stream.WriteByte((byte)(value >> 8));
         stream.WriteByte((byte)value);
+    }
+}
+
+public static class RwtxXbox
+{
+    public const uint Platform = 0x05;
+
+    private const int RasterFormatC8888 = 0x0500;
+    private const int RasterFormatC888 = 0x0600;
+    private const int RasterFormatC1555 = 0x0100;
+    private const int RasterFormatC565 = 0x0200;
+    private const int RasterFormatC4444 = 0x0300;
+    private const int RasterFormatLum8 = 0x0400;
+    private const int RasterFormatC555 = 0x0A00;
+
+    private const byte Dxt1Format = 0x0C;
+    private const byte Dxt3Format = 0x0E;
+    private const byte Dxt5Format = 0x0F;
+
+    public static bool HasAlpha(uint rasterFormatFlags)
+    {
+        int fmt = (int)(rasterFormatFlags >> 8) & 0xF;
+        return fmt switch
+        {
+            1 or 3 or 5 => true,
+            _ => false,
+        };
+    }
+
+    public static string FormatName(uint rasterFormatFlags, byte compression)
+    {
+        if (compression == Dxt1Format) return "Xbox D3D8 DXT1 (BC1, compressed)";
+        if (compression == Dxt3Format) return "Xbox D3D8 DXT3 (BC2, compressed)";
+        if (compression == Dxt5Format) return "Xbox D3D8 DXT5 (BC3, compressed)";
+
+        return (rasterFormatFlags & 0x0F00) switch
+        {
+            RasterFormatC8888 => "Xbox D3D8 A8R8G8B8 (swizzled)",
+            RasterFormatC888 => "Xbox D3D8 X8R8G8B8 (swizzled)",
+            RasterFormatC1555 => "Xbox D3D8 A1R5G5B5 (swizzled)",
+            RasterFormatC565 => "Xbox D3D8 R5G6B5 (swizzled)",
+            RasterFormatC4444 => "Xbox D3D8 A4R4G4B4 (swizzled)",
+            RasterFormatLum8 => "Xbox D3D8 L8 (swizzled)",
+            RasterFormatC555 => "Xbox D3D8 X1R5G5B5 (swizzled)",
+            _ => $"Xbox D3D8 format 0x{rasterFormatFlags:X8}",
+        };
+    }
+
+    public static int Mip0Bytes(int width, int height, byte bitDepth, byte compression)
+    {
+        if (width <= 0 || height <= 0)
+            return 0;
+
+        if (compression == Dxt1Format)
+            return ((width + 3) >> 2) * ((height + 3) >> 2) * 8;
+        if (compression == Dxt3Format || compression == Dxt5Format)
+            return ((width + 3) >> 2) * ((height + 3) >> 2) * 16;
+        return width * height * (bitDepth >> 3);
+    }
+
+    public static bool TryDecodeMip0(byte[] pixelData, int width, int height, byte bitDepth, uint rasterFormatFlags, byte compression, out byte[] rgba, out byte[] mip0)
+    {
+        rgba = null;
+        mip0 = null;
+
+        if (width <= 0 || height <= 0)
+            return false;
+
+        int span = Mip0Bytes(width, height, bitDepth, compression);
+        if (span <= 0 || pixelData.Length < span)
+            return false;
+
+        mip0 = new byte[span];
+        Array.Copy(pixelData, mip0, span);
+
+        try
+        {
+            if (compression == Dxt1Format || compression == Dxt3Format || compression == Dxt5Format)
+            {
+                rgba = DecodeDxt(pixelData, width, height, compression);
+                return rgba != null;
+            }
+
+            int bpp = bitDepth >> 3;
+            byte[] lin = new byte[width * height * bpp];
+            if (!Unswizzle(pixelData, lin, width, height, bpp, span))
+                return false;
+
+            rgba = ConvertToRgba(lin, width, height, bitDepth, rasterFormatFlags);
+            return rgba != null;
+        }
+        catch
+        {
+            rgba = null;
+            mip0 = null;
+            return false;
+        }
+    }
+
+    public static byte[] EncodeMip0(byte[] pixelData, int span, int width, int height, byte bitDepth, uint rasterFormatFlags, byte[] rgba)
+    {
+        if (bitDepth != 32 || rgba == null || width <= 0 || height <= 0)
+            return null;
+
+        try
+        {
+            byte[] bgra = new byte[width * height * 4];
+            for (int i = 0; i < width * height * 4; i += 4)
+            {
+                bgra[i] = rgba[i + 2];
+                bgra[i + 1] = rgba[i + 1];
+                bgra[i + 2] = rgba[i];
+                bgra[i + 3] = rgba[i + 3];
+            }
+
+            byte[] outBytes = new byte[span];
+            if (!Swizzle(bgra, outBytes, width, height, 4, span))
+                return null;
+
+            byte[] result = new byte[pixelData.Length];
+            Array.Copy(pixelData, result, pixelData.Length);
+            Array.Copy(outBytes, 0, result, 0, Math.Min(span, pixelData.Length));
+            return result;
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
+    private static bool Unswizzle(byte[] src, byte[] dst, int width, int height, int bpp, int span)
+    {
+        uint maskU = 0;
+        uint maskV = 0;
+        int i = 1;
+        int j = 1;
+        int c;
+        do
+        {
+            c = 0;
+            if (i < width) { maskU |= (uint)j; j <<= 1; c = j; }
+            if (i < height) { maskV |= (uint)j; j <<= 1; c = j; }
+            i <<= 1;
+        }
+        while (c != 0);
+
+        uint v = 0;
+        for (int y = 0; y < height; y++)
+        {
+            uint u = 0;
+            for (int x = 0; x < width; x++)
+            {
+                int so = (int)((u | v) * (uint)bpp);
+                int doff = (y * width + x) * bpp;
+                if (so < 0 || so + bpp > span || doff + bpp > dst.Length)
+                    return false;
+                for (int b = 0; b < bpp; b++)
+                    dst[doff + b] = src[so + b];
+                u = (u - maskU) & maskU;
+            }
+            v = (v - maskV) & maskV;
+        }
+        return true;
+    }
+
+    private static bool Swizzle(byte[] src, byte[] dst, int width, int height, int bpp, int span)
+    {
+        uint maskU = 0;
+        uint maskV = 0;
+        int i = 1;
+        int j = 1;
+        int c;
+        do
+        {
+            c = 0;
+            if (i < width) { maskU |= (uint)j; j <<= 1; c = j; }
+            if (i < height) { maskV |= (uint)j; j <<= 1; c = j; }
+            i <<= 1;
+        }
+        while (c != 0);
+
+        uint v = 0;
+        for (int y = 0; y < height; y++)
+        {
+            uint u = 0;
+            for (int x = 0; x < width; x++)
+            {
+                int so = (int)((u | v) * (uint)bpp);
+                int doff = (y * width + x) * bpp;
+                if (so < 0 || so + bpp > span || doff + bpp > dst.Length)
+                    return false;
+                for (int b = 0; b < bpp; b++)
+                    dst[so + b] = src[doff + b];
+                u = (u - maskU) & maskU;
+            }
+            v = (v - maskV) & maskV;
+        }
+        return true;
+    }
+
+    private static byte[] ConvertToRgba(byte[] lin, int width, int height, byte bitDepth, uint rasterFormatFlags)
+    {
+        byte[] rgba = new byte[width * height * 4];
+        int fmt = (int)(rasterFormatFlags & 0x0F00);
+
+        if (bitDepth == 32)
+        {
+            for (int i = 0; i < width * height; i++)
+            {
+                int s = i * 4;
+                rgba[s] = lin[s + 2];
+                rgba[s + 1] = lin[s + 1];
+                rgba[s + 2] = lin[s];
+                rgba[s + 3] = fmt == RasterFormatC888 ? (byte)0xFF : lin[s + 3];
+            }
+            return rgba;
+        }
+
+        if (bitDepth == 16)
+        {
+            for (int i = 0; i < width * height; i++)
+            {
+                int s = i * 2;
+                int word = lin[s] | (lin[s + 1] << 8);
+                byte r, g, b, a;
+                switch (fmt)
+                {
+                    case RasterFormatC565:
+                        r = (byte)(((word >> 11) & 0x1F) * 255 / 31);
+                        g = (byte)(((word >> 5) & 0x3F) * 255 / 63);
+                        b = (byte)((word & 0x1F) * 255 / 31);
+                        a = 0xFF;
+                        break;
+                    case RasterFormatC1555:
+                        a = (byte)(((word >> 15) & 1) != 0 ? 0xFF : 0);
+                        r = (byte)(((word >> 10) & 0x1F) * 255 / 31);
+                        g = (byte)(((word >> 5) & 0x1F) * 255 / 31);
+                        b = (byte)((word & 0x1F) * 255 / 31);
+                        break;
+                    case RasterFormatC555:
+                        a = 0xFF;
+                        r = (byte)(((word >> 10) & 0x1F) * 255 / 31);
+                        g = (byte)(((word >> 5) & 0x1F) * 255 / 31);
+                        b = (byte)((word & 0x1F) * 255 / 31);
+                        break;
+                    case RasterFormatC4444:
+                        a = (byte)(((word >> 12) & 0xF) * 17);
+                        r = (byte)(((word >> 8) & 0xF) * 17);
+                        g = (byte)(((word >> 4) & 0xF) * 17);
+                        b = (byte)((word & 0xF) * 17);
+                        break;
+                    default:
+                        return null;
+                }
+                rgba[i * 4] = r;
+                rgba[i * 4 + 1] = g;
+                rgba[i * 4 + 2] = b;
+                rgba[i * 4 + 3] = a;
+            }
+            return rgba;
+        }
+
+        if (bitDepth == 8)
+        {
+            for (int i = 0; i < width * height; i++)
+            {
+                byte g = lin[i];
+                rgba[i * 4] = g;
+                rgba[i * 4 + 1] = g;
+                rgba[i * 4 + 2] = g;
+                rgba[i * 4 + 3] = 0xFF;
+            }
+            return rgba;
+        }
+
+        return null;
+    }
+
+    private static byte[] DecodeDxt(byte[] src, int width, int height, byte compression)
+    {
+        byte[] rgba = new byte[width * height * 4];
+        int blocksX = (width + 3) >> 2;
+        int blocksY = (height + 3) >> 2;
+        int off = 0;
+
+        for (int by = 0; by < blocksY; by++)
+        {
+            for (int bx = 0; bx < blocksX; bx++)
+            {
+                if (compression == Dxt1Format)
+                    off = DecodeDxt1Block(src, off, rgba, blocksX, width, height, bx, by);
+                else if (compression == Dxt3Format)
+                    off = DecodeDxt3Block(src, off, rgba, blocksX, width, height, bx, by);
+                else
+                    off = DecodeDxt5Block(src, off, rgba, blocksX, width, height, bx, by);
+                if (off < 0)
+                    return null;
+            }
+        }
+        return rgba;
+    }
+
+    private static int DecodeDxt1Block(byte[] src, int off, byte[] dstPix, int blocksX, int w, int h, int bx, int by)
+    {
+        if (off + 8 > src.Length)
+            return -1;
+
+        int c0 = src[off] | (src[off + 1] << 8);
+        int c1 = src[off + 2] | (src[off + 3] << 8);
+
+        byte[,] r = new byte[4, 4];
+        byte[,] g = new byte[4, 4];
+        byte[,] b = new byte[4, 4];
+        byte[,] a = new byte[4, 4];
+
+        byte rr0 = (byte)(((c0 >> 11) & 0x1F) * 255 / 31);
+        byte gg0 = (byte)(((c0 >> 5) & 0x3F) * 255 / 63);
+        byte bb0 = (byte)((c0 & 0x1F) * 255 / 31);
+        byte rr1 = (byte)(((c1 >> 11) & 0x1F) * 255 / 31);
+        byte gg1 = (byte)(((c1 >> 5) & 0x3F) * 255 / 63);
+        byte bb1 = (byte)((c1 & 0x1F) * 255 / 31);
+
+        bool mode = c0 > c1;
+        byte[] c2 = new byte[3], c3 = new byte[3];
+        byte[] a2 = new byte[4], a3 = new byte[4];
+        if (mode)
+        {
+            c2[0] = (byte)((2 * rr0 + rr1) / 3);
+            c2[1] = (byte)((2 * gg0 + gg1) / 3);
+            c2[2] = (byte)((2 * bb0 + bb1) / 3);
+            c3[0] = (byte)((rr0 + 2 * rr1) / 3);
+            c3[1] = (byte)((gg0 + 2 * gg1) / 3);
+            c3[2] = (byte)((bb0 + 2 * bb1) / 3);
+            a2[0] = a2[1] = a2[2] = a3[0] = a3[1] = a3[2] = 0xFF;
+            a3[3] = 0xFF;
+        }
+        else
+        {
+            c2[0] = (byte)((rr0 + rr1) / 2);
+            c2[1] = (byte)((gg0 + gg1) / 2);
+            c2[2] = (byte)((bb0 + bb1) / 2);
+            c3[0] = c3[1] = c3[2] = 0;
+        }
+
+        int indices = src[off + 4] | (src[off + 5] << 8) | (src[off + 6] << 16) | (src[off + 7] << 24);
+
+        for (int yy = 0; yy < 4; yy++)
+        {
+            for (int xx = 0; xx < 4; xx++)
+            {
+                int idx = (indices >> (2 * (yy * 4 + xx))) & 3;
+                if (idx == 0) { r[yy, xx] = rr0; g[yy, xx] = gg0; b[yy, xx] = bb0; a[yy, xx] = 0xFF; }
+                else if (idx == 1) { r[yy, xx] = rr1; g[yy, xx] = gg1; b[yy, xx] = bb1; a[yy, xx] = 0xFF; }
+                else if (idx == 2) { r[yy, xx] = c2[0]; g[yy, xx] = c2[1]; b[yy, xx] = c2[2]; a[yy, xx] = 0xFF; }
+                else { r[yy, xx] = c3[0]; g[yy, xx] = c3[1]; b[yy, xx] = c3[2]; a[yy, xx] = mode ? a3[3] : (byte)0; }
+            }
+        }
+
+        for (int yy = 0; yy < 4; yy++)
+        {
+            int py = by * 4 + yy;
+            if (py >= h) continue;
+            for (int xx = 0; xx < 4; xx++)
+            {
+                int px = bx * 4 + xx;
+                if (px >= w) continue;
+                int d = (py * w + px) * 4;
+                dstPix[d] = r[yy, xx];
+                dstPix[d + 1] = g[yy, xx];
+                dstPix[d + 2] = b[yy, xx];
+                dstPix[d + 3] = a[yy, xx];
+            }
+        }
+
+        return off + 8;
+    }
+
+    private static int DecodeDxt3Block(byte[] src, int off, byte[] dstPix, int blocksX, int w, int h, int bx, int by)
+    {
+        if (off + 16 > src.Length)
+            return -1;
+
+        byte[] a = new byte[16];
+        for (int i = 0; i < 8; i++)
+        {
+            int v = src[off + i];
+            a[i * 2] = (byte)((v & 0xF) * 17);
+            a[i * 2 + 1] = (byte)(((v >> 4) & 0xF) * 17);
+        }
+
+        int c0 = src[off + 8] | (src[off + 9] << 8);
+        int c1 = src[off + 10] | (src[off + 11] << 8);
+        int indices = src[off + 12] | (src[off + 13] << 8) | (src[off + 14] << 16) | (src[off + 15] << 24);
+
+        byte rr0 = (byte)(((c0 >> 11) & 0x1F) * 255 / 31);
+        byte gg0 = (byte)(((c0 >> 5) & 0x3F) * 255 / 63);
+        byte bb0 = (byte)((c0 & 0x1F) * 255 / 31);
+        byte rr1 = (byte)(((c1 >> 11) & 0x1F) * 255 / 31);
+        byte gg1 = (byte)(((c1 >> 5) & 0x3F) * 255 / 63);
+        byte bb1 = (byte)((c1 & 0x1F) * 255 / 31);
+        byte c2r = (byte)((2 * rr0 + rr1) / 3), c2g = (byte)((2 * gg0 + gg1) / 3), c2b = (byte)((2 * bb0 + bb1) / 3);
+        byte c3r = (byte)((rr0 + 2 * rr1) / 3), c3g = (byte)((gg0 + 2 * gg1) / 3), c3b = (byte)((bb0 + 2 * bb1) / 3);
+
+        for (int yy = 0; yy < 4; yy++)
+        {
+            int py = by * 4 + yy;
+            if (py >= h) continue;
+            for (int xx = 0; xx < 4; xx++)
+            {
+                int px = bx * 4 + xx;
+                if (px >= w) continue;
+                int idx = (indices >> (2 * (yy * 4 + xx))) & 3;
+                int d = (py * w + px) * 4;
+                if (idx == 0) { dstPix[d] = rr0; dstPix[d + 1] = gg0; dstPix[d + 2] = bb0; }
+                else if (idx == 1) { dstPix[d] = rr1; dstPix[d + 1] = gg1; dstPix[d + 2] = bb1; }
+                else if (idx == 2) { dstPix[d] = c2r; dstPix[d + 1] = c2g; dstPix[d + 2] = c2b; }
+                else { dstPix[d] = c3r; dstPix[d + 1] = c3g; dstPix[d + 2] = c3b; }
+                dstPix[d + 3] = a[yy * 4 + xx];
+            }
+        }
+
+        return off + 16;
+    }
+
+    private static int DecodeDxt5Block(byte[] src, int off, byte[] dstPix, int blocksX, int w, int h, int bx, int by)
+    {
+        if (off + 16 > src.Length)
+            return -1;
+
+        int a0 = src[off];
+        int a1 = src[off + 1];
+        byte[] alpha = new byte[8];
+        alpha[0] = (byte)a0;
+        alpha[1] = (byte)a1;
+        if (a0 > a1)
+        {
+            alpha[2] = (byte)((6 * a0 + a1) / 7);
+            alpha[3] = (byte)((5 * a0 + 2 * a1) / 7);
+            alpha[4] = (byte)((4 * a0 + 3 * a1) / 7);
+            alpha[5] = (byte)((3 * a0 + 4 * a1) / 7);
+            alpha[6] = (byte)((2 * a0 + 5 * a1) / 7);
+            alpha[7] = (byte)((a0 + 6 * a1) / 7);
+        }
+        else
+        {
+            alpha[2] = (byte)((4 * a0 + a1) / 5);
+            alpha[3] = (byte)((3 * a0 + 2 * a1) / 5);
+            alpha[4] = (byte)((2 * a0 + 3 * a1) / 5);
+            alpha[5] = (byte)((a0 + 4 * a1) / 5);
+            alpha[6] = 0;
+            alpha[7] = 0xFF;
+        }
+
+        int c0 = src[off + 8] | (src[off + 9] << 8);
+        int c1 = src[off + 10] | (src[off + 11] << 8);
+        int indices = src[off + 12] | (src[off + 13] << 8) | (src[off + 14] << 16) | (src[off + 15] << 24);
+
+        byte rr0 = (byte)(((c0 >> 11) & 0x1F) * 255 / 31);
+        byte gg0 = (byte)(((c0 >> 5) & 0x3F) * 255 / 63);
+        byte bb0 = (byte)((c0 & 0x1F) * 255 / 31);
+        byte rr1 = (byte)(((c1 >> 11) & 0x1F) * 255 / 31);
+        byte gg1 = (byte)(((c1 >> 5) & 0x3F) * 255 / 63);
+        byte bb1 = (byte)((c1 & 0x1F) * 255 / 31);
+        byte c2r = (byte)((2 * rr0 + rr1) / 3), c2g = (byte)((2 * gg0 + gg1) / 3), c2b = (byte)((2 * bb0 + bb1) / 3);
+        byte c3r = (byte)((rr0 + 2 * rr1) / 3), c3g = (byte)((gg0 + 2 * gg1) / 3), c3b = (byte)((bb0 + 2 * bb1) / 3);
+
+        long alphaBits = (long)(uint)(src[off + 2] | (src[off + 3] << 8) | (src[off + 4] << 16) | (src[off + 5] << 24)) | ((long)src[off + 6] << 32) | ((long)src[off + 7] << 40);
+
+        for (int yy = 0; yy < 4; yy++)
+        {
+            int py = by * 4 + yy;
+            if (py >= h) continue;
+            for (int xx = 0; xx < 4; xx++)
+            {
+                int px = bx * 4 + xx;
+                if (px >= w) continue;
+                int cIdx = (indices >> (2 * (yy * 4 + xx))) & 3;
+                int aIdx = (int)((alphaBits >> (3 * (yy * 4 + xx))) & 7);
+                int d = (py * w + px) * 4;
+                if (cIdx == 0) { dstPix[d] = rr0; dstPix[d + 1] = gg0; dstPix[d + 2] = bb0; }
+                else if (cIdx == 1) { dstPix[d] = rr1; dstPix[d + 1] = gg1; dstPix[d + 2] = bb1; }
+                else if (cIdx == 2) { dstPix[d] = c2r; dstPix[d + 1] = c2g; dstPix[d + 2] = c2b; }
+                else { dstPix[d] = c3r; dstPix[d + 1] = c3g; dstPix[d + 2] = c3b; }
+                dstPix[d + 3] = alpha[aIdx];
+            }
+        }
+
+        return off + 16;
     }
 }
 
